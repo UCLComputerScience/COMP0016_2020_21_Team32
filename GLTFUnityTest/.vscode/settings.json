@@ -52,5 +52,10 @@
         "ProjectSettings/":true,
         "temp/":true,
         "Temp/":true
+    },
+    "launch": {
+        "editor.acceptSuggestionOnCommitCharacter": false,
+        "configurations": [],
+        "compounds": []
     }
 }
