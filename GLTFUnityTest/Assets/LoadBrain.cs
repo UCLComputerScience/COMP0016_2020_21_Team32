@@ -53,8 +53,9 @@ public class LoadBrain : MonoBehaviour
 
     public void AdjustOpacity(float newOp) {
         SegOpacity = newOp;
-        segments[0].GetComponent<MeshRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, SegOpacity);
-        // TO BE DONE: disable camera movement script when slider is in use
-
+        // segments[0].GetComponent<MeshRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, SegOpacity);
+        Color color = segments[0].GetComponent<MeshRenderer>().material.color;
+        color.a = SegOpacity;
+        segments[0].GetComponent<MeshRenderer>().material.color = color;
     }
 }
