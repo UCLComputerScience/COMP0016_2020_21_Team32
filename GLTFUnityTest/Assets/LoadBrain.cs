@@ -15,9 +15,13 @@ public class LoadBrain : MonoBehaviour
     //public Stack<Renderer> disabledRenderers = new Stack<Renderer>();
 
     
-    string relativeFilepath = "\\brain.glb";
-    string path;
+    private string relativeFilepath = "\\brain.glb";
+    private string path;
     GameObject brain;
+
+    Slider opacitySlider;
+    private float segOpacity;
+    private int currentlySelected = -1;
 
 
     void Start()
@@ -38,21 +42,21 @@ public class LoadBrain : MonoBehaviour
                 //enabledRenderers.Push((segments[i].GetComponent<Renderer>()));
             }
         }
+        opacitySlider = GameObject.Find("Opacity Slider").GetComponent<Slider>();
+        segOpacity = opacitySlider.value;
+        opacitySlider.gameObject.SetActive(false);
+
     }
-    // public void disableRenderer(){
-    //     if(enabledRenderers.Count !=0){
-    //         Debug.Log("disabled");
-    //         enabledRenderers.Peek().enabled = false;
-    //         disabledRenderers.Push(enabledRenderers.Pop());
-    //     }
-    // }
-    // public void enableRenderer(){
-    //     if(disabledRenderers.Count !=0){
-    //         Debug.Log("enabled");
-    //         disabledRenderers.Peek().enabled = true;
-    //         enabledRenderers.Push(disabledRenderers.Pop());
-    //     }
-    // }
+    private void displayOpacitySlider(){
+        opacitySlider.enabled = true;
+        opacitySlider.gameObject.SetActive(true);
+    }
+    private void hideOpacitySlider(){
+        opacitySlider.enabled = false;
+        opacitySlider.gameObject.SetActive(false);
+    }
+
+    
     private void selectRenderer(Renderer rend){
         foreach(Renderer r in allRenderers){
             if(!Object.Equals(r, rend))r.GetComponent<Renderer>().enabled = false;
@@ -76,33 +80,83 @@ public class LoadBrain : MonoBehaviour
             }
         }
     }
+    // public void selectSegment(int n){
+    //     if(currentlySelected != n){
+    //         currentlySelected = -1;
+    //         hideOpacitySlider();
+    //     }else{
+    //         currentlySelected = n;
+    //         displayOpacitySlider();
+    //     }
+    //     clickSegmentButton(segments[currentlySelected]);
+    // }
+
 
     public void selectSegment1(){
+        if(currentlySelected == 0)
+        {
+            currentlySelected = -1;
+            hideOpacitySlider();
+        }else{
+            currentlySelected = 0;
+            displayOpacitySlider();
+        } 
         clickSegmentButton(segments[0]);
     }
     public void selectSegment2(){
+        if(currentlySelected == 1)
+        {
+            currentlySelected = -1;
+            hideOpacitySlider();
+        }else{
+            currentlySelected = 1;
+            displayOpacitySlider();
+        } 
         clickSegmentButton(segments[1]);
     }
     public void selectSegment3(){
+        if(currentlySelected == 2)
+        {
+            currentlySelected = -1;
+            hideOpacitySlider();
+        }else{
+            currentlySelected = 2;
+            displayOpacitySlider();
+        } 
         clickSegmentButton(segments[2]);
     }
     public void selectSegment4(){
+        if(currentlySelected == 3)
+        {
+            currentlySelected = -1;
+            hideOpacitySlider();
+        }else{
+            currentlySelected = 3;
+            displayOpacitySlider();
+        } 
         clickSegmentButton(segments[3]);
     }
     public void selectSegment5(){
+        if(currentlySelected == 4)
+        {
+            currentlySelected = -1;
+            hideOpacitySlider();
+        }else{
+            currentlySelected = 4;
+            displayOpacitySlider();
+        } 
         clickSegmentButton(segments[4]);
     }
     
 
 
-    public float SegOpacity = 1.0f;
-
     public void AdjustOpacity(float newOp) {
-        SegOpacity = newOp;
-        // segments[0].GetComponent<MeshRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, SegOpacity);
-        Color color = segments[0].seg.GetComponent<MeshRenderer>().material.color;
-        color.a = SegOpacity;
-        segments[0].seg.GetComponent<MeshRenderer>().material.color = color;
+        if(currentlySelected != -1){
+            segOpacity = newOp;
+            Color color = segments[currentlySelected].seg.GetComponent<MeshRenderer>().material.color;
+            color.a = segOpacity;
+            segments[currentlySelected].seg.GetComponent<MeshRenderer>().material.color = color;
+        }
     }
 }
     // public void selectSegment1(){
