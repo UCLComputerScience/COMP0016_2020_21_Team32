@@ -17,6 +17,7 @@ public class CameraMovement : MonoBehaviour
         displacement = new Vector3(0, 0, cameraDistance);
         dirVec = new Vector3();
         prevPosition = cam.ScreenToViewportPoint(Input.mousePosition);
+        cam.transparencySortMode = TransparencySortMode.Orthographic;
     }
     //WORKING
     //Zoom controls inverted and still a bit slow but other than that working nicely.
