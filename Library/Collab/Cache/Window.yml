@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffe70aba2e7074048aca5de573b64a59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SimpleSelectedItems:
+    m_Keys:
+    - Assets/GLTFUtility/Scripts/Editor/GLBImporter.cs
+    - Assets/GLTFUtility/Scripts/Editor/GLTFAssetUtility.cs
+    - Assets/GLTFUtility/Scripts/Editor/GLTFImporter.cs
+    - Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF.asset
+    - Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF.asset
+    - Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Electronic
+      Highway Sign SDF.asset
+    - Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Oswald Bold
+      SDF.asset
+    - Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold
+      SDF.asset
+    - Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+    - Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset
+    - Assets/UI.unity
+    - Assets/UI.unity.meta
+    - Assets/font.meta
+    - Assets/font/JandaManateeBubble.ttf
+    - Assets/font/JandaManateeBubble.ttf.meta
+    - Assets/font/JandaManateeSolid.ttf
+    - Assets/font/JandaManateeSolid.ttf.meta
+    - Assets/font/Stanberry.ttf
+    - Assets/font/Stanberry.ttf.meta
+    - Assets/image.meta
+    - Assets/image/addAnnotation.png
+    - Assets/image/addAnnotation.png.meta
+    - Assets/image/annotation.png
+    - Assets/image/annotation.png.meta
+    - Assets/image/box.png
+    - Assets/image/box.png.meta
+    - Assets/image/button.png
+    - Assets/image/button.png.meta
+    - Assets/image/button_3d1.png
+    - Assets/image/button_3d1.png.meta
+    - Assets/image/button_3d2.png
+    - Assets/image/button_3d2.png.meta
+    - Assets/image/button_circle.png
+    - Assets/image/button_circle.png.meta
+    - Assets/image/button_export.png
+    - Assets/image/button_export.png.meta
+    - Assets/image/button_rect.png
+    - Assets/image/button_rect.png.meta
+    - Assets/image/button_sqr.png
+    - Assets/image/button_sqr.png.meta
+    - Assets/image/button_undo.png
+    - Assets/image/button_undo.png.meta
+    - Assets/image/dropdown.png
+    - Assets/image/dropdown.png.meta
+    - Assets/image/exitFullScreen.png
+    - Assets/image/exitFullScreen.png.meta
+    - Assets/image/fullScreen.png
+    - Assets/image/fullScreen.png.meta
+    - Assets/image/palette.png
+    - Assets/image/palette.png.meta
+    - Assets/image/quit.png
+    - Assets/image/quit.png.meta
+    - Assets/image/refresh.png
+    - Assets/image/refresh.png.meta
+    - Assets/image/settings.png
+    - Assets/image/settings.png.meta
+    - Assets/image/slider_bar.png
+    - Assets/image/slider_bar.png.meta
+    - Assets/image/slider_block.png
+    - Assets/image/slider_block.png.meta
+    - Assets/image/white_bg_2.png
+    - Assets/image/white_bg_2.png.meta
+    - Assets/palette.cs
+    - Assets/palette.cs.meta
+    - Packages/manifest.json
+    - Packages/packages-lock.json
+    - ProjectSettings/ProjectVersion.txt
+    - 
+    m_Values: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  RevisionSummary: 
+  ChangesSearchValue: 
+  SelectedHistoryRevision: 
+  HistoryPageNumber: 0
+  TabIndex: 0
