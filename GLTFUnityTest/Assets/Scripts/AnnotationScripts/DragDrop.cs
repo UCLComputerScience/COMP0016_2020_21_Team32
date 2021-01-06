@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -21,7 +21,6 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegin
         rectTransform.anchoredPosition += data.delta /canvas.scaleFactor; //movement delta - amount mouse moved since previous frame
         //must be divided by canvas scale factor because of the difference between mouse movement and canvas scale. This will vary 
         //due to the canvas adjusting itself to fit on every screen.
-
     }
     public void OnBeginDrag(PointerEventData data){
         Debug.Log("Beginnin draggin");

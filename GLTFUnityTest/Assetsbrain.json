@@ -1,0 +1,16 @@
+{"extensionsUsed":[],"extensionsRequired":[]}
+API with same notation used as http
+not local
+Idea is isolate the kind of function
+Got a model in the NHS cloud
+Service that, when called, gives back binary of the model
+Annotations are metadata
+Different API functions
+edit, delete, create metadata
+one http entry that we send our Json that we generate in our application
+Try firebase - make mockup of service
+Load model
+create, edit
+annotation is a dictionary:
+	Different keys
+	embed json

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 public class CameraMovement : MonoBehaviour
 {
+    [SerializeField] SelectionManager selectionManager;
     public Camera cam;
     private Vector3 prevPosition;
     public Transform target;
@@ -12,12 +14,28 @@ public class CameraMovement : MonoBehaviour
     private Vector3 dirVec;
     private float cameraDistance = -250f;
     private float scrollSpeed = 250f;
+    private bool isEnabled = true;
+
+
     void Start() 
     {
+        selectionManager.onCameraButtonPressed += SelectionMangager_onCameraButtonPressed;
+        selectionManager.onTButtonPressed += otherEvent;
+        selectionManager.onRButtonPressed += otherEvent;
+        selectionManager.onReButtonPressed += otherEvent;
+        selectionManager.onVAnnotationButtonPressed += otherEvent;
+        selectionManager.onAnnotationButton += otherEvent;
         displacement = new Vector3(0, 0, cameraDistance);
         dirVec = new Vector3();
         prevPosition = cam.ScreenToViewportPoint(Input.mousePosition);
         cam.transparencySortMode = TransparencySortMode.Orthographic;
+    }
+    public void SelectionMangager_onCameraButtonPressed(object sender, EventArgs e){
+        isEnabled = true;
+        Debug.Log(isEnabled);
+    }
+    public void otherEvent(object sender, EventArgs e){
+        isEnabled = false;
     }
     //WORKING
     //Zoom controls inverted and still a bit slow but other than that working nicely.
@@ -26,8 +44,9 @@ public class CameraMovement : MonoBehaviour
 
     void LateUpdate()
     {
+        if(!isEnabled) return;
         //target.transform.position = cam.ScreenToViewportPoint(Input.mousePosition);
-
+        
 
         if(Input.GetMouseButtonDown(0)){ 
             // if(!EventSystem.current.IsPointerOverGameObject()){
@@ -53,8 +72,8 @@ public class CameraMovement : MonoBehaviour
             print(displacement);
             cam.transform.Translate(displacement);
         }
-
         
     }
+
 }
  
