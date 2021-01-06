@@ -252,7 +252,7 @@
         <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-        <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
+        <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Library/PackageCache/com.unity.ext.nunit@1.0.5/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
         <HintPath>F:/Users/Bryn/Unity/2020.1.3f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -622,7 +622,6 @@
     <ProjectReference Include="Siccity.GLTFUtility.csproj">
       <Project>{6eb8801d-2dce-cb2b-864d-98f1288bf528}</Project>
       <Name>Siccity.GLTFUtility</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

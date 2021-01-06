@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 //loads the model at runtime
 
-
+//ONE ADDITIONAL COMMENT
 public class LoadBrain : MonoBehaviour
 {
-    List<Segment> segments = new List<Segment>();
+    [SerializeField] Shader shader;
+    [SerializeField] Button segmentSelectButton;
+    int currentlySelected = 0;
+   // [SerializeField] private Material baseMaterial; 
+    [SerializeField]Slider opacitySlider;
+    [SerializeField] TMP_Dropdown dropdown;
+
+    List<GameObject> segments = new List<GameObject>();
+    List<TMP_Text> segmentNames = new List<TMP_Text>();
     //public Stack<Renderer> enabledRenderers = new Stack<Renderer>();
     public List<Renderer> allRenderers = new List<Renderer>();
     public List<Renderer> disabledMeshes = new List<Renderer>();
@@ -19,13 +28,24 @@ public class LoadBrain : MonoBehaviour
     private string path;
     GameObject brain;
 
-    Slider opacitySlider;
+    
     private float segOpacity;
-    private int currentlySelected = -1;
+    private float minOpacity;
+    GameObject curSegment = null;
 
 
+    void assignNewMaterial(GameObject child, int i){
+        Color col = child.GetComponent<MeshRenderer>().material.GetColor("_Color");
+        col.a = 1.0f;
+        Material mat = new Material(shader);
+        mat.SetColor("_Color", col);
+        mat.renderQueue = 3000 + i*20;
+        child.GetComponent<MeshRenderer>().material = mat;
+    }
     void Start()
     {
+        
+        dropdown.ClearOptions();
         print(Application.streamingAssetsPath);
         path = Application.streamingAssetsPath + relativeFilepath;
         brain = Siccity.GLTFUtility.Importer.LoadFromFile(path);
@@ -33,20 +53,41 @@ public class LoadBrain : MonoBehaviour
         brain.transform.localPosition = new Vector3(-94.2f, -99.23f, -93.6f);
         brain.transform.localRotation = Quaternion.Euler(0.453f, -288.9f, 1.323f);
         foreach(Transform child in brain.transform){
-            if(child.gameObject.GetComponent<Renderer>() != null)segments.Add(new Segment(child.gameObject));
+            if(child.gameObject.GetComponent<Renderer>() != null)
+            {
+                // Color col = child.gameObject.GetComponent<MeshRenderer>().material.color;
+                // Material mat = baseMaterial;
+                // mat.color = col;
+                // child.gameObject.GetComponent<MeshRenderer>().material = mat;  
+                segments.Add(child.gameObject);
+
+            }
         }
         for(int i = segments.Count - 1; i !=-1; i--){
-            if(segments[i].seg.GetComponent<Renderer>() != null)
+            if(segments[i].GetComponent<Renderer>() != null)
             {
-                allRenderers.Add(segments[i].seg.GetComponent<Renderer>());
+                assignNewMaterial(segments[i], segments.Count - i);  
+                allRenderers.Add(segments[i].GetComponent<Renderer>());
+
+                dropdown.options.Add(new TMP_Dropdown.OptionData(i.ToString())); 
                 //enabledRenderers.Push((segments[i].GetComponent<Renderer>()));
             }
         }
-        opacitySlider = GameObject.Find("Opacity Slider").GetComponent<Slider>();
-        segOpacity = opacitySlider.value;
-        opacitySlider.gameObject.SetActive(false);
+        curSegment = segments[0]; 
+        dropdown.onValueChanged.AddListener(delegate{dropdownSegmentSelected(dropdown); });
+        //opacitySlider = GameObject.Find("Opacity Slider").GetComponent<Slider>();
+        //segOpacity = opacitySlider.value;
+        //opacitySlider.gameObject.SetActive(false);
 
     }
+    private void dropdownSegmentSelected(TMP_Dropdown dropdown){
+        int newSelection = dropdown.value;
+        print(newSelection);
+        //clickSegmentButton(segments[newSelection]);
+        curSegment = segments[newSelection];
+        if(curSegment == null)print("Ye");
+    }
+
     private void displayOpacitySlider(){
         opacitySlider.enabled = true;
         opacitySlider.gameObject.SetActive(true);
@@ -62,25 +103,11 @@ public class LoadBrain : MonoBehaviour
             if(!Object.Equals(r, rend))r.GetComponent<Renderer>().enabled = false;
         }
     }
-    private void clickSegmentButton(Segment segment){
-        segment.selected = !segment.selected;
-        if(segment.selected){
-            segment.seg.GetComponent<Renderer>().enabled = true;
-            foreach(Segment s in segments){
-                if(!Object.Equals(segment.seg, s.seg)){
-                    s.selected = false;
-                    s.seg.GetComponent<Renderer>().enabled = false;
-                }else{
-                }
-            }
-        }else{
-            foreach(Segment s in segments){
-                s.selected = false;
-                s.seg.GetComponent<Renderer>().enabled = true;
-            }
-        }
+    private void clickSegmentButton(GameObject segment){
+        curSegment = segment;
+        //curSegment.GetComponent<MeshRenderer>().material.color = new Color(255,0,0);
     }
-    // public void selectSegment(int n){
+    // public v oid selectSegment(int n){
     //     if(currentlySelected != n){
     //         currentlySelected = -1;
     //         hideOpacitySlider();
@@ -90,6 +117,47 @@ public class LoadBrain : MonoBehaviour
     //     }
     //     clickSegmentButton(segments[currentlySelected]);
     // }
+
+
+    public void AdjustOpacity(float newOp) {
+        print("banana");
+        print(curSegment);
+        if(curSegment != null){
+            segOpacity = newOp;
+            Color color = curSegment.GetComponent<MeshRenderer>().material.color;
+            color.a = segOpacity;
+            if(color.a < minOpacity)curSegment.GetComponent<MeshRenderer>().enabled = false;
+            else{
+                if(curSegment.GetComponent<MeshRenderer>().enabled == false)curSegment.GetComponent<MeshRenderer>().enabled = true;
+                print(color);
+                print("funanana");
+                curSegment.GetComponent<MeshRenderer>().material.color = color;
+            }
+        }
+    }
+
+    public void selectSegment(){
+        if(currentlySelected == segments.Count-1)currentlySelected = 0;
+        else currentlySelected++;
+        clickSegmentButton(segments[currentlySelected]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public void selectSegment1(){
@@ -148,16 +216,6 @@ public class LoadBrain : MonoBehaviour
         clickSegmentButton(segments[4]);
     }
     
-
-
-    public void AdjustOpacity(float newOp) {
-        if(currentlySelected != -1){
-            segOpacity = newOp;
-            Color color = segments[currentlySelected].seg.GetComponent<MeshRenderer>().material.color;
-            color.a = segOpacity;
-            segments[currentlySelected].seg.GetComponent<MeshRenderer>().material.color = color;
-        }
-    }
 }
     // public void selectSegment1(){
     //     selectRenderer(allRenderers[0]);
