@@ -3,6 +3,10 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - CameraMovement
     - LoadBrain
+    - MainMenu
+    - SegmentSelect
+    - SelectionManager
+    - palette
     Unity.CollabProxy.Editor.dll:
     - Unity.Cloud.Collaborate.UserInterface.CollaborateWindow
     - Unity.Cloud.Collaborate.UserInterface.WindowCache
@@ -10,10 +14,12 @@ ScriptsOnlyBuild:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
     - TMPro.TMP_ColorGradient
+    - TMPro.TMP_Dropdown
     - TMPro.TMP_FontAsset
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
+    - TMPro.TextMeshProUGUI
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -25,10 +31,89 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Mask
+    - UnityEngine.UI.ScrollRect
+    - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Slider
-    - UnityEngine.UI.Text
+    - UnityEngine.UI.Toggle
+    - UnityEngine.UI.ToggleGroup
   sceneClasses:
-    Assets/Scenes/CameraTesting.unity:
+    Assets/Scenes/Brain.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11782}
+    - Class: 114
+      Script: {instanceID: 11842}
+    - Class: 114
+      Script: {instanceID: 11976}
+    - Class: 114
+      Script: {instanceID: 12022}
+    - Class: 114
+      Script: {instanceID: 12378}
+    - Class: 114
+      Script: {instanceID: 12380}
+    - Class: 114
+      Script: {instanceID: 12488}
+    - Class: 114
+      Script: {instanceID: 12740}
+    - Class: 114
+      Script: {instanceID: 12906}
+    - Class: 114
+      Script: {instanceID: 13000}
+    - Class: 114
+      Script: {instanceID: 13274}
+    - Class: 114
+      Script: {instanceID: 13524}
+    - Class: 114
+      Script: {instanceID: 13596}
+    - Class: 114
+      Script: {instanceID: 13758}
+    - Class: 114
+      Script: {instanceID: 13760}
+    - Class: 114
+      Script: {instanceID: 13960}
+    - Class: 114
+      Script: {instanceID: 14044}
+    - Class: 114
+      Script: {instanceID: 14066}
+    - Class: 114
+      Script: {instanceID: 14086}
+    - Class: 114
+      Script: {instanceID: 14110}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/Scenes/Start page.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -50,37 +135,45 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11768}
+      Script: {instanceID: 11782}
     - Class: 114
-      Script: {instanceID: 11954}
+      Script: {instanceID: 11842}
     - Class: 114
-      Script: {instanceID: 12000}
+      Script: {instanceID: 11976}
     - Class: 114
-      Script: {instanceID: 12346}
+      Script: {instanceID: 12022}
     - Class: 114
-      Script: {instanceID: 12454}
+      Script: {instanceID: 12380}
     - Class: 114
-      Script: {instanceID: 12490}
+      Script: {instanceID: 12488}
     - Class: 114
-      Script: {instanceID: 12948}
+      Script: {instanceID: 12528}
     - Class: 114
-      Script: {instanceID: 13212}
+      Script: {instanceID: 12682}
     - Class: 114
-      Script: {instanceID: 13230}
+      Script: {instanceID: 12740}
     - Class: 114
-      Script: {instanceID: 13534}
+      Script: {instanceID: 13000}
     - Class: 114
-      Script: {instanceID: 13686}
+      Script: {instanceID: 13274}
     - Class: 114
-      Script: {instanceID: 13730}
+      Script: {instanceID: 13292}
     - Class: 114
-      Script: {instanceID: 13852}
+      Script: {instanceID: 13524}
     - Class: 114
-      Script: {instanceID: 13966}
+      Script: {instanceID: 13596}
     - Class: 114
-      Script: {instanceID: 14006}
+      Script: {instanceID: 13760}
     - Class: 114
-      Script: {instanceID: 14464}
+      Script: {instanceID: 13806}
+    - Class: 114
+      Script: {instanceID: 13926}
+    - Class: 114
+      Script: {instanceID: 14044}
+    - Class: 114
+      Script: {instanceID: 14066}
+    - Class: 114
+      Script: {instanceID: 14086}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -96,8 +189,6 @@ ScriptsOnlyBuild:
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
-      Script: {instanceID: 0}
-    - Class: 850595691
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -270,7 +361,7 @@ ScriptsOnlyBuild:
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: f0d235c885a842d05c430ddc38458c0d
+      Hash: 923996059fca96b70ff969d25feb4b87
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CameraMovement
@@ -366,6 +457,12 @@ ScriptsOnlyBuild:
     className: BrainButton
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MainMenu
+  - hash:
+      serializedVersion: 2
       Hash: 040dd48e3a027d5424519a5fa2009df4
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -394,6 +491,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SpriteAnimator
+  - hash:
+      serializedVersion: 2
+      Hash: e0766a0e8938b34dbdc572ce4b274d5c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SegmentSelect
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -522,7 +625,7 @@ ScriptsOnlyBuild:
     className: TMP_TextSelector_A
   - hash:
       serializedVersion: 2
-      Hash: c1933cc0a2f4ff6eb13333347497beb3
+      Hash: a74405a4829a834d107a0c6e072719ed
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: TimelineAsset
@@ -594,7 +697,7 @@ ScriptsOnlyBuild:
     className: Benchmark04
   - hash:
       serializedVersion: 2
-      Hash: 88cc9df3c6fc697bfbeacd24c0d6f2d7
+      Hash: 8e6ceabfd38a184413d69b7db56c89cc
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools
     className: BeforeAfterTestCommandState
@@ -642,10 +745,16 @@ ScriptsOnlyBuild:
     className: VertexZoom
   - hash:
       serializedVersion: 2
-      Hash: ab42f535311fcbee78ba1675c7a69fdf
+      Hash: 173868577a809a0c0d7927f48965d541
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LoadBrain
+  - hash:
+      serializedVersion: 2
+      Hash: afc5b93a7b192de2dcb3832fe35a5c7e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: palette
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -720,6 +829,12 @@ ScriptsOnlyBuild:
     className: BaseInput
   - hash:
       serializedVersion: 2
+      Hash: 84e4c1319e9694ed890627342d4df692
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SelectionManager
+  - hash:
+      serializedVersion: 2
       Hash: caa533b001ae39b864ba8425019e2268
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -744,7 +859,7 @@ ScriptsOnlyBuild:
     className: TestRunCallbackListener
   - hash:
       serializedVersion: 2
-      Hash: c60c5cba0d5ed4f4a018240d6339217f
+      Hash: f1d735cc1a21c3704ab52568f4fbfcf8
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner
     className: PlaymodeTestsController
@@ -798,5 +913,6 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   platform: 5
   scenePathNames:
-  - Assets/Scenes/CameraTesting.unity
+  - Assets/Scenes/Start page.unity
+  - Assets/Scenes/Brain.unity
   playerPath: D:/COMP0016_2020_21_Team32/GLTFUnityTest.exe

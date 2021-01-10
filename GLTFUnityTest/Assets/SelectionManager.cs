@@ -85,6 +85,11 @@ using System.Collections.Generic;
 
 public class SelectionManager : MonoBehaviour
 {
+
+    public static SelectionManager current; //singleton pattern.
+    void Awake(){
+        current = this;
+    }
     GraphicRaycaster raycaster;
     PointerEventData pointerEventData;
     EventSystem eventSystem;
@@ -96,13 +101,18 @@ public class SelectionManager : MonoBehaviour
     public event EventHandler onVAnnotationButtonPressed;
     public event EventHandler onAnnotationButton;
 
+    public event EventHandler onColourSelect;
+
     [SerializeField] Toggle cameraButton;
     [SerializeField] Toggle tButton;
     [SerializeField] Toggle rButton;
     [SerializeField] Toggle reButton;
     [SerializeField] Toggle vAnnotationButton;
-    [SerializeField] Toggle annotationButton;
+    [SerializeField] Button annotationButton;
 
+    [SerializeField] Button segmentSelector;
+    
+    [SerializeField] GameObject pallete; 
     private Toggle selectedToggle;
     private List<Toggle> toggles;
     private List<EventHandler> events;
@@ -120,7 +130,6 @@ public class SelectionManager : MonoBehaviour
         toggles.Add(rButton);
         toggles.Add(reButton);
         toggles.Add(vAnnotationButton);
-        toggles.Add(annotationButton);
 
         events.Add(onCameraButtonPressed);
         events.Add(onTButtonPressed);
@@ -162,10 +171,16 @@ public class SelectionManager : MonoBehaviour
                         if(result.gameObject.Equals(toggles[i].gameObject)){
                             Debug.Log("I clicked it");
                             selectedToggle = toggles[i];
-                            toggles[i].Select();
+                            //toggles[i].Select();
                             events[i]?.Invoke(this, EventArgs.Empty);
                         }
                     }
+                }
+                if(result.gameObject.Equals(annotationButton.gameObject)){
+                    onAnnotationButton?.Invoke(this, EventArgs.Empty);
+                }
+                if(result.gameObject.Equals(pallete)){
+                    onColourSelect?.Invoke(this, EventArgs.Empty);
                 }
             }   
         }
