@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 using TMPro;
 //loads the model at runtime
 
 //ONE ADDITIONAL COMMENT
 public class LoadBrain : MonoBehaviour
 {
+    public static LoadBrain current; //singleton pattern again - probably not ideal
     [SerializeField] Shader shader;
     [SerializeField] Button segmentSelectButton;
     int currentlySelected = 0;
@@ -32,8 +34,6 @@ public class LoadBrain : MonoBehaviour
     private float segOpacity;
     private float minOpacity;
     GameObject curSegment = null;
-
-
     void assignNewMaterial(GameObject child, int i){
         Color col = child.GetComponent<MeshRenderer>().material.GetColor("_Color");
         col.a = 1.0f;
@@ -42,9 +42,12 @@ public class LoadBrain : MonoBehaviour
         mat.renderQueue = 3000 + i*20;
         child.GetComponent<MeshRenderer>().material = mat;
     }
+    void Awake(){
+        current = this;
+    }
     void Start()
     {
-        
+        SelectionManager.current.onColourSelect += SelectionManager_onColourSelect;
         dropdown.ClearOptions();
         print(Application.streamingAssetsPath);
         path = Application.streamingAssetsPath + relativeFilepath;
@@ -52,8 +55,9 @@ public class LoadBrain : MonoBehaviour
         brain.transform.SetParent(this.transform);
         brain.transform.localPosition = new Vector3(-94.2f, -99.23f, -93.6f);
         brain.transform.localRotation = Quaternion.Euler(0.453f, -288.9f, 1.323f);
+        int count = 0;
         foreach(Transform child in brain.transform){
-            if(child.gameObject.GetComponent<Renderer>() != null)
+            if(child.gameObject.GetComponent<Renderer>() != null && count != 1)
             {
                 // Color col = child.gameObject.GetComponent<MeshRenderer>().material.color;
                 // Material mat = baseMaterial;
@@ -62,6 +66,9 @@ public class LoadBrain : MonoBehaviour
                 segments.Add(child.gameObject);
 
             }
+            if(count ==1)child.gameObject.GetComponent<Renderer>().enabled = false;
+            count++;
+            
         }
         for(int i = segments.Count - 1; i !=-1; i--){
             if(segments[i].GetComponent<Renderer>() != null)
@@ -100,11 +107,33 @@ public class LoadBrain : MonoBehaviour
     
     private void selectRenderer(Renderer rend){
         foreach(Renderer r in allRenderers){
-            if(!Object.Equals(r, rend))r.GetComponent<Renderer>().enabled = false;
+            if(!object.Equals(r, rend))r.GetComponent<Renderer>().enabled = false;
         }
+    }
+
+
+
+
+
+
+    //Some event stuff - should probably be done in a separate class 
+    //Gonna be used to let other scripts know which segment is currently selected. (Only AddAnnotation is currently subscribed to this event)
+
+    public void SelectionManager_onColourSelect(object sender, EventArgs e){
+        curSegment.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(255, 0, 0));
+    }
+    public event EventHandler<onSegmentSelectEventArgs> onSegmentSelect;
+    public class onSegmentSelectEventArgs : EventArgs{
+        public GameObject curSegment;
+        public onSegmentSelectEventArgs(GameObject curSegment){
+            this.curSegment = curSegment;
+        }
+        
     }
     private void clickSegmentButton(GameObject segment){
         curSegment = segment;
+        onSegmentSelectEventArgs e = new onSegmentSelectEventArgs(curSegment);
+        onSegmentSelect?.Invoke(this, e);
         //curSegment.GetComponent<MeshRenderer>().material.color = new Color(255,0,0);
     }
     // public v oid selectSegment(int n){

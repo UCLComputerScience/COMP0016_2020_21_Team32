@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 public class DragDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+    String title;
     [SerializeField] Canvas canvas;
-    private RectTransform rectTransform; //stores position, size, anchor, pivot of a rectangle
 
+    [SerializeField] Annotation annotation;
+    public event EventHandler placeAnnotationPin;
+    private RectTransform rectTransform; //stores position, size, anchor, pivot of a rectangle
+    void awake(){
+        annotation.hide();
+    }
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -27,6 +34,9 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegin
     }
     public void OnEndDrag(PointerEventData data){
         Debug.Log("StoppingDraggin");
+        title = "Annotation #" + annotation.annotationId;
+        annotation.show(title, "enter...", (string input) => Debug.Log(input),() => Debug.Log("Cancel")); 
+
     }
 
     // Start is called before the first frame update

@@ -6,9 +6,12 @@ using System;
 
 public class CameraMovement : MonoBehaviour
 {
-    [SerializeField] SelectionManager selectionManager;
+    public static Vector3 startPosition = new Vector3(864.715f, 198.6647f, -1475.485f);
+    public static Quaternion startRotation = Quaternion.Euler(14.21f, -14.114f, 0f);
     public Camera cam;
     private Vector3 prevPosition;
+
+    public Transform startTransform;
     public Transform target;
     private Vector3 displacement; 
     private Vector3 dirVec;
@@ -19,14 +22,20 @@ public class CameraMovement : MonoBehaviour
 
     void Start() 
     {
-        selectionManager.onCameraButtonPressed += SelectionMangager_onCameraButtonPressed;
-        selectionManager.onTButtonPressed += otherEvent;
-        selectionManager.onRButtonPressed += otherEvent;
-        selectionManager.onReButtonPressed += otherEvent;
-        selectionManager.onVAnnotationButtonPressed += otherEvent;
-        selectionManager.onAnnotationButton += otherEvent;
+
+        SelectionManager.current.onCameraButtonPressed += SelectionMangager_onCameraButtonPressed;
+        SelectionManager.current.onTButtonPressed += otherEvent;
+        SelectionManager.current.onRButtonPressed += otherEvent;
+        SelectionManager.current.onReButtonPressed += SelectionManager_onReButtonPressed;
+        SelectionManager.current.onVAnnotationButtonPressed += otherEvent;
+        SelectionManager.current.onAnnotationButton += otherEvent;
+
+
         displacement = new Vector3(0, 0, cameraDistance);
         dirVec = new Vector3();
+        startTransform = cam.transform;
+        cam.transform.position = startPosition;
+        cam.transform.rotation = startRotation;
         prevPosition = cam.ScreenToViewportPoint(Input.mousePosition);
         cam.transparencySortMode = TransparencySortMode.Orthographic;
     }
@@ -34,7 +43,16 @@ public class CameraMovement : MonoBehaviour
         isEnabled = true;
         Debug.Log(isEnabled);
     }
+
+    public void SelectionManager_onReButtonPressed(object sender, EventArgs e){
+        prevPosition = startPosition;
+        displacement = new Vector3(0, 0, cameraDistance);
+        dirVec = new Vector3();
+        isEnabled = true; // should really wait until the camera has finished its Slerp
+        Debug.Log(isEnabled);
+    }
     public void otherEvent(object sender, EventArgs e){
+        print("The other guy is being fired");
         isEnabled = false;
     }
     //WORKING
