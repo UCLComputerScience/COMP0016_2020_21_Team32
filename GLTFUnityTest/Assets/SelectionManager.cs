@@ -108,7 +108,7 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] Toggle rButton;
     [SerializeField] Toggle reButton;
     [SerializeField] Toggle vAnnotationButton;
-    [SerializeField] Button annotationButton;
+    [SerializeField] Toggle annotationButton;
 
     [SerializeField] Button segmentSelector;
     
@@ -130,6 +130,7 @@ public class SelectionManager : MonoBehaviour
         toggles.Add(rButton);
         toggles.Add(reButton);
         toggles.Add(vAnnotationButton);
+        toggles.Add(annotationButton);
 
         events.Add(onCameraButtonPressed);
         events.Add(onTButtonPressed);
@@ -141,10 +142,20 @@ public class SelectionManager : MonoBehaviour
 
         raycaster = GetComponent<GraphicRaycaster>();
         eventSystem = GetComponent<EventSystem>();
+
+        events[0]?.Invoke(this, EventArgs.Empty); //have first button selected immediately
+        selectedToggle = toggles[0];
+
     }
 
     void Update()
     {
+        foreach(Toggle toggle in toggles){
+            if(toggle.Equals(selectedToggle))toggle.isOn = true;
+            else{
+                toggle.isOn = false;
+            }
+        }
         // if(selectedToggle != null){
         //     selectedToggle.Select();
         //     //selectedToggle.isOn = true;
@@ -171,13 +182,10 @@ public class SelectionManager : MonoBehaviour
                         if(result.gameObject.Equals(toggles[i].gameObject)){
                             Debug.Log("I clicked it");
                             selectedToggle = toggles[i];
-                            //toggles[i].Select();
+                            selectedToggle.isOn = true;
                             events[i]?.Invoke(this, EventArgs.Empty);
                         }
                     }
-                }
-                if(result.gameObject.Equals(annotationButton.gameObject)){
-                    onAnnotationButton?.Invoke(this, EventArgs.Empty);
                 }
                 if(result.gameObject.Equals(pallete)){
                     onColourSelect?.Invoke(this, EventArgs.Empty);

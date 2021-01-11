@@ -1,9 +1,14 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - AddAnnotation
+    - AddAnnotationPin
+    - Annotation
     - CameraMovement
+    - DragDrop
     - LoadBrain
     - MainMenu
+    - ResetPosition
     - SegmentSelect
     - SelectionManager
     - palette
@@ -16,6 +21,7 @@ ScriptsOnlyBuild:
     - TMPro.TMP_ColorGradient
     - TMPro.TMP_Dropdown
     - TMPro.TMP_FontAsset
+    - TMPro.TMP_InputField
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
@@ -31,7 +37,9 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.LayoutElement
     - UnityEngine.UI.Mask
+    - UnityEngine.UI.RectMask2D
     - UnityEngine.UI.ScrollRect
     - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Slider
@@ -66,37 +74,53 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12022}
     - Class: 114
+      Script: {instanceID: 12050}
+    - Class: 114
+      Script: {instanceID: 12166}
+    - Class: 114
+      Script: {instanceID: 12264}
+    - Class: 114
+      Script: {instanceID: 12328}
+    - Class: 114
       Script: {instanceID: 12378}
     - Class: 114
       Script: {instanceID: 12380}
     - Class: 114
       Script: {instanceID: 12488}
     - Class: 114
-      Script: {instanceID: 12740}
+      Script: {instanceID: 12516}
     - Class: 114
-      Script: {instanceID: 12906}
+      Script: {instanceID: 12712}
     - Class: 114
-      Script: {instanceID: 13000}
+      Script: {instanceID: 12744}
     - Class: 114
-      Script: {instanceID: 13274}
+      Script: {instanceID: 12910}
     - Class: 114
-      Script: {instanceID: 13524}
+      Script: {instanceID: 13004}
     - Class: 114
-      Script: {instanceID: 13596}
+      Script: {instanceID: 13278}
     - Class: 114
-      Script: {instanceID: 13758}
+      Script: {instanceID: 13490}
     - Class: 114
-      Script: {instanceID: 13760}
+      Script: {instanceID: 13530}
     - Class: 114
-      Script: {instanceID: 13960}
+      Script: {instanceID: 13602}
     - Class: 114
-      Script: {instanceID: 14044}
+      Script: {instanceID: 13764}
     - Class: 114
-      Script: {instanceID: 14066}
+      Script: {instanceID: 13766}
     - Class: 114
-      Script: {instanceID: 14086}
+      Script: {instanceID: 13966}
     - Class: 114
-      Script: {instanceID: 14110}
+      Script: {instanceID: 14050}
+    - Class: 114
+      Script: {instanceID: 14072}
+    - Class: 114
+      Script: {instanceID: 14092}
+    - Class: 114
+      Script: {instanceID: 14104}
+    - Class: 114
+      Script: {instanceID: 14116}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -147,33 +171,33 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12488}
     - Class: 114
-      Script: {instanceID: 12528}
+      Script: {instanceID: 12530}
     - Class: 114
-      Script: {instanceID: 12682}
+      Script: {instanceID: 12684}
     - Class: 114
-      Script: {instanceID: 12740}
+      Script: {instanceID: 12744}
     - Class: 114
-      Script: {instanceID: 13000}
+      Script: {instanceID: 13004}
     - Class: 114
-      Script: {instanceID: 13274}
+      Script: {instanceID: 13278}
     - Class: 114
-      Script: {instanceID: 13292}
+      Script: {instanceID: 13296}
     - Class: 114
-      Script: {instanceID: 13524}
+      Script: {instanceID: 13530}
     - Class: 114
-      Script: {instanceID: 13596}
+      Script: {instanceID: 13602}
     - Class: 114
-      Script: {instanceID: 13760}
+      Script: {instanceID: 13766}
     - Class: 114
-      Script: {instanceID: 13806}
+      Script: {instanceID: 13812}
     - Class: 114
-      Script: {instanceID: 13926}
+      Script: {instanceID: 13932}
     - Class: 114
-      Script: {instanceID: 14044}
+      Script: {instanceID: 14050}
     - Class: 114
-      Script: {instanceID: 14066}
+      Script: {instanceID: 14072}
     - Class: 114
-      Script: {instanceID: 14086}
+      Script: {instanceID: 14092}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -349,7 +373,7 @@ ScriptsOnlyBuild:
     className: TMP_SubMeshUI
   - hash:
       serializedVersion: 2
-      Hash: e9539b36af987b1fc4d5169f5d2f3d29
+      Hash: 04351ae53ea47d50196627cbe9d9b8e2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DragDrop
@@ -361,7 +385,7 @@ ScriptsOnlyBuild:
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 923996059fca96b70ff969d25feb4b87
+      Hash: e9da808a9f47a41bc3bb714b42330001
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CameraMovement
@@ -415,6 +439,12 @@ ScriptsOnlyBuild:
     className: CameraScript
   - hash:
       serializedVersion: 2
+      Hash: 9f3b4e43488d830eca5ee724db65d561
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ResetPosition
+  - hash:
+      serializedVersion: 2
       Hash: dd7520b7d4e690e8c593273e7b9fbe80
     assemblyName: Assembly-CSharp.dll
     namespaceName: TMPro.Examples
@@ -461,6 +491,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainMenu
+  - hash:
+      serializedVersion: 2
+      Hash: 17dfaee020f4793d7ac23139cce94a0d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AddAnnotation
   - hash:
       serializedVersion: 2
       Hash: 040dd48e3a027d5424519a5fa2009df4
@@ -655,6 +691,12 @@ ScriptsOnlyBuild:
     className: TMP_TextSelector_B
   - hash:
       serializedVersion: 2
+      Hash: 2632ec799aa269eff37d3ce03ffa2998
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AddAnnotationPin
+  - hash:
+      serializedVersion: 2
       Hash: 7fe8f55bedf794cae0d742b21f1fe784
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -829,7 +871,7 @@ ScriptsOnlyBuild:
     className: BaseInput
   - hash:
       serializedVersion: 2
-      Hash: 84e4c1319e9694ed890627342d4df692
+      Hash: 11c893cc820b73495b7f14d749970515
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SelectionManager
@@ -895,7 +937,7 @@ ScriptsOnlyBuild:
     className: Slider
   - hash:
       serializedVersion: 2
-      Hash: c55084a3dd50a709ca5184b2e58d2658
+      Hash: d6b217ff6cd6779aa423583e382100e0
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Annotation
