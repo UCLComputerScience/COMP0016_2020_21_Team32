@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dracodec", "Dracodec.csproj", "{43d38dd2-d66a-882f-8b98-ab49900f0384}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Siccity.GLTFUtility.Editor", "Siccity.GLTFUtility.Editor.csproj", "{40002442-a595-fe36-0b62-036170cecec3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,8 +18,6 @@ Global
 		{133c2df9-6c2c-10ff-bcf3-b2f726400125}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43d38dd2-d66a-882f-8b98-ab49900f0384}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{43d38dd2-d66a-882f-8b98-ab49900f0384}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{40002442-a595-fe36-0b62-036170cecec3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{40002442-a595-fe36-0b62-036170cecec3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

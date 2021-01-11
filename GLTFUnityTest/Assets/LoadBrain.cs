@@ -1,4 +1,4 @@
-﻿using Siccity;
+using Siccity;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -42,7 +42,7 @@ public class LoadBrain : MonoBehaviour
         mat.renderQueue = 3000 + i*20;
         child.GetComponent<MeshRenderer>().material = mat;
     }
-    void Awake(){
+    void Awake(){ //singleton pattern at work
         current = this;
     }
     void Start()
