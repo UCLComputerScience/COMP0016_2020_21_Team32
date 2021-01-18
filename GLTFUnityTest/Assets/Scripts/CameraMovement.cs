@@ -6,8 +6,9 @@ using System;
 
 public class CameraMovement : MonoBehaviour
 {
-    public static Vector3 startPosition = new Vector3(864.715f, 198.6647f, -1475.485f);
-    public static Quaternion startRotation = Quaternion.Euler(14.21f, -14.114f, 0f);
+    //public static Vector3 startPosition = new Vector3(864.715f, 198.6647f, -1475.485f);
+    public static Vector3 startPosition = new Vector3(169.1957f, 93.43023f, -514.921f);
+    public static Quaternion startRotation = Quaternion.Euler(9.78f, -18.19f, 0f);
     public Camera cam;
     private Vector3 prevPosition;
 
@@ -22,15 +23,7 @@ public class CameraMovement : MonoBehaviour
 
     void Start() 
     {
-
-        SelectionManager.current.onCameraButtonPressed += SelectionMangager_onCameraButtonPressed;
-        SelectionManager.current.onTButtonPressed += otherEvent;
-        SelectionManager.current.onRButtonPressed += otherEvent;
-        SelectionManager.current.onReButtonPressed += SelectionManager_onReButtonPressed;
-        SelectionManager.current.onVAnnotationButtonPressed += otherEvent;
-        SelectionManager.current.onAnnotationButton += otherEvent;
-
-
+        subscribeToEvents();
         displacement = new Vector3(0, 0, cameraDistance);
         dirVec = new Vector3();
         startTransform = cam.transform;
@@ -39,27 +32,6 @@ public class CameraMovement : MonoBehaviour
         prevPosition = cam.ScreenToViewportPoint(Input.mousePosition);
         cam.transparencySortMode = TransparencySortMode.Orthographic;
     }
-    public void SelectionMangager_onCameraButtonPressed(object sender, EventArgs e){
-        isEnabled = true;
-        Debug.Log(isEnabled);
-    }
-
-    public void SelectionManager_onReButtonPressed(object sender, EventArgs e){
-        prevPosition = startPosition;
-        displacement = new Vector3(0, 0, cameraDistance);
-        dirVec = new Vector3();
-        isEnabled = true; // should really wait until the camera has finished its Slerp
-        Debug.Log(isEnabled);
-    }
-    public void otherEvent(object sender, EventArgs e){
-        print("The other guy is being fired");
-        isEnabled = false;
-    }
-    //WORKING
-    //Zoom controls inverted and still a bit slow but other than that working nicely.
-    
-    // Update is called once per frame
-
     void LateUpdate()
     {
         if(!isEnabled) return;
@@ -91,6 +63,39 @@ public class CameraMovement : MonoBehaviour
             cam.transform.Translate(displacement);
         }
         
+    }
+
+    //subscribes this script to events that are fired by the SelectionManager
+    private void subscribeToEvents(){
+        SelectionManager.current.onCameraButtonPressed += SelectionMangager_onCameraButtonPressed;
+        SelectionManager.current.onTButtonPressed += otherEvent;
+        SelectionManager.current.onRButtonPressed += otherEvent;
+        SelectionManager.current.onReButtonPressed += SelectionManager_onReButtonPressed;
+        SelectionManager.current.onVAnnotationButtonPressed += otherEvent;
+        SelectionManager.current.onAnnotationButton += otherEvent;
+
+    }
+
+    /*When the hand UI button is pressed, Selection manager fires of an event. This enables this script, so the user can
+     start rotating the camera.*/
+    public void SelectionMangager_onCameraButtonPressed(object sender, EventArgs e){
+        isEnabled = true;
+        Debug.Log(isEnabled);
+    }
+
+
+   //When the reset button is pressed, it's assumed the user will want to go back to rotating the camera.  
+    public void SelectionManager_onReButtonPressed(object sender, EventArgs e){
+        prevPosition = startPosition;
+        displacement = new Vector3(0, 0, cameraDistance);
+        dirVec = new Vector3();
+        isEnabled = true; // should really wait until the camera has finished its Slerp
+        Debug.Log(isEnabled);
+    }
+
+    //If any other button is pressed, this script is disabled
+    public void otherEvent(object sender, EventArgs e){
+        isEnabled = false;
     }
 
 }

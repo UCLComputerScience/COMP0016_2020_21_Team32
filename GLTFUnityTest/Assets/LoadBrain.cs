@@ -26,14 +26,16 @@ public class LoadBrain : MonoBehaviour
     //public Stack<Renderer> disabledRenderers = new Stack<Renderer>();
 
     
-    private string relativeFilepath = "\\brain.glb";
+    private string relativeFilepath = Path.DirectorySeparatorChar + "brain.glb";
     private string path;
     GameObject brain;
 
     
-    private float segOpacity;
+    private float segOpacity = 1.0f;
     private float minOpacity;
     GameObject curSegment = null;
+
+    //This makes the transparency work correctly
     void assignNewMaterial(GameObject child, int i){
         Color col = child.GetComponent<MeshRenderer>().material.GetColor("_Color");
         col.a = 1.0f;
@@ -47,7 +49,7 @@ public class LoadBrain : MonoBehaviour
     }
     void Start()
     {
-        SelectionManager.current.onColourSelect += SelectionManager_onColourSelect;
+        colourSelect.current.onColourSelect += Pallete_onColourSelect;
         dropdown.ClearOptions();
         print(Application.streamingAssetsPath);
         path = Application.streamingAssetsPath + relativeFilepath;
@@ -104,12 +106,7 @@ public class LoadBrain : MonoBehaviour
         opacitySlider.gameObject.SetActive(false);
     }
 
-    
-    private void selectRenderer(Renderer rend){
-        foreach(Renderer r in allRenderers){
-            if(!object.Equals(r, rend))r.GetComponent<Renderer>().enabled = false;
-        }
-    }
+
 
 
 
@@ -120,7 +117,12 @@ public class LoadBrain : MonoBehaviour
     //Gonna be used to let other scripts know which segment is currently selected. (Only AddAnnotation is currently subscribed to this event)
 
     public void SelectionManager_onColourSelect(object sender, EventArgs e){
-        curSegment.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(255, 0, 0));
+        curSegment.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(1, 0.2f, 0.2f, segOpacity));
+    }
+    public void Pallete_onColourSelect(object sender, EventArgsColourData e){
+        Color col = e.col;
+        col.a = segOpacity;
+        curSegment.GetComponent<MeshRenderer>().material.SetColor("_Color", col);
     }
     public event EventHandler<onSegmentSelectEventArgs> onSegmentSelect;
     public class onSegmentSelectEventArgs : EventArgs{

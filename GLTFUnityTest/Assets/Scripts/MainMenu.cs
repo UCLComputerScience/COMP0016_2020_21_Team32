@@ -7,6 +7,6 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public void playgame(){
-        SceneManager.LoadScene("Brain");
+        SceneManager.LoadScene("brainOptimised");
     }
 }

@@ -112,7 +112,7 @@ public class SelectionManager : MonoBehaviour
 
     [SerializeField] Button segmentSelector;
     
-    [SerializeField] GameObject pallete; 
+    public GameObject pallete; 
     private Toggle selectedToggle;
     private List<Toggle> toggles;
     private List<EventHandler> events;

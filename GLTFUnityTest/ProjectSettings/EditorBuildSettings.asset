@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Start page.unity
     guid: be729bada9025324e8dd570f4ecf32f6
   - enabled: 1
-    path: Assets/Scenes/Brain.unity
-    guid: ffe157b746004bb44b0cf1ab926fbb07
+    path: Assets/Scenes/brainOptimised.unity
+    guid: 850b34035d9bf3f44865211d792ddd3f
   m_configObjects: {}
