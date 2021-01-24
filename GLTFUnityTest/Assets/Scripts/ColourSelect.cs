@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class colourSelect : MonoBehaviour
+public class ColourSelect : MonoBehaviour
 {
     // Start is called before the first frame update
-    public static colourSelect current;
+    public static ColourSelect current;
     public event EventHandler<EventArgsColourData> onColourSelect; 
 
     public Texture2D colours;
@@ -41,12 +41,19 @@ public class colourSelect : MonoBehaviour
     void Update()
     {
         RectTransformUtility.ScreenPointToLocalPointInRectangle(rect, Input.mousePosition, null, out mousePos);
+
+        /***ISSUE: when the palette is rotated the rect changes so the modified x and y values change. 
+        Means you can select colours not on the palette and the selected segment will change colour.
+        ***/
+
+
         //Centre of texture is currently (0,0). Pixel data isn't stored in this way - we need to make it so
         //bottom left = (0,0) and top right = (width, height);
         mousePos.x = width - (width/2 -mousePos.x);
         mousePos.y = Mathf.Abs((height/2 - mousePos.y) - height);
         if(Input.GetMouseButton(0)){
-            if(mousePos.x > -1 && mousePos.y > -1 && doubleClick()){ //if mouse is within the
+            if(mousePos.x > -1 && mousePos.y > -1 && doubleClick()){ //if mouse is within the rect of the palette
+                Debug.Log("here");
                 var col = colours.GetPixel((int)mousePos.x, (int)mousePos.y);
                 EventArgsColourData e = new EventArgsColourData(col);
                 onColourSelect?.Invoke(this, e);

@@ -25,7 +25,8 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegin
     }
     public void OnDrag(PointerEventData data){
         Debug.Log("Draggin");
-        rectTransform.anchoredPosition += data.delta /canvas.scaleFactor; //movement delta - amount mouse moved since previous frame
+        rectTransform.anchoredPosition += data.delta /canvas.scaleFactor; 
+        //movement delta - amount mouse moved since previous frame
         //must be divided by canvas scale factor because of the difference between mouse movement and canvas scale. This will vary 
         //due to the canvas adjusting itself to fit on every screen.
     }
@@ -33,9 +34,8 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegin
         Debug.Log("Beginnin draggin");
     }
     public void OnEndDrag(PointerEventData data){
-        Debug.Log("StoppingDraggin");
         title = "Annotation #" + annotation.annotationId;
-        annotation.show(title, "enter...", (string input) => Debug.Log(input),() => Debug.Log("Cancel")); 
+        annotation.show(title, "enter...", (string input) => annotation.save(title, input),() => Debug.Log("Cancel")); 
 
     }
 

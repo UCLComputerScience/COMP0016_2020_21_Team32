@@ -112,12 +112,12 @@ public class SelectionManager : MonoBehaviour
 
     [SerializeField] Button segmentSelector;
     
-    public GameObject pallete; 
+    [SerializeField] GameObject pallete; 
     private Toggle selectedToggle;
     private List<Toggle> toggles;
     private List<EventHandler> events;
 
-    
+
     void Start()
     {
         cameraButton.Select();
@@ -187,9 +187,9 @@ public class SelectionManager : MonoBehaviour
                         }
                     }
                 }
-                if(result.gameObject.Equals(pallete)){
-                    onColourSelect?.Invoke(this, EventArgs.Empty);
-                }
+                // if(result.gameObject.Equals(pallete)){
+                //     onColourSelect?.Invoke(this, EventArgs.Empty);
+                // }
             }   
         }
     }
