@@ -38,7 +38,7 @@ public class AddAnnotation : MonoBehaviour
 
     public void SelectionManager_onAnnotationButtonPressed(object sender, EventArgs e){
         isEnabled = true;
-        annotation.show(title, "enter...", (string input) => Debug.Log(input),() => Debug.Log("Cancel")); 
+        //annotation.show(new Vector3(0f,0f,0f)); 
     }
     public void LoadBrain_OnSegmentSelect(object sender, LoadBrain.onSegmentSelectEventArgs e){
         //if(prevSeg!=null) Destroy(prevSeg.GetComponent<MeshCollider>());

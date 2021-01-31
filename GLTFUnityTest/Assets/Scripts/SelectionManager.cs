@@ -180,7 +180,7 @@ public class SelectionManager : MonoBehaviour
                 for(int i = 0; i < toggles.Count; i++){
                     if(result.isValid){
                         if(result.gameObject.Equals(toggles[i].gameObject)){
-                            Debug.Log("I clicked it");
+                            //Debug.Log("I clicked it");
                             selectedToggle = toggles[i];
                             selectedToggle.isOn = true;
                             events[i]?.Invoke(this, EventArgs.Empty);

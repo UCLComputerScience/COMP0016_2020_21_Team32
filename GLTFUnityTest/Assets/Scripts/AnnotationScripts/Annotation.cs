@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,41 +16,72 @@ public class Annotation : MonoBehaviour
     [SerializeField] GameObject AnnotationPin;
     [SerializeField] private Button confirmButton;
     [SerializeField] private Button cancelButton;
-    [SerializeField] private TextMeshProUGUI titleText;
+    [SerializeField] private TMP_InputField titleInputField;
     [SerializeField] private TMP_InputField inputField;
-    public void show(String title, String input, Action<string> onConfirm, Action onCancel){
-        data = new AnnotationData();
-        numAnnotations++;
-        annotationId = numAnnotations;
+
+    public static void setNumAnnotations(int value){
+        numAnnotations = value;
+    }
+    void Awake(){
+        organ = LoadBrain.current.gameObject;
+        titleInputField.text = "Annotation #" + numAnnotations; 
+    }
+
+    public void show(Vector3 pos){
         gameObject.SetActive(true);
-        titleText.text =  title;
-        inputField.text = input;
-        confirmButton.onClick.AddListener(() =>{ 
-            hide();
-            onConfirm(inputField.text);
-            AnnotationPin.transform.position = new Vector3(0f, 0f, 0f);
+        data = new AnnotationData();
+        annotationId = numAnnotations;
+        confirmButton.onClick.AddListener(() => {
+            save(titleInputField.text, inputField.text, pos);
             AnnotationPin.SetActive(false);
             numAnnotations++;
+            hide();
         });
         cancelButton.onClick.AddListener(() => {
-            hide();
-            AnnotationPin.transform.position = new Vector3(0f, 0f, 0f);
             AnnotationPin.SetActive(false);
-            onCancel();
+            hide();
         });
     }
-    public void save(String title, String input){
-        data.title = title;
-        data.text = input;
+    public void save(String title, String input, Vector3 pos){
+        data.title = titleInputField.text;
+        data.text = inputField.text;
         data.cameraCoordinates = Camera.main.transform.position;
         data.cameraRotation = Camera.main.transform.rotation;
         data.colours = new List<Color>();
-        foreach(Transform transform in organ.transform){
-            data.colours.Add(transform.gameObject.GetComponent<MeshRenderer>().material.color);
+        data.annotationPosition = pos;
+        foreach(Transform transform in organ.transform.gameObject.GetComponentsInChildren<Transform>()){
+            if(transform.gameObject.GetComponent<MeshRenderer>()!=null) data.colours.Add(transform.gameObject.GetComponent<MeshRenderer>().material.color);
         }
+        String jsonAnnotation = JsonUtility.ToJson(data);
+        String path = Path.Combine(Application.persistentDataPath, titleInputField.text+".json");
+        File.WriteAllText(path, jsonAnnotation);
     }
     public void hide(){
         gameObject.SetActive(false);
     }
+    private void populateAnnotation(){
+        
+    }
     
 }
+
+    // public void show(String title, String input, Action<string> onConfirm, Action onCancel){
+    //     data = new AnnotationData();
+    //     Debug.Log(numAnnotations);
+    //     annotationId = numAnnotations;
+    //     gameObject.SetActive(true);
+    //     titleInputField.text =  title;
+    //     inputField.text = input;
+    //     confirmButton.onClick.AddListener(() =>{ 
+    //         hide();
+    //         onConfirm(inputField.text);
+    //         AnnotationPin.SetActive(false);
+    //         numAnnotations++;
+    //     });
+    //     cancelButton.onClick.AddListener(() => {
+    //         hide();
+    //         //AnnotationPin.transform.position = new Vector3(0f, 0f, 0f);
+    //         AnnotationPin.SetActive(false);
+    //         onCancel();
+    //     });
+    // }

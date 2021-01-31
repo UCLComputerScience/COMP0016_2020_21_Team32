@@ -10,7 +10,6 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegin
     [SerializeField] Canvas canvas;
 
     [SerializeField] Annotation annotation;
-    public event EventHandler placeAnnotationPin;
     private RectTransform rectTransform; //stores position, size, anchor, pivot of a rectangle
     void awake(){
         annotation.hide();
@@ -33,10 +32,14 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegin
     public void OnBeginDrag(PointerEventData data){
         Debug.Log("Beginnin draggin");
     }
-    public void OnEndDrag(PointerEventData data){
-        title = "Annotation #" + annotation.annotationId;
-        annotation.show(title, "enter...", (string input) => annotation.save(title, input),() => Debug.Log("Cancel")); 
+    // public void OnEndDrag(PointerEventData data){
+    //     title = "Annotation #" + annotation.annotationId; 
+    //     annotation.show(title, "enter...", (string input) => annotation.save(title, input, this.transform.position),() => Debug.Log("Cancel")); 
 
+    // }
+    public void OnEndDrag(PointerEventData data){
+        title = "Annotation #" + annotation.annotationId; 
+        annotation.show(this.transform.position); 
     }
 
     // Start is called before the first frame update

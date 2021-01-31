@@ -14,6 +14,7 @@ public class LoadBrain : MonoBehaviour
 {
     public static LoadBrain current; //singleton pattern again - probably not ideal
     [SerializeField] Shader shader;
+    [SerializeField] Shader otherShader;
     [SerializeField] Button segmentSelectButton;
     int currentlySelected = 0;
    // [SerializeField] private Material baseMaterial; 
@@ -28,16 +29,20 @@ public class LoadBrain : MonoBehaviour
     private float minOpacity;
     GameObject curSegment = null;
 
-    //This makes the transparency work correctly
+
     void Awake(){ //singleton pattern at work
         current = this;
         gameObject.AddComponent<LoadModel>();
     }
+
+    //This makes the transparency work correctly
     void assignNewMaterial(GameObject child, int i){
         Color col = child.GetComponent<MeshRenderer>().material.GetColor("_Color");
         col.a = 1.0f;
-        Material mat = new Material(shader);
+        Material mat = new Material(otherShader);
+        mat.enableInstancing = true; //should improve performance
         mat.SetColor("_Color", col);
+        mat.SetVector("_PlanePosition", new Vector4(2000,2000,2000,2000)); //Just sets the plane WAY away from the model (for the time being)
         mat.renderQueue = 3000 + i*20;
         child.GetComponent<MeshRenderer>().material = mat;
     }
@@ -49,6 +54,7 @@ public class LoadBrain : MonoBehaviour
         for(int i = segments.Count - 1; i !=-1; i--){
             if(segments[i].GetComponent<Renderer>() != null)
             {
+                Debug.Log(segments[i].name);
                 assignNewMaterial(segments[i], segments.Count - i);  
             }
         }
@@ -126,7 +132,8 @@ public class LoadBrain : MonoBehaviour
             if(color.a < minOpacity)segments[currentlySelected].GetComponent<MeshRenderer>().enabled = false;
             else{
                 if(segments[currentlySelected].GetComponent<MeshRenderer>().enabled == false)segments[currentlySelected].GetComponent<MeshRenderer>().enabled = true;
-                segments[currentlySelected].GetComponent<MeshRenderer>().material.color = color;
+                segments[currentlySelected].GetComponent<MeshRenderer>().material.SetColor("_Color", color);
+                //segments[currentlySelected].GetComponent<MeshRenderer>().material.SetColor("_CrossColor", color);
             }
         }
     }
