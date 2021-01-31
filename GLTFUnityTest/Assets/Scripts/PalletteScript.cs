@@ -36,7 +36,7 @@ public class PalletteScript : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     }
 
     public void OnPointerDown(PointerEventData data){
-        print(colours.GetPixel((int) mousePos.x, (int) mousePos.y));
+        //print(colours.GetPixel((int) mousePos.x, (int) mousePos.y));
         Vector3 dir = Camera.main.WorldToScreenPoint(transform.position);
         dir = Input.mousePosition - dir;
         baseAngle  = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;

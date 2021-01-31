@@ -14,6 +14,7 @@ ScriptsOnlyBuild:
     - SegmentSelect
     - SelectionManager
     - ToggleColourChange
+    - ViewAnnotation
     - palette
     Unity.CollabProxy.Editor.dll:
     - Unity.Cloud.Collaborate.UserInterface.CollaborateWindow
@@ -72,15 +73,13 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11844}
+      Script: {instanceID: 11866}
     - Class: 114
-      Script: {instanceID: 11868}
+      Script: {instanceID: 11926}
     - Class: 114
-      Script: {instanceID: 11928}
+      Script: {instanceID: 12062}
     - Class: 114
-      Script: {instanceID: 12064}
-    - Class: 114
-      Script: {instanceID: 12110}
+      Script: {instanceID: 12108}
     - Class: 114
       Script: {instanceID: 12468}
     - Class: 114
@@ -92,31 +91,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12834}
     - Class: 114
-      Script: {instanceID: 13126}
+      Script: {instanceID: 13096}
     - Class: 114
-      Script: {instanceID: 13368}
+      Script: {instanceID: 13370}
     - Class: 114
-      Script: {instanceID: 13386}
+      Script: {instanceID: 13388}
     - Class: 114
-      Script: {instanceID: 13622}
+      Script: {instanceID: 13624}
     - Class: 114
-      Script: {instanceID: 13694}
+      Script: {instanceID: 13696}
     - Class: 114
-      Script: {instanceID: 13858}
+      Script: {instanceID: 13860}
     - Class: 114
-      Script: {instanceID: 13904}
+      Script: {instanceID: 13906}
     - Class: 114
-      Script: {instanceID: 14024}
+      Script: {instanceID: 14026}
     - Class: 114
-      Script: {instanceID: 14100}
+      Script: {instanceID: 14148}
     - Class: 114
-      Script: {instanceID: 14146}
+      Script: {instanceID: 14170}
     - Class: 114
-      Script: {instanceID: 14168}
-    - Class: 114
-      Script: {instanceID: 14188}
-    - Class: 114
-      Script: {instanceID: 16302}
+      Script: {instanceID: 14190}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -155,17 +150,17 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11844}
+      Script: {instanceID: 11866}
     - Class: 114
-      Script: {instanceID: 11868}
+      Script: {instanceID: 11926}
     - Class: 114
-      Script: {instanceID: 11928}
+      Script: {instanceID: 12062}
     - Class: 114
-      Script: {instanceID: 12064}
+      Script: {instanceID: 12108}
     - Class: 114
-      Script: {instanceID: 12110}
+      Script: {instanceID: 12136}
     - Class: 114
-      Script: {instanceID: 12138}
+      Script: {instanceID: 12204}
     - Class: 114
       Script: {instanceID: 12254}
     - Class: 114
@@ -189,33 +184,35 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13002}
     - Class: 114
-      Script: {instanceID: 13126}
+      Script: {instanceID: 13096}
     - Class: 114
-      Script: {instanceID: 13368}
+      Script: {instanceID: 13128}
     - Class: 114
-      Script: {instanceID: 13524}
+      Script: {instanceID: 13370}
     - Class: 114
-      Script: {instanceID: 13582}
+      Script: {instanceID: 13526}
     - Class: 114
-      Script: {instanceID: 13622}
+      Script: {instanceID: 13584}
     - Class: 114
-      Script: {instanceID: 13694}
+      Script: {instanceID: 13624}
     - Class: 114
-      Script: {instanceID: 13856}
+      Script: {instanceID: 13696}
     - Class: 114
-      Script: {instanceID: 14058}
+      Script: {instanceID: 13858}
     - Class: 114
-      Script: {instanceID: 14100}
+      Script: {instanceID: 14060}
     - Class: 114
-      Script: {instanceID: 14146}
+      Script: {instanceID: 14102}
     - Class: 114
-      Script: {instanceID: 14168}
+      Script: {instanceID: 14148}
     - Class: 114
-      Script: {instanceID: 14188}
+      Script: {instanceID: 14170}
     - Class: 114
-      Script: {instanceID: 14200}
+      Script: {instanceID: 14190}
     - Class: 114
-      Script: {instanceID: 14212}
+      Script: {instanceID: 14202}
+    - Class: 114
+      Script: {instanceID: 14214}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -258,17 +255,15 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11844}
+      Script: {instanceID: 11866}
     - Class: 114
-      Script: {instanceID: 11868}
+      Script: {instanceID: 11926}
     - Class: 114
-      Script: {instanceID: 11928}
+      Script: {instanceID: 12062}
     - Class: 114
-      Script: {instanceID: 12064}
+      Script: {instanceID: 12108}
     - Class: 114
-      Script: {instanceID: 12110}
-    - Class: 114
-      Script: {instanceID: 12138}
+      Script: {instanceID: 12136}
     - Class: 114
       Script: {instanceID: 12254}
     - Class: 114
@@ -292,33 +287,35 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13002}
     - Class: 114
-      Script: {instanceID: 13126}
+      Script: {instanceID: 13096}
     - Class: 114
-      Script: {instanceID: 13368}
+      Script: {instanceID: 13128}
     - Class: 114
-      Script: {instanceID: 13524}
+      Script: {instanceID: 13370}
     - Class: 114
-      Script: {instanceID: 13582}
+      Script: {instanceID: 13526}
     - Class: 114
-      Script: {instanceID: 13622}
+      Script: {instanceID: 13584}
     - Class: 114
-      Script: {instanceID: 13694}
+      Script: {instanceID: 13624}
     - Class: 114
-      Script: {instanceID: 13856}
+      Script: {instanceID: 13696}
     - Class: 114
-      Script: {instanceID: 14058}
+      Script: {instanceID: 13858}
     - Class: 114
-      Script: {instanceID: 14100}
+      Script: {instanceID: 14060}
     - Class: 114
-      Script: {instanceID: 14146}
+      Script: {instanceID: 14102}
     - Class: 114
-      Script: {instanceID: 14168}
+      Script: {instanceID: 14148}
     - Class: 114
-      Script: {instanceID: 14188}
+      Script: {instanceID: 14170}
     - Class: 114
-      Script: {instanceID: 14200}
+      Script: {instanceID: 14190}
     - Class: 114
-      Script: {instanceID: 14212}
+      Script: {instanceID: 14202}
+    - Class: 114
+      Script: {instanceID: 14214}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -340,12 +337,6 @@ ScriptsOnlyBuild:
     - Class: 850595691
       Script: {instanceID: 0}
   scriptHashData:
-  - hash:
-      serializedVersion: 2
-      Hash: f087c23fbfa15475a0d110af46fb0496
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: Button
   - hash:
       serializedVersion: 2
       Hash: 4bc4346a71a8df53a6b106f68ef3a190
@@ -462,6 +453,12 @@ ScriptsOnlyBuild:
     className: GridLayoutGroup
   - hash:
       serializedVersion: 2
+      Hash: bbeb96f595bc84aa4038f0fbe35c3805
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ViewAnnotation
+  - hash:
+      serializedVersion: 2
       Hash: 8aa3d6ccbcb54ee8db6c1229854adaaa
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -522,7 +519,7 @@ ScriptsOnlyBuild:
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: e9da808a9f47a41bc3bb714b42330001
+      Hash: f8e3ad738319ce7cb7e0b3b359547948
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CameraMovement
@@ -694,6 +691,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ChatController
+  - hash:
+      serializedVersion: 2
+      Hash: f087c23fbfa15475a0d110af46fb0496
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Button
   - hash:
       serializedVersion: 2
       Hash: c1d728126ff1918728036c59106d32b2
@@ -930,7 +933,7 @@ ScriptsOnlyBuild:
     className: VertexZoom
   - hash:
       serializedVersion: 2
-      Hash: 173868577a809a0c0d7927f48965d541
+      Hash: 6b6b4d2732f83e326c542496c14310dd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LoadBrain
@@ -1092,7 +1095,7 @@ ScriptsOnlyBuild:
     className: Slider
   - hash:
       serializedVersion: 2
-      Hash: c0114c99b2a6f39388164b423fc68bfe
+      Hash: 02dc62c8ba2460b111df51fb3f79988e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Annotation

@@ -32,7 +32,6 @@ public class ResetPosition : MonoBehaviour
     void Update()
     {
         if(!isEnabled)return;
-        print("Alright let's elapse some mother. fucking. TIIIMME");
         timeElapsed +=Time.deltaTime; 
         float ratio = timeElapsed/travelTime;
         Camera.main.gameObject.transform.position = Vector3.Lerp(startPos, targetPos, ratio);
