@@ -7,14 +7,15 @@ using UnityEngine.UI;
 using System;
 using TMPro;
 using UnityEngine.Networking;
-//loads the model at runtime
 
-//ONE ADDITIONAL COMMENT
 public class LoadBrain : MonoBehaviour
 {
     public static LoadBrain current; //singleton pattern again - probably not ideal
+    public GameObject plane;
     [SerializeField] Shader shader;
     [SerializeField] Shader otherShader;
+
+    [SerializeField] Shader opaqueShader;
     [SerializeField] Button segmentSelectButton;
     int currentlySelected = 0;
    // [SerializeField] private Material baseMaterial; 
@@ -36,28 +37,46 @@ public class LoadBrain : MonoBehaviour
     }
 
     //This makes the transparency work correctly
-    void assignNewMaterial(GameObject child, int i){
+    void assignNewMaterial(GameObject child, int i, Shader shader){
         Color col = child.GetComponent<MeshRenderer>().material.GetColor("_Color");
         col.a = 1.0f;
-        Material mat = new Material(otherShader);
+        Material mat = new Material(shader);
         mat.enableInstancing = true; //should improve performance
         mat.SetColor("_Color", col);
-        mat.SetVector("_PlanePosition", new Vector4(2000,2000,2000,2000)); //Just sets the plane WAY away from the model (for the time being)
+        mat.SetVector("_PlanePosition", plane.transform.position); //Just sets the plane WAY away from the model (for the time being)
+        mat.SetVector("_PlaneNormal", plane.transform.up);
         mat.renderQueue = 3000 + i*20;
         child.GetComponent<MeshRenderer>().material = mat;
+    }
+    void assignNewMaterial2(GameObject child, int i, Shader shader){
+        Color col = child.GetComponent<MeshRenderer>().material.GetColor("_Color");
+        col.a = 1.0f;
+        Material mat = new Material(shader);
+        mat.enableInstancing = true; //should improve performance
+        mat.SetColor("_Color", col);
+        mat.SetVector("_PlanePosition", plane.transform.position); //Just sets the plane WAY away from the model (for the time being)
+        mat.SetVector("_PlaneNormal", plane.transform.up);
+        //mat.renderQueue = 3000 + i*20;
+        child.GetComponent<MeshRenderer>().material = mat;
+    }
+
+    private void assignMaterialToAllChildrenBelowIndex(int index, Shader shader){
+        for(int i = segments.Count - 1 -index; i !=-1; i--){
+            Debug.Log(i +" "+ segments[i].name);
+            if(segments[i].GetComponent<Renderer>() != null)
+            {
+                Debug.Log(segments[i].name);
+                assignNewMaterial(segments[i], segments.Count - i, otherShader);
+
+            }
+        }
     }
 
     void Start()
     {
         LoadModel load = GetComponent<LoadModel>();
         load.LoadInModel(this.gameObject, brain, segments, "brain.glb");
-        for(int i = segments.Count - 1; i !=-1; i--){
-            if(segments[i].GetComponent<Renderer>() != null)
-            {
-                Debug.Log(segments[i].name);
-                assignNewMaterial(segments[i], segments.Count - i);  
-            }
-        }
+        assignMaterialToAllChildrenBelowIndex(0, otherShader);
         // dropdown.onValueChanged.AddListener(delegate{dropdownSegmentSelected(dropdown); });
         // //opacitySlider = GameObject.Find("Opacity Slider").GetComponent<Slider>();
         // //segOpacity = opacitySlider.value;
@@ -80,14 +99,14 @@ public class LoadBrain : MonoBehaviour
     //     }
     //     ColourSelect.current.onColourSelect += Pallete_onColourSelect;
     // }
-    private void displayOpacitySlider(){
-        opacitySlider.enabled = true;
-        opacitySlider.gameObject.SetActive(true);
-    }
-    private void hideOpacitySlider(){
-        opacitySlider.enabled = false;
-        opacitySlider.gameObject.SetActive(false);
-    }
+    // private void displayOpacitySlider(){
+    //     opacitySlider.enabled = true;
+    //     opacitySlider.gameObject.SetActive(true);
+    // }
+    // private void hideOpacitySlider(){
+    //     opacitySlider.enabled = false;
+    //     opacitySlider.gameObject.SetActive(false);
+    // }
 
 
 
@@ -125,6 +144,17 @@ public class LoadBrain : MonoBehaviour
 
     public void AdjustOpacity(float newOp) {
         if(segments[currentlySelected] != null){
+            Debug.Log(currentlySelected);
+            // for(int i = segments.Count -1; i != -1; i--){
+            //     if((i < currentlySelected) && (segments[i].GetComponent<MeshRenderer>().material.color.a > 0.99f)){
+            //         assignNewMaterial(segments[i], i, opaqueShader);
+            //         Debug.Log("Here we're assignin': "+ segments[i].name);
+            //     } 
+            //     else{
+            //         assignNewMaterial(segments[i], i, otherShader);
+            //         Debug.Log("Here we're assignin da transparent: "+segments[i]);
+            //     } 
+            // }
             Debug.Log("WE'RE HERE");
             segOpacity = newOp;
             Color color = segments[currentlySelected].GetComponent<MeshRenderer>().material.color;
@@ -133,7 +163,6 @@ public class LoadBrain : MonoBehaviour
             else{
                 if(segments[currentlySelected].GetComponent<MeshRenderer>().enabled == false)segments[currentlySelected].GetComponent<MeshRenderer>().enabled = true;
                 segments[currentlySelected].GetComponent<MeshRenderer>().material.SetColor("_Color", color);
-                //segments[currentlySelected].GetComponent<MeshRenderer>().material.SetColor("_CrossColor", color);
             }
         }
     }

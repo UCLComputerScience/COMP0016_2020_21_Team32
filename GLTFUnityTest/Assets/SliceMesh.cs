@@ -5,24 +5,28 @@ using System;
 
 public class SliceMesh : MonoBehaviour
 {
+    [SerializeField] GameObject planeController;
     [SerializeField] GameObject organToSlice;
-    GameObject pieceOne;
-    GameObject pieceTwo;
     [SerializeField] GameObject plane;
-    [SerializeField] Material capMaterial;
-    private GameObject[] pieces = new GameObject[2];
     private bool isEnabled = false;
-    private bool cut = true;
-    [SerializeField] Shader crossSectionShader;
-
+    private bool cut = false;
     [SerializeField] Shader otherShader;
 
     [SerializeField] Shader redBlueShader;
     Material mat;
+
+    Vector3 cutStartPos;
+    Vector3 cutEndPos;
+    Plane rayCastPlane;
+
+    Vector3 planepos;
+    Vector3 normal;
     void assignNewMaterial(GameObject child, int i, Shader shader){
         Color col = child.GetComponent<MeshRenderer>().material.GetColor("_Color");
-        col.a = 1.0f;
+        //col.a = 1.0f;
         mat = new Material(shader);
+        mat.SetVector("_PlanePosition", plane.transform.position);
+        mat.SetVector("_PlaneNormal", plane.transform.up);
         mat.SetColor("_Color", col);
         mat.SetColor("_CrossColor", col);
         mat.renderQueue = 3100 - i*20;
@@ -31,12 +35,32 @@ public class SliceMesh : MonoBehaviour
     void Start()
     {
         subscribeToEvents();
+        plane.SetActive(false);
+        //plane.transform.position = new Vector3(0,100,0);
+        plane.transform.rotation = Quaternion.identity;
+        // rayCastPlane = new Plane(Vector3.up, 0f);
+        // planepos = plane.transform.position;
+        // normal = plane.transform.up;
 
-        // pieceOne.transform.position = gameObject.transform.position;
-        // pieceTwo.transform.position = gameObject.transform.position;
-        // pieces[0] = pieceOne;
-        // pieces[1] = pieceTwo;
 
+    }
+    public void confirmSlice(){
+        assignMaterialToAllChildren(otherShader);
+        //resetPlane();
+        planeController.SetActive(false);
+        plane.SetActive(false);
+        cut = true;
+    }
+    public void cancelSlice(){
+        resetPlane();
+        planeController.SetActive(false);
+        plane.SetActive(false);
+        assignMaterialToAllChildren(otherShader);
+    }
+
+    public void resetPlane(){
+        plane.transform.position = new Vector3(0, 100, 0);
+        plane.transform.rotation = Quaternion.identity;
     }
 
     // Update is called once per frame
@@ -58,10 +82,6 @@ public class SliceMesh : MonoBehaviour
             }
             count++;
         }
-        if(Input.GetMouseButtonDown(1)){
-            cut = true;
-            assignMaterialToAllChildren(otherShader);
-        }
     }
     private void subscribeToEvents(){
         SelectionManager.current.onCameraButtonPressed += otherEvent;
@@ -73,6 +93,8 @@ public class SliceMesh : MonoBehaviour
     }
     public void SelectionManager_onSliceButtonPressed(object sender, EventArgs e){
         isEnabled = true;
+        Debug.Log(plane.transform.position);
+        plane.SetActive(true);
         assignMaterialToAllChildren(redBlueShader);
     }
     private void otherEvent(object sender, EventArgs e){
@@ -87,6 +109,58 @@ public class SliceMesh : MonoBehaviour
                 assignNewMaterial(t.gameObject, count, shader);
             }
         count++;
+        }
+    }
+    private Vector3 screenSpaceToWorldSpace(Vector3 mousePos, Plane plane){
+        Ray ray = Camera.main.ScreenPointToRay(mousePos);
+        float distanceToPlane;
+        Vector3 click;
+        if(plane.Raycast(ray, out distanceToPlane)){
+            click = ray.GetPoint(distanceToPlane);
+        }else{
+            click = Vector3.zero;
+        }
+        Debug.Log(click);
+        return click;
+    }
+    private static void drawPlane(Vector3 pos, Vector3 normal, int mag){
+        Vector3 v3 = new Vector3(0,0,0);
+        if(normal.normalized != Vector3.forward){
+            v3 = Vector3.Cross(normal, Vector3.forward).normalized * mag;
+        }
+        Vector3 c0 = pos - v3;
+        Vector3 c2 = pos + v3;
+        Quaternion q = Quaternion.AngleAxis(90.0f, normal);
+        v3 = q * v3;
+        Vector3 c1 = pos - v3;
+        Vector3 c3 = pos + v3;
+
+        Debug.DrawLine(c0,c2, Color.blue,20.0f);
+        Debug.DrawLine(c1,c3, Color.blue,20.0f);
+        Debug.DrawLine(c0,c1, Color.blue,20.0f);
+        Debug.DrawLine(c1,c2, Color.blue,20.0f);
+        Debug.DrawLine(c2,c3, Color.blue,20.0f);
+        Debug.DrawLine(c3,c0, Color.blue, 20.0f);
+        Debug.DrawLine(pos, normal, Color.green, 20.0f);
+    }
+
+    void getClicks(){
+        if(Input.GetMouseButtonDown(0)){
+            if(!cut){
+                cutStartPos = screenSpaceToWorldSpace(Input.mousePosition, rayCastPlane);
+                Debug.Log(cutStartPos);
+                cut = true;
+            }
+        }
+        if(Input.GetMouseButtonUp(0)){
+            cutEndPos = screenSpaceToWorldSpace(Input.mousePosition, rayCastPlane);
+            Debug.Log(cutEndPos);
+            Vector3 cutDir = Vector3.Normalize(cutStartPos-cutEndPos);
+            Vector3 cutNorm = Vector3.Cross(cutDir, Vector3.up);
+            drawPlane(Vector3.zero, cutNorm, 10000);
+            planepos = Vector3.zero;
+            normal = cutNorm;
+            cut = false;
         }
     }
 
