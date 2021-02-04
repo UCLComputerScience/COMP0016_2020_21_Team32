@@ -8,6 +8,7 @@ using System;
 
 public class LoadModel : MonoBehaviour
 {
+    RaycastHit[] hits;
     public void LoadInModel(GameObject parent, GameObject model, List<GameObject> segments, string fileName)
     {
         string path = Path.Combine(Application.streamingAssetsPath, fileName);
@@ -35,17 +36,43 @@ public class LoadModel : MonoBehaviour
         }
     }
     private void initialiseModel(GameObject parent, GameObject model, List<GameObject> segments){
+        parent.transform.position = Vector3.zero;
+        parent.transform.rotation = Quaternion.identity;
         model.transform.SetParent(parent.transform);
+        // model.transform.localPosition = Vector3.zero;
+        // model.transform.localRotation = Quaternion.Euler(0f,0f,0f);
+        // foreach(Transform t in model.transform){
+        //     Debug.Log("Trying to set the transform: "+ t.name);
+        //     t.SetParent(model.transform);
+        //     t.localPosition = Vector3.zero;
+        //     t.localRotation = Quaternion.Euler(0f,0f,0f);
+        // }
+        //model.transform.localPosition = Vector3.zero;
+        //model.transform.rotation = Quaternion.identity;
+        //Camera.main.transform.LookAt(parent.transform);
         model.transform.localPosition = new Vector3(-94.2f, -99.23f, -93.6f);
         model.transform.localRotation = Quaternion.Euler(0.453f, -288.9f, 1.323f);
+
+        // foreach(Transform child in model.transform){
+        //     child.gameObject.AddComponent<MeshCollider>();
+        //     Debug.Log("mesh checking in");
+        // }
+        // Debug.Log("Hits checking in");
+        // hits = Physics.RaycastAll(Camera.main.transform.position, Camera.main.transform.forward);
+        // Array.Sort(hits, (RaycastHit a, RaycastHit b) => (int) (a.distance - b.distance));
+        // foreach(RaycastHit hit in hits){
+        //     Debug.Log("This is what we're interested in: "+ hit.transform.gameObject.name);
+        // }
 
         int count = 0;
         foreach(Transform child in model.transform){
             if(child.gameObject.GetComponent<Renderer>() != null && count != 1)
-            { 
+            {
+//                Debug.Log("This is what you're after: "+ child.gameObject.name); 
                 segments.Add(child.gameObject);
             }
             if(count ==1)child.gameObject.GetComponent<Renderer>().enabled = false;
+            if(child.gameObject.GetComponent<Camera>() != null) child.gameObject.SetActive(false);
             count++;   
         }
     }
