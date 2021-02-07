@@ -54,6 +54,9 @@ public class Annotation : MonoBehaviour
         }
         String jsonAnnotation = JsonUtility.ToJson(data);
         String path = Path.Combine(Application.persistentDataPath, titleInputField.text+".json");
+
+        /*HERE'S WHERE THE WRITING TO THE FIREBASE/SQLLite DATABASE SHIT WILL GO*/
+
         File.WriteAllText(path, jsonAnnotation);
     }
     public void hide(){

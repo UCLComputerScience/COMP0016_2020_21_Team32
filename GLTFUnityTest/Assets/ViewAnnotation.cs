@@ -10,7 +10,10 @@ using TMPro;
 public class ViewAnnotation : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameObject pointOfInterest;
     [SerializeField] TMP_Dropdown dropdown;
+    
+    [SerializeField] Image annotationTextBox;
     [SerializeField] TMP_Text annotationText;
     private bool isEnabled = false;
     public List<AnnotationData> annotations = new List<AnnotationData>();
@@ -30,11 +33,21 @@ public class ViewAnnotation : MonoBehaviour
     }
 
     public void onIndexChanged(int index){
-        Camera.main.gameObject.transform.position = annotations[index].cameraCoordinates;
-        Camera.main.gameObject.transform.rotation = annotations[index].cameraRotation;
-        annotationText.rectTransform.position = annotations[index].annotationPosition;
-        annotationText.text = annotations[index].text;
-        annotationText.gameObject.SetActive(true);
+        if(index != 0){
+            // annotationTextBox.gameObject.SetActive(false);
+            // pointOfInterest.SetActive(false);
+            Camera.main.gameObject.transform.position = annotations[index].cameraCoordinates;
+            Camera.main.gameObject.transform.rotation = annotations[index].cameraRotation;
+            annotationTextBox.rectTransform.position = annotations[index].annotationPosition + new Vector3(100f,0f,0f);
+            pointOfInterest.transform.position = annotations[index].annotationPosition;
+            pointOfInterest.SetActive(true);
+            annotationText.text = annotations[index].text;
+            annotationText.gameObject.SetActive(true);
+            annotationTextBox.gameObject.SetActive(true);
+        }
+        /*
+        Still need to set the colours of the model that's loaded in
+        */
 
     }
     private void jsonToAnnotations(){
@@ -45,8 +58,10 @@ public class ViewAnnotation : MonoBehaviour
         DirectoryInfo dir = new DirectoryInfo(path);
         FileInfo[] info = dir.GetFiles("*.json");
         
+        
         foreach (FileInfo f in info){
-            //if(!f.Exists)f.Create();
+            //if(f.Exists)f.Delete();
+            if(!f.Exists)f.Create();
             String jsonToParse = File.ReadAllText(f.FullName);
             // Debug.Log(f.FullName);
             // Debug.Log(jsonToParse);
@@ -54,9 +69,11 @@ public class ViewAnnotation : MonoBehaviour
         }
         //Debug.Log("Length of annotations: " +annotations.Count);
         Annotation.setNumAnnotations(annotations.Count);
+        annotationTitles.Add("--Select Annotation--");
         foreach(AnnotationData annotation in annotations){
             annotationTitles.Add(annotation.title);
         }
+        annotations.Insert(0, new AnnotationData());
         dropdown.AddOptions(annotationTitles);
         //Debug.Log("Length of annotationTitles: "+annotationTitles.Count);
     }

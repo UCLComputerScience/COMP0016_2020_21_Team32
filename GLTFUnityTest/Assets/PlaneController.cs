@@ -18,11 +18,11 @@ public class PlaneController : MonoBehaviour
     private float startYRot;
     private float startZRot;
     public Button resetButton;
+    // public Button confirmButton;
     // public Button cancelButton;
 
     void Awake(){
         // confirmButton.onClick.AddListener(this.onConfirm);
-        plane.transform.position = new Vector3(0f, 500f, 0f);
         resetButton.onClick.AddListener(resetSlider);
         yPosSlider.onValueChanged.AddListener(changeYPos);
         xRotSlider.onValueChanged.AddListener(changeXRot);
@@ -33,13 +33,6 @@ public class PlaneController : MonoBehaviour
         startYRot = yRotSlider.value;
         startZRot = zRotSlider.value;
     }
-    
-    void OnEnable(){
-        //plane.transform.position = new Vector3(0f, 100f, 0f);
-    }
-    // void OnDisable(){
-    //     plane.transform.position = new Vector3(0f, 500f, 0f);
-    // }
     public void changeXPos(float newXPos){
         plane.transform.position = new Vector3(newXPos, plane.transform.position.y, plane.transform.position.z);
     }
@@ -60,8 +53,6 @@ public class PlaneController : MonoBehaviour
         plane.transform.eulerAngles = new Vector3(plane.transform.rotation.eulerAngles.x, plane.transform.rotation.eulerAngles.y, newZRot);
     }
     public void resetSlider(){
-        plane.transform.position = new Vector3(0, 100, 0);
-        plane.transform.rotation = Quaternion.identity;
         yPosSlider.value = startYPos;
         xRotSlider.value = startXRot;
         yRotSlider.value = startYRot;
