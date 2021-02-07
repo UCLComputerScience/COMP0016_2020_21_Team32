@@ -23,10 +23,10 @@ public class SliceMesh : MonoBehaviour
     Vector3 normal;
     void assignNewMaterial(GameObject child, int i, Shader shader){
         Color col = child.GetComponent<MeshRenderer>().material.GetColor("_Color");
-        //col.a = 1.0f;
+        col.a = 1.0f;
         mat = new Material(shader);
-        mat.SetVector("_PlanePosition", plane.transform.position);
-        mat.SetVector("_PlaneNormal", plane.transform.up);
+        mat.SetVector("_PlanePosition", planepos);
+        mat.SetVector("_PlaneNormal", normal);
         mat.SetColor("_Color", col);
         mat.SetColor("_CrossColor", col);
         mat.renderQueue = 3100 - i*20;
@@ -36,7 +36,7 @@ public class SliceMesh : MonoBehaviour
     {
         subscribeToEvents();
         plane.SetActive(false);
-        //plane.transform.position = new Vector3(0,100,0);
+        plane.transform.position = new Vector3(0,100,0);
         plane.transform.rotation = Quaternion.identity;
         // rayCastPlane = new Plane(Vector3.up, 0f);
         // planepos = plane.transform.position;
@@ -67,8 +67,8 @@ public class SliceMesh : MonoBehaviour
     void Update()
     {
         if(!isEnabled)return;
-        mat.SetVector("_PlanePosition", plane.transform.position);
-        mat.SetVector("_PlaneNormal", plane.transform.up);
+        mat.SetVector("_PlanePosition", planepos);
+        mat.SetVector("_PlaneNormal", normal);
         int count = 0;
         foreach(Transform t in organToSlice.GetComponentsInChildren<Transform>()){
             if(t.gameObject.GetComponent<MeshFilter>() != null && count != 1){
@@ -93,8 +93,6 @@ public class SliceMesh : MonoBehaviour
     }
     public void SelectionManager_onSliceButtonPressed(object sender, EventArgs e){
         isEnabled = true;
-        Debug.Log(plane.transform.position);
-        plane.SetActive(true);
         assignMaterialToAllChildren(redBlueShader);
     }
     private void otherEvent(object sender, EventArgs e){

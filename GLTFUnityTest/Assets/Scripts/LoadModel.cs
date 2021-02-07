@@ -36,8 +36,6 @@ public class LoadModel : MonoBehaviour
         }
     }
     private void initialiseModel(GameObject parent, GameObject model, List<GameObject> segments){
-        parent.transform.position = Vector3.zero;
-        parent.transform.rotation = Quaternion.identity;
         model.transform.SetParent(parent.transform);
         // model.transform.localPosition = Vector3.zero;
         // model.transform.localRotation = Quaternion.Euler(0f,0f,0f);
@@ -47,9 +45,6 @@ public class LoadModel : MonoBehaviour
         //     t.localPosition = Vector3.zero;
         //     t.localRotation = Quaternion.Euler(0f,0f,0f);
         // }
-        //model.transform.localPosition = Vector3.zero;
-        //model.transform.rotation = Quaternion.identity;
-        //Camera.main.transform.LookAt(parent.transform);
         model.transform.localPosition = new Vector3(-94.2f, -99.23f, -93.6f);
         model.transform.localRotation = Quaternion.Euler(0.453f, -288.9f, 1.323f);
 
@@ -72,7 +67,7 @@ public class LoadModel : MonoBehaviour
                 segments.Add(child.gameObject);
             }
             if(count ==1)child.gameObject.GetComponent<Renderer>().enabled = false;
-            if(child.gameObject.GetComponent<Camera>() != null) child.gameObject.SetActive(false);
+            else if(child.gameObject.GetComponent<Camera>() != null) child.gameObject.SetActive(false);
             count++;   
         }
     }

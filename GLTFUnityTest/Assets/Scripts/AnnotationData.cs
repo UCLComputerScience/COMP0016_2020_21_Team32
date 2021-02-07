@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AnnotationData{ 
+    
     //Class used to store the data associated with a particular view of the model. Contains no methods as it must be parsed to and from JSON
     public Vector3 cameraCoordinates;
     public Quaternion cameraRotation;

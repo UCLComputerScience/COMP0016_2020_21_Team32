@@ -1,6 +1,7 @@
 //Relied heavily on these resources and examples to create this shader:
 //https://www.youtube.com/watch?v=zCkC5e_Pkz4&list=PLX2vGYjWbI0RS_lkb68ApE2YPcZMC4Ohz
 //https://github.com/Dandarawy/Unity3DCrossSectionShader/blob/master/Assets/Cross%20Section%20Shader/Shaders/OnePlaneBSP.shader
+
 //https://forum.unity.com/threads/transparent-depth-shader-good-for-ghosts.149511/
 //GLTFUTILITY/Materials/Standard Transparent (Metallic)
 

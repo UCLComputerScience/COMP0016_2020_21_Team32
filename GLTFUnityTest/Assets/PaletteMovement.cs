@@ -27,7 +27,7 @@ public class PaletteMovement : MonoBehaviour, IDragHandler
     }
     /*
         Maybe to do:
-        Add inertia to the wheel, so when you release the cursor it continues decelerates before coming 
+        Add inertia to the wheel, so when you release the cursor it decelerates before coming 
         to a stop.
     
     */

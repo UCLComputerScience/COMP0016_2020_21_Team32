@@ -99,6 +99,14 @@
      <Compile Include="Assets\Scripts\LoadModel.cs" />
      <Compile Include="Assets\Scripts\PalletteScript.cs" />
      <Compile Include="Assets\Scripts\AnnotationScripts\Annotation.cs" />
+     <Compile Include="Assets\Scripts\Refactoring folder\Organ.cs" />
+     <Compile Include="Assets\Scripts\Refactoring folder\ModelHandler.cs" />
+     <Compile Include="Assets\Scripts\Refactoring folder\OrganFactory.cs" />
+     <Compile Include="Assets\Scripts\Refactoring folder\BrainExample.cs" />
+     <Compile Include="Assets\Scripts\Refactoring folder\BoneExample.cs" />
+     <Compile Include="Assets\Scripts\Refactoring folder\AbdomenExample.cs" />
+     <Compile Include="Assets\Scripts\Refactoring folder\LungExample.cs" />
+     <Compile Include="Assets\Scripts\Refactoring folder\KidneyExample.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\shaderTest.shader" />

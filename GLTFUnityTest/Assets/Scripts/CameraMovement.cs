@@ -6,9 +6,9 @@ using System;
 
 public class CameraMovement : MonoBehaviour
 {
-    bool clicked = false;
-    public static Vector3 startPosition = new Vector3(169.1957f, 93.43023f, -514.921f);//Vector3.zero;//
-    public static Quaternion startRotation = Quaternion.Euler(9.78f, -18.19f, 0f);//Quaternion.identity;//
+    //public static Vector3 startPosition = new Vector3(864.715f, 198.6647f, -1475.485f);
+    public static Vector3 startPosition = new Vector3(169.1957f, 93.43023f, -514.921f);
+    public static Quaternion startRotation = Quaternion.Euler(9.78f, -18.19f, 0f);
     public Camera cam;
     private Vector3 prevPosition;
 
@@ -67,7 +67,7 @@ public class CameraMovement : MonoBehaviour
         
 
         if(Input.GetMouseButtonDown(0)){ 
-           // if(!EventSystem.current.IsPointerOverGameObject()){
+            // if(!EventSystem.current.IsPointerOverGameObject()){
                 prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition); // cam position set to normalised version of mouse coord
             // }
         }
@@ -89,28 +89,8 @@ public class CameraMovement : MonoBehaviour
             displacement -= new Vector3(0, 0, scrollAmount);
             //print(displacement);
             Camera.main.transform.Translate(displacement);
-        }else if(Input.touchCount == 2){
-            touchScreenZoom();
         }
         
-        
-    }
-
-    private void touchScreenZoom(){
-        Touch touchOne = Input.GetTouch(0);
-        Touch touchTwo = Input.GetTouch(1);
-
-        Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
-        Vector2 touchTwoPrevPos = touchTwo.position - touchTwo.deltaPosition; 
-
-        float prevDist = (touchOnePrevPos - touchTwoPrevPos).magnitude;
-        float curDist = (touchOne.position - touchTwo.position).magnitude;
-        float deltaDist = prevDist-curDist;
-        //if the distance between the two touches has decreased then we zoom out (deltaDist > 0)
-        //if the distance between the two touches has increased them we zoom in (deltaDist < 0)
-        float zoomAmount = deltaDist*scrollSpeed; 
-        displacement -= new Vector3(0,0,zoomAmount);
-        Camera.main.transform.Translate(displacement);
     }
 
     //subscribes this script to events that are fired by the SelectionManager

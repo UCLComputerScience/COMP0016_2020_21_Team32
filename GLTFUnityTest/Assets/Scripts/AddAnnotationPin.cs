@@ -32,7 +32,7 @@ public class AddAnnotationPin : MonoBehaviour
         SelectionManager.current.onReButtonPressed += otherEvent;
         SelectionManager.current.onVAnnotationButtonPressed += otherEvent;
         SelectionManager.current.onAnnotationButton += SelectionManager_onAnnotationButtonPressed;
-        LoadBrain.current.onSegmentSelect += LoadBrain_OnSegmentSelect;
+//        LoadBrain.current.onSegmentSelect += LoadBrain_OnSegmentSelect;
     }
 
     public void SelectionManager_onAnnotationButtonPressed(object sender, EventArgs e){

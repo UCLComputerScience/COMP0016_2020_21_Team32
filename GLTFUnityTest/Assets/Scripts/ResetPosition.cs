@@ -15,7 +15,6 @@ public class ResetPosition : MonoBehaviour
     bool isEnabled = false;
     void Start(){
 
-
         SelectionManager.current.onCameraButtonPressed += otherEvent;
         SelectionManager.current.onTButtonPressed += otherEvent;
         SelectionManager.current.onRButtonPressed += otherEvent;

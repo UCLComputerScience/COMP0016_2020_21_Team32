@@ -14,15 +14,106 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/PlaneController.cs
-    - Assets/Scenes/New Scene.unity
-    - Assets/Scenes/New Scene.unity.meta
+    - Assets/PaletteMovement.cs
+    - Assets/Scenes/MainPage.unity
+    - Assets/Scenes/MainPage.unity.meta
+    - Assets/Scenes/Refactored scenes.meta
+    - Assets/Scenes/StartPageAgain.unity
+    - Assets/Scenes/StartPageAgain.unity.meta
     - Assets/Scenes/brainOptimised.unity
-    - Assets/Scripts/CameraMovement.cs
-    - Assets/Scripts/LoadModel.cs
-    - Assets/SliceMesh.cs
+    - Assets/Scenes/brainOptimisedTest 1.unity
+    - Assets/Scenes/brainOptimisedTest 1.unity.meta
+    - Assets/Scripts/AddAnnotationPin.cs
+    - Assets/Scripts/AnnotationData.cs
+    - Assets/Scripts/AnnotationScripts/Annotation.cs
+    - Assets/Scripts/LoadBrain.cs
+    - Assets/Scripts/MainMenu.cs
+    - Assets/Scripts/Refactoring folder.meta
+    - Assets/Scripts/Refactoring folder/AbdomenExample.cs
+    - Assets/Scripts/Refactoring folder/AbdomenExample.cs.meta
+    - Assets/Scripts/Refactoring folder/BoneExample.cs
+    - Assets/Scripts/Refactoring folder/BoneExample.cs.meta
+    - Assets/Scripts/Refactoring folder/BrainExample.cs
+    - Assets/Scripts/Refactoring folder/BrainExample.cs.meta
+    - Assets/Scripts/Refactoring folder/KidneyExample.cs
+    - Assets/Scripts/Refactoring folder/KidneyExample.cs.meta
+    - Assets/Scripts/Refactoring folder/LungExample.cs
+    - Assets/Scripts/Refactoring folder/LungExample.cs.meta
+    - Assets/Scripts/Refactoring folder/ModelHandler.cs
+    - Assets/Scripts/Refactoring folder/ModelHandler.cs.meta
+    - Assets/Scripts/Refactoring folder/Organ.cs
+    - Assets/Scripts/Refactoring folder/Organ.cs.meta
+    - Assets/Scripts/Refactoring folder/OrganFactory.cs
+    - Assets/Scripts/Refactoring folder/OrganFactory.cs.meta
+    - Assets/Scripts/ResetPosition.cs
+    - Assets/Shaders/CrossSection.shader
+    - Assets/ViewAnnotation.cs
+    - Assets/image/Logos.meta
+    - Assets/image/Logos/1024px-NHS-Logo.svg.png
+    - Assets/image/Logos/1024px-NHS-Logo.svg.png.meta
+    - Assets/image/Logos/New-2020-Intel-Logo-Blue-Background.jpg
+    - Assets/image/Logos/New-2020-Intel-Logo-Blue-Background.jpg.meta
+    - Assets/image/Logos/gosh drive logo.png
+    - Assets/image/Logos/gosh drive logo.png.meta
+    - Assets/image/Logos/twitter-card-ucl-logo.png
+    - Assets/image/Logos/twitter-card-ucl-logo.png.meta
+    - Assets/image/Materials.meta
+    - Assets/image/Materials/New-2020-Intel-Logo-Blue-Background.mat
+    - Assets/image/Materials/New-2020-Intel-Logo-Blue-Background.mat.meta
+    - Assets/image/UI images.meta
+    - Assets/image/UI images/Sequence 01.Still001.png
+    - Assets/image/UI images/Sequence 01.Still001.png.meta
+    - Assets/image/UI images/Sphere.prefab
+    - Assets/image/UI images/Sphere.prefab.meta
+    - Assets/image/UI images/addAnnotation.png
+    - Assets/image/UI images/addAnnotation.png.meta
+    - Assets/image/UI images/annotation.png
+    - Assets/image/UI images/annotation.png.meta
+    - Assets/image/UI images/box.png
+    - Assets/image/UI images/box.png.meta
+    - Assets/image/UI images/button.png
+    - Assets/image/UI images/button.png.meta
+    - Assets/image/UI images/button_3d1.png
+    - Assets/image/UI images/button_3d1.png.meta
+    - Assets/image/UI images/button_3d2.png
+    - Assets/image/UI images/button_3d2.png.meta
+    - Assets/image/UI images/button_circle.png
+    - Assets/image/UI images/button_circle.png.meta
+    - Assets/image/UI images/button_export.png
+    - Assets/image/UI images/button_export.png.meta
+    - Assets/image/UI images/button_rect.png
+    - Assets/image/UI images/button_rect.png.meta
+    - Assets/image/UI images/button_sqr.png
+    - Assets/image/UI images/button_sqr.png.meta
+    - Assets/image/UI images/button_undo.png
+    - Assets/image/UI images/button_undo.png.meta
+    - Assets/image/UI images/dropdown.png
+    - Assets/image/UI images/dropdown.png.meta
+    - Assets/image/UI images/exitFullScreen.png
+    - Assets/image/UI images/exitFullScreen.png.meta
+    - Assets/image/UI images/fullScreen.png
+    - Assets/image/UI images/fullScreen.png.meta
+    - Assets/image/UI images/handgrabben-removebg-preview.png
+    - Assets/image/UI images/handgrabben-removebg-preview.png.meta
+    - Assets/image/UI images/handgrabben.png
+    - Assets/image/UI images/handgrabben.png.meta
+    - Assets/image/UI images/palette.png
+    - Assets/image/UI images/palette.png.meta
+    - Assets/image/UI images/quit.png
+    - Assets/image/UI images/quit.png.meta
+    - Assets/image/UI images/refresh.png
+    - Assets/image/UI images/refresh.png.meta
+    - Assets/image/UI images/settings.png
+    - Assets/image/UI images/settings.png.meta
+    - Assets/image/UI images/slider_bar.png
+    - Assets/image/UI images/slider_bar.png.meta
+    - Assets/image/UI images/slider_block.png
+    - Assets/image/UI images/slider_block.png.meta
+    - Assets/image/UI images/white_bg_2.png
+    - Assets/image/UI images/white_bg_2.png.meta
+    - ProjectSettings/EditorBuildSettings.asset
     - 
-    m_Values: 0000000000000000
+    m_Values: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 

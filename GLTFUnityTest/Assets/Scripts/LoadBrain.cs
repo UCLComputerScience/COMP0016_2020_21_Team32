@@ -112,16 +112,16 @@ public class LoadBrain : MonoBehaviour
 
 
 
-
-
-
-    //Some event stuff - should probably be done in a separate class 
-    //Gonna be used to let other scripts know which segment is currently selected. (Only AddAnnotation is currently subscribed to this event)
-    public void Pallete_onColourSelect(object sender, EventArgsColourData e){
+    //Receives event: Changes segment colour 
+   public void Pallete_onColourSelect(object sender, EventArgsColourData e){
         Color col = e.col;
         col.a = segOpacity;
         segments[currentlySelected].GetComponent<MeshRenderer>().material.SetColor("_Color", col);
     }
+
+    //Sends events 
+    //Gonna be used to let other scripts know which segment is currently selected. (Only AddAnnotation is currently subscribed to this event)
+ 
     public event EventHandler<onSegmentSelectEventArgs> onSegmentSelect;
     public class onSegmentSelectEventArgs : EventArgs{
         public GameObject curSegment;
