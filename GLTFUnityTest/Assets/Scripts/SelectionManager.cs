@@ -103,6 +103,8 @@ public class SelectionManager : MonoBehaviour
 
     public event EventHandler onColourSelect;
 
+    [SerializeField] GameObject UIBlocker;
+    
     [SerializeField] Toggle cameraButton;
     [SerializeField] Toggle tButton;
     [SerializeField] Toggle rButton;
@@ -150,6 +152,10 @@ public class SelectionManager : MonoBehaviour
 
     void Update()
     {
+        if(UIBlocker.activeInHierarchy){
+            Debug.Log(UIBlocker.activeInHierarchy);
+            return;
+        }
         foreach(Toggle toggle in toggles){
             if(toggle.Equals(selectedToggle))toggle.isOn = true;
             else{

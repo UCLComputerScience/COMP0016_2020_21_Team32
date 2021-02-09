@@ -10,8 +10,10 @@ using TMPro;
 public class ViewAnnotation : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject pointOfInterest;
+    public Image pointOfInterest;
     [SerializeField] TMP_Dropdown dropdown;
+
+    [SerializeField] Canvas canvas;
     
     [SerializeField] Image annotationTextBox;
     [SerializeField] TMP_Text annotationText;
@@ -36,11 +38,14 @@ public class ViewAnnotation : MonoBehaviour
         if(index != 0){
             // annotationTextBox.gameObject.SetActive(false);
             // pointOfInterest.SetActive(false);
+            // pointOfInterest.SetActive(false);
+            // annotationTextBox.gameObject.SetActive(false);
             Camera.main.gameObject.transform.position = annotations[index].cameraCoordinates;
             Camera.main.gameObject.transform.rotation = annotations[index].cameraRotation;
-            annotationTextBox.rectTransform.position = annotations[index].annotationPosition + new Vector3(100f,0f,0f);
-            pointOfInterest.transform.position = annotations[index].annotationPosition;
-            pointOfInterest.SetActive(true);
+            Debug.Log("Canvas scale factor "+ canvas.scaleFactor);
+            annotationTextBox.rectTransform.position= annotations[index].annotationPosition + new Vector3(100f,0f,0f);
+            pointOfInterest.rectTransform.position = annotations[index].annotationPosition;
+            pointOfInterest.gameObject.SetActive(true);
             annotationText.text = annotations[index].text;
             annotationText.gameObject.SetActive(true);
             annotationTextBox.gameObject.SetActive(true);
@@ -56,7 +61,7 @@ public class ViewAnnotation : MonoBehaviour
         dropdown.ClearOptions();
         String path = Application.persistentDataPath;
         DirectoryInfo dir = new DirectoryInfo(path);
-        FileInfo[] info = dir.GetFiles("*.json");
+        FileInfo[] info = dir.GetFiles("*" + "-" + ModelHandler.fileName + "*.json");
         
         
         foreach (FileInfo f in info){
@@ -88,8 +93,9 @@ public class ViewAnnotation : MonoBehaviour
         jsonToAnnotations();
     }
     public void otherEvent(object sender, EventArgs e){
-        dropdown.gameObject.SetActive(false);
+        pointOfInterest.gameObject.SetActive(false);
         annotationText.gameObject.SetActive(false);
+        annotationTextBox.gameObject.SetActive(false);
         isEnabled = false;
     }
 }

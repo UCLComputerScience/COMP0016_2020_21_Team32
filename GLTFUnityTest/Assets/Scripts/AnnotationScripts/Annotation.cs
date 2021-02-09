@@ -10,6 +10,7 @@ public class Annotation : MonoBehaviour
 {
     public AnnotationData data;
 
+    [SerializeField] GameObject UIBlocker;
     [SerializeField] GameObject organ;
     public static int numAnnotations = 0;
     public int annotationId; 
@@ -23,26 +24,32 @@ public class Annotation : MonoBehaviour
         numAnnotations = value;
     }
     void Awake(){
-        organ = LoadBrain.current.gameObject;
+        //organ = LoadBrain.current.gameObject;
         titleInputField.text = "Annotation #" + numAnnotations; 
     }
 
     public void show(Vector3 pos){
+        UIBlocker.SetActive(true);
         gameObject.SetActive(true);
         data = new AnnotationData();
         annotationId = numAnnotations;
+        confirmButton.onClick.RemoveAllListeners();
         confirmButton.onClick.AddListener(() => {
+            Debug.Log("confirm button clicked");
             save(titleInputField.text, inputField.text, pos);
             AnnotationPin.SetActive(false);
             numAnnotations++;
             hide();
         });
+        cancelButton.onClick.RemoveAllListeners();
         cancelButton.onClick.AddListener(() => {
+            Debug.Log("Cancelling");
             AnnotationPin.SetActive(false);
             hide();
         });
     }
     public void save(String title, String input, Vector3 pos){
+        Debug.Log("Saving annotation");
         data.title = titleInputField.text;
         data.text = inputField.text;
         data.cameraCoordinates = Camera.main.transform.position;
@@ -53,14 +60,16 @@ public class Annotation : MonoBehaviour
             if(transform.gameObject.GetComponent<MeshRenderer>()!=null) data.colours.Add(transform.gameObject.GetComponent<MeshRenderer>().material.color);
         }
         String jsonAnnotation = JsonUtility.ToJson(data);
-        String path = Path.Combine(Application.persistentDataPath, titleInputField.text+".json");
+        String path = Path.Combine(Application.persistentDataPath, titleInputField.text+ "-" + ModelHandler.fileName + ".json");
 
-        /*HERE'S WHERE THE WRITING TO THE FIREBASE/SQLLite DATABASE SHIT WILL GO*/
 
         File.WriteAllText(path, jsonAnnotation);
     }
     public void hide(){
         gameObject.SetActive(false);
+        UIBlocker.SetActive(false);
+        titleInputField.text = "Annotation #" + numAnnotations;
+        inputField.text = "";
     }
     private void populateAnnotation(){
         

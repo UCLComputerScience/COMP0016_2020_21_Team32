@@ -16,7 +16,7 @@ public static class OrganFactory
                 return new AbdomenExample(loadedModel);
             case "bone.glb":
                 return new BoneExample(loadedModel);
-            case "lungs.glb":
+            case "lung.glb":
                 return new LungExample(loadedModel);
             case "kidney.glb":
                 return new KidneyExample(loadedModel);

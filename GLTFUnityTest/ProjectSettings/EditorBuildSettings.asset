@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Start page.unity
     guid: be729bada9025324e8dd570f4ecf32f6
   - enabled: 0
-    path: Assets/Scenes/brainOptimised.unity
+    path: Assets/Scenes/Test scenes/brainOptimised.unity
     guid: 850b34035d9bf3f44865211d792ddd3f
   - enabled: 0
     path: Assets/Scenes/brainOptimisedTest 1.unity

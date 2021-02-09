@@ -15,13 +15,17 @@ public class ColourSelect : MonoBehaviour
     public Vector2 mousePos = new Vector2();
 
     public RectTransform rect;
+
+    [SerializeField] GameObject UIBlocker;
+
+    CircleCollider2D col; 
     private int width;
     private int height;
     [SerializeField] const float DOUBLE_CLICK_TIME = 0.2f;
     [SerializeField] const float CURSOR_DRAG_TIME = 0.05f;
     private float lastTimeClicked;
 
-    private Color[] pixelData;
+    //private Color[] pixelData;
     void Awake(){
         current = this;
     }
@@ -29,13 +33,16 @@ public class ColourSelect : MonoBehaviour
     {
         RawImage image = GetComponent<RawImage>();
         colours = image.texture as Texture2D;
-        pixelData = colours.GetPixels();
+        //pixelData = colours.GetPixels();
         rect = image.GetComponent<RectTransform>();
         width = (int) rect.rect.width;
         height = (int) rect.rect.height;
         print(width);
         print(height);
+        col = GetComponent<CircleCollider2D>();
     }
+
+
 
     // Update is called once per frame
     void Update()
@@ -49,16 +56,18 @@ public class ColourSelect : MonoBehaviour
 
         //Centre of texture is currently (0,0). Pixel data isn't stored in this way - we need to make it so
         //bottom left = (0,0) and top right = (width, height);
+        
         mousePos.x = width - (width/2 -mousePos.x);
         mousePos.y = Mathf.Abs((height/2 - mousePos.y) - height);
         if(Input.GetMouseButton(0)){
-            if(mousePos.x > -1 && mousePos.y > -1 && doubleClick()){ //if mouse is within the rect of the palette
-                Debug.Log("here");
+            if(isInside(col, Input.mousePosition) && doubleClick() && !UIBlocker.activeInHierarchy){
                 var col = colours.GetPixel((int)mousePos.x, (int)mousePos.y);
                 EventArgsColourData e = new EventArgsColourData(col);
                 onColourSelect?.Invoke(this, e);
             }
+
         }
+
     }
     private bool doubleClick(){
         bool returnVal = false;
@@ -70,6 +79,10 @@ public class ColourSelect : MonoBehaviour
         lastTimeClicked = Time.time;
         return returnVal;
         
+    }
+    private bool isInside(CircleCollider2D collider, Vector3 pos){
+        Vector3 closestPoint = collider.ClosestPoint(pos);
+        return closestPoint == pos;
     }
 
 }
