@@ -7,11 +7,14 @@ using TMPro;
 using System.IO;
 using System.Globalization;
 
+/*
+Class provides interactivity to the buttons in the main menu.
+*/
 public class MainMenu : MonoBehaviour
 {
-    List<string> exampleFiles; 
+    private List<string> exampleFiles; 
 
-    TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
+    private TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
     List<string> options;
     [SerializeField] TMP_Dropdown exampleButtons;
 
@@ -20,8 +23,27 @@ public class MainMenu : MonoBehaviour
     void Awake(){
         exampleButtons.ClearOptions();
         exampleButtons.onValueChanged.AddListener(OnValueChanged);
-        viewButton.onClick.AddListener(playgame);
+        viewButton.onClick.AddListener(nextScene);
+        getAllFiles();
+    }
+    public void nextScene(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+    }
+    public void prevScene(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1);
+    }
 
+    public void OnValueChanged(int index){
+        ModelHandler.fileName = exampleFiles[index];
+    }
+
+    public void quitApplication(){
+        Application.Quit();
+    }
+
+
+/*Gets all example models from the streaming Assets folder and converts the filenames to a dropdown list.*/
+    private void getAllFiles(){
         exampleFiles = new List<string>();
         options = new List<string>();
 
@@ -36,12 +58,5 @@ public class MainMenu : MonoBehaviour
         }
         exampleButtons.AddOptions(options);
         ModelHandler.fileName = exampleFiles[0];
-    }
-    public void playgame(){
-        SceneManager.LoadScene("MainPage");
-    }
-
-    public void OnValueChanged(int index){
-        ModelHandler.fileName = exampleFiles[index];
     }
 }

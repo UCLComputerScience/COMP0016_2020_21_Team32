@@ -18,10 +18,11 @@ public class SliceMesh : MonoBehaviour
     Vector3 cutStartPos;
     Vector3 cutEndPos;
     Plane rayCastPlane;
+    Quaternion startRot = Quaternion.identity;
 
     Vector3 planepos;
     Vector3 normal;
-    void assignNewMaterial(GameObject child, int i, Shader shader){
+    private void assignNewMaterial(GameObject child, int i, Shader shader){
         Color col = child.GetComponent<MeshRenderer>().material.GetColor("_Color");
         col.a = 1.0f;
         mat = new Material(shader);
@@ -37,7 +38,7 @@ public class SliceMesh : MonoBehaviour
         subscribeToEvents();
         plane.SetActive(false);
         plane.transform.position = new Vector3(0,100,0);
-        plane.transform.rotation = Quaternion.identity;
+        plane.transform.rotation = startRot;
         // rayCastPlane = new Plane(Vector3.up, 0f);
         // planepos = plane.transform.position;
         // normal = plane.transform.up;
@@ -46,7 +47,6 @@ public class SliceMesh : MonoBehaviour
     }
     public void confirmSlice(){
         assignMaterialToAllChildren(otherShader);
-        //resetPlane();
         planeController.SetActive(false);
         plane.SetActive(false);
         cut = true;
@@ -58,9 +58,20 @@ public class SliceMesh : MonoBehaviour
         assignMaterialToAllChildren(otherShader);
     }
 
+    private IEnumerator resetPlaneHelper(){
+        yield return new WaitForEndOfFrame();
+        for(int i = 0; i < 100; i++){
+            plane.transform.position = new Vector3(0,100,0);
+            plane.transform.rotation = startRot;
+        }
+    }
+    
     public void resetPlane(){
-        plane.transform.position = new Vector3(0, 100, 0);
-        plane.transform.rotation = Quaternion.identity;
+        for(int i = 0; i < 100; i++){
+            plane.transform.position = new Vector3(0, 100, 0);
+            plane.transform.rotation = startRot;
+        }
+        StartCoroutine(resetPlaneHelper());
     }
 
     // Update is called once per frame
