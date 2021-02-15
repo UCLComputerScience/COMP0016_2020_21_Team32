@@ -21,7 +21,7 @@ public static class OrganFactory
             case "kidney.glb":
                 return new KidneyExample(loadedModel);
             default:
-                return null;//StandardOrgan(Siccity.GLTFUtility.Importer.LoadFromFile(filepath));
+                return new LoadedOrgan(loadedModel);
         }
     }
 }

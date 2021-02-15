@@ -12,14 +12,17 @@ public class CameraMovement : MonoBehaviour
     public Camera cam;
     private Vector3 prevPosition;
 
+    private float cameraRatio = 350/178; //experimentally discovered value to move the camera in the z plane relative to the radius of the model loaded
     public Transform startTransform;
-    public Transform target;
+    public static Transform target;
     public Vector3 displacement; 
     private Vector3 dirVec;
-    private float cameraDistance = -250f;
-    private float scrollSpeed = 250f;
-    private bool isEnabled = true;
+    private float cameraDistance;// = -250f;
+    private float scrollSpeed; //= 250f;
+    public static bool isEnabled = true;
     private bool annotationJustViewed = false;
+    [SerializeField] GameObject axes;
+    [SerializeField] GameObject pivot;
 
 
     // void OnPointerClick(PointerEventData eventData){
@@ -43,16 +46,29 @@ public class CameraMovement : MonoBehaviour
     //     print(displacement);
     //     Camera.main.transform.Translate(displacement);
     // }
+    IEnumerator setCameraDistance(){
+        yield return new WaitUntil(() => ModelHandler.organ != null);
+        Renderer r;
+        r = (ModelHandler.organ.segments.Count != 0) ?  ModelHandler.organ.segments[0].GetComponent<Renderer>() : ModelHandler.organ.model.GetComponent<Renderer>();
+        Debug.Log(r.bounds.extents.magnitude);
+        cameraDistance = -cameraRatio * r.bounds.extents.magnitude; //multiplies the ratio by the radius of the bounding sphere of the renderer.
+        scrollSpeed = -cameraDistance;
+        displacement = new Vector3(0f,0f,cameraDistance);
+
+    }
     void Start() 
     {
+        //Renderer r = ModelHandler.organ.segments[0].GetComponent<Renderer>();
+        StartCoroutine(setCameraDistance());
+        target = pivot.transform;
         subscribeToEvents();
-        displacement = new Vector3(0, 0, cameraDistance);
+        //displacement = new Vector3(0, 0, cameraDistance);
         dirVec = new Vector3();
-        startTransform = Camera.main.gameObject.transform;
         Camera.main.enabled =true;
         Camera.main.gameObject.transform.position = startPosition;
         Camera.main.gameObject.transform.rotation = startRotation;
         prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        startPosition = prevPosition;
         Camera.main.transparencySortMode = TransparencySortMode.Orthographic;
     }
     void LateUpdate()
@@ -79,6 +95,7 @@ public class CameraMovement : MonoBehaviour
 
                 Camera.main.transform.Rotate(new Vector3(1f, 0f, 0f), dir.y *180);
                 Camera.main.transform.Rotate(new Vector3(0f, 1f, 0f), -dir.x * 180, Space.World);
+                //Camera.main.transform.Rotate(new Vector3(0f, 0f, 1f), dir.z * 180);
                 Camera.main.transform.Translate(displacement);
                 prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
             }
@@ -101,6 +118,8 @@ public class CameraMovement : MonoBehaviour
         SelectionManager.current.onReButtonPressed += SelectionManager_onReButtonPressed;
         SelectionManager.current.onVAnnotationButtonPressed += SelectionManager_OnAnnotationViewButtonPressed;
         SelectionManager.current.onAnnotationButton += otherEvent;
+        /*Remember to do this for the other classes later*/
+        SelectionManager.current.onChangePivot += otherEvent;
 
     }
 
@@ -128,6 +147,7 @@ public class CameraMovement : MonoBehaviour
 
     //If any other button is pressed, this script is disabled
     public void otherEvent(object sender, EventArgs e){
+        //Debug.Log("The otherEvent for cameraMovement");
         isEnabled = false;
     }
 

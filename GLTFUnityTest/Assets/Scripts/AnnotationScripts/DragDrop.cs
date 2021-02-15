@@ -7,9 +7,13 @@ using System;
 public class DragDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     String title;
+
+    Organ organ;
     [SerializeField] Canvas canvas;
 
     [SerializeField] Annotation annotation;
+
+    List<Collider> colliders;
     private RectTransform rectTransform; //stores position, size, anchor, pivot of a rectangle
     void awake(){
         annotation.hide();
@@ -18,8 +22,15 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegin
     {
         rectTransform = GetComponent<RectTransform>();
     }
+    void OnEnable(){
+
+    }
 
     public void OnPointerDown(PointerEventData data){
+        // organ = ModelHandler.organ;
+        // foreach(GameObject g in organ.segments){
+        //     colliders.Add(g.AddComponent<SphereCollider>());
+        // }
         Debug.Log("Mouse down");
     }
     public void OnDrag(PointerEventData data){
@@ -38,7 +49,9 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegin
 
     // }
     public void OnEndDrag(PointerEventData data){
-        title = "Annotation #" + annotation.annotationId; 
+        title = "Annotation #" + annotation.annotationId;
+        //Vector3 relativeRectTransform = rectTransform 
+        Debug.Log(this.rectTransform.position);
         annotation.show(this.transform.position); 
     }
 

@@ -100,8 +100,9 @@ public class SelectionManager : MonoBehaviour
     public event EventHandler onReButtonPressed;
     public event EventHandler onVAnnotationButtonPressed;
     public event EventHandler onAnnotationButton;
-
     public event EventHandler onColourSelect;
+
+    public event EventHandler onChangePivot;
 
     [SerializeField] GameObject UIBlocker;
     
@@ -115,6 +116,7 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] Button segmentSelector;
     
     [SerializeField] GameObject pallete; 
+    [SerializeField] GameObject pivotChangeButton;
     private Toggle selectedToggle;
     private List<Toggle> toggles;
     private List<EventHandler> events;
@@ -192,6 +194,10 @@ public class SelectionManager : MonoBehaviour
                             events[i]?.Invoke(this, EventArgs.Empty);
                         }
                     }
+                }
+                if(result.gameObject.Equals(pivotChangeButton.gameObject) && result.isValid){
+                    Debug.Log("On change pivot is fired");
+                    onChangePivot?.Invoke(this, EventArgs.Empty);
                 }
                 // if(result.gameObject.Equals(pallete)){
                 //     onColourSelect?.Invoke(this, EventArgs.Empty);

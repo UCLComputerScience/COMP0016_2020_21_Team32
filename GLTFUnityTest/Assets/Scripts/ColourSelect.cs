@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +25,6 @@ public class ColourSelect : MonoBehaviour
     [SerializeField] const float CURSOR_DRAG_TIME = 0.05f;
     private float lastTimeClicked;
 
-    //private Color[] pixelData;
     void Awake(){
         current = this;
     }
@@ -33,7 +32,6 @@ public class ColourSelect : MonoBehaviour
     {
         RawImage image = GetComponent<RawImage>();
         colours = image.texture as Texture2D;
-        //pixelData = colours.GetPixels();
         rect = image.GetComponent<RectTransform>();
         width = (int) rect.rect.width;
         height = (int) rect.rect.height;

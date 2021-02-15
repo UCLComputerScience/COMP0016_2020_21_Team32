@@ -1,6 +1,6 @@
-﻿//Used as reference for this shader: 
-//https://www.youtube.com/watch?v=zCkC5e_Pkz4&list=PLX2vGYjWbI0RS_lkb68ApE2YPcZMC4Ohz
+﻿//Relied heavily on these resources and examples to create this shader:
 //https://github.com/Dandarawy/Unity3DCrossSectionShader/blob/master/Assets/Cross%20Section%20Shader/Shaders/OnePlaneBSP.shader
+//https://www.youtube.com/watch?v=zCkC5e_Pkz4&list=PLX2vGYjWbI0RS_lkb68ApE2YPcZMC4Ohz
 //https://forum.unity.com/threads/transparent-depth-shader-good-for-ghosts.149511/
 //GLTFUTILITY/Materials/Standard Transparent (Metallic)
 
@@ -62,7 +62,7 @@ Shader "Custom/DifferentColour" {
 		void surf(Input IN, inout SurfaceOutputStandard o){
 			float dist = dot(IN.worldPos - _PlanePosition, _PlaneNormal);
 			fixed4 c;
-			if(dist > 0)c = (1,0,0,0);
+			if(dist > 0)c = (0,0,0,0); //sets everything that won't be drawn by the gpu to black
 			else c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
 			o.Albedo = c.rgb * IN.color;
 			o.Alpha = c.a;

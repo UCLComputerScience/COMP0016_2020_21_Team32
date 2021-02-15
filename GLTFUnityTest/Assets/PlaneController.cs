@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,16 +42,10 @@ public class PlaneController : MonoBehaviour
         prevYRot = startYRot = yRotSlider.value = 0;
         prevZRot = startZRot = zRotSlider.value = 0;
     }
-    // private void initialiseSlider(Slider slider){
-    //     slider.minValue = -180;
-    //     slider.maxValue = 180;
-    //     slider.value = 0;
-    //     slider.onValueChanged.AddListener(e);
-    // }
+
     private IEnumerator enableBlocker(){
         yield return new WaitForSeconds(0.1f);
         UIBlocker.SetActive(true);
-        
     }
     
     void OnEnable(){
