@@ -9,7 +9,7 @@ using TMPro;
 public class Annotation : MonoBehaviour
 {
     public AnnotationData data;
-
+    [SerializeField] GameObject plane;
     [SerializeField] GameObject UIBlocker;
     [SerializeField] GameObject organ;
     public static int numAnnotations = 0;
@@ -56,8 +56,12 @@ public class Annotation : MonoBehaviour
         data.cameraRotation = Camera.main.transform.rotation;
         data.colours = new List<Color>();
         data.annotationPosition = pos;
-        foreach(Transform transform in organ.transform.gameObject.GetComponentsInChildren<Transform>()){
-            if(transform.gameObject.GetComponent<MeshRenderer>()!=null) data.colours.Add(transform.gameObject.GetComponent<MeshRenderer>().material.color);
+        data.planeNormal = plane.transform.up;
+        data.planePosition = plane.transform.position;
+        foreach(GameObject g in ModelHandler.segments)
+        {
+            Debug.Log(g);
+            data.colours.Add(g.GetComponent<MeshRenderer>().material.color);
         }
         String jsonAnnotation = JsonUtility.ToJson(data);
         String path = Path.Combine(Application.persistentDataPath, titleInputField.text+ "-" + ModelHandler.fileName + ".json");

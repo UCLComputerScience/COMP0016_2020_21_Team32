@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -10,16 +10,30 @@ using TMPro;
 public class ViewAnnotation : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField] Shader shader;
+    [SerializeField] GameObject plane;
     public Image pointOfInterest;
+
+    public GameObject POI;
     [SerializeField] TMP_Dropdown dropdown;
 
-    [SerializeField] Canvas canvas;
+    [SerializeField] Canvas canvas; 
+    
+    private CanvasScaler scaler;
+
+    Vector2 screenScale;
+
+    //[SerializeField] GameObject poi;
     
     [SerializeField] Image annotationTextBox;
     [SerializeField] TMP_Text annotationText;
     private bool isEnabled = false;
     public List<AnnotationData> annotations = new List<AnnotationData>();
     public List<string> annotationTitles = new List<string>();
+    void Awake(){
+        scaler = canvas.GetComponent<CanvasScaler>();
+        screenScale = new Vector2(scaler.referenceResolution.x/Screen.width, scaler.referenceResolution.y/Screen.height);
+    }
     void Start()
     {
         subscribeToEvents();
@@ -35,24 +49,34 @@ public class ViewAnnotation : MonoBehaviour
     }
 
     public void onIndexChanged(int index){
-        if(index != 0){
+        if(index != 0){ 
             // annotationTextBox.gameObject.SetActive(false);
             // pointOfInterest.SetActive(false);
             // pointOfInterest.SetActive(false);
             // annotationTextBox.gameObject.SetActive(false);
             Camera.main.gameObject.transform.position = annotations[index].cameraCoordinates;
             Camera.main.gameObject.transform.rotation = annotations[index].cameraRotation;
-            Debug.Log("Canvas scale factor "+ canvas.scaleFactor);
+            //var scaledPos = new Vector2(annotations[index].annotationPosition.x * screenScale.x, annotations[index].annotationPosition.y * screenScale.y);
             annotationTextBox.rectTransform.position= annotations[index].annotationPosition + new Vector3(100f,0f,0f);
-            pointOfInterest.rectTransform.position = annotations[index].annotationPosition;
+            pointOfInterest.transform.position = annotations[index].annotationPosition;
+            //poi.transform.position = annotations[index].annotationPosition;
+            //new Vector2(annotations[index].annotationPosition.x * screenScale.x, annotations[index].annotationPosition.y * screenScale.y);//annotations[index].annotationPosition;
+            Debug.Log(pointOfInterest.rectTransform.position);
             pointOfInterest.gameObject.SetActive(true);
             annotationText.text = annotations[index].text;
             annotationText.gameObject.SetActive(true);
             annotationTextBox.gameObject.SetActive(true);
+            plane.transform.position = annotations[index].planePosition;
+            plane.transform.up = annotations[index].planeNormal;
+            MaterialAssigner.assignMaterialToAllChildrenBelowIndex(plane, ModelHandler.segments,shader);
+            for(int i = 0; i < ModelHandler.segments.Count(); i++){
+                ModelHandler.segments[i].GetComponent<MeshRenderer>().material.color = annotations[index].colours[i];
+            }
+
+
+            //POI.transform.position = Camera.main.ScreenToWorldPoint(annotations[index].annotationPosition);
+            //POI.transform.SetParent(ModelHandler.segments[0].transform);
         }
-        /*
-        Still need to set the colours of the model that's loaded in
-        */
 
     }
     private void jsonToAnnotations(){
@@ -61,15 +85,17 @@ public class ViewAnnotation : MonoBehaviour
         dropdown.ClearOptions();
         String path = Application.persistentDataPath;
         DirectoryInfo dir = new DirectoryInfo(path);
+
+        /*Problem with loading in other files here */
         FileInfo[] info = dir.GetFiles("*" + "-" + ModelHandler.fileName + "*.json");
-        
         
         foreach (FileInfo f in info){
             //if(f.Exists)f.Delete();
             if(!f.Exists)f.Create();
-            String jsonToParse = File.ReadAllText(f.FullName);
             // Debug.Log(f.FullName);
-            // Debug.Log(jsonToParse);
+            String jsonToParse = File.ReadAllText(f.FullName);
+            // // Debug.Log(f.FullName);
+            // // Debug.Log(jsonToParse);
             annotations.Add(JsonUtility.FromJson<AnnotationData>(jsonToParse) as AnnotationData);
         }
         //Debug.Log("Length of annotations: " +annotations.Count);

@@ -14,93 +14,80 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/AnnotationPin.prefab
-    - Assets/AnnotationPin.prefab.meta
-    - Assets/Images.meta
-    - Assets/Images/Logos.meta
-    - Assets/Images/Logos/1024px-NHS-Logo.svg.png
-    - Assets/Images/Logos/1024px-NHS-Logo.svg.png.meta
-    - Assets/Images/Logos/New-2020-Intel-Logo-Blue-Background.jpg
-    - Assets/Images/Logos/New-2020-Intel-Logo-Blue-Background.jpg.meta
-    - Assets/Images/Logos/gosh drive logo.png
-    - Assets/Images/Logos/gosh drive logo.png.meta
-    - Assets/Images/Logos/twitter-card-ucl-logo.png
-    - Assets/Images/Logos/twitter-card-ucl-logo.png.meta
-    - Assets/Images/Materials.meta
-    - Assets/Images/Materials/New-2020-Intel-Logo-Blue-Background.mat
-    - Assets/Images/Materials/New-2020-Intel-Logo-Blue-Background.mat.meta
-    - Assets/Images/UI images.meta
-    - Assets/Images/UI images/Sequence 01.Still001.png
-    - Assets/Images/UI images/Sequence 01.Still001.png.meta
-    - Assets/Images/UI images/Sphere.prefab
-    - Assets/Images/UI images/Sphere.prefab.meta
-    - Assets/Images/UI images/addAnnotation.png
-    - Assets/Images/UI images/addAnnotation.png.meta
-    - Assets/Images/UI images/annotation.png
-    - Assets/Images/UI images/annotation.png.meta
-    - Assets/Images/UI images/box.png
-    - Assets/Images/UI images/box.png.meta
-    - Assets/Images/UI images/button.png
-    - Assets/Images/UI images/button.png.meta
-    - Assets/Images/UI images/button_3d1.png
-    - Assets/Images/UI images/button_3d1.png.meta
-    - Assets/Images/UI images/button_3d2.png
-    - Assets/Images/UI images/button_3d2.png.meta
-    - Assets/Images/UI images/button_circle.png
-    - Assets/Images/UI images/button_circle.png.meta
-    - Assets/Images/UI images/button_export.png
-    - Assets/Images/UI images/button_export.png.meta
-    - Assets/Images/UI images/button_rect.png
-    - Assets/Images/UI images/button_rect.png.meta
-    - Assets/Images/UI images/button_sqr.png
-    - Assets/Images/UI images/button_sqr.png.meta
-    - Assets/Images/UI images/button_undo.png
-    - Assets/Images/UI images/button_undo.png.meta
-    - Assets/Images/UI images/dropdown.png
-    - Assets/Images/UI images/dropdown.png.meta
-    - Assets/Images/UI images/exitFullScreen.png
-    - Assets/Images/UI images/exitFullScreen.png.meta
-    - Assets/Images/UI images/fullScreen.png
-    - Assets/Images/UI images/fullScreen.png.meta
-    - Assets/Images/UI images/handgrabben-removebg-preview.png
-    - Assets/Images/UI images/handgrabben-removebg-preview.png.meta
-    - Assets/Images/UI images/handgrabben.png
-    - Assets/Images/UI images/handgrabben.png.meta
-    - Assets/Images/UI images/palette.png
-    - Assets/Images/UI images/palette.png.meta
-    - Assets/Images/UI images/quit.png
-    - Assets/Images/UI images/quit.png.meta
-    - Assets/Images/UI images/refresh.png
-    - Assets/Images/UI images/refresh.png.meta
-    - Assets/Images/UI images/settings.png
-    - Assets/Images/UI images/settings.png.meta
-    - Assets/Images/UI images/slider_bar.png
-    - Assets/Images/UI images/slider_bar.png.meta
-    - Assets/Images/UI images/slider_block.png
-    - Assets/Images/UI images/slider_block.png.meta
-    - Assets/Images/UI images/white_bg_2.png
-    - Assets/Images/UI images/white_bg_2.png.meta
-    - Assets/Images/handgrabben-removebg-preview.png
-    - Assets/Images/handgrabben-removebg-preview.png.meta
-    - Assets/Images/holorepository logo.png
-    - Assets/Images/holorepository logo.png.meta
+    - Assets/FileManager.cs
+    - Assets/FileManager.cs.meta
+    - Assets/GenerateLines.cs
+    - Assets/GenerateLines.cs.meta
+    - Assets/PivotController.cs
+    - Assets/PivotController.cs.meta
+    - Assets/Plugins.meta
+    - Assets/Prefabs/Pivot Controller.prefab
+    - Assets/Prefabs/Pivot Controller.prefab.meta
     - Assets/Scenes/MainPage.unity
     - Assets/Scenes/StartPageAgain.unity
-    - Assets/Scenes/Test scenes/Abdominal.unity
-    - Assets/Scenes/Test scenes/Abdominal.unity.meta
-    - Assets/Scenes/Test scenes/Brain.unity
-    - Assets/Scenes/Test scenes/Brain.unity.meta
-    - Assets/Scenes/Test scenes/Kidney.unity
-    - Assets/Scenes/Test scenes/Kidney.unity.meta
-    - Assets/Scenes/Test scenes/Lungs.unity
-    - Assets/Scenes/Test scenes/Lungs.unity.meta
-    - Assets/Scenes/Test scenes/brainOptimised.unity
-    - Assets/Scenes/Test scenes/brainOptimised.unity.meta
-    - Assets/Scripts/ColourSelect.cs
-    - Assets/Scripts/MainMenu.cs
+    - Assets/Scripts/AnnotationScripts/DragDrop.cs
+    - Assets/Scripts/CameraMovement.cs
+    - Assets/Scripts/ChangeCameraAxis.cs
+    - Assets/Scripts/ChangeCameraAxis.cs.meta
+    - Assets/Scripts/MoveAxis.cs
+    - Assets/Scripts/MoveAxis.cs.meta
+    - Assets/Scripts/Refactoring folder/LoadedOrgan.cs
+    - Assets/Scripts/Refactoring folder/LoadedOrgan.cs.meta
+    - Assets/Scripts/Refactoring folder/MaterialAssigner.cs
+    - Assets/Scripts/Refactoring folder/ModelHandler.cs
+    - Assets/Scripts/Refactoring folder/OrganFactory.cs
+    - Assets/Scripts/SelectionManager.cs
+    - Assets/StandaloneFileBrowser.meta
+    - Assets/StandaloneFileBrowser/IStandaloneFileBrowser.cs
+    - Assets/StandaloneFileBrowser/IStandaloneFileBrowser.cs.meta
+    - Assets/StandaloneFileBrowser/Plugins.meta
+    - Assets/StandaloneFileBrowser/Plugins/Linux.meta
+    - Assets/StandaloneFileBrowser/Plugins/Linux/x86_64.meta
+    - Assets/StandaloneFileBrowser/Plugins/Linux/x86_64/libStandaloneFileBrowser.so
+    - Assets/StandaloneFileBrowser/Plugins/Linux/x86_64/libStandaloneFileBrowser.so.meta
+    - Assets/StandaloneFileBrowser/Plugins/Ookii.Dialogs.dll
+    - Assets/StandaloneFileBrowser/Plugins/Ookii.Dialogs.dll.meta
+    - Assets/StandaloneFileBrowser/Plugins/StandaloneFileBrowser.bundle.meta
+    - Assets/StandaloneFileBrowser/Plugins/StandaloneFileBrowser.bundle/Contents.meta
+    - Assets/StandaloneFileBrowser/Plugins/StandaloneFileBrowser.bundle/Contents/Info.plist
+    - Assets/StandaloneFileBrowser/Plugins/StandaloneFileBrowser.bundle/Contents/Info.plist.meta
+    - Assets/StandaloneFileBrowser/Plugins/StandaloneFileBrowser.bundle/Contents/MacOS.meta
+    - Assets/StandaloneFileBrowser/Plugins/StandaloneFileBrowser.bundle/Contents/MacOS/StandaloneFileBrowser
+    - Assets/StandaloneFileBrowser/Plugins/StandaloneFileBrowser.bundle/Contents/MacOS/StandaloneFileBrowser.meta
+    - Assets/StandaloneFileBrowser/Plugins/StandaloneFileBrowser.jslib
+    - Assets/StandaloneFileBrowser/Plugins/StandaloneFileBrowser.jslib.meta
+    - Assets/StandaloneFileBrowser/Plugins/System.Windows.Forms.dll
+    - Assets/StandaloneFileBrowser/Plugins/System.Windows.Forms.dll.meta
+    - Assets/StandaloneFileBrowser/Sample.meta
+    - Assets/StandaloneFileBrowser/Sample/BasicSample.cs
+    - Assets/StandaloneFileBrowser/Sample/BasicSample.cs.meta
+    - Assets/StandaloneFileBrowser/Sample/BasicSampleScene.unity
+    - Assets/StandaloneFileBrowser/Sample/BasicSampleScene.unity.meta
+    - Assets/StandaloneFileBrowser/Sample/CanvasSampleOpenFileImage.cs
+    - Assets/StandaloneFileBrowser/Sample/CanvasSampleOpenFileImage.cs.meta
+    - Assets/StandaloneFileBrowser/Sample/CanvasSampleOpenFileText.cs
+    - Assets/StandaloneFileBrowser/Sample/CanvasSampleOpenFileText.cs.meta
+    - Assets/StandaloneFileBrowser/Sample/CanvasSampleOpenFileTextMultiple.cs
+    - Assets/StandaloneFileBrowser/Sample/CanvasSampleOpenFileTextMultiple.cs.meta
+    - Assets/StandaloneFileBrowser/Sample/CanvasSampleSaveFileImage.cs
+    - Assets/StandaloneFileBrowser/Sample/CanvasSampleSaveFileImage.cs.meta
+    - Assets/StandaloneFileBrowser/Sample/CanvasSampleSaveFileText.cs
+    - Assets/StandaloneFileBrowser/Sample/CanvasSampleSaveFileText.cs.meta
+    - Assets/StandaloneFileBrowser/Sample/CanvasSampleScene.unity
+    - Assets/StandaloneFileBrowser/Sample/CanvasSampleScene.unity.meta
+    - Assets/StandaloneFileBrowser/StandaloneFileBrowser.cs
+    - Assets/StandaloneFileBrowser/StandaloneFileBrowser.cs.meta
+    - Assets/StandaloneFileBrowser/StandaloneFileBrowserEditor.cs
+    - Assets/StandaloneFileBrowser/StandaloneFileBrowserEditor.cs.meta
+    - Assets/StandaloneFileBrowser/StandaloneFileBrowserLinux.cs
+    - Assets/StandaloneFileBrowser/StandaloneFileBrowserLinux.cs.meta
+    - Assets/StandaloneFileBrowser/StandaloneFileBrowserMac.cs
+    - Assets/StandaloneFileBrowser/StandaloneFileBrowserMac.cs.meta
+    - Assets/StandaloneFileBrowser/StandaloneFileBrowserWindows.cs
+    - Assets/StandaloneFileBrowser/StandaloneFileBrowserWindows.cs.meta
     - Assets/ViewAnnotation.cs
     - 
-    m_Values: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    m_Values: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 
