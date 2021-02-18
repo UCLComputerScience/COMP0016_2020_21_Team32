@@ -11,56 +11,38 @@ public class CameraMovement : MonoBehaviour
     public static Quaternion startRotation = Quaternion.Euler(9.78f, -18.19f, 0f);
     public Camera cam;
     private Vector3 prevPosition;
+    private Vector3 farTarget;
+
+    private Quaternion targetRot;
 
     private float cameraRatio = 350/178; //experimentally discovered value to move the camera in the z plane relative to the radius of the model loaded
     public Transform startTransform;
     public static Transform target;
+
+    private Vector3 xTranslationCache = Vector3.zero;
+    private Vector3 yTranslationCache = Vector3.zero;
+    private Quaternion xRotationCache = Quaternion.identity;
+    private Quaternion yRotationCache = Quaternion.identity;
     public Vector3 displacement; 
     private Vector3 dirVec;
-    private float cameraDistance;// = -250f;
+    private Transform startTarget;  
+    private float cameraDistance;
     private float scrollSpeed; //= 250f;
     public static bool isEnabled = true;
+    private Transform prevTransform;
+    Quaternion prevRot;
     private bool annotationJustViewed = false;
-    [SerializeField] GameObject axes;
     [SerializeField] GameObject pivot;
 
-
-    // void OnPointerClick(PointerEventData eventData){
-    //     if(!isEnabled)return;
-    //     Vector3 dir = prevPosition - Camera.main.ScreenTom ViewportPoint(Input.mousePosition);
-    //     Camera.main.transform.position = target.transform.position;
-    //     Camera.main.transform.Rotate(new Vector3(1f, 0f, 0f), dir.y *180);
-    //     Camera.main.transform.Rotate(new Vector3(0f, 1f, 0f), -dir.x * 180, Space.World);
-    //     Camera.main.transform.Translate(displacement);
-    //     prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-    // }
-    // void OnPointerDown(PointerEventData eventData){
-    //     if(!isEnabled)return;
-    //     prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition); // cam position set to normalised version of mouse coord
-    // }
-    // void OnScroll(){
-    //     if(!isEnabled)return;
-    //     Camera.main.transform.position = target.transform.position;
-    //     float scrollAmount = Input.GetAxis("Mouse ScrollWheel")*scrollSpeed;
-    //     displacement -= new Vector3(0, 0, scrollAmount);
-    //     print(displacement);
-    //     Camera.main.transform.Translate(displacement);
-    // }
-    IEnumerator setCameraDistance(){
-        yield return new WaitUntil(() => ModelHandler.organ != null);
-        Renderer r;
-        r = (ModelHandler.organ.segments.Count != 0) ?  ModelHandler.organ.segments[0].GetComponent<Renderer>() : ModelHandler.organ.model.GetComponent<Renderer>();
-        Debug.Log(r.bounds.extents.magnitude);
-        cameraDistance = -cameraRatio * r.bounds.extents.magnitude; //multiplies the ratio by the radius of the bounding sphere of the renderer.
-        scrollSpeed = -cameraDistance;
-        displacement = new Vector3(0f,0f,cameraDistance);
-
-    }
     void Start() 
     {
-        //Renderer r = ModelHandler.organ.segments[0].GetComponent<Renderer>();
+        Camera.main.ScreenToViewportPoint(Input.mousePosition);
         StartCoroutine(setCameraDistance());
-        target = pivot.transform;
+        target = pivot.transform; //The pivot of camera rotation is initialised to the same position as the model's parent gameobject (ie, this.gameObject) at (0,0,0)
+        // farTarget = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        // farTarget.transform.position = pivot.transform.position + Vector3.forward*1000f;
+        farTarget = pivot.transform.position + Vector3.forward*1000f;
+        //Camera.main.transform.SetParent(farTarget.transform);
         subscribeToEvents();
         //displacement = new Vector3(0, 0, cameraDistance);
         dirVec = new Vector3();
@@ -68,36 +50,43 @@ public class CameraMovement : MonoBehaviour
         Camera.main.gameObject.transform.position = startPosition;
         Camera.main.gameObject.transform.rotation = startRotation;
         prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        prevTransform = Camera.main.transform;
         startPosition = prevPosition;
         Camera.main.transparencySortMode = TransparencySortMode.Orthographic;
     }
     void LateUpdate()
     {
         if(!isEnabled) return;
-        // if(annotationJustViewed){
-        //     annotationJustViewed = false;
-        //     displacement = new Vector3(0f,0f, Camera.main.gameObject.transform.position.z);
-        //     prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        // }
-        //target.transform.position = cam.ScreenToViewportPoint(Input.mousePosition);
-        
+        //Debug.Log(xTranslationCache);
+        prevTransform = Camera.main.transform;
 
         if(Input.GetMouseButtonDown(0)){ 
-            // if(!EventSystem.current.IsPointerOverGameObject()){
-                prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition); // cam position set to normalised version of mouse coord
-            // }
+                //farTarget = pivot.transform.position + Vector3.forward*1000f;//getFarPivotPos(pivot.transform.position, Camera.main.transform.position, 1000f);
+                //Camera.main.transform.LookAt(target);
+            if(!EventSystem.current.IsPointerOverGameObject()){
+                Camera.main.transform.Translate(xTranslationCache);
+                Camera.main.transform.Translate(yTranslationCache);
+                //Camera.main.transform.Rotate(xRotationCache);
+                prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition); // cam position set to normalised version of screen coordinates 
+            } 
         }
         if(Input.GetMouseButton(0)){
             if(!EventSystem.current.IsPointerOverGameObject()){ //Ensures camera doesn't move when interacting with UI (THIS IS STILL BUGGY)
+                farTarget = getFarPivotPos(pivot.transform.position, Camera.main.transform.position - xTranslationCache, 1000f);
                 Vector3 dir = prevPosition - Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
                 Camera.main.transform.position = target.transform.position;
-
+                //Camera.main.transform.rotation *= xRotationCache;
                 Camera.main.transform.Rotate(new Vector3(1f, 0f, 0f), dir.y *180);
                 Camera.main.transform.Rotate(new Vector3(0f, 1f, 0f), -dir.x * 180, Space.World);
+                prevRot = Camera.main.transform.rotation;
                 //Camera.main.transform.Rotate(new Vector3(0f, 0f, 1f), dir.z * 180);
                 Camera.main.transform.Translate(displacement);
+                Camera.main.transform.Translate(xTranslationCache);
+                Camera.main.transform.Translate(yTranslationCache);
                 prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+                // Camera.main.transform.RotateAround(pivot.transform.position, Vector3.up, Input.GetAxisRaw("Mouse X") * 9);
+                // Camera.main.transform.RotateAround(pivot.transform.position, Camera.main.transform.right, -Input.GetAxisRaw("Mouse Y") * 9);
             }
 
         }else if(Input.GetAxis("Mouse ScrollWheel") != 0){
@@ -106,8 +95,115 @@ public class CameraMovement : MonoBehaviour
             displacement -= new Vector3(0, 0, scrollAmount);
             //print(displacement);
             Camera.main.transform.Translate(displacement);
+            Camera.main.transform.Translate(xTranslationCache);
+            Camera.main.transform.Translate(yTranslationCache);
+        //     Debug.DrawLine(Camera.main.transform.position, farTarget, new Color(1f,0f,0f,1f), 20);
+        //     Camera.main.transform.RotateAround(farTarget, Vector3.up, -0.1f);
+        //     Vector3 curPos = Camera.main.transform.position;
+        //     Debug.Log("Help!");
+        //     // yield return new WaitUntil(() => prevTransform.position != curPos);
+        //     Debug.Log("Is this never reached?");
+        //     Vector3 diff = curPos - prevTransform.position;
+        //     Debug.Log("Difference: "+ diff);
+        //     xTranslationCache+= new Vector3(diff.x, 0f,0f);
+        // }else if(Input.GetKey(KeyCode.G)){
+        //     Camera.main.transform.RotateAround(farTarget, Vector3.up, 0.1f);
+        //     Vector3 curPos = Camera.main.transform.position;
+        //     Debug.Log("Help!");
+        //     // yield return new WaitUntil(() => prevTransform.position != curPos);
+        //     Debug.Log("Is this never reached?");
+        //     Vector3 diff = curPos - prevTransform.position;
+        //     xTranslationCache+= new Vector3(diff.x, 0f,0f);
+        // }else if(Input.GetKey(KeyCode.Y)){
+        //     Camera.main.transform.RotateAround(farTarget, Vector3.right, 0.1f);
+        //     Vector3 curPos = Camera.main.transform.position;
+        //     Debug.Log("Help!");
+        //     // yield return new WaitUntil(() => prevTransform.position != curPos);
+        //     Debug.Log("Is this never reached?");
+        //     Vector3 diff = curPos - prevTransform.position;
+        //     yTranslationCache+= new Vector3(0f, diff.y,0f);
+        // }else if(Input.GetKey(KeyCode.B)){
+        //     Camera.main.transform.RotateAround(farTarget, Vector3.right, 0.1f);
+        //     Vector3 curPos = Camera.main.transform.position;
+        //     Debug.Log("Help!");
+        //     // yield return new WaitUntil(() => prevTransform.position != curPos);
+        //     Debug.Log("Is this never reached?");
+        //     Vector3 diff = curPos - prevTransform.position;
+        //     xTranslationCache+= new Vector3(0f,diff.y,0f);
+        // }
+        }else if(Input.GetKey(KeyCode.H)){
+            Camera.main.transform.position += Camera.main.transform.right * 1.0f;
+            //Camera.main.transform.rotation = targetRot;
+            xTranslationCache += Vector3.right*1.0f;
+            //Camera.main.transform.RotateAround(farTarget, Camera.main.transform.up, 0.1f);
+            // Debug.DrawLine(this.gameObject.transform.position, Camera.main.transform.position, new Color(1f,0f,0f,1f), 20);
+            // // //Debug.Log(Camera.main.transform.right);
+            // xTranslationCache += Vector3.right*1.0f;
+            // Vector3 tempPos = Camera.main.transform.position;
+            // Camera.main.transform.LookAt(farTarget);
+            // Camera.main.transform.position = tempPos;
+            //Camera.main.transform.LookAt(farTarget);
+            //Camera.main.transform.LookAt(farTarget, Camera.main.transform.up);
+        }else if (Input.GetKey(KeyCode.G)){
+            Camera.main.transform.position -= Camera.main.transform.right * 1.0f;
+            xTranslationCache += Vector3.left*1.0f;
+            Debug.Log(Quaternion.Angle(this.transform.rotation, Camera.main.transform.rotation));
+            //Camera.main.transform.LookAt(farTarget);
+            //Camera.main.transform.LookAt(pivot.transform);
+        }else if(Input.GetKey(KeyCode.Y)){
+            Camera.main.transform.position += Camera.main.transform.up * 1.0f;
+            yTranslationCache += Vector3.up*1.0f;
+            //Camera.main.transform.LookAt(farTarget);
+            //Camera.main.transform.LookAt(pivot.transform);
+        }else if(Input.GetKey(KeyCode.B)){
+            Camera.main.transform.position -= Camera.main.transform.up * 1.0f;
+            yTranslationCache += Vector3.down*1.0f;
+            //Camera.main.transform.LookAt(farTarget);
+            //Camera.main.transform.LookAt(pivot.transform);
+        }else if(Input.GetKey(KeyCode.D)){
+            Camera.main.transform.position += Vector3.right*0.5f;
+        }else if(Input.GetKey(KeyCode.A)){
+            Camera.main.transform.position -= Vector3.right*0.5f;
         }
         
+    }
+
+    private IEnumerator cameraDist(){
+        Camera.main.transform.RotateAround(farTarget, Vector3.up, -0.1f);
+        Vector3 curPos = Camera.main.transform.position;
+        Debug.Log("Help!");
+        yield return new WaitUntil(() => prevTransform.position != curPos);
+        Debug.Log("Is this never reached?");
+        Vector3 diff = curPos - prevTransform.position;
+        Debug.Log("Difference: "+ diff);
+        xTranslationCache+= new Vector3(diff.x, 0f,0f);
+    }
+
+    // private IEnumerator changeDirection(){
+    //     Camera.main.gameObject.transform.rotation = Quaternion.Lerp(startRot, targetRot, ratio);
+    // }
+    private Vector3 getFarPivotPos(Vector3 originalPivot, Vector3 cameraPos, float distance){
+        Vector3 dirVec = (originalPivot - cameraPos).normalized;
+        return originalPivot + dirVec * distance;
+    }
+    private void lookRotation(){
+        Vector3 prevPos = Camera.main.transform.position;
+        Camera.main.transform.position += Camera.main.transform.right * 0.5f;
+        Quaternion rot = Quaternion.LookRotation((farTarget - Camera.main.transform.position), Vector3.up);
+        Camera.main.transform.rotation = rot;
+        xTranslationCache = Camera.main.transform.position - prevPos;
+    }
+
+
+    /* Coroutine that initialises the camera distance dynamically based on the radius of the sphere that bounds the renderer of the model loaded into the application. This enables 
+       models of any physical size to be viewed when loaded into the application.*/
+    private IEnumerator setCameraDistance(){
+        yield return new WaitUntil(() => ModelHandler.organ != null); //waits until the model has been loaded in - prevents nullReferencEexceptions being thrown
+        Renderer r;
+        r = (ModelHandler.organ.segments.Count != 0) ?  ModelHandler.organ.segments[0].GetComponent<Renderer>() : ModelHandler.organ.model.GetComponent<Renderer>();
+        cameraDistance = -cameraRatio * r.bounds.extents.magnitude; //ratio * radius of renderer
+        scrollSpeed = -cameraDistance;
+        displacement = new Vector3(0f,0f,cameraDistance);
     }
 
     //subscribes this script to events that are fired by the SelectionManager

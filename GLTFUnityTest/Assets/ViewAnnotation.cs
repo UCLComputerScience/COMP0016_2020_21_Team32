@@ -57,12 +57,11 @@ public class ViewAnnotation : MonoBehaviour
             Camera.main.gameObject.transform.position = annotations[index].cameraCoordinates;
             Camera.main.gameObject.transform.rotation = annotations[index].cameraRotation;
             //var scaledPos = new Vector2(annotations[index].annotationPosition.x * screenScale.x, annotations[index].annotationPosition.y * screenScale.y);
-            annotationTextBox.rectTransform.position= annotations[index].annotationPosition + new Vector3(100f,0f,0f);
+            annotationTextBox.rectTransform.position= annotations[index].annotationPosition; //+ new Vector3(100f,0f,0f);
             pointOfInterest.transform.position = annotations[index].annotationPosition;
             //poi.transform.position = annotations[index].annotationPosition;
             //new Vector2(annotations[index].annotationPosition.x * screenScale.x, annotations[index].annotationPosition.y * screenScale.y);//annotations[index].annotationPosition;
-            Debug.Log(pointOfInterest.rectTransform.position);
-            pointOfInterest.gameObject.SetActive(true);
+            //pointOfInterest.gameObject.SetActive(true);
             annotationText.text = annotations[index].text;
             annotationText.gameObject.SetActive(true);
             annotationTextBox.gameObject.SetActive(true);
@@ -72,22 +71,20 @@ public class ViewAnnotation : MonoBehaviour
             for(int i = 0; i < ModelHandler.segments.Count(); i++){
                 ModelHandler.segments[i].GetComponent<MeshRenderer>().material.color = annotations[index].colours[i];
             }
-
-
-            //POI.transform.position = Camera.main.ScreenToWorldPoint(annotations[index].annotationPosition);
-            //POI.transform.SetParent(ModelHandler.segments[0].transform);
         }
 
     }
     private void jsonToAnnotations(){
+        DirectoryInfo dir;
         annotations = new List<AnnotationData>();
         annotationTitles = new List<String>();
         dropdown.ClearOptions();
-        String path = Application.persistentDataPath;
-        DirectoryInfo dir = new DirectoryInfo(path);
+        string dirPath = Path.Combine(Application.dataPath, ModelHandler.annotationFolder);
+        dir = Directory.CreateDirectory(dirPath);
+
 
         /*Problem with loading in other files here */
-        FileInfo[] info = dir.GetFiles("*" + "-" + ModelHandler.fileName + "*.json");
+        FileInfo[] info = dir.GetFiles("*.json");
         
         foreach (FileInfo f in info){
             //if(f.Exists)f.Delete();

@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
-public class ModelHandler : MonoBehaviour
+public class ModelHandler : MonoBehaviour // This class should be a singleton
 {
     /*
     Class handles interaction between the UI and the model.
+
+
+    Might make sense to make this a singleton and to separate out the Opacity script -> the more separation of concerns the better
     */
-    public static string fileName = "brain.glb";
+    public static string fileName = "brain.glb"; 
+    public static string annotationFolder;
     public static Organ organ; 
     [SerializeField] GameObject plane; // could make plane singleton
     
@@ -18,22 +23,14 @@ public class ModelHandler : MonoBehaviour
     private float minOpacity = 0.3f;
     [SerializeField] Slider opacitySlider;
     private int currentlySelected = 0;
-
-
-/*
-Coroutine ensures that the model has been read from the file and converted into a GameObject 
-before initialising its child segments
-*/
-
     
     void Start()
     {
         this.opacitySlider.onValueChanged.AddListener(AdjustOpacity);
         StartCoroutine(loadModel());
         ColourSelect.current.onColourSelect += Pallete_onColourSelect;
-        Debug.Log(organ);
+        annotationFolder = getAnnotationFolderName(fileName);
     }
-
     /*Called whenever the opacity slider is moved. Changes the opacity of the currently selected segment*/
     public void AdjustOpacity(float newOp) {
         if(segments[currentlySelected] != null){
@@ -84,6 +81,12 @@ before initialising its child segments
         //     m.cookingOptions =
         // }
         MaterialAssigner.assignMaterialToAllChildrenBelowIndex(plane, segments, clippingPlaneShader);
+    }
+
+    /*Generates a readable foldername (not containing any path separators) to store the annotations of the model being viewed*/    
+    private string getAnnotationFolderName(string filename){
+        int index = filename.LastIndexOf(Path.DirectorySeparatorChar);
+        return (index != -1) ? fileName.Substring(index) : filename;
     }
 
     // private void assignMaterialToAllChildrenBelowIndex(int index, Shader shader){

@@ -49,7 +49,15 @@ public class Annotation : MonoBehaviour
         });
     }
     public void save(String title, String input, Vector3 pos){
-        Debug.Log("Saving annotation");
+        initialiseAnnotation(pos);
+        writeAnnotationToJsonFile();
+    }    public void hide(){
+        gameObject.SetActive(false);
+        UIBlocker.SetActive(false);
+        titleInputField.text = "Annotation #" + numAnnotations;
+        inputField.text = "";
+    }
+    private void initialiseAnnotation(Vector3 pos){
         data.title = titleInputField.text;
         data.text = inputField.text;
         data.cameraCoordinates = Camera.main.transform.position;
@@ -58,25 +66,16 @@ public class Annotation : MonoBehaviour
         data.annotationPosition = pos;
         data.planeNormal = plane.transform.up;
         data.planePosition = plane.transform.position;
-        foreach(GameObject g in ModelHandler.segments)
-        {
-            Debug.Log(g);
-            data.colours.Add(g.GetComponent<MeshRenderer>().material.color);
-        }
+        foreach(GameObject g in ModelHandler.segments)data.colours.Add(g.GetComponent<MeshRenderer>().material.color);
+    }
+    private void writeAnnotationToJsonFile(){
         String jsonAnnotation = JsonUtility.ToJson(data);
-        String path = Path.Combine(Application.persistentDataPath, titleInputField.text+ "-" + ModelHandler.fileName + ".json");
-
-
-        File.WriteAllText(path, jsonAnnotation);
-    }
-    public void hide(){
-        gameObject.SetActive(false);
-        UIBlocker.SetActive(false);
-        titleInputField.text = "Annotation #" + numAnnotations;
-        inputField.text = "";
-    }
-    private void populateAnnotation(){
-        
+        string dirPath = Path.Combine(Application.dataPath, ModelHandler.annotationFolder);
+        if(!Directory.Exists(dirPath)){
+            DirectoryInfo dir = Directory.CreateDirectory(dirPath);
+        }
+        string filePath = Path.Combine(dirPath, titleInputField.text + ".json");
+        File.WriteAllText(filePath, jsonAnnotation);
     }
     
 }
