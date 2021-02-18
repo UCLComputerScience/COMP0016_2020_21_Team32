@@ -7,7 +7,6 @@ using System;
 public class ChangeCameraAxis : MonoBehaviour
 {
     private bool isEnabled = false;
-    //[SerializeField] GameObject axes;
     [SerializeField] GameObject pivotController;
     [SerializeField] GameObject pivot;
     void Start()
@@ -26,16 +25,12 @@ public class ChangeCameraAxis : MonoBehaviour
         SelectionManager.current.onChangePivot += SelectionManager_OnChangePivot;
 
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void changeCameraAxis(){
         //isEnabled = false;
     }
+
+    /*Sets the pivot controller to active and */
     public void SelectionManager_OnChangePivot(object sender, EventArgs e){
-        Debug.Log("Here I am");
         pivot.transform.position = CameraMovement.target.position;
         pivotController.SetActive(true);
         foreach(GameObject g in ModelHandler.organ.segments){
@@ -43,8 +38,6 @@ public class ChangeCameraAxis : MonoBehaviour
             float op = (r.material.color.a < 0.4f) ? r.material.color.a : 0.4f;
             r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, op);
         }
-        //sphere.AddComponent<MoveAxis>();
-        //sphere.transform.localScale = new Vector3(20f,20f,20f);
     }    
     public void otherEvent(object sender, EventArgs e){
         Debug.Log("disabling axes");

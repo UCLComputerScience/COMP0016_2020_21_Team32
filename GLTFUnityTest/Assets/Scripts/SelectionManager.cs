@@ -112,11 +112,11 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] Toggle reButton;
     [SerializeField] Toggle vAnnotationButton;
     [SerializeField] Toggle annotationButton;
+    [SerializeField] Toggle pivotChangeButton;
 
     [SerializeField] Button segmentSelector;
     
     [SerializeField] GameObject pallete; 
-    [SerializeField] GameObject pivotChangeButton;
     private Toggle selectedToggle;
     private List<Toggle> toggles;
     private List<EventHandler> events;
@@ -135,6 +135,7 @@ public class SelectionManager : MonoBehaviour
         toggles.Add(reButton);
         toggles.Add(vAnnotationButton);
         toggles.Add(annotationButton);
+        toggles.Add(pivotChangeButton);
 
         events.Add(onCameraButtonPressed);
         events.Add(onTButtonPressed);
@@ -142,6 +143,7 @@ public class SelectionManager : MonoBehaviour
         events.Add(onReButtonPressed);
         events.Add(onVAnnotationButtonPressed);
         events.Add(onAnnotationButton);
+        events.Add(onChangePivot);
         
 
         raycaster = GetComponent<GraphicRaycaster>();
@@ -195,13 +197,6 @@ public class SelectionManager : MonoBehaviour
                         }
                     }
                 }
-                if(result.gameObject.Equals(pivotChangeButton.gameObject) && result.isValid){
-                    Debug.Log("On change pivot is fired");
-                    onChangePivot?.Invoke(this, EventArgs.Empty);
-                }
-                // if(result.gameObject.Equals(pallete)){
-                //     onColourSelect?.Invoke(this, EventArgs.Empty);
-                // }
             }   
         }
     }

@@ -283,6 +283,12 @@
     <Reference Include="Newtonsoft.Json">
         <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Ookii.Dialogs">
+        <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/StandaloneFileBrowser/Plugins/Ookii.Dialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+        <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/StandaloneFileBrowser/Plugins/System.Windows.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
         <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Library/PackageCache/com.unity.ext.nunit@1.0.5/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>

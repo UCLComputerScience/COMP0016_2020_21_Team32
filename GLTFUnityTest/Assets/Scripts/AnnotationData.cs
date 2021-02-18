@@ -10,6 +10,7 @@ public class AnnotationData{
     public string title;
     public string text;
     public List<Color> colours;
+    
     public Vector3 annotationPosition;
     public Vector3 planeNormal;
     public Vector3 planePosition;

@@ -48,6 +48,7 @@
      <Compile Include="Assets\ViewAnnotation.cs" />
      <Compile Include="Assets\Scripts\Refactoring folder\OrganFactory.cs" />
      <Compile Include="Assets\Scripts\AnnotationScripts\DragDrop.cs" />
+     <Compile Include="Assets\Scripts\ChangeCameraAxis.cs" />
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
      <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleOpenFileText.cs" />
@@ -61,6 +62,7 @@
      <Compile Include="Assets\AnnotationPIn3D.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
+     <Compile Include="Assets\PivotController.cs" />
      <Compile Include="Assets\Scripts\AnnotationData.cs" />
      <Compile Include="Assets\PaletteMovement.cs" />
      <Compile Include="Assets\Scripts\BrainButton.cs" />
@@ -120,15 +122,13 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
      <Compile Include="Assets\Scripts\SelectionManager.cs" />
+     <Compile Include="Assets\Scripts\MoveAxis.cs" />
      <Compile Include="Assets\Scripts\LoadModel.cs" />
      <Compile Include="Assets\Scripts\PalletteScript.cs" />
      <Compile Include="Assets\TextBoxDragDrop.cs" />
      <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleSaveFileText.cs" />
-     <Compile Include="Assets\Scripts\AnnotationScripts\Annotation.cs" />
-     <Compile Include="Assets\Scripts\MoveAxis.cs" />
      <Compile Include="Assets\GenerateLines.cs" />
-     <Compile Include="Assets\Scripts\ChangeCameraAxis.cs" />
-     <Compile Include="Assets\PivotController.cs" />
+     <Compile Include="Assets\Scripts\AnnotationScripts\Annotation.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\shaderTest.shader" />
