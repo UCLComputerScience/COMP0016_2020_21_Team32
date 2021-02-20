@@ -14,23 +14,128 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Materials/New Material 1.mat
-    - Assets/Materials/New Material 1.mat.meta
+    - Assets/AnnotationPIn3D.cs
+    - Assets/AnnotationPIn3D.cs.meta
+    - Assets/CameraController.cs
+    - Assets/CameraController.cs.meta
+    - Assets/Prefabs/Textboxcontainer.prefab
+    - Assets/Scenes/Duped.unity
+    - Assets/Scenes/Duped.unity.meta
     - Assets/Scenes/MainPage.unity
-    - Assets/Scripts/AnnotationData.cs
-    - Assets/Scripts/AnnotationScripts/Annotation.cs
-    - Assets/Scripts/CameraMovement.cs
-    - Assets/Scripts/ChangeCameraAxis.cs
-    - Assets/Scripts/Refactoring folder/ModelHandler.cs
-    - Assets/Scripts/SelectionManager.cs
-    - Assets/Tree.prefab
-    - Assets/Tree.prefab.meta
-    - Assets/ViewAnnotation.cs
-    - Assets/brain.glb.meta
-    - Assets/brain.glb/Helo.json
-    - Assets/brain.glb/Helo.json.meta
+    - Assets/Scripts/AddAnnotationPin.cs
+    - Assets/Scripts/AddAnnotationPin.cs.meta
+    - Assets/Scripts/AddTranslation.cs
+    - Assets/Scripts/AddTranslation.cs.meta
+    - Assets/Scripts/AnnotationScripts/AnnotationTest.cs
+    - Assets/Scripts/AnnotationScripts/AnnotationTest.cs.meta
+    - Assets/Scripts/CameraScript.cs
+    - Assets/Scripts/CameraScript.cs.meta
+    - Assets/Scripts/LoadBrain.cs
+    - Assets/Scripts/LoadBrain.cs.meta
+    - Assets/Scripts/MainCamera.cs
+    - Assets/Scripts/MainCamera.cs.meta
+    - Assets/Scripts/MoveAxis.cs
+    - Assets/Scripts/MoveAxis.cs.meta
+    - Assets/Scripts/NewBehaviourScript.cs
+    - Assets/Scripts/NewBehaviourScript.cs.meta
+    - Assets/Scripts/PalletteScript.cs
+    - Assets/Scripts/PalletteScript.cs.meta
+    - Assets/Scripts/Refactoring folder/AnnotationScripts.meta
+    - Assets/Scripts/Refactoring folder/AnnotationScripts/AddAnnotation.cs
+    - Assets/Scripts/Refactoring folder/AnnotationScripts/AddAnnotation.cs.meta
+    - Assets/Scripts/Refactoring folder/AnnotationScripts/Annotation.cs
+    - Assets/Scripts/Refactoring folder/AnnotationScripts/Annotation.cs.meta
+    - Assets/Scripts/Refactoring folder/AnnotationScripts/AnnotationData.cs
+    - Assets/Scripts/Refactoring folder/AnnotationScripts/AnnotationData.cs.meta
+    - Assets/Scripts/Refactoring folder/AnnotationScripts/DragDrop.cs
+    - Assets/Scripts/Refactoring folder/AnnotationScripts/DragDrop.cs.meta
+    - Assets/Scripts/Refactoring folder/AnnotationScripts/ViewAnnotation.cs
+    - Assets/Scripts/Refactoring folder/AnnotationScripts/ViewAnnotation.cs.meta
+    - Assets/Scripts/Refactoring folder/Camera.meta
+    - Assets/Scripts/Refactoring folder/Camera/CameraMovement.cs
+    - Assets/Scripts/Refactoring folder/Camera/CameraMovement.cs.meta
+    - Assets/Scripts/Refactoring folder/Camera/ChangeCameraAxis.cs
+    - Assets/Scripts/Refactoring folder/Camera/ChangeCameraAxis.cs.meta
+    - Assets/Scripts/Refactoring folder/Camera/GenerateLines.cs
+    - Assets/Scripts/Refactoring folder/Camera/GenerateLines.cs.meta
+    - Assets/Scripts/Refactoring folder/Camera/ResetPosition.cs
+    - Assets/Scripts/Refactoring folder/Camera/ResetPosition.cs.meta
+    - Assets/Scripts/Refactoring folder/Model loading and interaction.meta
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/AbdomenExample.cs
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/AbdomenExample.cs.meta
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/BoneExample.cs
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/BoneExample.cs.meta
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/BrainExample.cs
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/BrainExample.cs.meta
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/CrossSectionView.cs
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/CrossSectionView.cs.meta
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/KidneyExample.cs
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/KidneyExample.cs.meta
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/LoadedOrgan.cs
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/LoadedOrgan.cs.meta
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/LungExample.cs
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/LungExample.cs.meta
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/MaterialAssigner.cs
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/MaterialAssigner.cs.meta
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/ModelHandler.cs
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/ModelHandler.cs.meta
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/Organ.cs
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/Organ.cs.meta
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/OrganFactory.cs
+    - Assets/Scripts/Refactoring folder/Model loading and interaction/OrganFactory.cs.meta
+    - Assets/Scripts/Refactoring folder/SelectionManager.cs
+    - Assets/Scripts/Refactoring folder/SelectionManager.cs.meta
+    - Assets/Scripts/Refactoring folder/UI Scripts.meta
+    - Assets/Scripts/Refactoring folder/UI Scripts/ColourSelect.cs
+    - Assets/Scripts/Refactoring folder/UI Scripts/ColourSelect.cs.meta
+    - Assets/Scripts/Refactoring folder/UI Scripts/EventManager.cs
+    - Assets/Scripts/Refactoring folder/UI Scripts/EventManager.cs.meta
+    - Assets/Scripts/Refactoring folder/UI Scripts/FileManager.cs
+    - Assets/Scripts/Refactoring folder/UI Scripts/FileManager.cs.meta
+    - Assets/Scripts/Refactoring folder/UI Scripts/MainMenu.cs
+    - Assets/Scripts/Refactoring folder/UI Scripts/MainMenu.cs.meta
+    - Assets/Scripts/Refactoring folder/UI Scripts/NavigationBarManager.cs
+    - Assets/Scripts/Refactoring folder/UI Scripts/NavigationBarManager.cs.meta
+    - Assets/Scripts/Refactoring folder/UI Scripts/PaletteMovement.cs
+    - Assets/Scripts/Refactoring folder/UI Scripts/PaletteMovement.cs.meta
+    - Assets/Scripts/Refactoring folder/UI Scripts/PivotController.cs
+    - Assets/Scripts/Refactoring folder/UI Scripts/PivotController.cs.meta
+    - Assets/Scripts/Refactoring folder/UI Scripts/PlaneController.cs
+    - Assets/Scripts/Refactoring folder/UI Scripts/PlaneController.cs.meta
+    - Assets/Scripts/Refactoring folder/UI Scripts/ReturnToStartPage.cs
+    - Assets/Scripts/Refactoring folder/UI Scripts/ReturnToStartPage.cs.meta
+    - Assets/Scripts/Refactoring folder/UI Scripts/SegmentSelect.cs
+    - Assets/Scripts/Refactoring folder/UI Scripts/SegmentSelect.cs.meta
+    - Assets/Scripts/Refactoring folder/UI Scripts/TextBoxDragDrop.cs
+    - Assets/Scripts/Refactoring folder/UI Scripts/TextBoxDragDrop.cs.meta
+    - Assets/Scripts/Refactoring folder/UI Scripts/ToggleColourChange.cs
+    - Assets/Scripts/Refactoring folder/UI Scripts/ToggleColourChange.cs.meta
+    - Assets/Scripts/Segment.cs
+    - Assets/Scripts/Segment.cs.meta
+    - Assets/abdomen.glb.meta
+    - Assets/bone.glb.meta
+    - Assets/brain.glb/Annotation #1.json
+    - Assets/brain.glb/Annotation #1.json.meta
+    - Assets/brain.glb/Annotation #2.json
+    - Assets/brain.glb/Annotation #2.json.meta
+    - Assets/brain.glb/Annotation #6.json
+    - Assets/brain.glb/Annotation #6.json.meta
+    - Assets/brain.glb/Annotation #7.json
+    - Assets/brain.glb/Annotation #7.json.meta
+    - Assets/brain.glb/Annotation 81.json
+    - Assets/brain.glb/Annotation 81.json.meta
+    - Assets/brain.glb/Hello.json
+    - Assets/brain.glb/Hello.json.meta
+    - Assets/brain.glb/Monkeying around.json
+    - Assets/brain.glb/Monkeying around.json.meta
+    - Assets/brain.glb/Shit swizzlin monkey hammer.json
+    - Assets/brain.glb/Shit swizzlin monkey hammer.json.meta
+    - Assets/brain.glb/There should be no blue.json
+    - Assets/brain.glb/There should be no blue.json.meta
+    - Assets/kidney.glb.meta
+    - Assets/lung.glb.meta
     - 
-    m_Values: 00000000000000000000000000000000
+    m_Values: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 
