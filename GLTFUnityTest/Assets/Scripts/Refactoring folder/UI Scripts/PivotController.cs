@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -59,18 +59,20 @@ public class PivotController : MonoBehaviour
     }
     
     void OnEnable(){
+        MaterialAssigner.reduceOpacityAll(0.4f, ModelHandler.segments);
         StartCoroutine(enableBlocker());
         pivot.transform.position = startPos;
         pivot.SetActive(true);
         axes.SetActive(true);
     }
     void OnDisable(){
+        MaterialAssigner.resetOpacities(ModelHandler.segments);
         startPos = pivot.transform.position;
         pivot.SetActive(false);
         UIBlocker.SetActive(false);
-        CameraMovement.isEnabled = true;
         axes.SetActive(false);
         EventManager.current.onEnableCamera();
+        ToolTip.current.gameObject.SetActive(false);
     }
     public void changeXPos(float newXPos){
         pivot.transform.position = new Vector3(newXPos, pivot.transform.position.y, pivot.transform.position.z);

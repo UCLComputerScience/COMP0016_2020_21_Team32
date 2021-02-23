@@ -7,7 +7,8 @@ using UnityEngine.EventSystems;
 public class PlaneController : MonoBehaviour
 {
     public GameObject plane;
-
+    [SerializeField] Shader otherShader;
+    [SerializeField] Shader redBlueShader;
     [SerializeField] CrossSectionView crossSectionView;
     [SerializeField] GameObject UIBlocker;
     [SerializeField] Slider yPosSlider;
@@ -35,11 +36,11 @@ public class PlaneController : MonoBehaviour
 
     void Awake(){
 
-        confirmButton.onClick.AddListener(crossSectionView.confirmSlice);
-        cancelButton.onClick.AddListener(crossSectionView.cancelSlice);
+        confirmButton.onClick.AddListener(confirmSlice);
+        cancelButton.onClick.AddListener(cancelSlice);
         cancelButton.onClick.AddListener(resetSlider);
         resetButton.onClick.AddListener(resetSlider);
-        resetButton.onClick.AddListener(crossSectionView.resetPlane);
+        resetButton.onClick.AddListener(resetPlane);
 
         yPosSlider.onValueChanged.AddListener(changeYPos);
         
@@ -69,11 +70,13 @@ public class PlaneController : MonoBehaviour
     }      
     
     void OnEnable(){
+        MaterialAssigner.assignMaterialToAllChildrenBelowIndex(plane, ModelHandler.segments, redBlueShader);
         StartCoroutine(enableBlocker());
     }
     void OnDisable(){
         UIBlocker.SetActive(false);
         EventManager.current.onEnableCamera();
+        ToolTip.current.gameObject.SetActive(false);
     }
     public void changeXPos(float newXPos){
         plane.transform.position = new Vector3(newXPos, plane.transform.position.y, plane.transform.position.z);
@@ -89,26 +92,54 @@ public class PlaneController : MonoBehaviour
         float delta = newXRot - this.prevXRot;
         this.plane.transform.Rotate(Vector3.right * delta);
         this.prevXRot = newXRot;
-        //plane.transform.eulerAngles = new Vector3(newXRot, plane.transform.eulerAngles.y, plane.transform.eulerAngles.z);
     }
     public void changeYRot(float newYRot){
-        // float delta = newYRot - this.prevYRot;
-        // this.plane.transform.Rotate(Vector3.up * delta);
-        // this.prevYRot = newYRot;
-        // plane.transform.eulerAngles = new Vector3(plane.transform.eulerAngles.x, newYRot, plane.transform.eulerAngles.z);
         plane.transform.rotation = Quaternion.Euler(plane.transform.eulerAngles.x, newYRot, plane.transform.eulerAngles.z);
     }
     public void changeZRot(float newZRot){
         float delta = newZRot - this.prevZRot;
         this.plane.transform.Rotate(Vector3.forward * delta);
         this.prevZRot = newZRot;
-        //plane.transform.eulerAngles = new Vector3(plane.transform.rotation.eulerAngles.x, plane.transform.rotation.eulerAngles.y, newZRot);
     }
     public void resetSlider(){
         yPosSlider.value = startYPos;
         xRotSlider.value = startXRot;
         yRotSlider.value = startYRot;
         zRotSlider.value = startZRot;
+    }
+    public void confirmSlice(){
+        MaterialAssigner.assignMaterialToAllChildrenBelowIndex(plane, ModelHandler.segments, otherShader);
+        plane.SetActive(false);
+        this.gameObject.SetActive(false);
+    }
+    public void cancelSlice(){
+        resetPlane();
+        plane.SetActive(false);
+        MaterialAssigner.assignMaterialToAllChildrenBelowIndex(plane, ModelHandler.segments, otherShader);
+        this.gameObject.SetActive(false);
+    }
+    public void resetPlane(){
+        for(int i = 0; i < 100; i++){
+            plane.transform.position = new Vector3(0, 100, 0);
+            plane.transform.rotation = startRot;
+        }
+        StartCoroutine(resetPlaneHelper());
+    }
+
+    private IEnumerator resetPlaneHelper(){
+        yield return new WaitForEndOfFrame();
+        for(int i = 0; i < 100; i++){
+            plane.transform.position = new Vector3(0,100,0);
+            plane.transform.rotation = startRot;
+        }
+    }
+    void Update()
+    {
+        foreach(GameObject g in ModelHandler.segments){
+            g.GetComponent<MeshRenderer>().material.SetVector("_PlanePosition", plane.transform.position);
+            g.GetComponent<MeshRenderer>().material.SetVector("_PlaneNormal", plane.transform.up);
+            
+        }
     }
     // public void onConfirm(){
     //     plane.SetActive(false);
