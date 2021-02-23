@@ -53,6 +53,7 @@ public class Annotation : MonoBehaviour
         writeAnnotationToJsonFile();
     }    
     public void hide(){
+        ToolTip.current.gameObject.SetActive(false);
         gameObject.SetActive(false);
         UIBlocker.SetActive(false);
         Debug.Log(inputField.text == null);

@@ -26,6 +26,7 @@ public class NavigationBarManager : MonoBehaviour
     [SerializeField] Toggle enableCamera;
     [SerializeField] Toggle enablePivot;
     [SerializeField] Toggle enableCrossSection;
+    [SerializeField] Toggle enableDicom;
     [SerializeField] Toggle reset;
     [SerializeField] Toggle viewAnnotation;
     [SerializeField] Toggle addAnnotation;
@@ -34,7 +35,7 @@ public class NavigationBarManager : MonoBehaviour
         EventManager.current.OnEnableCamera += OnEnableCamera_EventManager;
         initButton(enableCamera, EventManager.current.onEnableCamera);
         initButton(enablePivot, EventManager.current.onEnablePivot);
-        initButton(enablePivot, EventManager.current.onEnablePivot);
+        initButton(enableDicom, EventManager.current.onEnableDicom);
         initButton(enableCrossSection, EventManager.current.onEnableCrossSection);
         initButton(reset, EventManager.current.onReset);
         initButton(viewAnnotation, EventManager.current.onViewAnnotations);
