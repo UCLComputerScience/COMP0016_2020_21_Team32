@@ -1471,12 +1471,12 @@ GameObject:
   - component: {fileID: 330587745}
   - component: {fileID: 330587744}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Chosen Path
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &330587744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1497,7 +1497,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: GLB and embedded GLTF files currently supported
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1590,8 +1590,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -650, y: -331}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -332.8, y: -324.8}
+  m_SizeDelta: {x: 834.41003, y: 37.72972}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &341030158
 GameObject:
@@ -3844,7 +3844,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a99307dfbaf34ccc83423e786010d54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
 --- !u!114 &860461982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4490,9 +4489,8 @@ GameObject:
   - component: {fileID: 1069103241}
   - component: {fileID: 1069103240}
   - component: {fileID: 1069103239}
-  - component: {fileID: 1069103238}
   m_Layer: 5
-  m_Name: FileExplorer
+  m_Name: File Explorer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4518,19 +4516,6 @@ RectTransform:
   m_AnchoredPosition: {x: -535, y: -234}
   m_SizeDelta: {x: 500, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1069103238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1069103236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e91f7cbf52b9ec4a879e5c5a61fcafd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chosenPath: {fileID: 330587744}
 --- !u!114 &1069103239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6723,8 +6708,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20793b26ea85bcf45aaea02fd28ea62a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exampleButtons: {fileID: 1392975497}
-  viewButton: {fileID: 1657066170}
 --- !u!1 &1529854543
 GameObject:
   m_ObjectHideFlags: 0
@@ -7393,7 +7376,7 @@ GameObject:
   - component: {fileID: 1657066171}
   - component: {fileID: 1657066170}
   m_Layer: 5
-  m_Name: button_VIEW
+  m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
