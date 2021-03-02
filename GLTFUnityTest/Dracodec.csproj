@@ -246,6 +246,18 @@
     <Reference Include="UnityEditor.UWP.Extensions">
         <HintPath>F:/Users/Bryn/Unity/2020.1.17f1/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.UWP.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="BitMiracle.LibJpeg.Portable">
+        <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/fo-dicom/Assets/Plugins/BitMiracle.LibJpeg.Portable.dll</HintPath>
+    </Reference>
+    <Reference Include="cscharls">
+        <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/fo-dicom/Assets/Plugins/cscharls.dll</HintPath>
+    </Reference>
+    <Reference Include="CSJ2K">
+        <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/fo-dicom/Assets/Plugins/CSJ2K.dll</HintPath>
+    </Reference>
+    <Reference Include="Dicom.Core">
+        <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/fo-dicom/Assets/Plugins/Dicom.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
         <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
