@@ -10,14 +10,12 @@ using UnityEngine.EventSystems;
 public class PlaneController : MonoBehaviour
 {
     public GameObject plane;
-    [SerializeField] Shader planeShader;
-    [SerializeField] Shader otherShader;
-    [SerializeField] Shader blackShader;
-    [SerializeField] GameObject UIBlocker;
-    [SerializeField] Slider yPosSlider;
-    [SerializeField] Slider xRotSlider;
-    [SerializeField] Slider yRotSlider;
-    [SerializeField] Slider zRotSlider;
+    public Shader crossSectionalShader;
+    public Shader differentColourShader;
+    private Slider yPosSlider;
+    private Slider xRotSlider;
+    private Slider yRotSlider;
+    private Slider zRotSlider;
     private float startYPos;
     private float startXRot;
     private float prevXRot;
@@ -25,9 +23,9 @@ public class PlaneController : MonoBehaviour
     private float prevYRot;
     private float startZRot;
     private float prevZRot;
-    [SerializeField] Button resetButton;
-    [SerializeField] Button confirmButton;
-    [SerializeField] Button cancelButton;
+    private Button resetButton;
+    private Button confirmButton;
+    private Button cancelButton;
 
     private float maxPlaneHeight;
     private float minPlaneHeight;
@@ -35,8 +33,22 @@ public class PlaneController : MonoBehaviour
     // public Button confirmButton;
     // public Button cancelButton;
 
-/*Initialises all interactable elements attatched to the PlaneController with callback actions, and initialises the position of the plane*/
+
+/*Initialise all interactable elements attatched to the PlaneController with callback actions, and initialise the position of the plane*/
     void Awake(){
+        crossSectionalShader = Shader.Find("Custom/Clipping");
+        differentColourShader = Shader.Find("Custom/DifferentColour");
+        yPosSlider = transform.Find("Plane yPos").GetComponent<Slider>();
+        xRotSlider = transform.Find("Plane xRot").GetComponent<Slider>();
+        yRotSlider = transform.Find("Plane yRot").GetComponent<Slider>();
+        zRotSlider = transform.Find("Plane zRot").GetComponent<Slider>();
+        resetButton = transform.Find("Reset Plane Position").GetComponent<Button>();
+        confirmButton = transform.Find("Confirm").GetComponent<Button>();
+        cancelButton = transform.Find("Cancel").GetComponent<Button>();
+
+
+
+
         confirmButton.onClick.AddListener(confirmSlice);
         cancelButton.onClick.AddListener(cancelSlice);
         cancelButton.onClick.AddListener(resetSlider);
@@ -55,10 +67,6 @@ public class PlaneController : MonoBehaviour
 
         StartCoroutine(initialisePlane());
     }
-    void start(){
-        plane.transform.position = new Vector3(0,100,0);
-        plane.transform.rotation = startRot;
-    }
 
     /*This coroutine enables this controller to be used on any model regardless of the size of the model. 
     None of its code is executed until the model is loaded in and the radius of the sphere that bounds its mesh calculated (ModelHandler.modelRadius). 
@@ -66,28 +74,23 @@ public class PlaneController : MonoBehaviour
     minimum and maximum values of the slider that enables the y position of the plane to be changed are initialised to these values. */
     private IEnumerator initialisePlane(){
         yield return new WaitUntil(() => ModelHandler.modelRadius != 0); //wait until model is loaded
-        startYPos = yPosSlider.value = yPosSlider.maxValue = maxPlaneHeight = ModelHandler.modelCentre.y + ModelHandler.modelRadius; //set max value of slider
+        startYPos = yPosSlider.value = yPosSlider.maxValue = maxPlaneHeight = ModelHandler.modelCentre.y + ModelHandler.modelRadius; //set max (and initial) value of slider
         yPosSlider.minValue = minPlaneHeight = ModelHandler.modelCentre.y - ModelHandler.modelRadius; //set min value of slider
         plane.transform.position = Vector3.up * maxPlaneHeight;//move the plane to the max position
         plane.transform.rotation = Quaternion.identity; //set the rotation of the plane to zero.
     }
 
-    private IEnumerator enableBlocker(){
-        yield return new WaitForSeconds(0.1f);
-        UIBlocker.SetActive(true);
-    }      
-    
-    /*When the controller is enabled by the controller handler, the different colour shader is applied to the model. With this shader applied, 
+    /*When the controller is enabled, the different colour shader is applied to the model. With this shader applied, 
     the volume of the model to be removed when the confirm button is pressed is coloured black. 
     */
     void OnEnable(){
-        MaterialAssigner.assignMaterialToAllChildrenBelowIndex(plane, ModelHandler.segments, blackShader);
-        StartCoroutine(enableBlocker());
+        EventManager.current.onEnableUIBlocker();
+        MaterialAssigner.assignMaterialToAllChildrenBelowIndex(plane, ModelHandler.segments, differentColourShader);
     }
     /*When the controller is disabled, fire an onEnableCamera event so the user can start rotating the camera again immediately without having to click the icon.
     Also disable the tooltip that appears when the cancel button is hovered over.*/
     void OnDisable(){
-        UIBlocker.SetActive(false);
+        EventManager.current.onDisableUIBlocker();
         EventManager.current.onEnableCamera();
         ToolTip.current.gameObject.SetActive(false);
     }
@@ -126,7 +129,7 @@ public class PlaneController : MonoBehaviour
     This has the effect of removing all of the volume of the model that was coloured black before the button was pressed. The controller is
     also set to inactive so that the user can continue to use the UI and view/manipulate the cross section of the model.*/
     public void confirmSlice(){
-        MaterialAssigner.assignMaterialToAllChildrenBelowIndex(plane, ModelHandler.segments, otherShader);
+        MaterialAssigner.assignMaterialToAllChildrenBelowIndex(plane, ModelHandler.segments, crossSectionalShader);
         plane.SetActive(false);
         this.gameObject.SetActive(false);
     }
@@ -137,9 +140,11 @@ public class PlaneController : MonoBehaviour
         resetPlane();
         resetSlider();
         plane.SetActive(false);
-        MaterialAssigner.assignMaterialToAllChildrenBelowIndex(plane, ModelHandler.segments, otherShader);
+        MaterialAssigner.assignMaterialToAllChildrenBelowIndex(plane, ModelHandler.segments, crossSectionalShader);
         this.gameObject.SetActive(false);
     }
+
+
     /*Resets the position of the plane. It is done in a strange way, as simply attempting to reset its rotation once did not work.
     This is due to the way in which Unity represents the orientations of objects and I haven't been able to find a better way to solve the
     problem than this one.*/
@@ -158,13 +163,13 @@ public class PlaneController : MonoBehaviour
             plane.transform.rotation = startRot;
         }
     }
-    /*Updates the */
+    /*Every frame, the material on the model is updated with the new position and normal of the plane. This is passed as input to the shader, which determines
+    which parts of the model will be drawn to the screen*/
     void Update()
     {
         foreach(GameObject g in ModelHandler.segments){
             g.GetComponent<Renderer>().material.SetVector("_PlanePosition", plane.transform.position);
             g.GetComponent<Renderer>().material.SetVector("_PlaneNormal", plane.transform.up);
-            
         }
     }
 }

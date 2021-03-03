@@ -4,28 +4,37 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 
+///<summary>This class is uses the OrganFactory to load in the model and helps to otherwise initialise the model and scene based on the model that is loaded in. 
+///The radius of the model is calculated here, and the segments of the model are loaded into a list. The list and radius are kept public and static as they are
+///used by many other classes.</summary>
 public class ModelHandler : MonoBehaviour // This class should be a singleton
 {
-    /*
-    Class handles interaction between the UI and the model.
-    */
     public static ModelHandler current;
     public static float modelRadius; 
     public static Vector3 modelCentre;
     public static Organ organ; 
-    [SerializeField] GameObject plane; // could make plane singleton 
-    [SerializeField] Shader clippingPlaneShader;
-    public static List<GameObject> segments = new List<GameObject>();
-    private float segOpacity = 1.0f;
-    private float minOpacity = 0.3f;
+    public GameObject plane; // could make plane singleton 
+    public Shader crossSectionalShader;
+    public static List<GameObject> segments;
+    private float segOpacity;
+    private float minOpacity;
     [SerializeField] Slider opacitySlider;
-    private int currentlySelected = 0;
+    private int currentlySelected;
     void Awake(){
+        //singleton pattern
         if(current != null && current != this){
             Destroy(this.gameObject);
         }else{
             current = this;
         }
+        segOpacity = 1.0f;
+        minOpacity = 0.3f;
+        currentlySelected = 0;
+        segments = new List<GameObject>();
+        crossSectionalShader = Shader.Find("Custom/Clipping");
+        plane = GameObject.Find("Plane");
+        opacitySlider = GameObject.Find("Opacity Slider").GetComponent<Slider>();
+
         this.opacitySlider.onValueChanged.AddListener(AdjustOpacity);
         StartCoroutine(loadModel());
         EventManager.current.OnColourSelect += EventManager_onColourSelect;
@@ -41,7 +50,7 @@ public class ModelHandler : MonoBehaviour // This class should be a singleton
         yield return new WaitUntil(() => (organ.model != null));
         organ.initialiseModel(this.gameObject);
         segments = organ.segments;
-        MaterialAssigner.assignMaterialToAllChildrenBelowIndex(plane, segments, clippingPlaneShader);
+        MaterialAssigner.assignMaterialToAllChildrenBelowIndex(plane, segments, crossSectionalShader);
         Bounds modelBounds = getModelBounds();
         modelRadius = modelBounds.extents.magnitude;
         modelCentre = modelBounds.center; 

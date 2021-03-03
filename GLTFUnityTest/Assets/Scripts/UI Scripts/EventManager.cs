@@ -27,14 +27,22 @@ public class EventManager : MonoBehaviour
     public event EventHandler OnToggleLogos;
     public event EventHandler OnToggleColourPalette;
     public event EventHandler OnChangeSettings;
+    public event EventHandler OnEnableUIBlocker;
+    public event EventHandler OnDisableUIBlocker;
 
-       private void Awake(){
+    private void Awake(){
         //Making use of the Singleton design pattern
         if(current != null && current != this){
             Destroy(this.gameObject);
         }else{
             current = this;
         }
+    }
+    public void onEnableUIBlocker(){
+        OnEnableUIBlocker?.Invoke(this, EventArgs.Empty);
+    }
+    public void onDisableUIBlocker(){
+        OnDisableUIBlocker?.Invoke(this, EventArgs.Empty);
     }
     public void onEnableCamera(){
         OnEnableCamera?.Invoke(this, EventArgs.Empty); 

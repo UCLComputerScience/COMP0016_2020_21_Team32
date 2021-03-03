@@ -7,7 +7,8 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
-    private List<GameObject> UIElements;
+   public GameObject UIBlocker; 
+   private List<GameObject> UIElements;
    private GameObject planeController;
    private GameObject pivotController;
    private GameObject DICOMController;
@@ -19,7 +20,7 @@ public class UIManager : MonoBehaviour
    private GameObject logos;
    private Toggle fullScreen;
    private Button settings;
-    private GameObject mainPage; 
+   private GameObject mainPage; 
     void Awake(){
        mainPage = GameObject.Find("Main Page");
        colourPalette = GameObject.Find("Colour Palette");
@@ -44,6 +45,8 @@ public class UIManager : MonoBehaviour
         EventManager.current.OnToggleNavigationBar+=EventManager_onToggleNavigationBar;
         EventManager.current.OnToggleOpacitySlider+=EventManager_onToggleOpacitySlider;
         EventManager.current.OnToggleSegmentSelect+=EventManager_onToggleSegmentSelect;
+        EventManager.current.OnEnableUIBlocker+=EventManager_onEnableUIBlocker;
+        EventManager.current.OnDisableUIBlocker+=EventManager_onDisableUIBlocker;
     }
     public void EventManager_onToggleColourPalette(object o, EventArgs e){
         colourPalette.SetActive(!colourPalette.activeInHierarchy);
@@ -60,7 +63,13 @@ public class UIManager : MonoBehaviour
     public void EventManager_onToggleSegmentSelect(object o, EventArgs e){
         segmentSelect.SetActive(!segmentSelect.activeInHierarchy);
     }
+    public void EventManager_onEnableUIBlocker(object o, EventArgs e){
+        UIBlocker.SetActive(true);
+    }
+    public void EventManager_onDisableUIBlocker(object o, EventArgs e){
+        UIBlocker.SetActive(false);
+    }
     public void toggleFullScreen(bool isOn){
         mainPage.SetActive(isOn);
-    }
+    } 
 }

@@ -1,17 +1,17 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Linq;
 using System;
-/*Class initialises and manages the state of all the toggles on the navigation bar.
-Adds listeners to these toggles and ensures that the correct event is fired when a toggle is selected. This ensures 
-that the buttons trigger the correct scripts to be enabled.
-Also ensures that the enableCamera button is selected if nothing else is. For example, once an annotation has
-been confirmed by the user, the annotation prefab is disabled and an enableCamera event is fired. This class listens
-for that event and changes the state of the enableCamera toggle accordingly.
-*/
+///<summary>This class initialises and manages the state of all the toggles on the navigation bar.
+///Adds listeners to these toggles and ensures that the correct event is fired when a toggle is selected. This ensures 
+///that the buttons trigger the correct scripts to be enabled.
+///Also ensures that the enableCamera button is selected if nothing else is. For example, once an annotation has
+///been confirmed by the user, the annotation prefab is disabled and an enableCamera event is fired. This class listens
+///for that event and changes the state of the enableCamera toggle accordingly.
+///</summary>
 public class NavigationBarManager : MonoBehaviour
 {
     [SerializeField] Toggle enableCamera;
