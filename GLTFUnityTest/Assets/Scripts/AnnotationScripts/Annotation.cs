@@ -5,45 +5,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+///<summary>This class is attatched to the Annotation prefab. It initialises the text in the input fields, provides
+/// interactivity to the confirm/cancel buttons, and uses the user input (along with the other relevant data available in the scene)
+/// to instantiate a new AnnotationData object and write this to a file in JSON format.</summary>
 public class Annotation : MonoBehaviour
 {
-    [SerializeField] Canvas canvas;
+    public Canvas canvas;
     public AnnotationData data;
-    [SerializeField] GameObject plane;
-    [SerializeField] GameObject UIBlocker;
+    public GameObject plane;
     public static int numAnnotations = 0;
-    public int annotationId; 
-    [SerializeField] GameObject AnnotationPin;
-    [SerializeField] private Button confirmButton;
-    [SerializeField] private Button cancelButton;
-    [SerializeField] private TMP_InputField titleInputField;
-    [SerializeField] private TMP_InputField inputField;
+    [SerializeField] GameObject annotationPin;
+    private Button confirmButton;
+    private Button cancelButton;
+    private TMP_InputField titleInputField;
+    private TMP_InputField inputField;
 
     public static void setNumAnnotations(int value){
         numAnnotations = value;
     }
     void Awake(){
+        /*initialise variables*/
         canvas = GetComponentInParent<Canvas>();
+        plane = GameObject.Find("Plane");
+        confirmButton = this.transform.Find("Confirm").GetComponent<Button>();
+        cancelButton = this.transform.Find("Cancel").GetComponent<Button>();
+        titleInputField = this.transform.Find("title input field").GetComponent<TMP_InputField>();
+        inputField = this.transform.Find("input field").GetComponent<TMP_InputField>(); 
         titleInputField.text = "Annotation #" + numAnnotations; 
         inputField.text = "enter...";
     }
 
     public void show(Vector3 pos){
-        UIBlocker.SetActive(true);
+        EventManager.current.onEnableUIBlocker();
         gameObject.SetActive(true);
         data = new AnnotationData();
-        annotationId = numAnnotations;
-        confirmButton.onClick.RemoveAllListeners();
         confirmButton.onClick.AddListener(() => {
             save(titleInputField.text, inputField.text, pos);
-            AnnotationPin.SetActive(false);
+            annotationPin.SetActive(false);
             numAnnotations++;
             hide();
         });
         cancelButton.onClick.RemoveAllListeners();
         cancelButton.onClick.AddListener(() => {
-            AnnotationPin.SetActive(false);
+            annotationPin.SetActive(false);
             hide();
         });
     }
@@ -54,7 +58,7 @@ public class Annotation : MonoBehaviour
     public void hide(){
         ToolTip.current.gameObject.SetActive(false);
         gameObject.SetActive(false);
-        UIBlocker.SetActive(false);
+        EventManager.current.onDisableUIBlocker();
         Debug.Log(inputField.text == null);
         titleInputField.text = "Annotation #" + numAnnotations;
         inputField.text = "enter...";

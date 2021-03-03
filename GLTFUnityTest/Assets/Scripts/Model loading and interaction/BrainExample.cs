@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+ ///<summary>This class is instantiated if the example model of a brain is loaded in</summary>
 public class BrainExample : Organ
 {   
     public BrainExample(GameObject model){

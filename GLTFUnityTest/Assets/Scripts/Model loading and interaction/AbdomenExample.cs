@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+///<summary>This class is instantiated if the example model of an abdomen is loaded in</summary>
 public class AbdomenExample : Organ
 {
     // Start is called before the first frame update

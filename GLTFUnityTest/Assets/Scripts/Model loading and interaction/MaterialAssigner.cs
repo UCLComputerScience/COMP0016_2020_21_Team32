@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
-Helper class that handles the assignment and change of state of materials to a loaded model at runtime.
-*/
+
+///<summary>Helper class that handles the assignment and change of state of materials to a loaded model at runtime</summary>
 public static class MaterialAssigner
 {
     public static Stack<float> opacities = new Stack<float>();
