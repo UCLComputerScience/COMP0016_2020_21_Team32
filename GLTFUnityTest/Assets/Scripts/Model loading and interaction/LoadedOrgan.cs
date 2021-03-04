@@ -1,7 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+///<summary>This class is instantiated if a model is chosen from local storage</summary>
 public class LoadedOrgan : Organ
 {
     public LoadedOrgan(GameObject model){

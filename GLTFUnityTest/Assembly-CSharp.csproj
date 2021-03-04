@@ -40,7 +40,7 @@
      <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowserLinux.cs" />
      <Compile Include="Assets\Scripts\Model loading and interaction\KidneyExample.cs" />
      <Compile Include="Assets\Scripts\Model loading and interaction\MaterialAssigner.cs" />
-     <Compile Include="Assets\SettingsController.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\SettingsController.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\ControllerHandler.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
      <Compile Include="Assets\Scripts\Model loading and interaction\LoadedOrgan.cs" />
@@ -49,26 +49,24 @@
      <Compile Include="Assets\Scripts\AnnotationScripts\ViewAnnotation.cs" />
      <Compile Include="Assets\Scripts\Model loading and interaction\OrganFactory.cs" />
      <Compile Include="Assets\Scripts\AnnotationScripts\DragDrop.cs" />
-     <Compile Include="Assets\Scripts\Camera\ChangeCameraAxis.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraMovement.cs" />
      <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleOpenFileText.cs" />
      <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowserWindows.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
      <Compile Include="Assets\Scripts\Model loading and interaction\LungExample.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\DicomToTexture2D.cs" />
      <Compile Include="Assets\Scripts\Camera\ResetPosition.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\PivotController.cs" />
-     <Compile Include="Assets\app_icon.cs" />
      <Compile Include="Assets\Scripts\AnnotationScripts\AnnotationData.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\PaletteMovement.cs" />
      <Compile Include="Assets\Scripts\Model loading and interaction\BoneExample.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Model loading and interaction\CrossSectionView.cs" />
-     <Compile Include="Assets\Scripts\AnnotationScripts\AddAnnotation.cs" />
      <Compile Include="Assets\StandaloneFileBrowser\IStandaloneFileBrowser.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\ReturnToStartPage.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
@@ -81,14 +79,12 @@
      <Compile Include="Assets\Scripts\UI Scripts\ColourSelect.cs" />
      <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleSaveFileImage.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\SegmentSelect.cs" />
-     <Compile Include="Assets\Scripts\Camera\test.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\PlaneController.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
      <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleOpenFileTextMultiple.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
-     <Compile Include="Assets\Scripts\UI Scripts\DICOMViewer.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
@@ -120,13 +116,11 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
-     <Compile Include="Assets\fo-dicom\Demo\Scripts\StoreScu.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\TextBoxDragDrop.cs" />
      <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleSaveFileText.cs" />
      <Compile Include="Assets\Scripts\Camera\GenerateLines.cs" />
-     <Compile Include="Assets\fo-dicom\Demo\Scripts\Test.cs" />
      <Compile Include="Assets\Scripts\AnnotationScripts\Annotation.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -142,18 +136,14 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\JsonDotNet\link.xml" />
      <None Include="Assets\Shaders\CrossSectionOpaque.shader" />
-     <None Include="Assets\fo-dicom\Documentation\License.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
-     <None Include="Assets\fo-dicom\Documentation\README.txt" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
-     <None Include="Assets\fo-dicom\Assets\Resources\Private Dictionary.xml" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
-     <None Include="Assets\fo-dicom\Assets\Resources\DICOM Dictionary.xml" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
      <None Include="Assets\Shaders\ModifiedTransparent.shader" />
@@ -353,20 +343,11 @@
     <Reference Include="UnityEditor">
         <HintPath>F:/Users/Bryn/Unity/2020.1.17f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="BitMiracle.LibJpeg.Portable">
-        <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/fo-dicom/Assets/Plugins/BitMiracle.LibJpeg.Portable.dll</HintPath>
-    </Reference>
-    <Reference Include="cscharls">
-        <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/fo-dicom/Assets/Plugins/cscharls.dll</HintPath>
-    </Reference>
-    <Reference Include="CSJ2K">
-        <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/fo-dicom/Assets/Plugins/CSJ2K.dll</HintPath>
-    </Reference>
-    <Reference Include="Dicom.Core">
-        <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/fo-dicom/Assets/Plugins/Dicom.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
         <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleITKCSharpManaged">
+        <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/SimpleITK/SimpleITK-2.0.2-CSharp-win64-x64/SimpleITKCSharpManaged.dll</HintPath>
     </Reference>
     <Reference Include="Ookii.Dialogs">
         <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/StandaloneFileBrowser/Plugins/Ookii.Dialogs.dll</HintPath>

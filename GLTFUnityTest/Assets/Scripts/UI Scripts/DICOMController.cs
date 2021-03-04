@@ -1,21 +1,22 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using Dicom;
-using Dicom.Imaging;
 using SFB;
 using UnityEngine.EventSystems;
+using System.IO;
 
-/**/
+///<summary>This script is attached to the  DICOMController prefab and provides it with interactivity. The user can load in </summary>
 public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler 
 {
     #region variableDeclaration 
+    private DicomToTexture2D converter;
     private Button hideButton;
     private Button loadButton;
     private Canvas canvas;
     private String[] paths;
+    private List<String> outputPaths;
     private RawImage viewArea;
     private Slider dicomSlider;
     private List<Texture2D> images;
@@ -41,24 +42,19 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
         loadButton = this.transform.Find("Load different scans").GetComponent<Button>();
         hideButton.onClick.AddListener(hide);
         loadButton.onClick.AddListener(openFileExplorer);
+        converter = new DicomToTexture2D((int)rectTransform.rect.width, (int)rectTransform.rect.height);
+        outputPaths = new List<String>();
     }
 
-    
+    /*Drag and drop functionality*/
     public void OnBeginDrag(PointerEventData data){
         dragOffset = (Vector3)data.position - rectTransform.position;
     }
-    	// 	Vector3 globalMousePos;
-		// if (RectTransformUtility.ScreenPointToWorldPointInRectangle(m_DraggingPlanes[eventData.pointerId], eventData.position, eventData.pressEventCamera, out globalMousePos))
-		// {
-		// 	rt.position = globalMousePos;
-		// 	rt.rotation = m_DraggingPlanes[eventData.pointerId].rotation;
-		// }
     public void OnDrag(PointerEventData data){      
         rectTransform.position = (Vector3)data.position - dragOffset;
-        //rectTransform.anchoredPosition = data.position - dragOffset;
     }
 
-    /*Open native file browser and update the controller with the dcm files selected by the user. Called when the load button is pressed*/
+/*Open native file browser and updates the controller with the dcm files selected by the user. Called when the load button is pressed*/
     public void openFileExplorer(){
         var extension = new [] {new ExtensionFilter("DICOM", "dcm")};
         paths = StandaloneFileBrowser.OpenFilePanel("Select one or multiple dcm files", "", extension, true);
@@ -78,8 +74,8 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
             return;
         }
     }
-    /*Using the fo-Dicom library, convert the selected .dcm files into Texture2D objects. Populate the images
-    array with these textures so they can be loaded onto the viewArea */
+    /*Convert the selected .dcm files into Texture2D objects by temporarily writing them to a png. Populate the images
+    array with these textures loaded from the pngs so they can be loaded onto the viewArea */
     private void updateImages(){
         if(paths.Length == 0){ //If the user presses cancel in the fileExplorer disable the controller
             paths = null;
@@ -88,10 +84,17 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
             return;
         }
         images.Clear(); //clear existing images if loadButton is pressed
+        outputPaths.Clear();
         foreach(String path in paths){
-            images.Add(new DicomImage(path).RenderImage().AsTexture2D()); 
+            string outputfile = Application.dataPath + Path.DirectorySeparatorChar + path.Substring(path.LastIndexOf(Path.DirectorySeparatorChar)) + ".png";
+            converter.ReadDICOM(path, outputfile, images);
+            outputPaths.Add(outputfile);
         }
-        viewArea.texture = images[0]; //initialise the viewArea with the first selected dcm
+        foreach(string path in outputPaths){
+            Texture2D tex = new Texture2D((int)rectTransform.rect.width, (int)rectTransform.rect.height);
+            tex.LoadImage(File.ReadAllBytes(path));
+            images.Add(tex);
+        }
         StartCoroutine(initialiseSliderMaxValue());
     }
 
@@ -99,8 +102,18 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
     re-enables the camera.*/
     private IEnumerator initialiseSliderMaxValue(){
         yield return new WaitUntil(() => images.Count != 0);
+        viewArea.texture = images[0]; //initialise the viewArea with the first selected dcm
         dicomSlider.maxValue = images.Count;
         EventManager.current.onEnableCamera();
+        StartCoroutine(deleteFiles());
+    }
+    private IEnumerator deleteFiles(){
+        yield return new WaitUntil(() => images.Count == outputPaths.Count);
+        foreach(string path in outputPaths){
+            File.Delete(path);
+        }
+        outputPaths.Clear();
+        
     }
 
     /*Adjusting the slider will fire the onValueChanged UnityEvent, triggering this callback. It changes the dcm
@@ -109,15 +122,9 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
         if(index >= images.Count || index < 0)return;
         viewArea.texture = images[(int) index];
     }
-    // void LateUpdate(){
-    //     Vector2 anchoredPos = Input.mousePosition / canvas.r.transform.localScale.x;
-    //     if(anchoredPos.x + background.rect.width > canvasRect.rect.width){
-    //         anchoredPos.x = canvasRect.rect.width - background.rect.width;
-    //     }
-    //     if(anchoredPos.y + background.rect.height > canvasRect.rect.height){
-    //         anchoredPos.y = canvasRect.rect.height - background.rect.height;
-    //     }
-    //     rect.anchoredPosition = anchoredPos;
-        
-    // }
+    void onDestory(){
+        foreach(string path in outputPaths){
+            File.Delete(path);
+        }
+    }
 }

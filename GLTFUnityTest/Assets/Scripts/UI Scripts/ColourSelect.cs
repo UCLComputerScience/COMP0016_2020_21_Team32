@@ -13,16 +13,10 @@ using System;
 
 public class ColourSelect : MonoBehaviour
 {
-     
-
     private Texture2D colours;
-
-    private Vector2 mousePos = new Vector2();
-
+    private Vector2 mousePos; 
     private RectTransform rect;
-
     [SerializeField] GameObject UIBlocker;
-
     CircleCollider2D col; 
     private int width;
     private int height;
@@ -30,6 +24,8 @@ public class ColourSelect : MonoBehaviour
     private float lastTimeClicked;
     void Start()
     {
+        /*initialise variables*/
+        mousePos = new Vector2();
         RawImage image = GetComponent<RawImage>();
         colours = image.texture as Texture2D; 
         rect = image.GetComponent<RectTransform>(); //RectTransform of the colour palette

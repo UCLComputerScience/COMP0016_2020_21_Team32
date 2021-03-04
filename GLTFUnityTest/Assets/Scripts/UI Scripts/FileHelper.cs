@@ -7,6 +7,8 @@ using TMPro;
 using System.IO;
 using System.Linq;
 using System.Globalization;
+
+///<summary>Helper class for dealing with files</summary>
 public class FileHelper{
     public static string currentModelFileName = "brain.glb";
     public static string currentAnnotationFolder = "brain.glb";
@@ -18,6 +20,8 @@ public class FileHelper{
     public FileHelper(string path){
         this.dir = new DirectoryInfo(path);
     }
+
+    /*Return a list of all files in the current directory*/
     public List<string> getPathsInDir(string searchPattern="*", bool relative=false){
         List<string> paths = (relative) ? getRelativePathsInDir(searchPattern) : getAbsolutePathsInDir(searchPattern);
         return paths;
@@ -28,10 +32,12 @@ public class FileHelper{
     private List<string> getAbsolutePathsInDir(string searchPattern="*"){
         return dir.GetFiles(searchPattern).Select(f => f.FullName).ToList<string>();
     }
+    /*Generate a readable file name (relative, no path separators)*/
     public static string getReadableFileName(string filename){
         int index = filename.LastIndexOf(Path.DirectorySeparatorChar);
         return (index != -1) ? filename.Substring(index+1) : filename;
     }
+    /*Get a list of relative path names with their extensions omitted*/
     public List<string> getRelativePathsNoExtensions(string searchPattern="*"){
         TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
         return dir.GetFiles(searchPattern).Select(f => ti.ToTitleCase(f.Name.Substring(0, f.Name.IndexOf(".")))).ToList<string>();
@@ -42,13 +48,3 @@ public class FileHelper{
     }
 
 }
-/*
-FileInfo[] info = dir.GetFiles("*.json");
-        
-        foreach (FileInfo f in info){
-            if(!f.Exists)f.Create();
-            Debug.Log(f.FullName);
-            String jsonToParse = File.ReadAllText(f.FullName);
-            annotations.Add(JsonUtility.FromJson<AnnotationData>(jsonToParse) as AnnotationData);
-        }
-*/

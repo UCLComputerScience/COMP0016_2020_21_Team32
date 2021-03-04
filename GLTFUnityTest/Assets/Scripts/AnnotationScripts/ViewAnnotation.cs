@@ -121,7 +121,7 @@ public class ViewAnnotation : MonoBehaviour
         dropdown.gameObject.SetActive(true);
         jsonToAnnotations();
     }
-    /*Whenever any other event is received, the annotation textbox is made inactive*/
+    /*Whenever any of the other events triggered by the buttons on the navigation bar are received, the annotation textbox is made inactive*/
     public void otherEvent(object sender, EventArgs e){
         annotationTextBox.gameObject.SetActive(false);
     }

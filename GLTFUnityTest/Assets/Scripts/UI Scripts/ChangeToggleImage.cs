@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+///<summary>Helper script that enables one of two images for a toggle. If the isOn variable is true then onImage is displayed,
+///otherwise offImage is displayed</summary>
 public class ChangeToggleImage : MonoBehaviour
 {
     private GameObject onImage;
     private GameObject offImage;
     Toggle toggle;
-
-    // Update is called once per frame
     void Awake(){
         onImage = transform.Find("isOn").gameObject;
         onImage.gameObject.SetActive(true);

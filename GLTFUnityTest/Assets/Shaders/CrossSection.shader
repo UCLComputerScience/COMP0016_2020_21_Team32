@@ -1,7 +1,6 @@
 //Relied heavily on these resources and examples to create this shader:
 //https://www.youtube.com/watch?v=zCkC5e_Pkz4&list=PLX2vGYjWbI0RS_lkb68ApE2YPcZMC4Ohz
-//https://github.com/Dandarawy/Unity3DCrossSectionShader/blob/master/Assets/Cross%20Section%20Shader/Shaders/OnePlaneBSP.shader (see License.txt for copyright information)
-
+//https://github.com/Dandarawy/Unity3DCrossSectionShader/blob/master/Assets/Cross%20Section%20Shader/Shaders/OnePlaneBSP.shader 
 //https://forum.unity.com/threads/transparent-depth-shader-good-for-ghosts.149511/
 //GLTFUTILITY/Materials/Standard Transparent (Metallic)
 //https://docs.unity3d.com/Manual/SL-SurfaceShaders.html
@@ -23,6 +22,7 @@ Shader "Custom/Clipping" {
 	 _PlaneNormal("PlaneNormal",Vector) = (0,1,0,0)
 	 _PlanePosition("PlanePosition",Vector) = (0,0,0,1)
     }
+    
 
     SubShader { 
        Tags {  "RenderType"="Transparent" "RenderQueue"= "Transparent" }
@@ -65,12 +65,12 @@ Shader "Custom/Clipping" {
 
 		        float dist = dot(i.worldPos - _PlanePosition, _PlaneNormal);
             //calculates the dot product between:
-            // - vector between the plane's centre and the current vertex on our model in world space
+            // - vector between the plane's centre and the current pixel on our model in world space
             // - the plane's normal
-            //if this value is positive then the vertex is below the plane, otherwise it's above.
+            //if this value is positive then the pixel is below the plane, otherwise it's above.
 		        clip(-dist); //discards the current pixel if dist is positive, ie does not draw pixel currently being processed if it's ABOVE the plane
          
-           return half4 (0,0,0,1);
+           return half4 (0,0,0,1); 
          }
          ENDCG  
        }
@@ -105,7 +105,7 @@ Shader "Custom/Clipping" {
 
     //SurfaceOutputStandard is a struct that describes the properties of the surface.
     //The surf function is required for all surface shaders, which changes the properties of the
-    //surface based on the values of the input we pass (IN). IN has type Input.
+    //surface based on the values of the input we pass (IN). IN has type Input (defined above).
     //The surf function here is very similar to the one used iN the 
     //GLTFUTILITY/Materials/Standard Transparent (Metallic) shader.
        
@@ -123,7 +123,7 @@ Shader "Custom/Clipping" {
 			o.Normal = UnpackScaleNormal(tex2D (_BumpMap, IN.uv_BumpMap), _BumpScale);
 
 			float dist = dot(IN.worldPos - _PlanePosition, _PlaneNormal); 
-		  clip(-dist);
+		  clip(-dist); //discards any pixels above the plane
     }
     ENDCG    
     }

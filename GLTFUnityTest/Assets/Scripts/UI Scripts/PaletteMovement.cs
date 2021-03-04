@@ -1,17 +1,19 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+///<summary> This class implements the IDragHandler interface. Allows the gameobject this script is attatched to to be 
+///rotated about the z axis on mouse drag events.
+///</summary>
 public class PaletteMovement : MonoBehaviour, IDragHandler
 {
-    // Start is called before the first frame update
     private Vector2 centre;
 
     /*
     Calculates the change in angle from the centre of the wheel to the pointer between frames and rotates the
-    wheel by that many degrees if the pointer is held down.
+    wheel by that many degrees (about the z axis) if the pointer is held down.
     */
     public void OnDrag(PointerEventData eventData){
         centre = this.transform.position;

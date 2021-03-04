@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.Linq;
 using System;
 
+///<summary>This class manages the top level components of the UI and whether they are active or not.</summary>
 public class UIManager : MonoBehaviour
 {
    public GameObject UIBlocker; 
@@ -20,7 +21,9 @@ public class UIManager : MonoBehaviour
    private GameObject logos;
    private Toggle fullScreen;
    private Button settings;
+   [SerializeField]private GameObject annotationPin;
    private GameObject mainPage; 
+
     void Awake(){
        mainPage = GameObject.Find("Main Page");
        colourPalette = GameObject.Find("Colour Palette");
@@ -47,6 +50,7 @@ public class UIManager : MonoBehaviour
         EventManager.current.OnToggleSegmentSelect+=EventManager_onToggleSegmentSelect;
         EventManager.current.OnEnableUIBlocker+=EventManager_onEnableUIBlocker;
         EventManager.current.OnDisableUIBlocker+=EventManager_onDisableUIBlocker;
+        EventManager.current.OnAddAnnotations+=EventManager_onAddAnnotation;
     }
     public void EventManager_onToggleColourPalette(object o, EventArgs e){
         colourPalette.SetActive(!colourPalette.activeInHierarchy);
@@ -68,6 +72,9 @@ public class UIManager : MonoBehaviour
     }
     public void EventManager_onDisableUIBlocker(object o, EventArgs e){
         UIBlocker.SetActive(false);
+    }
+    public void EventManager_onAddAnnotation(object o, EventArgs e){
+        annotationPin.SetActive(true);
     }
     public void toggleFullScreen(bool isOn){
         mainPage.SetActive(isOn);

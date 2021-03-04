@@ -13,7 +13,7 @@ public class ModelHandler : MonoBehaviour // This class should be a singleton
     public static float modelRadius; 
     public static Vector3 modelCentre;
     public static Organ organ; 
-    public GameObject plane; // could make plane singleton 
+    public GameObject plane; 
     public Shader crossSectionalShader;
     public static List<GameObject> segments;
     private float segOpacity;
@@ -79,6 +79,6 @@ public class ModelHandler : MonoBehaviour // This class should be a singleton
    public void EventManager_onColourSelect(object sender, EventArgsColourData e){
         Color col = e.col;
         col.a = segOpacity;
-        segments[currentlySelected].GetComponent<Renderer>().material.SetColor("_Color", col);
+        MaterialAssigner.changeColour(segments[currentlySelected], col);
     }  
 }
