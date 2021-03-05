@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/Test scenes/Start page.unity
+    guid: be729bada9025324e8dd570f4ecf32f6
+  - enabled: 0
+    path: Assets/Scenes/Test scenes/brainOptimised.unity
+    guid: 850b34035d9bf3f44865211d792ddd3f
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Scenes in build/StartPageAgain.unity
+    guid: 0cc6d448feb91e74c920132b476463bb
+  - enabled: 1
+    path: Assets/Scenes/Scenes in build/MainPage.unity
+    guid: fe3019b9fc2fec84592773b4be29b85c
+  - enabled: 0
+    path: Assets/Scenes/Test scenes/MainPageNoDicom.unity
+    guid: d5373f5ab3762294c8a25389903520fb
+  m_configObjects: {}

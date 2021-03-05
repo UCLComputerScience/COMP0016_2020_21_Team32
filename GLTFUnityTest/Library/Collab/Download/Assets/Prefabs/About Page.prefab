@@ -1,0 +1,1011 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3620761961530182809
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3620761961530182810}
+  - component: {fileID: 3620761961530182788}
+  - component: {fileID: 3620761961530182811}
+  m_Layer: 0
+  m_Name: Copyright Info
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3620761961530182810
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761961530182809}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3620761962658980030}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3620761961530182788
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761961530182809}
+  m_CullTransparentMesh: 0
+--- !u!114 &3620761961530182811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761961530182809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "The HoloRepository Portable 2021 is built using the following open-source
+    libraries:\n-------------------------------\nGLTFUtility\n-------------------------------\nMIT
+    License\r\n\r\nCopyright (c) 2018 Thor Brigsted\r\n\r\nPermission is hereby granted,
+    free of charge, to any person obtaining a copy of this software and associated
+    documentation files (the \"Software\"), to deal in the Software without restriction,
+    including without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to permit persons
+    to whom the Software is furnished to do so, subject to the following conditions:\r\n\r\nThe
+    above copyright notice and this permission notice shall be included in all copies
+    or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS
+    IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+    TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
+    OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+    IN THE SOFTWARE.\n----------------------------\nUnityStandaloneFileBrowser\n----------------------------\nMIT
+    License\r\n\r\nCopyright (c) 2017 G\xF6khan G\xF6k\xE7e\r\n\r\nPermission is
+    hereby granted, free of charge, to any person obtaining a copy\r\nof this software
+    and associated documentation files (the \"Software\"), to deal\r\nin the Software
+    without restriction, including without limitation the rights\r\nto use, copy,
+    modify, merge, publish, distribute, sublicense, and/or sell\r\ncopies of the
+    Software, and to permit persons to whom the Software is\r\nfurnished to do so,
+    subject to the following conditions:\r\n\r\nThe above copyright notice and this
+    permission notice shall be included in all\r\ncopies or substantial portions
+    of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY
+    OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+    OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+    DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+    ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+    DEALINGS IN THE\r\nSOFTWARE.\n-----------------------\nUnity3D Cross Section
+    Shader\n-----------------------\n\nBSD 3-Clause License\r\n\r\nCopyright (c)
+    2018, Abdullah Aldandarawy \r\nAll rights reserved.\r\n\r\nRedistribution and
+    use in source and binary forms, with or without\r\nmodification, are permitted
+    provided that the following conditions are met:\r\n\r\n* Redistributions of source
+    code must retain the above copyright notice, this\r\n  list of conditions and
+    the following disclaimer.\r\n\r\n* Redistributions in binary form must reproduce
+    the above copyright notice,\r\n  this list of conditions and the following disclaimer
+    in the documentation\r\n  and/or other materials provided with the distribution.\r\n\r\n*
+    Neither the name of the copyright holder nor the names of its\r\n  contributors
+    may be used to endorse or promote products derived from\r\n  this software without
+    specific prior written permission.\r\n\r\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT
+    HOLDERS AND CONTRIBUTORS \"AS IS\"\r\nAND ANY EXPRESS OR IMPLIED WARRANTIES,
+    INCLUDING, BUT NOT LIMITED TO, THE\r\nIMPLIED WARRANTIES OF MERCHANTABILITY AND
+    FITNESS FOR A PARTICULAR PURPOSE ARE\r\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+    HOLDER OR CONTRIBUTORS BE LIABLE\r\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+    EXEMPLARY, OR CONSEQUENTIAL\r\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+    OF SUBSTITUTE GOODS OR\r\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER\r\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+    STRICT LIABILITY,\r\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+    WAY OUT OF THE USE\r\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+    SUCH DAMAGE.\n\n------------------------\nFellow-Oak DICOM\n------------------------\nFellow
+    Oak DICOM\r\n\r\nCopyright (c) 2012-2021 fo-dicom contributors\r\n\r\nThis software
+    is licensed under the Microsoft Public License (MS-PL)\r\n\r\nMicrosoft Public
+    License (MS-PL)\r\n\r\nThis license governs use of the accompanying software.
+    If you use the software, you\r\naccept this license. If you do not accept the
+    license, do not use the software.\r\n\r\n1. Definitions\r\nThe terms \"reproduce,\"
+    \"reproduction,\" \"derivative works,\" and \"distribution\" have the\r\nsame
+    meaning here as under U.S. copyright law.\r\nA \"contribution\" is the original
+    software, or any additions or changes to the software.\r\nA \"contributor\" is
+    any person that distributes its contribution under this license.\r\n\"Licensed
+    patents\" are a contributor's patent claims that read directly on its contribution.\r\n\r\n2.
+    Grant of Rights\r\n(A) Copyright Grant- Subject to the terms of this license,
+    including the license conditions \r\n    and limitations in section 3, each contributor
+    grants you a non-exclusive, worldwide, \r\n\troyalty-free copyright license to
+    reproduce its contribution, prepare derivative works \r\n\tof its contribution,
+    and distribute its contribution or any derivative works that you create.\r\n(B)
+    Patent Grant- Subject to the terms of this license, including the license conditions
+    and \r\n    limitations in section 3, each contributor grants you a non-exclusive,
+    worldwide, royalty-free \r\n\tlicense under its licensed patents to make, have
+    made, use, sell, offer for sale, import, \r\n\tand/or otherwise dispose of its
+    contribution in the software or derivative works of the \r\n\tcontribution in
+    the software.\r\n\r\n3. Conditions and Limitations\r\n(A) No Trademark License-
+    This license does not grant you rights to use any contributors' name, \r\n   
+    logo, or trademarks.\r\n(B) If you bring a patent claim against any contributor
+    over patents that you claim are infringed \r\n    by the software, your patent
+    license from such contributor to the software ends automatically.\r\n(C) If you
+    distribute any portion of the software, you must retain all copyright, patent,
+    trademark, \r\n    and attribution notices that are present in the software.\r\n(D)
+    If you distribute any portion of the software in source code form, you may do
+    so only under this \r\n    license by including a complete copy of this license
+    with your distribution. If you distribute \r\n\tany portion of the software in
+    compiled or object code form, you may only do so under a license \r\n\tthat complies
+    with this license.\r\n(E) The software is licensed \"as-is.\" You bear the risk
+    of using it. The contributors give no express \r\n    warranties, guarantees
+    or conditions. You may have additional consumer rights under your local \r\n\tlaws
+    which this license cannot change. To the extent permitted under your local laws,
+    the \r\n\tcontributors exclude the implied warranties of merchantability, fitness
+    for a particular purpose \r\n\tand non-infringement.\r\n\r\n\r\n\r\n---- libijg
+    (from DCMTK 3.5.4 COPYRIGHT) ----\r\n\r\nUnless otherwise specified, the DCMTK
+    software package has the\r\nfollowing copyright:\r\n\r\n/*\r\n *  Copyright (C)
+    1994-2004, OFFIS\r\n *\r\n *  This software and supporting documentation were
+    developed by\r\n *\r\n *    Kuratorium OFFIS e.V.\r\n *    Healthcare Information
+    and Communication Systems\r\n *    Escherweg 2\r\n *    D-26121 Oldenburg, Germany\r\n
+    *\r\n *  THIS SOFTWARE IS MADE AVAILABLE,  AS IS,  AND OFFIS MAKES NO  WARRANTY\r\n
+    *  REGARDING  THE  SOFTWARE,  ITS  PERFORMANCE,  ITS  MERCHANTABILITY  OR\r\n
+    *  FITNESS FOR ANY PARTICULAR USE, FREEDOM FROM ANY COMPUTER DISEASES  OR\r\n
+    *  ITS CONFORMITY TO ANY SPECIFICATION. THE ENTIRE RISK AS TO QUALITY AND\r\n
+    *  PERFORMANCE OF THE SOFTWARE IS WITH THE USER.\r\n *\r\n *  Copyright of the
+    software  and  supporting  documentation  is,  unless\r\n *  otherwise stated,
+    owned by OFFIS, and free access is hereby granted as\r\n *  a license to  use 
+    this  software,  copy  this  software  and  prepare\r\n *  derivative works based
+    upon this software.  However, any  distribution\r\n *  of this software source
+    code or supporting documentation or derivative\r\n *  works  (source code and 
+    supporting documentation)  must  include  the\r\n *  three paragraphs of this
+    copyright notice.\r\n *\r\n */\r\n\r\nThe dcmjpeg sub-package includes an adapted
+    version of the Independent JPEG\r\nGroup Toolkit Version 6b, which is contained
+    in dcmjpeg/libijg8,\r\ndcmjpeg/libijg12 and dcmjpeg/libijg16.  This toolkit is
+    covered by the\r\nfollowing copyright.  The original README file for the Independent
+    JPEG\r\nGroup Toolkit is located in dcmjpeg/docs/ijg_readme.txt.\r\n\r\n/*\r\n
+    *  The authors make NO WARRANTY or representation, either express or implied,\r\n
+    *  with respect to this software, its quality, accuracy, merchantability, or\r\n
+    *  fitness for a particular purpose.  This software is provided \"AS IS\", and
+    you,\r\n *  its user, assume the entire risk as to its quality and accuracy.\r\n
+    *\r\n *  This software is copyright (C) 1991-1998, Thomas G. Lane.\r\n *  All
+    Rights Reserved except as specified below.\r\n *\r\n *  Permission is hereby
+    granted to use, copy, modify, and distribute this\r\n *  software (or portions
+    thereof) for any purpose, without fee, subject to these\r\n *  conditions:\r\n
+    *  (1) If any part of the source code for this software is distributed, then
+    this\r\n *  README file must be included, with this copyright and no-warranty
+    notice\r\n *  unaltered; and any additions, deletions, or changes to the original
+    files\r\n *  must be clearly indicated in accompanying documentation.\r\n * 
+    (2) If only executable code is distributed, then the accompanying\r\n *  documentation
+    must state that \"this software is based in part on the work of\r\n *  the Independent
+    JPEG Group\".\r\n *  (3) Permission for use of this software is granted only
+    if the user accepts\r\n *  full responsibility for any undesirable consequences;
+    the authors accept\r\n *  NO LIABILITY for damages of any kind.\r\n *\r\n * 
+    These conditions apply to any software derived from or based on the IJG code,\r\n
+    *  not just to the unmodified library.  If you use our work, you ought to\r\n
+    *  acknowledge us.\r\n *\r\n *  Permission is NOT granted for the use of any
+    IJG author's name or company name\r\n *  in advertising or publicity relating
+    to this software or products derived from\r\n *  it.  This software may be referred
+    to only as \"the Independent JPEG Group's\r\n *  software\".\r\n *\r\n *  We
+    specifically permit and encourage the use of this software as the basis of\r\n
+    *  commercial products, provided that all warranty or liability claims are\r\n
+    *  assumed by the product vendor.\r\n */\r\n\r\n\r\n\r\n---- OpenJPEG JPEG 2000
+    codec (from license.txt) ----\r\n\r\n/*\r\n * Copyright (c) 2002-2007, Communications
+    and Remote Sensing Laboratory, Universite catholique de Louvain (UCL), Belgium\r\n
+    * Copyright (c) 2002-2007, Professor Benoit Macq\r\n * Copyright (c) 2001-2003,
+    David Janssens\r\n * Copyright (c) 2002-2003, Yannick Verschueren\r\n * Copyright
+    (c) 2003-2007, Francois-Olivier Devaux and Antonin Descampe\r\n * Copyright (c)
+    2005, Herve Drolon, FreeImage Team\r\n * All rights reserved.\r\n *\r\n * Redistribution
+    and use in source and binary forms, with or without\r\n * modification, are permitted
+    provided that the following conditions\r\n * are met:\r\n * 1. Redistributions
+    of source code must retain the above copyright\r\n *    notice, this list of
+    conditions and the following disclaimer.\r\n * 2. Redistributions in binary form
+    must reproduce the above copyright\r\n *    notice, this list of conditions and
+    the following disclaimer in the\r\n *    documentation and/or other materials
+    provided with the distribution.\r\n *\r\n * THIS SOFTWARE IS PROVIDED BY THE
+    COPYRIGHT HOLDERS AND CONTRIBUTORS `AS IS'\r\n * AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    INCLUDING, BUT NOT LIMITED TO, THE\r\n * IMPLIED WARRANTIES OF MERCHANTABILITY
+    AND FITNESS FOR A PARTICULAR PURPOSE\r\n * ARE DISCLAIMED.  IN NO EVENT SHALL
+    THE COPYRIGHT OWNER OR CONTRIBUTORS BE\r\n * LIABLE FOR ANY DIRECT, INDIRECT,
+    INCIDENTAL, SPECIAL, EXEMPLARY, OR\r\n * CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+    NOT LIMITED TO, PROCUREMENT OF\r\n * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+    DATA, OR PROFITS; OR BUSINESS\r\n * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
+    OF LIABILITY, WHETHER IN\r\n * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+    NEGLIGENCE OR OTHERWISE)\r\n * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+    EVEN IF ADVISED OF THE\r\n * POSSIBILITY OF SUCH DAMAGE.\r\n */\r\n\r\n\r\n\r\n----
+    CharLS JPEG-LS codec (from License.txt) ----\r\n\r\nCopyright (c) 2007-2009,
+    Jan de Vaan\r\nAll rights reserved.\r\n\r\nRedistribution and use in source and
+    binary forms, with or without \r\nmodification, are permitted provided that the
+    following conditions are met:\r\n\r\n* Redistributions of source code must retain
+    the above copyright notice, this \r\n  list of conditions and the following disclaimer.\r\n\r\n*
+    Redistributions in binary form must reproduce the above copyright notice, \r\n 
+    this list of conditions and the following disclaimer in the documentation \r\n 
+    and/or other materials provided with the distribution.\r\n\r\n* Neither the name
+    of my employer, nor the names of its contributors may be \r\n  used to endorse
+    or promote products derived from this software without \r\n  specific prior written
+    permission.\r\n\r\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+    \"AS IS\" \r\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+    TO, THE \r\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+    PURPOSE ARE \r\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+    BE LIABLE FOR\r\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+    DAMAGES \r\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+    SERVICES; \r\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+    CAUSED AND ON \r\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+    OR TORT \r\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
+    USE OF THIS \r\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    \r\n\r\n\r\n\r\n---- Unity.IO.Compression (from LICENSE.TXT and PATENTS.TXT)
+    ----\r\n\r\nThe MIT License (MIT)\r\n\r\nCopyright (c) Microsoft Corporation\r\n\r\nPermission
+    is hereby granted, free of charge, to any person obtaining a copy \r\nof this
+    software and associated documentation files (the \"Software\"), to deal \r\nin
+    the Software without restriction, including without limitation the rights \r\nto
+    use, copy, modify, merge, publish, distribute, sublicense, and/or sell \r\ncopies
+    of the Software, and to permit persons to whom the Software is \r\nfurnished
+    to do so, subject to the following conditions: \r\n\r\nThe above copyright notice
+    and this permission notice shall be included in all \r\ncopies or substantial
+    portions of the Software. \r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT
+    WARRANTY OF ANY KIND, EXPRESS OR \r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE
+    WARRANTIES OF MERCHANTABILITY, \r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE \r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+    DAMAGES OR OTHER \r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+    ARISING FROM, \r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+    DEALINGS IN THE \r\nSOFTWARE.\r\n\r\nMicrosoft Patent Promise for .NET Libraries
+    and Runtime Components \r\n\r\nMicrosoft Corporation and its affiliates (\"Microsoft\")
+    promise not to assert \r\nany .NET Patents against you for making, using, selling,
+    offering for sale, \r\nimporting, or distributing Covered Code, as part of either
+    a .NET Runtime or \r\nas part of any application designed to run on a .NET Runtime.
+    \r\n\r\nIf you file, maintain, or voluntarily participate in any claim in a lawsuit
+    \r\nalleging direct or contributory patent infringement by any Covered Code,
+    or \r\ninducement of patent infringement by any Covered Code, then your rights
+    under \r\nthis promise will automatically terminate. \r\n\r\nThis promise is
+    not an assurance that (i) any .NET Patents are valid or \r\nenforceable, or (ii)
+    Covered Code does not infringe patents or other \r\nintellectual property rights
+    of any third party. No rights except those \r\nexpressly stated in this promise
+    are granted, waived, or received by \r\nMicrosoft, whether by implication, exhaustion,
+    estoppel, or otherwise. \r\nThis is a personal promise directly from Microsoft
+    to you, and you agree as a \r\ncondition of benefiting from it that no Microsoft
+    rights are received from \r\nsuppliers, distributors, or otherwise from any other
+    person in connection with \r\nthis promise. \r\n\r\nDefinitions: \r\n\r\n\"Covered
+    Code\" means those Microsoft .NET libraries and runtime components as \r\nmade
+    available by Microsoft at https://github.com/Microsoft/referencesource. \r\n\r\n\".NET
+    Patents\" are those patent claims, both currently owned by Microsoft and \r\nacquired
+    in the future, that are necessarily infringed by Covered Code. .NET \r\nPatents
+    do not include any patent claims that are infringed by any Enabling \r\nTechnology,
+    that are infringed only as a consequence of modification of \r\nCovered Code,
+    or that are infringed only by the combination of Covered Code \r\nwith third
+    party code. \r\n\r\n\".NET Runtime\" means any compliant implementation in software
+    of (a) all of \r\nthe required parts of the mandatory provisions of Standard
+    ECMA-335 \u2013 Common \r\nLanguage Infrastructure (CLI); and (b) if implemented,
+    any additional \r\nfunctionality in Microsoft's .NET Framework, as described
+    in Microsoft's API \r\ndocumentation on its MSDN website. For example, .NET Runtimes
+    include \r\nMicrosoft's .NET Framework and those portions of the Mono Project
+    compliant \r\nwith (a) and (b). \r\n\r\n\"Enabling Technology\" means underlying
+    or enabling technology that may be \r\nused, combined, or distributed in connection
+    with Microsoft's .NET Framework \r\nor other .NET Runtimes, such as hardware,
+    operating systems, and applications \r\nthat run on .NET Framework or other .NET
+    Runtimes. \r\n\r\n\r\n\r\n---- Nito.AsyncEx (from LICENSE.TXT) ----\r\n\r\nThe
+    MIT License (MIT)\r\n\r\nCopyright (c) 2014 StephenCleary\r\n\r\nPermission is
+    hereby granted, free of charge, to any person obtaining a copy\r\nof this software
+    and associated documentation files (the \"Software\"), to deal\r\nin the Software
+    without restriction, including without limitation the rights\r\nto use, copy,
+    modify, merge, publish, distribute, sublicense, and/or sell\r\ncopies of the
+    Software, and to permit persons to whom the Software is\r\nfurnished to do so,
+    subject to the following conditions:\r\n\r\nThe above copyright notice and this
+    permission notice shall be included in all\r\ncopies or substantial portions
+    of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY
+    OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+    OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+    DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+    ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+    DEALINGS IN THE\r\nSOFTWARE.\n\n\n\n"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 11
+  m_fontSizeBase: 11
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 3
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 10, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &3620761962160575519
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3620761962160575512}
+  - component: {fileID: 3620761962160575515}
+  - component: {fileID: 3620761962160575514}
+  - component: {fileID: 3620761962160575513}
+  m_Layer: 0
+  m_Name: Scrollbar Vertical
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3620761962160575512
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761962160575519}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3620761963212745732}
+  m_Father: {fileID: 3620761963297532573}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -6.7, y: -60.2}
+  m_SizeDelta: {x: 11.049553, y: -98.0999}
+  m_Pivot: {x: 1, y: 1}
+--- !u!222 &3620761962160575515
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761962160575519}
+  m_CullTransparentMesh: 0
+--- !u!114 &3620761962160575514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761962160575519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3620761962160575513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761962160575519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 3620761962539474675}
+  m_HandleRect: {fileID: 3620761962539474674}
+  m_Direction: 2
+  m_Value: 0.98100156
+  m_Size: 0.060870714
+  m_NumberOfSteps: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &3620761962539474673
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3620761962539474674}
+  - component: {fileID: 3620761962539474684}
+  - component: {fileID: 3620761962539474675}
+  m_Layer: 0
+  m_Name: Handle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3620761962539474674
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761962539474673}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3620761963212745732}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3620761962539474684
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761962539474673}
+  m_CullTransparentMesh: 0
+--- !u!114 &3620761962539474675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761962539474673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3620761962628259756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3620761962628259757}
+  - component: {fileID: 3620761962628259752}
+  - component: {fileID: 3620761962628259759}
+  - component: {fileID: 3620761962628259758}
+  m_Layer: 0
+  m_Name: Viewport
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3620761962628259757
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761962628259756}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3620761962658980030}
+  m_Father: {fileID: 3620761963297532573}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 1}
+--- !u!222 &3620761962628259752
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761962628259756}
+  m_CullTransparentMesh: 0
+--- !u!114 &3620761962628259759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761962628259756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3620761962628259758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761962628259756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 0
+--- !u!1 &3620761962658980029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3620761962658980030}
+  - component: {fileID: 3620761962658980024}
+  - component: {fileID: 3620761962658980031}
+  m_Layer: 0
+  m_Name: Content
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3620761962658980030
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761962658980029}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3620761961530182810}
+  m_Father: {fileID: 3620761962628259757}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.00029723934, y: -0.000015258789}
+  m_SizeDelta: {x: 0.00030517578, y: 0}
+  m_Pivot: {x: -0.00000016391277, y: 0.982158}
+--- !u!114 &3620761962658980024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761962658980029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 10
+    m_Right: 10
+    m_Top: 10
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 10
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!114 &3620761962658980031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761962658980029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
+--- !u!1 &3620761963212745755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3620761963212745732}
+  m_Layer: 0
+  m_Name: Sliding Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3620761963212745732
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761963212745755}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3620761962539474674}
+  m_Father: {fileID: 3620761962160575512}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: -20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &3620761963297532572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3620761963297532573}
+  - component: {fileID: 3620761963297532568}
+  - component: {fileID: 3620761963297532575}
+  - component: {fileID: 3620761963297532574}
+  m_Layer: 0
+  m_Name: About Page
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3620761963297532573
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761963297532572}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3620761962628259757}
+  - {fileID: 3620761962160575512}
+  - {fileID: 3620761963327031400}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 521.8, y: 192.6}
+  m_SizeDelta: {x: 410.16138, y: 375.5522}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3620761963297532568
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761963297532572}
+  m_CullTransparentMesh: 0
+--- !u!114 &3620761963297532575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761963297532572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.972549}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: d68b7f0bda2b24157bc290cc97cca46c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3620761963297532574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761963297532572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Content: {fileID: 3620761962658980030}
+  m_Horizontal: 0
+  m_Vertical: 1
+  m_MovementType: 1
+  m_Elasticity: 0.1
+  m_Inertia: 1
+  m_DecelerationRate: 0.135
+  m_ScrollSensitivity: 1
+  m_Viewport: {fileID: 3620761962628259757}
+  m_HorizontalScrollbar: {fileID: 0}
+  m_VerticalScrollbar: {fileID: 3620761962160575513}
+  m_HorizontalScrollbarVisibility: 2
+  m_VerticalScrollbarVisibility: 2
+  m_HorizontalScrollbarSpacing: -3
+  m_VerticalScrollbarSpacing: -3
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &3620761963327031407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3620761963327031400}
+  - component: {fileID: 3620761963327031403}
+  - component: {fileID: 3620761963327031402}
+  - component: {fileID: 3620761963327031401}
+  m_Layer: 5
+  m_Name: Hide About
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3620761963327031400
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761963327031407}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.27399275, y: 0.28112838, z: 0.4010366}
+  m_Children: []
+  m_Father: {fileID: 3620761963297532573}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 187, y: 181}
+  m_SizeDelta: {x: 112.75192, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3620761963327031403
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761963327031407}
+  m_CullTransparentMesh: 0
+--- !u!114 &3620761963327031402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761963327031407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.745728, g: 0.9245283, b: 0.91055006, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 34aa8ca4cf385429e8b75d75c72c6ae7, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3620761963327031401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620761963327031407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 3620761963327031402}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
