@@ -3,3 +3,4 @@
 *.dll filter=lfs diff=lfs merge=lfs -text
 =======
 >>>>>>> 82abfe8fcbdad9d7e902c5387123d5828c2ba7d3
+GLTFUnityTest/Library/ArtifactDB filter=lfs diff=lfs merge=lfs -text
