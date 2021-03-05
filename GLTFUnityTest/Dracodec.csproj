@@ -268,6 +268,9 @@
  <Reference Include="Newtonsoft.Json">
  <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
  </Reference>
+ <Reference Include="SimpleITKCSharpManaged">
+ <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/SimpleITK/SimpleITK-2.0.2-CSharp-win64-x64/SimpleITKCSharpManaged.dll</HintPath>
+ </Reference>
  <Reference Include="Ookii.Dialogs">
  <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/StandaloneFileBrowser/Plugins/Ookii.Dialogs.dll</HintPath>
  </Reference>
@@ -276,9 +279,6 @@
  </Reference>
  <Reference Include="nunit.framework">
  <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Library/PackageCache/com.unity.ext.nunit@1.0.5/net35/unity-custom/nunit.framework.dll</HintPath>
- </Reference>
- <Reference Include="SimpleITKCSharpManaged">
- <HintPath>D:/COMP0016_2020_21_Team32/GLTFUnityTest/Assets/SimpleITK/SimpleITK-2.0.2-CSharp-win64-x64/SimpleITKCSharpManaged.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>F:/Users/Bryn/Unity/2020.1.17f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
