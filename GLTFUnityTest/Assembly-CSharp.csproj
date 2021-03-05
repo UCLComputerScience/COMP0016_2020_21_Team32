@@ -742,6 +742,10 @@
       <Project>{6eb8801d-2dce-cb2b-864d-98f1288bf528}</Project>
       <Name>Siccity.GLTFUtility</Name>
     </ProjectReference>
+    <ProjectReference Include="Siccity.GLTFUtility.Editor.csproj">
+      <Project>{40002442-a595-fe36-0b62-036170cecec3}</Project>
+      <Name>Siccity.GLTFUtility.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Dracodec.csproj">
       <Project>{43d38dd2-d66a-882f-8b98-ab49900f0384}</Project>
       <Name>Dracodec</Name>
