@@ -40,11 +40,14 @@ public class DicomToTexture2D
         }
         string tempFile = Application.dataPath + Path.DirectorySeparatorChar + "temp.png";
         SimpleITK.WriteImage(image, tempFile);
+        
         Texture2D texture = new Texture2D(this.targetWidth, this.targetHeight);
         texture.LoadImage(File.ReadAllBytes(tempFile));
         File.Delete(tempFile);
         return texture;
 
     }
+    // public Texture2D bullshit(string inputfile){
+    //     System.Drawing.Image image = Iamge
+    // }
 }
-   

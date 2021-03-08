@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
    private GameObject logos;
    private Toggle fullScreen;
    private Button settings;
-   [SerializeField]private GameObject annotationPin;
+   public GameObject annotationPin;
    private GameObject mainPage; 
    private GameObject dicomController;
    private GameObject settingsController;

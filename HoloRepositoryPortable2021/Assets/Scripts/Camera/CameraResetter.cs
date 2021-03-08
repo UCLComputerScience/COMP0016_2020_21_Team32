@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 ///<Summary>This class handles resetting the position of the camera via means of linear interpolation</summary>
-public class ResetPosition : MonoBehaviour
+public class CameraResetter : MonoBehaviour
 {
     public float travelTime = 2;
     Vector3 startPos;
@@ -14,7 +14,7 @@ public class ResetPosition : MonoBehaviour
     Vector3 targetPos;
     Quaternion targetRot;
     float timeElapsed;
-    bool isEnabled = false;
+    public bool isEnabled = false;
     void Start(){
         subscribeToEvents();    
     }

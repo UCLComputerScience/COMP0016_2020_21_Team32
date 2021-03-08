@@ -39,6 +39,7 @@ public class ColourSelect : MonoBehaviour
     //The update function is called every frame
     void Update()
     {
+        
         RectTransformUtility.ScreenPointToLocalPointInRectangle(rect, Input.mousePosition, null, out mousePos);
         //Converts the screen space coordinates of the pointer to local space coordinates of the RectTransform component of 
         //the colour palette. Stores the updated coordinates in the mousePos variable.
@@ -46,8 +47,10 @@ public class ColourSelect : MonoBehaviour
         //The origin of our image's RectTransform is at its centre. The pixel data of the texture is stored in a 2D array with
         //the first element in the bottom left, so the pointer's position must be recalculated to ensure that it samples the 
         //correct pixel.
-        mousePos.x = width - (width/2 -mousePos.x); 
-        mousePos.y = Mathf.Abs((height/2 - mousePos.y) - height);
+        //V
+
+        mousePos.x = Mathf.Clamp (0,(int)(((mousePos.x-rect.rect.x)*colours.width)/rect.rect.width),colours.width);
+        mousePos.y = Mathf.Clamp (0,(int)(((mousePos.y-rect.rect.y)*colours.height)/rect.rect.height),colours.height);
 
         //If the user double clicks within the circle collider attatched to the colour palette, fire the onColourSelect event, 
         //letting any subscribers of that event know what colour has been selected.
@@ -58,6 +61,28 @@ public class ColourSelect : MonoBehaviour
             }
         }
     }
+
+    // void Update(){
+    //     RaycastHit2D hit;
+    //     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //     if(Input.GetMouseButtonDown(0)){
+    //         hit = Physics2D.GetRayIntersection(ray);
+    //             Renderer renderer = hit.transform.GetComponent<Renderer>();
+    //             if(hit.transform == this.gameObject){
+    //                 Debug.Log("blapa");
+    //                 Texture2D tex = renderer.material.mainTexture as Texture2D;
+    //                 Vector2 localPos = this.transform.position - hit.transform.position;
+    //                 Vector2 uv = Vector2.zero;
+    //                 uv.x = localPos.x/tex.width * rect.rect.width;
+    //                 uv.y = localPos.y/tex.height * rect.rect.height;
+    //                 Color col = tex.GetPixel((int)uv.x, (int)uv.y);
+    //                 if(doubleClick(DOUBLE_CLICK_TIME)){
+    //                     EventManager.current.onColourSelect(col);
+    //                 }
+    //             }
+    //         }
+    //     }
+    
 
     //Determines the time between consecutive clicks by the user and returns true if this is less than the time allowed for a double click.
     private bool doubleClick(float maxDoubleClickTime){

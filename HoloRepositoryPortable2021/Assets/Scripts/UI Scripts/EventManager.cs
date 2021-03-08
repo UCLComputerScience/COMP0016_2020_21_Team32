@@ -83,6 +83,7 @@ public class EventManager : MonoBehaviour
         OnToggleLogos?.Invoke(this, EventArgs.Empty);
     }
     public void onToggleColourPalette(){
+        Debug.Log("INVOKED");
         OnToggleColourPalette?.Invoke(this, EventArgs.Empty);
     }
     public void onChangeSettings(){
