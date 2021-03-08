@@ -10,7 +10,6 @@ using TMPro;
 /// to instantiate a new AnnotationData object. On confirm, this object is converted to JSON format and  written to a file.</summary>
 public class Annotation : MonoBehaviour
 {
-    public Canvas canvas;
     public AnnotationData data;
     public GameObject plane;
     public static int numAnnotations = 0;
@@ -25,7 +24,6 @@ public class Annotation : MonoBehaviour
     }
     void Awake(){
         /*initialise variables*/
-        canvas = GetComponentInParent<Canvas>();
         plane = GameObject.Find("Plane");
         confirmButton = this.transform.Find("Confirm").GetComponent<Button>();
         cancelButton = this.transform.Find("Cancel").GetComponent<Button>();
@@ -58,11 +56,11 @@ public class Annotation : MonoBehaviour
     }
 
     /*Called when the confirm button is pressed. Instantiates a new AnnotationData object, converts it to a JSON string and writes that string to a file.*/
-    public void save(Vector3 pos){
+    private void save(Vector3 pos){
         initialiseAnnotation(pos);
         writeAnnotationToJsonFile();
     }    
-    public void hide(){
+    private void hide(){
         ToolTip.current.gameObject.SetActive(false);
         gameObject.SetActive(false);
         EventManager.current.onDisableUIBlocker();

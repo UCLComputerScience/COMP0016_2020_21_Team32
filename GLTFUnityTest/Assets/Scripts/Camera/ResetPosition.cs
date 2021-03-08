@@ -41,8 +41,8 @@ public class ResetPosition : MonoBehaviour
         timeElapsed = 0.0f;
         startPos = Camera.main.gameObject.transform.position; 
         startRot = Camera.main.gameObject.transform.rotation;
-        targetPos = CameraMovement.startPos;
-        targetRot = CameraMovement.startRot;  
+        targetPos = CameraController.startPos;
+        targetRot = CameraController.startRot;  
     }
     public void otherEvent(object sender, EventArgs e){
         isEnabled = false;

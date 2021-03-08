@@ -26,7 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <NoConfig>true</NoConfig>
@@ -46,10 +46,10 @@
      <Compile Include="Assets\Scripts\Model loading and interaction\LoadedOrgan.cs" />
      <Compile Include="Assets\StandaloneFileBrowser\Sample\BasicSample.cs" />
      <Compile Include="Assets\Scripts\Model loading and interaction\ModelHandler.cs" />
-     <Compile Include="Assets\Scripts\AnnotationScripts\ViewAnnotation.cs" />
+     <Compile Include="Assets\Scripts\AnnotationScripts\AnnotationSelector.cs" />
      <Compile Include="Assets\Scripts\Model loading and interaction\OrganFactory.cs" />
      <Compile Include="Assets\Scripts\AnnotationScripts\DragDrop.cs" />
-     <Compile Include="Assets\Scripts\Camera\CameraMovement.cs" />
+     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
      <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleOpenFileText.cs" />
      <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowserWindows.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
@@ -58,7 +58,6 @@
      <Compile Include="Assets\Scripts\UI Scripts\DicomToTexture2D.cs" />
      <Compile Include="Assets\Scripts\Camera\ResetPosition.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
-     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\PivotController.cs" />
@@ -120,9 +119,9 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\TextBoxDragDrop.cs" />
      <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleSaveFileText.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\EventManagerListener.cs" />
      <Compile Include="Assets\Scripts\Camera\GenerateLines.cs" />
      <Compile Include="Assets\Scripts\AnnotationScripts\Annotation.cs" />
-     <Compile Include="Assets\Scripts\UI Scripts\EventManagerListener.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\shaderTest.shader" />

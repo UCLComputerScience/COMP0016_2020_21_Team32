@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -30,12 +30,13 @@ public class AnnotationSelector : MonoBehaviour
         annotationText = annotationTextBox.GetComponentInChildren<TMP_Text>(true);
         annotations = new List<AnnotationData>();
         annotationTitles = new List<string>();
-        dropdown = canvas.GetComponentInChildren<TMP_Dropdown>(true);
+        //dropdown = this.GetComponent<TMP_Dropdown>();
+        dropdown = canvas.GetComponentInChildren<TMP_Dropdown>();
 
         /*Pass callback to the onValueChanged event of the dropdown menu*/
         dropdown.onValueChanged.AddListener(onIndexChanged);
     }
-    void Start()
+    void Start() 
     {
         subscribeToEvents();
         jsonToAnnotations();

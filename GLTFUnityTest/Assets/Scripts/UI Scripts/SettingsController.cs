@@ -49,18 +49,18 @@ public class SettingsController : MonoBehaviour
        about.onClick.AddListener(enablePanel);
        hideAbout.onClick.AddListener(disablePanel);
    }
-    public void adjustBackgroundBrightness(float tint){
+    private void adjustBackgroundBrightness(float tint){
          Color newCol = skyBoxColour * tint;
          RenderSettings.skybox.SetColor("_Tint",newCol);
     }
-    public void hide(){
+    private void hide(){
         this.gameObject.SetActive(false);
         ToolTip.current.gameObject.SetActive(false);
     }
-    public void enablePanel(){
+    private void enablePanel(){
         aboutPanel.SetActive(true);
     }
-    public void disablePanel(){
+    private void disablePanel(){
         aboutPanel.SetActive(false);
         ToolTip.current.gameObject.SetActive(false);
     }
