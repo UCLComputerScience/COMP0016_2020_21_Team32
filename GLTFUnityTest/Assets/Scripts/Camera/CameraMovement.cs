@@ -23,8 +23,6 @@ public class CameraMovement : MonoBehaviour
     private float scrollSpeed; 
     private bool isEnabled = true;
     [SerializeField] GameObject pivot;
-    float timeElapsed;
-    public float travelTime = 2.0f;
 
     void Start() 
     {
@@ -66,7 +64,7 @@ public class CameraMovement : MonoBehaviour
             Camera.main.transform.Translate(displacement);
             Camera.main.transform.Translate(xTranslationCache);
             Camera.main.transform.Translate(yTranslationCache);
-        /*Translate using keybinds. The amount translated is cached and reapplied each frame, offsetting the camera from its target position*/
+        /*Translate using keybinds. The amount translated is cached and reapplied each frame, offsetting the camera from its target position whenever the user rotates*/
         }else if(Input.GetKey(KeyCode.H)){
             Camera.main.transform.position -= Camera.main.transform.right * 1.0f;
             xTranslationCache -= Vector3.right*1.0f;
@@ -87,7 +85,6 @@ public class CameraMovement : MonoBehaviour
     models of any physical size to be viewed when loaded into the application.*/
     private IEnumerator setCameraDistance(){
         yield return new WaitUntil(() => ModelHandler.organ.segments != null); //waits until the model has been loaded in - prevents nullReferencEexceptions being thrown
-        //Debug.Log(ModelHandler.organ.parent);
         cameraDistance = -cameraRatio * ModelHandler.modelRadius; //ratio * radius of renderer
         scrollSpeed = -cameraDistance;
         displacement = new Vector3(0f,0f,cameraDistance);
@@ -103,17 +100,25 @@ public class CameraMovement : MonoBehaviour
         EventManager.current.OnEnablePivot += EventManager_otherEvent;
         EventManager.current.OnEnableCrossSection += EventManager_otherEvent;
         EventManager.current.OnReset += EventManager_resetPosition;
-        EventManager.current.OnViewAnnotations += EventManager_otherEvent;
+        EventManager.current.OnViewAnnotations += EventManager_onViewAnnotation;
         EventManager.current.OnAddAnnotations += EventManager_otherEvent;
     }
     public void EventManager_enableCamera(object sender, EventArgs e){
         isEnabled = true;
     }
 
+
     /*camera is disabled whenever another event is received*/
     public void EventManager_otherEvent(object sender, EventArgs e){
         isEnabled = false;
     }
+    public void EventManager_onViewAnnotation(object sender, EventArgs e){
+        isEnabled = false;
+        // xTranslationCache = Vector3.zero;
+        // yTranslationCache = Vector3.zero;
+        // displacement.z = cameraDistance;
+    }
+
     /*Reinitialise displacement and caches whenever the reset button is pressed*/
     public void EventManager_resetPosition(object sender, EventArgs e){
         isEnabled = false;

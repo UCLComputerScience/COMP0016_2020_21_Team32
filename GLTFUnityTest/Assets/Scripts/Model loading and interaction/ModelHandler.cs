@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 
-///<summary>This class is uses the OrganFactory to load in the model and helps to otherwise initialise the model and scene based on the model that is loaded in. 
+///<summary>This class uses the OrganFactory to load in the model and helps to otherwise initialise the model and scene based on the model that is loaded in. 
 ///The radius of the model is calculated here, and the segments of the model are loaded into a list. The list and radius are kept public and static as they are
-///used by many other classes.</summary>
+///needed by many other classes.</summary>
 public class ModelHandler : MonoBehaviour // This class should be a singleton
 {
     public static ModelHandler current;
@@ -76,7 +76,7 @@ public class ModelHandler : MonoBehaviour // This class should be a singleton
     /*When the user clicks the pallete, an event is fired that holds the data of the selected colour. 
      Here the currently selected mesh is set to that colour.
     */
-   public void EventManager_onColourSelect(object sender, EventArgsColourData e){
+   private void EventManager_onColourSelect(object sender, EventArgsColourData e){
         Color col = e.col;
         col.a = segOpacity;
         MaterialAssigner.changeColour(segments[currentlySelected], col);

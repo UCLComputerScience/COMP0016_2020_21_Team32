@@ -8,8 +8,8 @@ using System;
 ///<summary>This class manages the top level components of the UI and whether they are active or not.</summary>
 public class UIManager : MonoBehaviour
 {
-   public GameObject UIBlocker; 
-   private List<GameObject> UIElements;
+   public GameObject UIBlocker;
+   private GameObject controllerHandler; 
    private GameObject planeController;
    private GameObject pivotController;
    private GameObject DICOMController;
@@ -23,6 +23,8 @@ public class UIManager : MonoBehaviour
    private Button settings;
    [SerializeField]private GameObject annotationPin;
    private GameObject mainPage; 
+   private GameObject dicomController;
+   private GameObject settingsController;
 
     void Awake(){
        mainPage = GameObject.Find("Main Page");
@@ -33,7 +35,11 @@ public class UIManager : MonoBehaviour
        logos = GameObject.Find("Logos");
        settings = GameObject.Find("Settings").GetComponent<Button>();
        fullScreen = GameObject.Find("Toggle full screen").GetComponent<Toggle>();
-       UIElements = GetComponentsInChildren<Transform>().Select((t) => t.gameObject).ToList<GameObject>();
+       controllerHandler = GameObject.Find("Controller Handler");
+       pivotController = controllerHandler.transform.Find("Pivot Controller").gameObject;
+       planeController = controllerHandler.transform.Find("Plane Controller").gameObject;
+       dicomController = controllerHandler.transform.Find("Dicom Controller").gameObject;
+       settingsController = controllerHandler.transform.Find("Settings Controller").gameObject;
        
        settings.onClick.AddListener(EventManager.current.onChangeSettings);
        fullScreen.onValueChanged.AddListener(toggleFullScreen);
@@ -51,6 +57,10 @@ public class UIManager : MonoBehaviour
         EventManager.current.OnEnableUIBlocker+=EventManager_onEnableUIBlocker;
         EventManager.current.OnDisableUIBlocker+=EventManager_onDisableUIBlocker;
         EventManager.current.OnAddAnnotations+=EventManager_onAddAnnotation;
+        EventManager.current.OnEnableCrossSection += EventManager_OnCrossSectionEnabled;
+        EventManager.current.OnEnableDicom += EventManager_OnDICOMView;
+        EventManager.current.OnEnablePivot += EventManager_OnChangePivot;
+        EventManager.current.OnChangeSettings += EventManager_OnChangeSettings;
     }
     public void EventManager_onToggleColourPalette(object o, EventArgs e){
         colourPalette.SetActive(!colourPalette.activeInHierarchy);
@@ -76,6 +86,22 @@ public class UIManager : MonoBehaviour
     public void EventManager_onAddAnnotation(object o, EventArgs e){
         annotationPin.SetActive(true);
     }
+        //Enables the pivot controller
+    public void EventManager_OnChangePivot(object sender, EventArgs e){ //enables the pivot controller
+        pivotController.SetActive(true);
+    }
+    //Enables the plane controller
+    public void EventManager_OnCrossSectionEnabled(object sender, EventArgs e){ 
+        planeController.SetActive(true);
+    }
+    //Enables the dicom controller
+    public void EventManager_OnDICOMView(object sender, EventArgs e){ //enables the DICOM controller
+        dicomController.SetActive(true);
+    }
+    //Enables the settings controller
+    public void EventManager_OnChangeSettings(object sender, EventArgs e){ //enables the settings controller
+        settingsController.SetActive(true);
+    } 
     public void toggleFullScreen(bool isOn){
         mainPage.SetActive(isOn);
     } 

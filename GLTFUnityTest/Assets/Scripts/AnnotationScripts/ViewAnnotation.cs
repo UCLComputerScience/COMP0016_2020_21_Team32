@@ -11,7 +11,7 @@ using TMPro;
 ///This class allows the user to view the annotations made on a particular model by parsing all json files in the folder for 
 ///that model into annotation objects. The titles of these annotations are displayed as the options of the dropdown list. 
 ///<summary>
-public class ViewAnnotation : MonoBehaviour
+public class AnnotationSelector : MonoBehaviour
 {
     private Shader shader;
     public GameObject plane; //public as variable is shared by multiple classes
@@ -124,5 +124,6 @@ public class ViewAnnotation : MonoBehaviour
     /*Whenever any of the other events triggered by the buttons on the navigation bar are received, the annotation textbox is made inactive*/
     public void otherEvent(object sender, EventArgs e){
         annotationTextBox.gameObject.SetActive(false);
+        dropdown.gameObject.SetActive(false);
     }
 }

@@ -293,7 +293,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 85362190}
-  - component: {fileID: 85362192}
   m_Layer: 0
   m_Name: Controller Handler
   m_TagString: Untagged
@@ -319,18 +318,6 @@ Transform:
   m_Father: {fileID: 450532391}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &85362192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 85362189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79065191ca1c3c54c94ed4f6e92e5268, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &105454626
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,7 +839,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displacement: {x: 0, y: 0, z: 0}
   pivot: {fileID: 1847915357}
-  travelTime: 0
 --- !u!114 &224323451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -878,9 +864,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5a4d72a0b6e384a84adbe576ac6fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shader: {fileID: 0}
   plane: {fileID: 1548939258}
   canvas: {fileID: 1892268844}
+  dropdown: {fileID: 0}
   annotationTextBox: {fileID: 671316564}
+  annotationText: {fileID: 0}
+  annotationTitles: []
 --- !u!114 &224323454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6220,7 +6210,6 @@ GameObject:
   - component: {fileID: 1548939262}
   - component: {fileID: 1548939261}
   - component: {fileID: 1548939260}
-  - component: {fileID: 1548939259}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -6228,20 +6217,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!64 &1548939259
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1548939258}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1548939260
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6608,19 +6583,7 @@ MonoBehaviour:
     m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 224323452}
-        m_TargetAssemblyTypeName: ViewAnnotation, Assembly-CSharp
-        m_MethodName: onIndexChanged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1655088282
 MonoBehaviour:
@@ -7743,7 +7706,6 @@ GameObject:
   - component: {fileID: 1892268847}
   - component: {fileID: 1892268848}
   - component: {fileID: 1892268849}
-  - component: {fileID: 1892268846}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -7833,18 +7795,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1892268846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1892268841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04d9fbc4948eb1744bb0e8af41a480d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1892268847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8630,19 +8580,7 @@ MonoBehaviour:
   m_Group: {fileID: 1752620192}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1655088279}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 0
 --- !u!114 &2050311775
 MonoBehaviour:

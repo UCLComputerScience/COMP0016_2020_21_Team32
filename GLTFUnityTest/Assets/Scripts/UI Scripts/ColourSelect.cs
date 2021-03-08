@@ -17,7 +17,7 @@ public class ColourSelect : MonoBehaviour
     private Vector2 mousePos; 
     private RectTransform rect;
     [SerializeField] GameObject UIBlocker;
-    CircleCollider2D col; 
+    private CircleCollider2D col; 
     private int width;
     private int height;
     [SerializeField] const float DOUBLE_CLICK_TIME = 0.2f;

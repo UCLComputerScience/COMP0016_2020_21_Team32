@@ -23,6 +23,7 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
     private RectTransform canvasRect;
     private RectTransform rectTransform; 
     private RectTransform viewAreaRect;
+    private string input;
     private Vector3 dragOffset;
     #endregion variableDeclaration 
 
@@ -42,6 +43,7 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
         loadButton = this.transform.Find("Load different scans").GetComponent<Button>();
         hideButton.onClick.AddListener(hide);
         loadButton.onClick.AddListener(openFileExplorer);
+        //loadButton.onClick.AddListener(DicomToTexture2D.ReadDICOMopenDicom);
         converter = new DicomToTexture2D((int)rectTransform.rect.width, (int)rectTransform.rect.height);
         outputPaths = new List<String>();
     }
@@ -58,6 +60,7 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
     public void openFileExplorer(){
         var extension = new [] {new ExtensionFilter("DICOM", "dcm")};
         paths = StandaloneFileBrowser.OpenFilePanel("Select one or multiple dcm files", "", extension, true);
+        input = paths[0];
         updateImages();
     }
 
@@ -76,6 +79,27 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
     }
     /*Convert the selected .dcm files into Texture2D objects by temporarily writing them to a png. Populate the images
     array with these textures loaded from the pngs so they can be loaded onto the viewArea */
+    // private void updateImages(){
+    //     if(paths.Length == 0){ //If the user presses cancel in the fileExplorer disable the controller
+    //         paths = null;
+    //         EventManager.current.onEnableCamera();
+    //         this.gameObject.SetActive(false);
+    //         return;
+    //     }
+    //     images.Clear(); //clear existing images if loadButton is pressed
+    //     outputPaths.Clear();
+    //     foreach(String path in paths){
+    //         string outputfile = Application.dataPath + Path.DirectorySeparatorChar + path.Substring(path.LastIndexOf(Path.DirectorySeparatorChar)) + ".png";
+    //         converter.ReadDICOM(path, outputfile, images);
+    //         outputPaths.Add(outputfile);
+    //     }
+    //     foreach(string path in outputPaths){
+    //         Texture2D tex = new Texture2D((int)rectTransform.rect.width, (int)rectTransform.rect.height);
+    //         tex.LoadImage(File.ReadAllBytes(path));
+    //         images.Add(tex);
+    //     }
+    //     StartCoroutine(initialiseSliderMaxValue());
+    // }
     private void updateImages(){
         if(paths.Length == 0){ //If the user presses cancel in the fileExplorer disable the controller
             paths = null;
@@ -87,8 +111,7 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
         outputPaths.Clear();
         foreach(String path in paths){
             string outputfile = Application.dataPath + Path.DirectorySeparatorChar + path.Substring(path.LastIndexOf(Path.DirectorySeparatorChar)) + ".png";
-            converter.ReadDICOM(path, outputfile, images);
-            outputPaths.Add(outputfile);
+            images.Add(converter.ReadDICOM(path));
         }
         foreach(string path in outputPaths){
             Texture2D tex = new Texture2D((int)rectTransform.rect.width, (int)rectTransform.rect.height);

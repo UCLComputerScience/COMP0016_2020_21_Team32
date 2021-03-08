@@ -75,26 +75,26 @@ public class PivotController : MonoBehaviour
     }
 
     /*Passed as a callback to the onValueChanged event of the x position slider.*/
-    public void changeXPos(float newXPos){
+    private void changeXPos(float newXPos){
         pivot.transform.position = new Vector3(newXPos, pivot.transform.position.y, pivot.transform.position.z);
     }
     /*Passed as a callback to the onValueChanged event of the y position slider.*/
-    public void changeYPos(float newYPos){
+    private void changeYPos(float newYPos){
         pivot.transform.position = new Vector3(pivot.transform.position.x, newYPos, pivot.transform.position.z);
     }
     /*Passed as a callback to the onValueChanged event of the z position slider.*/
-    public void changeZPos(float newZPos){
+    private void changeZPos(float newZPos){
         pivot.transform.position = new Vector3(pivot.transform.position.x, pivot.transform.position.y, newZPos);
     }
     /*Resets the slider values and position of the pivot (to (0,0,0))*/
-    public void resetSlider(){
+    private void resetSlider(){
         xPosSlider.value = startXPos;
         yPosSlider.value = startYPos;
         zPosSlider.value = startZPos;
         pivot.transform.position = CameraMovement.target.position;
     }
     /*Passed as a callback to the onClick event of the confirm button. Reassigns the camera's target to the new position of the pivot and disables the controller.*/
-    public void onConfirm(){
+    private void onConfirm(){
         startPos = pivot.transform.position;
         CameraMovement.target.position = pivot.transform.position;
         pivot.SetActive(false);
@@ -102,7 +102,7 @@ public class PivotController : MonoBehaviour
     }
 
     /*Passed as a callback to the onClick event of the cancel button. Resets the slider and disables the controller*/
-    public void onCancel(){
+    private void onCancel(){
         resetSlider();
         pivot.SetActive(false);
         this.gameObject.SetActive(false);
