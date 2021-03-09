@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using System;
 
 ///<summary>This class uses the OrganFactory to load in the model and helps to otherwise initialise the model and scene based on the model that is loaded in. 
 ///The radius of the model is calculated here, and the segments of the model are loaded into a list. The list and radius are kept public and static as they are
@@ -14,11 +15,10 @@ public class ModelHandler : MonoBehaviour // This class should be a singleton
     public static Vector3 modelCentre;
     public static Organ organ; 
     public GameObject plane; 
-    public Shader crossSectionalShader;
     public static List<GameObject> segments;
+    public Shader crossSectionalShader;
     private float segOpacity;
     private float minOpacity;
-    [SerializeField] Slider opacitySlider;
     private int currentlySelected;
     void Awake(){
         //singleton pattern
@@ -32,15 +32,13 @@ public class ModelHandler : MonoBehaviour // This class should be a singleton
         currentlySelected = 0;
         segments = new List<GameObject>();
         crossSectionalShader = Shader.Find("Custom/Clipping");
-        plane = GameObject.Find("Plane");
-        opacitySlider = GameObject.Find("Opacity Slider").GetComponent<Slider>();
 
-        this.opacitySlider.onValueChanged.AddListener(AdjustOpacity);
+        //this.opacitySlider.onValueChanged.AddListener(AdjustOpacity);
         StartCoroutine(loadModel());
-        EventManager.current.OnColourSelect += EventManager_onColourSelect;
-    }
-    void start(){
         
+    }
+    void Start(){
+        subscribeToEvents();
     }
     /*
     Loads the appropriate model and sets it as a child to the gameObject this script is attatched to.
@@ -66,16 +64,15 @@ public class ModelHandler : MonoBehaviour // This class should be a singleton
     }
 
     /*Called whenever the opacity slider is moved. Changes the opacity of the currently selected segment*/
-    public void AdjustOpacity(float newOp) {
+    private void EventManager_onAdjustOpacity(object sender, EventArgsFloat e){
         if(segments[currentlySelected] != null){
-            segOpacity = MaterialAssigner.adjustOpacity(newOp, segments, currentlySelected, minOpacity);
+            segOpacity = MaterialAssigner.adjustOpacity(e.data, segments, currentlySelected, minOpacity);
         }
     }
-    public void selectSegment(){
+    private void EventManager_onSelectSegment(object sender, EventArgs e){
         if(currentlySelected == segments.Count-1)currentlySelected = 0;
         else currentlySelected++;
     }
-
     /*When the user clicks the pallete, an event is fired that holds the data of the selected colour. 
      Here the currently selected mesh is set to that colour.
     */
@@ -83,5 +80,10 @@ public class ModelHandler : MonoBehaviour // This class should be a singleton
         Color col = e.col;
         col.a = segOpacity;
         MaterialAssigner.changeColour(segments[currentlySelected], col);
+    }
+    private void subscribeToEvents(){
+        EventManager.current.OnColourSelect += EventManager_onColourSelect;
+        EventManager.current.OnChangeOpacity+=EventManager_onAdjustOpacity;
+        EventManager.current.OnSegmentSelect+=EventManager_onSelectSegment;
     }  
 }

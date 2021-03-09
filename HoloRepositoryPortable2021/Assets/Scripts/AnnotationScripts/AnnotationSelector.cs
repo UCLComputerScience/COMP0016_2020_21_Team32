@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -13,26 +13,21 @@ using TMPro;
 ///<summary>
 public class AnnotationSelector : MonoBehaviour
 {
+    public GameObject plane; 
+    public TMP_Dropdown dropdown;
+    public GameObject annotationTextBox;
     private Shader shader;
-    public GameObject plane; //public as variable is shared by multiple classes
-    public Canvas canvas; 
-    private TMP_Dropdown dropdown;
+    
     private FileHelper fileHelper;
-    [SerializeField] private GameObject annotationTextBox;
     private TMP_Text annotationText;
     private List<AnnotationData> annotations;
     private List<string> annotationTitles;
     void Awake(){
         /*initialise variables*/
         shader = Shader.Find("Custom/Clipping");
-        plane = GameObject.Find("Plane");
-        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         annotationText = annotationTextBox.GetComponentInChildren<TMP_Text>(true);
         annotations = new List<AnnotationData>();
         annotationTitles = new List<string>();
-        //dropdown = this.GetComponent<TMP_Dropdown>();
-        dropdown = canvas.GetComponentInChildren<TMP_Dropdown>();
-
         /*Pass callback to the onValueChanged event of the dropdown menu*/
         dropdown.onValueChanged.AddListener(onIndexChanged);
     }
@@ -54,6 +49,7 @@ public class AnnotationSelector : MonoBehaviour
             //load the camera coordinates in which the annotation was made
             Camera.main.gameObject.transform.position = annotations[index].cameraCoordinates;
             Camera.main.gameObject.transform.rotation = annotations[index].cameraRotation;
+            CameraController.displacement = annotations[index].cameraDisplacement;
 
             //set the text contained within the annotation and display in a transparent textbox
             annotationText.text = annotations[index].text;

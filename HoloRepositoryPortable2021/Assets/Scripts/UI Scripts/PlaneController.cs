@@ -26,7 +26,6 @@ public class PlaneController : MonoBehaviour
     private Button resetButton;
     private Button confirmButton;
     private Button cancelButton;
-
     private float maxPlaneHeight;
     private float minPlaneHeight;
     private Quaternion startRot = Quaternion.identity;
@@ -168,8 +167,7 @@ public class PlaneController : MonoBehaviour
     void Update()
     {
         foreach(GameObject g in ModelHandler.segments){
-            g.GetComponent<Renderer>().material.SetVector("_PlanePosition", plane.transform.position);
-            g.GetComponent<Renderer>().material.SetVector("_PlaneNormal", plane.transform.up);
+            MaterialAssigner.updatePlanePos(g, plane);
         }
     }
 }

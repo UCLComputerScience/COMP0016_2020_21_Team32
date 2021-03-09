@@ -24,7 +24,6 @@ public class Annotation : MonoBehaviour
     }
     void Awake(){
         /*initialise variables*/
-        plane = GameObject.Find("Plane");
         confirmButton = this.transform.Find("Confirm").GetComponent<Button>();
         cancelButton = this.transform.Find("Cancel").GetComponent<Button>();
         titleInputField = this.transform.Find("title input field").GetComponent<TMP_InputField>();
@@ -74,6 +73,7 @@ public class Annotation : MonoBehaviour
         data.text = inputField.text; //the value entered by the user in the main input field
         data.cameraCoordinates = Camera.main.transform.position; //current position of the camera
         data.cameraRotation = Camera.main.transform.rotation; //current rotation of the camera
+        data.cameraDisplacement = CameraController.displacement; //the amount the user has displaced the camera
         data.annotationPosition = pos; //the position the text of the annotation should appear (same as the position the annotationPin was dropped)
         data.screenDimensions = new Vector2(Screen.width, Screen.height); //current screen dimensions (so the position in which the text appears on any screen looks the same)
         data.planeNormal = plane.transform.up; //current plane normal (for saving cross sectional views)

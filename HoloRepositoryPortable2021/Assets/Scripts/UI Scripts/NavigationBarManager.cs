@@ -33,16 +33,15 @@ public class NavigationBarManager : MonoBehaviour
         initButton(addAnnotation, EventManager.current.onAddAnnotations);
     }
 
-    /*Initialises the listener of the toggle such that it executes the myMethodName() function when selected*/
-    private void initButton(Toggle toggle, Action myMethodName){
+    /*Initialises the listener of the toggle such that it executes the callback() function when selected*/
+    private void initButton(Toggle toggle, Action callback){
         toggle.onValueChanged.AddListener((bool isOn) => {
-            if(isOn) myMethodName();
+            if(isOn) callback();
         });
     }
 
 /*Sets the enableCamera button to be selected whenever an enableCamera event is fired*/
     public void OnEnableCamera_EventManager(object sender, EventArgs e){
-        EventSystem.current.SetSelectedGameObject(EventSystem.current.currentSelectedGameObject);
         EventSystem.current.SetSelectedGameObject(enableCamera.gameObject);
         enableCamera.isOn = true;
     }

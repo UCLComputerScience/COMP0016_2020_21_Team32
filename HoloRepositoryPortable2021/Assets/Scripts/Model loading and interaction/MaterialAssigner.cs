@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-///<summary>Helper class that handles the assignment and change of state of materials to a loaded model at runtime</summary>
+///<summary>Class that handles the assignment and change of state of materials to a loaded model at runtime</summary>
 public static class MaterialAssigner
 {
     public static Stack<float> opacities = new Stack<float>();
@@ -33,6 +33,10 @@ public static class MaterialAssigner
             segments[segmentIndex].GetComponent<Renderer>().material.SetColor("_Color", color);
         }
         return newOpacity;
+    }
+    public static void updatePlanePos(GameObject g, GameObject plane){
+        g.GetComponent<Renderer>().material.SetVector("_PlanePosition", plane.transform.position);
+        g.GetComponent<Renderer>().material.SetVector("_PlaneNormal", plane.transform.up);
     }
 
     /*Reduces the opacities of all segments to a minimum of targetOpacity.*/

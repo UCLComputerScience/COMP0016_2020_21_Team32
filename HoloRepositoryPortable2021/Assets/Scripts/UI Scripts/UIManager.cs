@@ -9,41 +9,18 @@ using System;
 public class UIManager : MonoBehaviour
 {
    public GameObject UIBlocker;
-   private GameObject controllerHandler; 
-   private GameObject planeController;
-   private GameObject pivotController;
-   private GameObject DICOMController;
-   private GameObject SettingsController;
-   private GameObject colourPalette;
-   private GameObject navigationBar;
-   private GameObject segmentSelect;
-   private GameObject opacitySlider;
-   private GameObject logos;
-   private Toggle fullScreen;
-   private Button settings;
+   public GameObject controllerHandler; 
+   public GameObject planeController;
+   public GameObject pivotController;
+   public GameObject colourPalette;
+   public GameObject navigationBar;
+   public GameObject segmentSelect;
+   public GameObject opacitySlider;
+   public GameObject logos;
    public GameObject annotationPin;
-   private GameObject mainPage; 
-   private GameObject dicomController;
-   private GameObject settingsController;
-
-    void Awake(){
-       mainPage = GameObject.Find("Main Page");
-       colourPalette = GameObject.Find("Colour Palette");
-       navigationBar = GameObject.Find("Navigation Bar");
-       segmentSelect = GameObject.Find("Toggle Selected Segment");
-       opacitySlider = GameObject.Find("Opacity Slider");
-       logos = GameObject.Find("Logos");
-       settings = GameObject.Find("Settings").GetComponent<Button>();
-       fullScreen = GameObject.Find("Toggle full screen").GetComponent<Toggle>();
-       controllerHandler = GameObject.Find("Controller Handler");
-       pivotController = controllerHandler.transform.Find("Pivot Controller").gameObject;
-       planeController = controllerHandler.transform.Find("Plane Controller").gameObject;
-       dicomController = controllerHandler.transform.Find("Dicom Controller").gameObject;
-       settingsController = controllerHandler.transform.Find("Settings Controller").gameObject;
-       
-       settings.onClick.AddListener(EventManager.current.onChangeSettings);
-       fullScreen.onValueChanged.AddListener(toggleFullScreen);
-    }
+   public GameObject mainPage; 
+   public GameObject dicomController;
+   public GameObject settingsController;
 
     void Start(){
         subscribeToEvents();
@@ -61,6 +38,7 @@ public class UIManager : MonoBehaviour
         EventManager.current.OnEnableDicom += EventManager_OnDICOMView;
         EventManager.current.OnEnablePivot += EventManager_OnChangePivot;
         EventManager.current.OnChangeSettings += EventManager_OnChangeSettings;
+        EventManager.current.OnToggleFullScreen+=EventManager_OnToggleFullScreen;
     }
     public void EventManager_onToggleColourPalette(object o, EventArgs e){
         colourPalette.SetActive(!colourPalette.activeInHierarchy);
@@ -101,8 +79,9 @@ public class UIManager : MonoBehaviour
     //Enables the settings controller
     public void EventManager_OnChangeSettings(object sender, EventArgs e){ //enables the settings controller
         settingsController.SetActive(true);
-    } 
-    public void toggleFullScreen(bool isOn){
-        mainPage.SetActive(isOn);
-    } 
+    }
+    public void EventManager_OnToggleFullScreen(object sender, EventArgs e){
+        mainPage.SetActive(!mainPage.activeInHierarchy);
+    }
+
 }

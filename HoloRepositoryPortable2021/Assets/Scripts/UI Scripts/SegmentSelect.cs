@@ -33,6 +33,6 @@ public class SegmentSelect : MonoBehaviour
         }
         if(currentSegment == segments.Count -1)currentSegment = -1;
         text.text = segments[++currentSegment];
-        ModelHandler.current.selectSegment();
+        EventManager.current.onSegmentSelect();
     }
 }

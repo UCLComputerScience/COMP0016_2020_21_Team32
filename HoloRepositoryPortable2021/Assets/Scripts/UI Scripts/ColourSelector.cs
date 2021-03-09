@@ -11,7 +11,7 @@ using System;
 //Tutorial used to develop this class: https://www.youtube.com/watch?v=n5WOD5zoggg
 ///</summary>
 
-public class ColourSelect : MonoBehaviour
+public class ColourSelector : MonoBehaviour
 {
     private Texture2D colours;
     private Vector2 mousePos; 

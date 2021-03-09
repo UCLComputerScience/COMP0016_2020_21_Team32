@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-///<summary>Helper script that enables one of two images for a toggle. If the isOn variable is true then onImage is displayed,
-///otherwise offImage is displayed</summary>
-public class ChangeToggleImage : MonoBehaviour
+///<summary>Attached to the fullscreen toggle.</summary>
+public class FullscreenToggle : MonoBehaviour
 {
     private GameObject onImage;
     private GameObject offImage;
@@ -16,9 +15,11 @@ public class ChangeToggleImage : MonoBehaviour
         offImage = transform.Find("isOff").gameObject;
         offImage.gameObject.SetActive(false);
         toggle = this.GetComponent<Toggle>();
-        toggle.onValueChanged.AddListener(swapImages);
+        toggle.onValueChanged.AddListener(onClicked);
     }
-    private void swapImages(bool isOn){
+    /*Fires an event to toggle the visibility of all UI elements that are children of the mainpage gameobject*/
+    private void onClicked(bool isOn){
+        EventManager.current.onToggleFullScreen();
         onImage.SetActive(!onImage.activeInHierarchy);
         offImage.gameObject.SetActive(!offImage.activeInHierarchy);
     }

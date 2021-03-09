@@ -13,5 +13,6 @@ public class AnnotationData{
     public Vector3 annotationPosition;
     public Vector3 planeNormal;
     public Vector3 planePosition;
+    public Vector3 cameraDisplacement;
 
 }

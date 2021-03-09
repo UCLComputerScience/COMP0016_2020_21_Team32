@@ -20,6 +20,7 @@ public class EventManager : MonoBehaviour
     public event EventHandler OnReset;
     public event EventHandler OnViewAnnotations;
     public event EventHandler OnAddAnnotations;
+    public event EventHandler OnSegmentSelect;
     public event EventHandler<EventArgsColourData> OnColourSelect;
     public event EventHandler OnToggleOpacitySlider;
     public event EventHandler OnToggleSegmentSelect;
@@ -29,6 +30,8 @@ public class EventManager : MonoBehaviour
     public event EventHandler OnChangeSettings;
     public event EventHandler OnEnableUIBlocker;
     public event EventHandler OnDisableUIBlocker;
+    public event EventHandler OnToggleFullScreen;
+    public event EventHandler<EventArgsFloat> OnChangeOpacity;
 
     private void Awake(){
         //Making use of the Singleton design pattern
@@ -45,7 +48,6 @@ public class EventManager : MonoBehaviour
         OnDisableUIBlocker?.Invoke(this, EventArgs.Empty);
     }
     public void onEnableCamera(){
-        Debug.Log("INVOKED");
         OnEnableCamera?.Invoke(this, EventArgs.Empty); 
     }
     public void onEnablePivot(){
@@ -63,12 +65,11 @@ public class EventManager : MonoBehaviour
     public void onViewAnnotations(){
         OnViewAnnotations?.Invoke(this, EventArgs.Empty);
     }
+    public void onSegmentSelect(){
+        OnSegmentSelect?.Invoke(this, EventArgs.Empty);
+    }
     public void onAddAnnotations(){
         OnAddAnnotations?.Invoke(this, EventArgs.Empty);
-    }
-    public void onColourSelect(Color col){
-        EventArgsColourData e = new EventArgsColourData(col);
-        OnColourSelect?.Invoke(this, e);
     }
     public void onToggleOpacitySlider(){
         OnToggleOpacitySlider?.Invoke(this, EventArgs.Empty);
@@ -83,16 +84,32 @@ public class EventManager : MonoBehaviour
         OnToggleLogos?.Invoke(this, EventArgs.Empty);
     }
     public void onToggleColourPalette(){
-        Debug.Log("INVOKED");
         OnToggleColourPalette?.Invoke(this, EventArgs.Empty);
     }
     public void onChangeSettings(){
         OnChangeSettings?.Invoke(this, EventArgs.Empty);
+    }
+    public void onToggleFullScreen(){
+        OnToggleFullScreen?.Invoke(this, EventArgs.Empty);
+    }
+    public void onColourSelect(Color col){
+        EventArgsColourData e = new EventArgsColourData(col);
+        OnColourSelect?.Invoke(this, e);
+    }
+    public void onChangeOpacity(float op){
+        EventArgsFloat e = new EventArgsFloat(op);
+        OnChangeOpacity?.Invoke(this, e);
     }
 }
 public class EventArgsColourData : EventArgs{
     public Color col;
     public EventArgsColourData(Color col){
         this.col = col;
+    }
+}
+public class EventArgsFloat : EventArgs{
+    public float data;
+    public EventArgsFloat(float data){
+        this.data = data;
     }
 }
