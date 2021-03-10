@@ -16,7 +16,6 @@ public class CameraController : MonoBehaviour
     public static Quaternion startRot;
     public static Vector3 displacement; 
     private Vector3 prevPosition;
-    public static Transform target;
     public GameObject pivot;
     private float cameraDistance;
     private float scrollSpeed; 
@@ -24,7 +23,6 @@ public class CameraController : MonoBehaviour
     void Start() 
     {
         StartCoroutine(setCameraDistance()); //sets the position of the camera based on the size of the model loaded in 
-        target = pivot.transform;
         subscribeToEvents();
         Camera.main.enabled =true;
         prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition); //used to determine the direction the camera should be rotated
@@ -43,7 +41,7 @@ public class CameraController : MonoBehaviour
         if(Input.GetMouseButton(0)){ //true if left mouse button is held down
             if(!EventSystem.current.IsPointerOverGameObject()){ 
                 Vector3 dir = prevPosition - Camera.main.ScreenToViewportPoint(Input.mousePosition); //direction to rotate the camera
-                Camera.main.transform.position = target.transform.position; //set the camera's position to the target
+                Camera.main.transform.position = pivot.transform.position; //set the camera's position to the target
                 Camera.main.transform.Rotate(Vector3.right, dir.y *180); //rotate the camera based on dir
                 Camera.main.transform.Rotate(Vector3.up, -dir.x * 180, Space.World);
                 Camera.main.transform.Translate(displacement); //move the camera back in the z axis so its not directly on top of the target
@@ -51,7 +49,7 @@ public class CameraController : MonoBehaviour
             }
         /*zoom in/out by changing the value of displacement whenever the scrollwheel is used*/
         }else if(Input.GetAxis("Mouse ScrollWheel") != 0){
-            Camera.main.transform.position = target.transform.position;
+            Camera.main.transform.position = pivot.transform.position;
             float scrollAmount = Input.GetAxis("Mouse ScrollWheel")*scrollSpeed;
             displacement -= new Vector3(0, 0, scrollAmount);
             Camera.main.transform.Translate(displacement);
@@ -75,8 +73,9 @@ public class CameraController : MonoBehaviour
     /*Coroutine that initialises the camera distance dynamically based on the radius of the sphere that bounds the renderer of the model loaded into the application. This enables 
     models of any physical size to be viewed when loaded into the application.*/
     private IEnumerator setCameraDistance(){
-        yield return new WaitUntil(() => ModelHandler.organ.segments != null); //waits until the model has been loaded in - prevents nullReferencEexceptions being thrown
-        cameraDistance = -CAMERA_TO_MODEL_RADIUS_RATIO * ModelHandler.modelRadius; //ratio * radius of renderer
+        yield return new WaitUntil(() => ModelHandler.current.modelRadius != 0); //waits until the model has been loaded in - prevents nullReferencEexceptions being thrown
+        cameraDistance = -CAMERA_TO_MODEL_RADIUS_RATIO * ModelHandler.current.modelRadius; //ratio * radius of renderer
+        Debug.Log("The camera distance! " + cameraDistance);
         scrollSpeed = -cameraDistance;
         displacement = new Vector3(0f,0f,cameraDistance);
         Camera.main.ScreenToViewportPoint(Input.mousePosition);

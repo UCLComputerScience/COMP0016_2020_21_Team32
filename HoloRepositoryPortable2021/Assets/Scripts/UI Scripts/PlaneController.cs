@@ -72,9 +72,9 @@ public class PlaneController : MonoBehaviour
     Using this radius, a maximum and minimum height that the plane can reach is calculated, and the
     minimum and maximum values of the slider that enables the y position of the plane to be changed are initialised to these values. */
     private IEnumerator initialisePlane(){
-        yield return new WaitUntil(() => ModelHandler.modelRadius != 0); //wait until model is loaded
-        startYPos = yPosSlider.value = yPosSlider.maxValue = maxPlaneHeight = ModelHandler.modelCentre.y + ModelHandler.modelRadius; //set max (and initial) value of slider
-        yPosSlider.minValue = minPlaneHeight = ModelHandler.modelCentre.y - ModelHandler.modelRadius; //set min value of slider
+        yield return new WaitUntil(() => ModelHandler.current.modelRadius != 0); //wait until model is loaded
+        startYPos = yPosSlider.value = yPosSlider.maxValue = maxPlaneHeight = ModelHandler.current.modelCentre.y + ModelHandler.current.modelRadius; //set max (and initial) value of slider
+        yPosSlider.minValue = minPlaneHeight = ModelHandler.current.modelCentre.y - ModelHandler.current.modelRadius; //set min value of slider
         plane.transform.position = Vector3.up * maxPlaneHeight;//move the plane to the max position
         plane.transform.rotation = Quaternion.identity; //set the rotation of the plane to zero.
     }

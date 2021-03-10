@@ -44,11 +44,11 @@ public class PivotController : MonoBehaviour
         cancelButton.onClick.AddListener(onCancel);
 
         /*Set the position and size of the pivot. Its size is determined by the radius of the sphere that bounds the mesh of the loaded model (ModelHandler.modelRadius)*/
-        pivot.transform.position = startPos = CameraController.target.position;
+        pivot.transform.position = startPos;
         startXPos = xPosSlider.value = pivot.transform.position.x;
         startYPos = yPosSlider.value = pivot.transform.position.y;
         startZPos = zPosSlider.value = pivot.transform.position.z;
-        float pRadius = ModelHandler.modelRadius / ModelToPivotRadiusRatio;
+        float pRadius = ModelHandler.current.modelRadius / ModelToPivotRadiusRatio;
         pivot.transform.localScale = new Vector3(pRadius,pRadius,pRadius); 
     }
 
@@ -91,12 +91,11 @@ public class PivotController : MonoBehaviour
         xPosSlider.value = startXPos;
         yPosSlider.value = startYPos;
         zPosSlider.value = startZPos;
-        pivot.transform.position = CameraController.target.position;
+        pivot.transform.position = Vector3.zero;
     }
     /*Passed as a callback to the onClick event of the confirm button. Reassigns the camera's target to the new position of the pivot and disables the controller.*/
     private void onConfirm(){
         startPos = pivot.transform.position;
-        CameraController.target.position = pivot.transform.position;
         pivot.SetActive(false);
         this.gameObject.SetActive(false);
     }
@@ -111,7 +110,7 @@ public class PivotController : MonoBehaviour
     onValue changed event of the slider*/
     private void initialiseSlider(Slider slider,  UnityAction<float> methodToCall, float multiplier){
         slider.onValueChanged.AddListener(methodToCall);
-        slider.minValue = -ModelHandler.modelRadius * multiplier;
-        slider.maxValue = ModelHandler.modelRadius * multiplier;
+        slider.minValue = -ModelHandler.current.modelRadius * multiplier;
+        slider.maxValue = ModelHandler.current.modelRadius * multiplier;
     }
 }

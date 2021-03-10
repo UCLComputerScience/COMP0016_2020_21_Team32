@@ -34,22 +34,26 @@ namespace Siccity.GLTFUtility {
 
 			if (uri == null) {
 				// Load entire file
+				Debug.Log("I am in uri == null");
 				if (string.IsNullOrEmpty(filepath)) result.stream = new MemoryStream(bytefile);
 				else result.stream = File.OpenRead(filepath);
 				result.startOffset = binChunkStart + 8;
 				result.stream.Position = result.startOffset;
 			} else if (uri.StartsWith(embeddedPrefix)) {
 				// Load embedded
+				Debug.Log("I am in uri.StartsWith(embeddedPrefix)");
 				string b64 = uri.Substring(embeddedPrefix.Length, uri.Length - embeddedPrefix.Length);
 				byte[] bytes = Convert.FromBase64String(b64);
 				result.stream = new MemoryStream(bytes);
 			} else if (uri.StartsWith(embeddedPrefix2)) {
 				// Load embedded
+				Debug.Log("I am in uri.StartsWith(embeddedPrefix2)");
 				string b64 = uri.Substring(embeddedPrefix2.Length, uri.Length - embeddedPrefix2.Length);
 				byte[] bytes = Convert.FromBase64String(b64);
 				result.stream = new MemoryStream(bytes);
 			} else {
 				// Load URI
+				Debug.Log("I am in else");
 				string directoryRoot = Directory.GetParent(filepath).ToString() + "/";
 				result.stream = File.OpenRead(directoryRoot + uri);
 				result.startOffset = result.stream.Length - byteLength;

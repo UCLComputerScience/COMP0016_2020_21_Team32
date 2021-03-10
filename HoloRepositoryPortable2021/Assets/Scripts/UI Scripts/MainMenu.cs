@@ -7,6 +7,7 @@ using TMPro;
 using SFB;
 using System.IO;
 using System.Globalization;
+using UnityEditor;
 
 ///<summary>
 ///This class is attatched to the MainMenu gameobject and provides the elements on it with interactivity by passing callback actions
@@ -33,7 +34,9 @@ public class MainMenu : MonoBehaviour
 
         /*Get all example model files in the streaming assets folder and add them as options to the drop down menu*/
         fileHelper = new FileHelper(Application.streamingAssetsPath);
-        exampleFiles = fileHelper.getPathsInDir("*.glb", true);
+        Debug.Log(Application.streamingAssetsPath);
+        exampleFiles = fileHelper.getPathsInDir("*.glb", false);
+        foreach(string x in exampleFiles)Debug.Log(x);
         options = fileHelper.getRelativePathsNoExtensions("*.glb");
         exampleOrganDropDown.ClearOptions();
         exampleOrganDropDown.AddOptions(options);
@@ -46,10 +49,9 @@ public class MainMenu : MonoBehaviour
         fileExplorer.onClick.AddListener(openFileExplorer);
     }
     public void nextScene(){
+        // Debug.Log(FileHelper.currentModelFileName);
+        // EditorApplication.ExitPlaymode();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
-    }
-    public void prevScene(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1);
     }
     public void OnValueChanged(int index){
        FileHelper.setCurrentModelFileName(exampleFiles[index]);
@@ -61,6 +63,7 @@ public class MainMenu : MonoBehaviour
         string[] paths = StandaloneFileBrowser.OpenFilePanel("Select a glb/gltf file", "", "", false);
         if(paths.Length == 0) return;
         FileHelper.setCurrentModelFileName(paths[0]);
+        Debug.Log(FileHelper.currentModelFileName);
         chosenPath.gameObject.SetActive(true);
         chosenPath.text = "Loaded: "+paths[0];
     }

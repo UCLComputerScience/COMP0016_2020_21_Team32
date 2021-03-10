@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System;
+using UnityEditor;
+using Siccity.GLTFUtility;
 
 ///<summary>This class uses the OrganFactory to load in the model and helps to otherwise initialise the model and scene based on the model that is loaded in. 
 ///The radius of the model is calculated here, and the segments of the model are loaded into a list. The list and radius are kept public and static as they are
@@ -11,12 +13,13 @@ using System;
 public class ModelHandler : MonoBehaviour // This class should be a singleton
 {
     public static ModelHandler current;
-    public static float modelRadius; 
-    public static Vector3 modelCentre;
-    public static Organ organ; 
+    public float modelRadius; 
+    public Vector3 modelCentre;
+    public Organ organ; 
     public GameObject plane; 
     public static List<GameObject> segments;
     public Shader crossSectionalShader;
+    private GameObject loadedModel = null;
     private float segOpacity;
     private float minOpacity;
     private int currentlySelected;
@@ -46,8 +49,14 @@ public class ModelHandler : MonoBehaviour // This class should be a singleton
     (ie, so that the initialiseModel() is not called on a model that has not yet loaded in) ->
     control is returned to the caller until the model is loaded in.
     */
+
+    private void OnFinishAsync(GameObject result, AnimationClip[] clips) {
+        loadedModel = result;
+    }
     private IEnumerator loadModel(){
-        organ = OrganFactory.GetOrgan(FileHelper.currentModelFileName);
+        Importer.LoadFromFileAsync(FileHelper.currentModelFileName, new ImportSettings(), OnFinishAsync);
+        yield return new WaitUntil(() => (loadedModel != null));
+        organ = OrganFactory.GetOrgan(FileHelper.currentAnnotationFolder, loadedModel);
         yield return new WaitUntil(() => (organ.model != null));
         organ.initialiseModel(this.gameObject);
         segments = organ.segments;
@@ -62,6 +71,11 @@ public class ModelHandler : MonoBehaviour // This class should be a singleton
         foreach(Renderer r in renderers)combinedBounds.Encapsulate(r.bounds);
         return combinedBounds;
     }
+    private void subscribeToEvents(){
+        EventManager.current.OnColourSelect += EventManager_onColourSelect;
+        EventManager.current.OnChangeOpacity+=EventManager_onAdjustOpacity;
+        EventManager.current.OnSegmentSelect+=EventManager_onSelectSegment;
+    }  
 
     /*Called whenever the opacity slider is moved. Changes the opacity of the currently selected segment*/
     private void EventManager_onAdjustOpacity(object sender, EventArgsFloat e){
@@ -81,9 +95,4 @@ public class ModelHandler : MonoBehaviour // This class should be a singleton
         col.a = segOpacity;
         MaterialAssigner.changeColour(segments[currentlySelected], col);
     }
-    private void subscribeToEvents(){
-        EventManager.current.OnColourSelect += EventManager_onColourSelect;
-        EventManager.current.OnChangeOpacity+=EventManager_onAdjustOpacity;
-        EventManager.current.OnSegmentSelect+=EventManager_onSelectSegment;
-    }  
 }

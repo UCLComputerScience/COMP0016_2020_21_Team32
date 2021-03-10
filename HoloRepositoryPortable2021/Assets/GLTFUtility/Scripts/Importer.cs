@@ -184,9 +184,10 @@ namespace Siccity.GLTFUtility {
 #region Sync
 		private static GameObject LoadInternal(this GLTFObject gltfObject, string filepath, byte[] bytefile, long binChunkStart, ImportSettings importSettings, out AnimationClip[] animations) {
 			CheckExtensions(gltfObject);
-
+			
 			// directory root is sometimes used for loading buffers from containing file, or local images
 			string directoryRoot = filepath != null ? Directory.GetParent(filepath).ToString() + "/" : null;
+			Debug.Log(directoryRoot);
 
 			importSettings.shaderOverrides.CacheDefaultShaders();
 
@@ -214,6 +215,7 @@ namespace Siccity.GLTFUtility {
 			else animations = new AnimationClip[0];
 
 			foreach (var item in bufferTask.Result) {
+				Debug.Log(item);
 				item.Dispose();
 			}
 

@@ -7,10 +7,11 @@ using TMPro;
 using System.IO;
 using System.Linq;
 using System.Globalization;
+using UnityEditor;
 
 ///<summary>Helper class for dealing with files</summary>
 public class FileHelper{
-    public static string currentModelFileName = "brain.glb";
+    public static string currentModelFileName = Path.Combine(Application.streamingAssetsPath, "brain.glb");
     public static string currentAnnotationFolder = "brain.glb";
     public static void setCurrentModelFileName(string filename){
         currentModelFileName = filename;

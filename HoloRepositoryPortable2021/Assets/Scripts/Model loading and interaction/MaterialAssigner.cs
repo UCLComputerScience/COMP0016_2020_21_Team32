@@ -51,7 +51,7 @@ public static class MaterialAssigner
     /*Resets the opacities of the segments - has no effect if not called after the above method*/
     public static void resetOpacities(List<GameObject> segments){
         if(opacities.Count > 0){
-            foreach(GameObject g in ModelHandler.organ.segments){
+            foreach(GameObject g in ModelHandler.current.organ.segments){
                 Renderer r = g.GetComponent<Renderer>();
                 r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, opacities.Pop());
             }

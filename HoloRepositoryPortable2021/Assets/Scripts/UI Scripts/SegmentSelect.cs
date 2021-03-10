@@ -28,7 +28,7 @@ public class SegmentSelect : MonoBehaviour
     has with the model (ie: changing colour, changing opacity) is applied to the intended segment */
      public void selectSegment(){
         if(numSegments == 0){
-            numSegments = ModelHandler.organ.segments.Count;
+            numSegments = ModelHandler.current.organ.segments.Count;
             for(int i = 1; i <= numSegments; i++)segments.Add("Segment" + " " + i);
         }
         if(currentSegment == segments.Count -1)currentSegment = -1;
