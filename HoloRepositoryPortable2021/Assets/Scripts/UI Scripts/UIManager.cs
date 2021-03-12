@@ -78,7 +78,6 @@ public class UIManager : MonoBehaviour, IEventManagerListener
     }
     //Enables the settings controller
     public void EventManager_OnChangeSettings(object sender, EventArgs e){ //enables the settings controller
-        Debug.Log("I'm here!");
         settingsController.SetActive(true);
     }
     public void EventManager_OnToggleFullScreen(object sender, EventArgs e){

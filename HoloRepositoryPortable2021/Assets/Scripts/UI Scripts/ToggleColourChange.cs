@@ -24,7 +24,6 @@ public class ToggleColourChange : MonoBehaviour
         if(isOn){
             colourBlock.normalColor = toggle.colors.selectedColor;
         }else{
-            Debug.Log("Here we go");
             colourBlock.normalColor = originalCol;
         }
         toggle.colors = colourBlock;

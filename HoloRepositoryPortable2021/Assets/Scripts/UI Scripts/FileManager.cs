@@ -20,9 +20,7 @@ public class FileManager : MonoBehaviour
     public void openFileExplorer()
     {
         string[] paths = StandaloneFileBrowser.OpenFilePanel("Select a glb/gltf file", "", "", false);
-        Debug.Log("I am here, at the file manager bit");
         if(paths.Length == 0)return;
-        //ModelHandler.fileName = paths[0];
         chosenPath.gameObject.SetActive(true);
         chosenPath.text = "Loaded: "+paths[0];
     }

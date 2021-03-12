@@ -15,7 +15,6 @@ using UnityEditor;
 ///</summary>
 public class MainMenu : MonoBehaviour
 {
-    private CanvasGroup canvasGroup;
     private FileHelper fileHelper;
     private List<string> exampleFiles; 
     private List<string> options;
@@ -38,11 +37,9 @@ public class MainMenu : MonoBehaviour
         controlButton = this.transform.Find("Control Button").GetComponent<Button>();
         controls = this.transform.Find("Controls").gameObject;
         minimiseControls = controls.transform.Find("Minimise").GetComponent<Button>();
-        canvasGroup = this.transform.Find("SceneFade").GetComponent<CanvasGroup>();
 
         /*Get all example model files in the streaming assets folder and add them as options to the drop down menu*/
         fileHelper = new FileHelper(Application.streamingAssetsPath);
-        Debug.Log(Application.streamingAssetsPath);
         exampleFiles = fileHelper.getPathsInDir("*.glb", false);
         options = fileHelper.getRelativePathsNoExtensions("*.glb");
         exampleOrganDropDown.ClearOptions();
@@ -71,7 +68,6 @@ public class MainMenu : MonoBehaviour
         string[] paths = StandaloneFileBrowser.OpenFilePanel("Select a glb/gltf file", "", extension, false);
         if(paths.Length == 0) return;
         FileHelper.setCurrentModelFileName(paths[0]);
-        Debug.Log(FileHelper.currentModelFileName);
         chosenPath.gameObject.SetActive(true);
         chosenPath.text = "Loaded: "+paths[0];
     }

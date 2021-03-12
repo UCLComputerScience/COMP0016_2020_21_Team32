@@ -23,7 +23,6 @@ public class GenerateLines : MonoBehaviour
         line.material.SetColor("_Color", color); 
         line.useWorldSpace = true;
         line.sortingOrder = 5;
-        Debug.Log(ModelHandler.current.modelRadius);
         line.startWidth = line.endWidth = ModelHandler.current.modelRadius / radiusToLineWidth;
         line.startColor = line.endColor = color;
         line.SetPositions(new Vector3[]{-axisDir*5000, axisDir*5000}); //arbitrarily large length of line in the direction specified 

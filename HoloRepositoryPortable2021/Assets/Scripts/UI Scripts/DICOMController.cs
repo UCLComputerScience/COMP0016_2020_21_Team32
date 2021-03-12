@@ -78,31 +78,9 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
     }
     /*Convert the selected .dcm files into Texture2D objects by temporarily writing them to a png. Populate the images
     array with these textures loaded from the pngs so they can be loaded onto the viewArea */
-    // private void updateImages(){
-    //     if(paths.Length == 0){ //If the user presses cancel in the fileExplorer disable the controller
-    //         paths = null;
-    //         EventManager.current.onEnableCamera();
-    //         this.gameObject.SetActive(false);
-    //         return;
-    //     }
-    //     images.Clear(); //clear existing images if loadButton is pressed
-    //     outputPaths.Clear();
-    //     foreach(String path in paths){
-    //         string outputfile = Application.dataPath + Path.DirectorySeparatorChar + path.Substring(path.LastIndexOf(Path.DirectorySeparatorChar)) + ".png";
-    //         converter.ReadDICOM(path, outputfile, images);
-    //         outputPaths.Add(outputfile);
-    //     }
-    //     foreach(string path in outputPaths){
-    //         Texture2D tex = new Texture2D((int)rectTransform.rect.width, (int)rectTransform.rect.height);
-    //         tex.LoadImage(File.ReadAllBytes(path));
-    //         images.Add(tex);
-    //     }
-    //     StartCoroutine(initialiseSliderMaxValue());
-    // }
     private void updateImages(){
         if(paths.Length == 0){ //If the user presses cancel in the fileExplorer disable the controller
             ToolTip.current.gameObject.SetActive(false);
-            Debug.Log(true);
             paths = null;
             EventManager.current.onEnableCamera();
             this.gameObject.SetActive(false);
@@ -122,8 +100,7 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
         StartCoroutine(initialiseSliderMaxValue());
     }
 
-    /*Coroutine that sets the maxValue of the slider equal to the number of .dcm files selected by the user. Also 
-    re-enables the camera.*/
+    /*Coroutine that sets the maxValue of the slider equal to the number of .dcm files selected by the user.*/
     private IEnumerator initialiseSliderMaxValue(){
         yield return new WaitUntil(() => images.Count != 0);
         viewArea.texture = images[0]; //initialise the viewArea with the first selected dcm
@@ -137,7 +114,6 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
             File.Delete(path);
         }
         outputPaths.Clear();
-        
     }
 
     /*Adjusting the slider will fire the onValueChanged UnityEvent, triggering this callback. It changes the dcm
@@ -146,6 +122,7 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
         if(index >= images.Count || index < 0)return;
         viewArea.texture = images[(int) index];
     }
+    /*Called when the gameObject this script is attached to is destroyed. Deletes all pngs created.*/
     void onDestory(){
         foreach(string path in outputPaths){
             File.Delete(path);

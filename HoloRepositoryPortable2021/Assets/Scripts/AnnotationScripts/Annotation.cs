@@ -57,7 +57,6 @@ public class Annotation : MonoBehaviour
 
     /*Called when the confirm button is pressed. Instantiates a new AnnotationData object, converts it to a JSON string and writes that string to a file.*/
     private void save(Vector3 pos){
-        Debug.Log("Save:");
         initialiseAnnotation(pos);
         writeAnnotationToJsonFile();
     }    
@@ -86,7 +85,6 @@ public class Annotation : MonoBehaviour
 
     /*Convert the AnnotationData object to a string and write it to a file in a folder with the same name as the model currently being viewed*/
     private void writeAnnotationToJsonFile(){
-        Debug.Log("Hey I'm an annotation");
         String jsonAnnotation = JsonUtility.ToJson(data);
         string dirPath = Path.Combine(Application.dataPath, FileHelper.currentAnnotationFolder);
         if(!Directory.Exists(dirPath)){

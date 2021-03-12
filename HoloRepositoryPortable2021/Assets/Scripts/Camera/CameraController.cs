@@ -85,7 +85,6 @@ public class CameraController : MonoBehaviour, IEventManagerListener
     private IEnumerator setCameraDistance(){
         yield return new WaitUntil(() => ModelHandler.current.modelRadius != 0); //waits until the model has been loaded in - prevents nullReferencEexceptions being thrown
         cameraDistance = -CAMERA_TO_MODEL_RADIUS_RATIO * ModelHandler.current.modelRadius; //ratio * radius of renderer
-        Debug.Log("The camera distance! " + cameraDistance);
         scrollSpeed = -cameraDistance;
         displacement = new Vector3(0f,0f,cameraDistance);
         Camera.main.ScreenToViewportPoint(Input.mousePosition);
