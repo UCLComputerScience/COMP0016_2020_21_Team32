@@ -15,6 +15,7 @@ using UnityEditor;
 ///</summary>
 public class MainMenu : MonoBehaviour
 {
+    private CanvasGroup canvasGroup;
     private FileHelper fileHelper;
     private List<string> exampleFiles; 
     private List<string> options;
@@ -23,6 +24,9 @@ public class MainMenu : MonoBehaviour
     private Button quitButton;
     private Button fileExplorer;
     private TMP_Text chosenPath;
+    private Button controlButton;
+    private GameObject controls;
+    private Button minimiseControls;
 
     void Awake(){
         /*Initialise all interactable elements*/
@@ -31,12 +35,15 @@ public class MainMenu : MonoBehaviour
         quitButton = this.transform.Find("Quit").GetComponent<Button>();
         fileExplorer = this.transform.Find("File Explorer").GetComponent<Button>();
         chosenPath = this.transform.Find("Chosen Path").GetComponent<TMP_Text>();
+        controlButton = this.transform.Find("Control Button").GetComponent<Button>();
+        controls = this.transform.Find("Controls").gameObject;
+        minimiseControls = controls.transform.Find("Minimise").GetComponent<Button>();
+        canvasGroup = this.transform.Find("SceneFade").GetComponent<CanvasGroup>();
 
         /*Get all example model files in the streaming assets folder and add them as options to the drop down menu*/
         fileHelper = new FileHelper(Application.streamingAssetsPath);
         Debug.Log(Application.streamingAssetsPath);
         exampleFiles = fileHelper.getPathsInDir("*.glb", false);
-        foreach(string x in exampleFiles)Debug.Log(x);
         options = fileHelper.getRelativePathsNoExtensions("*.glb");
         exampleOrganDropDown.ClearOptions();
         exampleOrganDropDown.AddOptions(options);
@@ -47,24 +54,31 @@ public class MainMenu : MonoBehaviour
         viewButton.onClick.AddListener(nextScene);
         quitButton.onClick.AddListener(quitApplication);
         fileExplorer.onClick.AddListener(openFileExplorer);
+        controlButton.onClick.AddListener(openControls);
+        minimiseControls.onClick.AddListener(closeControls);
     }
-    public void nextScene(){
-        // Debug.Log(FileHelper.currentModelFileName);
-        // EditorApplication.ExitPlaymode();
+    private void nextScene(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
-    public void OnValueChanged(int index){
+    private void OnValueChanged(int index){
        FileHelper.setCurrentModelFileName(exampleFiles[index]);
     }
-    public void quitApplication(){
+    private void quitApplication(){
         Application.Quit();
     }
-    public void openFileExplorer(){
-        string[] paths = StandaloneFileBrowser.OpenFilePanel("Select a glb/gltf file", "", "", false);
+    private void openFileExplorer(){
+        var extension = new [] {new ExtensionFilter("3D model files", "gltf", "glb")};
+        string[] paths = StandaloneFileBrowser.OpenFilePanel("Select a glb/gltf file", "", extension, false);
         if(paths.Length == 0) return;
         FileHelper.setCurrentModelFileName(paths[0]);
         Debug.Log(FileHelper.currentModelFileName);
         chosenPath.gameObject.SetActive(true);
         chosenPath.text = "Loaded: "+paths[0];
+    }
+    private void openControls(){
+        controls.SetActive(true);
+    }
+    private void closeControls(){
+        controls.SetActive(false);
     }
 }

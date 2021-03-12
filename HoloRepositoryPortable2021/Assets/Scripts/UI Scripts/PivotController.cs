@@ -55,7 +55,7 @@ public class PivotController : MonoBehaviour
     /*Automatically called when the gameobject the script is attached to is enabled. Reduces the opacity of the segments of the model (if they're above a certain threshold)
     so that the user can see the pivot they're controlling, as it will usually be within the model. Enable the UIBlocker, pivot and the axes.*/
     void OnEnable(){
-        MaterialAssigner.reduceOpacityAll(0.4f, ModelHandler.segments);
+        MaterialAssigner.reduceOpacityAll(0.4f, ModelHandler.current.segments);
         EventManager.current.onEnableUIBlocker();
         pivot.transform.position = startPos;
         pivot.SetActive(true);
@@ -65,7 +65,7 @@ public class PivotController : MonoBehaviour
     /*Automatically called when the game object this script is attached to is disabled. Resets the opacities of the segments of the model to their values before the controller.
     Disable the UIBlocker, pivot, axes and ToolTip, and fire an OnEnableCamera event so the user immediately has control of the camera again*/
     void OnDisable(){
-        MaterialAssigner.resetOpacities(ModelHandler.segments);
+        MaterialAssigner.resetOpacities(ModelHandler.current.segments);
         startPos = pivot.transform.position;
         EventManager.current.onDisableUIBlocker();
         axes.SetActive(false);

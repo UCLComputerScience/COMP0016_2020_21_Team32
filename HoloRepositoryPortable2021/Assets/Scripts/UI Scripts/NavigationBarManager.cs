@@ -12,7 +12,7 @@ using System;
 ///been confirmed by the user, the annotation prefab is disabled and an enableCamera event is fired. This class listens
 ///for that event and changes the state of the enableCamera toggle accordingly.
 ///</summary>
-public class NavigationBarManager : MonoBehaviour
+public class NavigationBarManager : MonoBehaviour, IEventManagerListener
 {
     [SerializeField] Toggle enableCamera;
     [SerializeField] Toggle enablePivot;
@@ -21,9 +21,12 @@ public class NavigationBarManager : MonoBehaviour
     [SerializeField] Toggle reset;
     [SerializeField] Toggle viewAnnotation;
     [SerializeField] Toggle addAnnotation;
+
+    public void subscribeToEvents(){
+        EventManager.current.OnEnableCamera += OnEnableCamera_EventManager;
+    }
     void Awake()
     {
-        EventManager.current.OnEnableCamera += OnEnableCamera_EventManager;
         initButton(enableCamera, EventManager.current.onEnableCamera);
         initButton(enablePivot, EventManager.current.onEnablePivot);
         initButton(enableDicom, EventManager.current.onEnableDicom);
@@ -31,6 +34,7 @@ public class NavigationBarManager : MonoBehaviour
         initButton(reset, EventManager.current.onReset);
         initButton(viewAnnotation, EventManager.current.onViewAnnotations);
         initButton(addAnnotation, EventManager.current.onAddAnnotations);
+        subscribeToEvents();
     }
 
     /*Initialises the listener of the toggle such that it executes the callback() function when selected*/

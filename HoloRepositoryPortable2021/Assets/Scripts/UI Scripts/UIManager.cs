@@ -6,7 +6,7 @@ using System.Linq;
 using System;
 
 ///<summary>This class manages the top level components of the UI and whether they are active or not.</summary>
-public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour, IEventManagerListener
 {
    public GameObject UIBlocker;
    public GameObject controllerHandler; 
@@ -22,10 +22,7 @@ public class UIManager : MonoBehaviour
    public GameObject dicomController;
    public GameObject settingsController;
 
-    void Start(){
-        subscribeToEvents();
-    }
-    private void subscribeToEvents(){
+    public void subscribeToEvents(){
         EventManager.current.OnToggleColourPalette+=EventManager_onToggleColourPalette;
         EventManager.current.OnToggleLogos+=EventManager_onToggleLogos;
         EventManager.current.OnToggleNavigationBar+=EventManager_onToggleNavigationBar;
@@ -39,6 +36,9 @@ public class UIManager : MonoBehaviour
         EventManager.current.OnEnablePivot += EventManager_OnChangePivot;
         EventManager.current.OnChangeSettings += EventManager_OnChangeSettings;
         EventManager.current.OnToggleFullScreen+=EventManager_OnToggleFullScreen;
+    }
+    void Start(){
+        subscribeToEvents();
     }
     public void EventManager_onToggleColourPalette(object o, EventArgs e){
         colourPalette.SetActive(!colourPalette.activeInHierarchy);
@@ -78,6 +78,7 @@ public class UIManager : MonoBehaviour
     }
     //Enables the settings controller
     public void EventManager_OnChangeSettings(object sender, EventArgs e){ //enables the settings controller
+        Debug.Log("I'm here!");
         settingsController.SetActive(true);
     }
     public void EventManager_OnToggleFullScreen(object sender, EventArgs e){

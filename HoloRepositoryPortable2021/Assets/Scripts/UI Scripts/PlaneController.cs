@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 ///<summary> This class is attatched as a component to the PlaneController prefab, and allows the user to create cross sectional views of the 
 ///model they're viewing by controlling the position of a plane. The position of this plane relative to the model determines which of the polygons
 ///making up the model should be drawn to the screen by the GPU.
@@ -49,8 +50,9 @@ public class PlaneController : MonoBehaviour
 
 
         confirmButton.onClick.AddListener(confirmSlice);
-        cancelButton.onClick.AddListener(cancelSlice);
         cancelButton.onClick.AddListener(resetSlider);
+        cancelButton.onClick.AddListener(resetPlane);
+        cancelButton.onClick.AddListener(cancelSlice);
         resetButton.onClick.AddListener(resetSlider);
         resetButton.onClick.AddListener(resetPlane);
 
@@ -84,11 +86,12 @@ public class PlaneController : MonoBehaviour
     */
     void OnEnable(){
         EventManager.current.onEnableUIBlocker();
-        MaterialAssigner.assignMaterialToAllChildrenBelowIndex(plane, ModelHandler.segments, differentColourShader);
+        MaterialAssigner.assignToAllChildren(plane, ModelHandler.current.segments, differentColourShader);
     }
     /*When the controller is disabled, fire an onEnableCamera event so the user can start rotating the camera again immediately without having to click the icon.
     Also disable the tooltip that appears when the cancel button is hovered over.*/
     void OnDisable(){
+        MaterialAssigner.assignToAllChildren(plane, ModelHandler.current.segments, crossSectionalShader);
         EventManager.current.onDisableUIBlocker();
         EventManager.current.onEnableCamera();
         ToolTip.current.gameObject.SetActive(false);
@@ -124,11 +127,15 @@ public class PlaneController : MonoBehaviour
         yRotSlider.value = startYRot;
         zRotSlider.value = startZRot;
     }
+    public void resetPlane(){
+        plane.transform.position = new Vector3(0, maxPlaneHeight, 0);
+        plane.transform.localRotation = Quaternion.Euler(0f,0f,0f);
+    }
     /*Passed as a callback to the onClick event of the confirm button. When pressed, the CrossSection shader is reapplied to all segments of the model. 
     This has the effect of removing all of the volume of the model that was coloured black before the button was pressed. The controller is
     also set to inactive so that the user can continue to use the UI and view/manipulate the cross section of the model.*/
     public void confirmSlice(){
-        MaterialAssigner.assignMaterialToAllChildrenBelowIndex(plane, ModelHandler.segments, crossSectionalShader);
+        MaterialAssigner.assignToAllChildren(plane, ModelHandler.current.segments, crossSectionalShader);
         plane.SetActive(false);
         this.gameObject.SetActive(false);
     }
@@ -139,7 +146,6 @@ public class PlaneController : MonoBehaviour
         resetPlane();
         resetSlider();
         plane.SetActive(false);
-        MaterialAssigner.assignMaterialToAllChildrenBelowIndex(plane, ModelHandler.segments, crossSectionalShader);
         this.gameObject.SetActive(false);
     }
 
@@ -147,27 +153,15 @@ public class PlaneController : MonoBehaviour
     /*Resets the position of the plane. It is done in a strange way, as simply attempting to reset its rotation once did not work.
     This is due to the way in which Unity represents the orientations of objects and I haven't been able to find a better way to solve the
     problem than this one.*/
-    public void resetPlane(){
-        for(int i = 0; i < 100; i++){
-            plane.transform.position = new Vector3(0, maxPlaneHeight, 0);
-            plane.transform.rotation = startRot;
-        }
-        StartCoroutine(resetPlaneHelper());
-    }
 
-    private IEnumerator resetPlaneHelper(){
-        yield return new WaitForEndOfFrame();
-        for(int i = 0; i < 100; i++){
-            plane.transform.position = new Vector3(0,maxPlaneHeight,0);
-            plane.transform.rotation = startRot;
-        }
-    }
+    /*Sets the correct slider position values for the position of the plane stored in the annotation being viewed.*/
     /*Every frame, the material on the model is updated with the new position and normal of the plane. This is passed as input to the shader, which determines
     which parts of the model will be drawn to the screen*/
     void Update()
     {
-        foreach(GameObject g in ModelHandler.segments){
+        foreach(GameObject g in ModelHandler.current.segments){
             MaterialAssigner.updatePlanePos(g, plane);
         }
     }
+
 }

@@ -46,6 +46,7 @@ public class Annotation : MonoBehaviour
             annotationPin.SetActive(false);
             numAnnotations++;
             hide();
+            confirmButton.onClick.RemoveAllListeners();
         });
         cancelButton.onClick.RemoveAllListeners();
         cancelButton.onClick.AddListener(() => {
@@ -56,6 +57,7 @@ public class Annotation : MonoBehaviour
 
     /*Called when the confirm button is pressed. Instantiates a new AnnotationData object, converts it to a JSON string and writes that string to a file.*/
     private void save(Vector3 pos){
+        Debug.Log("Save:");
         initialiseAnnotation(pos);
         writeAnnotationToJsonFile();
     }    
@@ -79,11 +81,12 @@ public class Annotation : MonoBehaviour
         data.planeNormal = plane.transform.up; //current plane normal (for saving cross sectional views)
         data.planePosition = plane.transform.position; //current plane position (for saving cross sectional views)
         data.colours = new List<Color>();
-        foreach(GameObject g in ModelHandler.segments)data.colours.Add(g.GetComponent<MeshRenderer>().material.color); //list of the colours (r,g,b,a) of the segments of the model being viewed
+        foreach(GameObject g in ModelHandler.current.segments)data.colours.Add(g.GetComponent<MeshRenderer>().material.color); //list of the colours (r,g,b,a) of the segments of the model being viewed
     }
 
     /*Convert the AnnotationData object to a string and write it to a file in a folder with the same name as the model currently being viewed*/
     private void writeAnnotationToJsonFile(){
+        Debug.Log("Hey I'm an annotation");
         String jsonAnnotation = JsonUtility.ToJson(data);
         string dirPath = Path.Combine(Application.dataPath, FileHelper.currentAnnotationFolder);
         if(!Directory.Exists(dirPath)){

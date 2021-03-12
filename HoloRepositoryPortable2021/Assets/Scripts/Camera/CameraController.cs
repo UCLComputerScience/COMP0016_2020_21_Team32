@@ -9,7 +9,7 @@ using System;
 ///
 ///Tutorial used to help make this class: https://www.youtube.com/watch?v=rDJOilo4Xrg&t=306s
 ///</summary>
-public class CameraController : MonoBehaviour
+public class CameraController : MonoBehaviour, IEventManagerListener
 {
     private const float CAMERA_TO_MODEL_RADIUS_RATIO = 350/178; //experimentally discovered value to move the camera in the z plane relative to the radius of the model loaded
     public static Vector3 startPos;
@@ -20,6 +20,16 @@ public class CameraController : MonoBehaviour
     private float cameraDistance;
     private float scrollSpeed; 
     public bool isEnabled = true;
+
+    /*Subscribes to certain events to determine when the camera controls should and shouldn't be enabled.*/
+    public void subscribeToEvents(){
+        EventManager.current.OnEnableCamera += EventManager_enableCamera;
+        EventManager.current.OnEnablePivot += EventManager_otherEvent;
+        EventManager.current.OnEnableCrossSection += EventManager_otherEvent;
+        EventManager.current.OnReset += EventManager_resetPosition;
+        EventManager.current.OnViewAnnotations += EventManager_otherEvent;
+        EventManager.current.OnAddAnnotations += EventManager_otherEvent;
+    }
     void Start() 
     {
         StartCoroutine(setCameraDistance()); //sets the position of the camera based on the size of the model loaded in 
@@ -55,17 +65,17 @@ public class CameraController : MonoBehaviour
             Camera.main.transform.Translate(displacement);
         /*Translate using keybinds. The amount translated is cached and reapplied each frame, offsetting the camera from its target position whenever the user rotates*/
         }else if(Input.GetKey(KeyCode.H)){
-            Camera.main.transform.position -= Camera.main.transform.right * 1.0f;
-            displacement -= Vector3.right*1.0f;
-        }else if (Input.GetKey(KeyCode.G)){
             Camera.main.transform.position += Camera.main.transform.right * 1.0f;
             displacement += Vector3.right*1.0f;
+        }else if (Input.GetKey(KeyCode.G)){
+            Camera.main.transform.position -= Camera.main.transform.right * 1.0f;
+            displacement -= Vector3.right*1.0f;
         }else if(Input.GetKey(KeyCode.Y)){
-            Camera.main.transform.position -= Camera.main.transform.up * 1.0f;
-            displacement -= Vector3.up*1.0f;
-        }else if(Input.GetKey(KeyCode.B)){
             Camera.main.transform.position += Camera.main.transform.up * 1.0f;
             displacement += Vector3.up*1.0f;
+        }else if(Input.GetKey(KeyCode.B)){
+            Camera.main.transform.position -= Camera.main.transform.up * 1.0f;
+            displacement -= Vector3.up*1.0f;
         }
         
     }
@@ -84,15 +94,7 @@ public class CameraController : MonoBehaviour
         startRot = Camera.main.transform.rotation;
         
     }
-    /*Subscribes to certain events to determine when the camera controls should and shouldn't be enabled.*/
-    private void subscribeToEvents(){
-        EventManager.current.OnEnableCamera += EventManager_enableCamera;
-        EventManager.current.OnEnablePivot += EventManager_otherEvent;
-        EventManager.current.OnEnableCrossSection += EventManager_otherEvent;
-        EventManager.current.OnReset += EventManager_resetPosition;
-        EventManager.current.OnViewAnnotations += EventManager_otherEvent;
-        EventManager.current.OnAddAnnotations += EventManager_otherEvent;
-    }
+
     public void EventManager_enableCamera(object sender, EventArgs e){
         isEnabled = true;
     }

@@ -8,6 +8,8 @@ public class GenerateLines : MonoBehaviour
     private LineRenderer xLine;
     private LineRenderer yLine;
     private LineRenderer zLine;
+    private float radiusToLineWidth = 750f;
+
 
     void Awake(){
         /*initialise variables*/
@@ -21,7 +23,8 @@ public class GenerateLines : MonoBehaviour
         line.material.SetColor("_Color", color); 
         line.useWorldSpace = true;
         line.sortingOrder = 5;
-        line.startWidth = line.endWidth = 0.2f;
+        Debug.Log(ModelHandler.current.modelRadius);
+        line.startWidth = line.endWidth = ModelHandler.current.modelRadius / radiusToLineWidth;
         line.startColor = line.endColor = color;
         line.SetPositions(new Vector3[]{-axisDir*5000, axisDir*5000}); //arbitrarily large length of line in the direction specified 
     }

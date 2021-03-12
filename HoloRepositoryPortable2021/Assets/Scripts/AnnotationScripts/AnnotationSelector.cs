@@ -11,8 +11,9 @@ using TMPro;
 ///This class allows the user to view the annotations made on a particular model by parsing all json files in the folder for 
 ///that model into annotation objects. The titles of these annotations are displayed as the options of the dropdown list. 
 ///<summary>
-public class AnnotationSelector : MonoBehaviour
+public class AnnotationSelector : MonoBehaviour, IEventManagerListener 
 {
+    
     public GameObject plane; 
     public TMP_Dropdown dropdown;
     public GameObject annotationTextBox;
@@ -22,6 +23,19 @@ public class AnnotationSelector : MonoBehaviour
     private TMP_Text annotationText;
     private List<AnnotationData> annotations;
     private List<string> annotationTitles;
+    
+    /*Subscribe to the relevant events. Ensures that the DropDown menu does not remain visible if another button on the navigation bar is pressed - helps
+    to keep the UI less cluttered when using the other features*/
+    public void subscribeToEvents(){
+        EventManager.current.OnEnableCamera += otherEvent;
+        EventManager.current.OnEnablePivot += otherEvent;
+        EventManager.current.OnEnableCrossSection += otherEvent;
+        EventManager.current.OnEnableDicom += otherEvent;
+        EventManager.current.OnReset += otherEvent;
+        EventManager.current.OnViewAnnotations += EventManager_onViewAnnotations;
+        EventManager.current.OnAddAnnotations += otherEvent;
+        EventManager.current.OnChangeSettings+=otherEvent;
+    }
     void Awake(){
         /*initialise variables*/
         shader = Shader.Find("Custom/Clipping");
@@ -62,9 +76,9 @@ public class AnnotationSelector : MonoBehaviour
             plane.transform.up = annotations[index].planeNormal; 
 
             //reassign the material (with the updated plane's position and colours stored in the annotation) to the model
-            MaterialAssigner.assignMaterialToAllChildrenBelowIndex(plane, ModelHandler.segments,shader);
-            for(int i = 0; i < ModelHandler.segments.Count(); i++){
-                MaterialAssigner.changeColour(ModelHandler.segments[i], annotations[index].colours[i]);
+            MaterialAssigner.assignToAllChildren(plane, ModelHandler.current.segments,shader);
+            for(int i = 0; i < ModelHandler.current.segments.Count(); i++){
+                MaterialAssigner.changeColour(ModelHandler.current.segments[i], annotations[index].colours[i]);
             }
         }
 
@@ -87,7 +101,6 @@ public class AnnotationSelector : MonoBehaviour
         
         foreach (FileInfo f in info){
             if(!f.Exists)f.Create();
-            Debug.Log(f.FullName);
             String jsonToParse = File.ReadAllText(f.FullName); //read all the text in the json file into a string
             annotations.Add(JsonUtility.FromJson<AnnotationData>(jsonToParse) as AnnotationData); //parse the string into an AnnotationData object and store it in a list
         }
@@ -98,18 +111,6 @@ public class AnnotationSelector : MonoBehaviour
         }
         annotations.Insert(0, new AnnotationData());
         dropdown.AddOptions(annotationTitles);
-    }
-
-    /*Subscribe to the relevant events. Ensures that the DropDown menu does not remain visible if another button on the navigation bar is pressed - helps
-    to keep the UI less cluttered when using the other features*/
-    private void subscribeToEvents(){
-        EventManager.current.OnEnableCamera += otherEvent;
-        EventManager.current.OnEnablePivot += otherEvent;
-        EventManager.current.OnEnableCrossSection += otherEvent;
-        EventManager.current.OnEnableDicom += otherEvent;
-        EventManager.current.OnReset += otherEvent;
-        EventManager.current.OnViewAnnotations += EventManager_onViewAnnotations;
-        EventManager.current.OnAddAnnotations += otherEvent;
     }
 
     /*When an onViewAnnotations event is received the dropdown menu is set to active and its 

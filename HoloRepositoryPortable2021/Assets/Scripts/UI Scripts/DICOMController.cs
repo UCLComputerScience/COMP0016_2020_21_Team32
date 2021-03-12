@@ -60,7 +60,6 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
     public void openFileExplorer(){
         var extension = new [] {new ExtensionFilter("DICOM", "dcm")};
         paths = StandaloneFileBrowser.OpenFilePanel("Select one or multiple dcm files", "", extension, true);
-        input = paths[0];
         updateImages();
     }
 
@@ -102,6 +101,8 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
     // }
     private void updateImages(){
         if(paths.Length == 0){ //If the user presses cancel in the fileExplorer disable the controller
+            ToolTip.current.gameObject.SetActive(false);
+            Debug.Log(true);
             paths = null;
             EventManager.current.onEnableCamera();
             this.gameObject.SetActive(false);

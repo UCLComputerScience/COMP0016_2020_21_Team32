@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+///<summary>Defines the behaviour of the opacity slider</summary>
 public class OpacitySlider : MonoBehaviour
 {
     Slider slider;

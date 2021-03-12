@@ -10,15 +10,20 @@ public static class MaterialAssigner
 
     #region public methods
 
-    /*Assigns a certain material to all segments in a list below index*/
+    /*Assigns a certain material to all segments*/
     public static void assignMaterialToAllChildrenBelowIndex(GameObject plane, List<GameObject> segments, Shader shader, int index =0,float opacity = 1.0f){
         for(int i = segments.Count - 1 - index; i !=-1; i--){
-            Debug.Log(i +" "+ segments[i].name);
             if(segments[i].GetComponent<Renderer>() != null)
             {
-                Debug.Log(segments[i].name);
                 assignNewMaterial(plane, segments[i], segments.Count - i, shader);
 
+            }
+        }
+    }
+    public static void assignToAllChildren(GameObject plane, List<GameObject> segments, Shader shader){
+        for(int i = 0; i < segments.Count; i++){
+            if(segments[i].GetComponent<Renderer>() != null){
+                assignNewMaterial(plane, segments[i], i, shader);
             }
         }
     }
@@ -51,7 +56,7 @@ public static class MaterialAssigner
     /*Resets the opacities of the segments - has no effect if not called after the above method*/
     public static void resetOpacities(List<GameObject> segments){
         if(opacities.Count > 0){
-            foreach(GameObject g in ModelHandler.current.organ.segments){
+            foreach(GameObject g in segments){
                 Renderer r = g.GetComponent<Renderer>();
                 r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, opacities.Pop());
             }
@@ -88,7 +93,7 @@ public static class MaterialAssigner
         mat.SetTexture("_MainTex", t);
         mat.SetVector("_PlanePosition", plane.transform.position); 
         mat.SetVector("_PlaneNormal", plane.transform.up);
-        mat.renderQueue = 3000 + i*20;
+        mat.renderQueue = 3000 - i*20;
         child.GetComponent<Renderer>().material = mat;
     }
     

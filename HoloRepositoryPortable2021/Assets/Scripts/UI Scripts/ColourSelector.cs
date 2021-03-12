@@ -47,8 +47,6 @@ public class ColourSelector : MonoBehaviour
         //The origin of our image's RectTransform is at its centre. The pixel data of the texture is stored in a 2D array with
         //the first element in the bottom left, so the pointer's position must be recalculated to ensure that it samples the 
         //correct pixel.
-        //V
-
         mousePos.x = Mathf.Clamp (0,(int)(((mousePos.x-rect.rect.x)*colours.width)/rect.rect.width),colours.width);
         mousePos.y = Mathf.Clamp (0,(int)(((mousePos.y-rect.rect.y)*colours.height)/rect.rect.height),colours.height);
 

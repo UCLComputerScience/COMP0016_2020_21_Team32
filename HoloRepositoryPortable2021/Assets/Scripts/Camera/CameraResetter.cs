@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 ///<Summary>This class handles resetting the position of the camera via means of linear interpolation</summary>
-public class CameraResetter : MonoBehaviour
+public class CameraResetter : MonoBehaviour, IEventManagerListener
 {
     public float travelTime = 2;
     Vector3 startPos;
@@ -15,6 +15,19 @@ public class CameraResetter : MonoBehaviour
     Quaternion targetRot;
     float timeElapsed;
     public bool isEnabled = false;
+
+
+    /*Ensures this script is only enabled when the relevant event is received.*/
+    public void subscribeToEvents(){
+        EventManager.current.OnEnableCamera += otherEvent;
+        EventManager.current.OnEnablePivot += otherEvent;
+        EventManager.current.OnEnableCrossSection += otherEvent;
+        EventManager.current.OnEnableDicom += otherEvent;
+        EventManager.current.OnReset += EventManager_OnReset;
+        EventManager.current.OnViewAnnotations += otherEvent;
+        EventManager.current.OnAddAnnotations += otherEvent;
+        EventManager.current.OnEnableDicom += otherEvent;
+    }
     void Start(){
         subscribeToEvents();    
     }
@@ -47,15 +60,5 @@ public class CameraResetter : MonoBehaviour
     public void otherEvent(object sender, EventArgs e){
         isEnabled = false;
     }
-    /*Ensures this script is only enabled when the relevant event is received.*/
-    private void subscribeToEvents(){
-        EventManager.current.OnEnableCamera += otherEvent;
-        EventManager.current.OnEnablePivot += otherEvent;
-        EventManager.current.OnEnableCrossSection += otherEvent;
-        EventManager.current.OnEnableDicom += otherEvent;
-        EventManager.current.OnReset += EventManager_OnReset;
-        EventManager.current.OnViewAnnotations += otherEvent;
-        EventManager.current.OnAddAnnotations += otherEvent;
-        EventManager.current.OnEnableDicom += otherEvent;
-    }
+
 }

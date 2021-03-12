@@ -10,14 +10,14 @@ using Siccity.GLTFUtility;
 ///<summary>This class uses the OrganFactory to load in the model and helps to otherwise initialise the model and scene based on the model that is loaded in. 
 ///The radius of the model is calculated here, and the segments of the model are loaded into a list. The list and radius are kept public and static as they are
 ///needed by many other classes.</summary>
-public class ModelHandler : MonoBehaviour // This class should be a singleton
+public class ModelHandler : MonoBehaviour, IEventManagerListener 
 {
     public static ModelHandler current;
     public float modelRadius; 
     public Vector3 modelCentre;
     public Organ organ; 
     public GameObject plane; 
-    public static List<GameObject> segments;
+    public List<GameObject> segments;
     public Shader crossSectionalShader;
     private GameObject loadedModel = null;
     private float segOpacity;
@@ -35,11 +35,14 @@ public class ModelHandler : MonoBehaviour // This class should be a singleton
         currentlySelected = 0;
         segments = new List<GameObject>();
         crossSectionalShader = Shader.Find("Custom/Clipping");
-
-        //this.opacitySlider.onValueChanged.AddListener(AdjustOpacity);
         StartCoroutine(loadModel());
         
     }
+    public void subscribeToEvents(){
+        EventManager.current.OnColourSelect+=EventManager_onColourSelect;
+        EventManager.current.OnChangeOpacity+=EventManager_onAdjustOpacity;
+        EventManager.current.OnSegmentSelect+=EventManager_onSelectSegment;
+    }  
     void Start(){
         subscribeToEvents();
     }
@@ -49,21 +52,20 @@ public class ModelHandler : MonoBehaviour // This class should be a singleton
     (ie, so that the initialiseModel() is not called on a model that has not yet loaded in) ->
     control is returned to the caller until the model is loaded in.
     */
-
-    private void OnFinishAsync(GameObject result, AnimationClip[] clips) {
-        loadedModel = result;
-    }
     private IEnumerator loadModel(){
-        Importer.LoadFromFileAsync(FileHelper.currentModelFileName, new ImportSettings(), OnFinishAsync);
+        Importer.LoadFromFileAsync(FileHelper.currentModelFileName, new ImportSettings(), onLoaded); //GLTFUtility call
         yield return new WaitUntil(() => (loadedModel != null));
         organ = OrganFactory.GetOrgan(FileHelper.currentAnnotationFolder, loadedModel);
         yield return new WaitUntil(() => (organ.model != null));
         organ.initialiseModel(this.gameObject);
         segments = organ.segments;
-        MaterialAssigner.assignMaterialToAllChildrenBelowIndex(plane, segments, crossSectionalShader);
+        MaterialAssigner.assignToAllChildren(plane, segments, crossSectionalShader);
         Bounds modelBounds = getModelBounds();
         modelRadius = modelBounds.extents.magnitude;
         modelCentre = modelBounds.center; 
+    }
+    private void onLoaded(GameObject result, AnimationClip[] clips) {
+        loadedModel = result;
     }
     private Bounds getModelBounds(){
         Bounds combinedBounds = new Bounds();
@@ -71,18 +73,14 @@ public class ModelHandler : MonoBehaviour // This class should be a singleton
         foreach(Renderer r in renderers)combinedBounds.Encapsulate(r.bounds);
         return combinedBounds;
     }
-    private void subscribeToEvents(){
-        EventManager.current.OnColourSelect += EventManager_onColourSelect;
-        EventManager.current.OnChangeOpacity+=EventManager_onAdjustOpacity;
-        EventManager.current.OnSegmentSelect+=EventManager_onSelectSegment;
-    }  
 
     /*Called whenever the opacity slider is moved. Changes the opacity of the currently selected segment*/
     private void EventManager_onAdjustOpacity(object sender, EventArgsFloat e){
         if(segments[currentlySelected] != null){
-            segOpacity = MaterialAssigner.adjustOpacity(e.data, segments, currentlySelected, minOpacity);
+            segOpacity = MaterialAssigner.adjustOpacity(e.value, segments, currentlySelected, minOpacity);
         }
     }
+    /*Called whenever the segment select button is pushed.*/
     private void EventManager_onSelectSegment(object sender, EventArgs e){
         if(currentlySelected == segments.Count-1)currentlySelected = 0;
         else currentlySelected++;

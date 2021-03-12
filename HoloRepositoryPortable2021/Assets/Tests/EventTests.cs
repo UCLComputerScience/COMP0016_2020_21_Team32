@@ -130,6 +130,7 @@ namespace Tests
         public IEnumerator tearDown(){
             Object.Destroy(modelHandler);
             Object.Destroy(eventManager);
+            Object.Destroy(eventListener);
             yield return new ExitPlayMode();
         }
 
@@ -217,17 +218,6 @@ namespace Tests
             Assert.True(planeController.activeInHierarchy);
         }
 
-        [UnityTest]
-        public IEnumerator EventManger_onChangeSettings(){
-            var uiManager = eventListener.AddComponent<UIManager>();
-            var settingsController = new GameObject();
-            uiManager.settingsController = settingsController;
-            settingsController.SetActive(false);
-            eventListener.SetActive(true);
-            yield return null;
-            eventManager.onChangeSettings();
-            Assert.True(settingsController.activeInHierarchy);
-        }
         [UnityTest]
         public IEnumerator EventManager_onEnableUIBlocker(){
             Debug.Log(eventManager);
@@ -337,12 +327,12 @@ namespace Tests
         public IEnumerator EventManager_onColourSelect(){
             eventListener.SetActive(true);
             Color newCol = new Color(1f,0f,0f,1f); //set new colour red
-            yield return new  WaitUntil(() => ModelHandler.segments !=null);
-            Color initialColour = ModelHandler.segments[0].GetComponent<Renderer>().material.color = new Color(0f,1f,0f,1f); //set initial colour green
+            yield return new  WaitUntil(() => ModelHandler.current.organ !=null && ModelHandler.current.modelRadius != 0); //wait for model to be loaded
+            Color initialColour = ModelHandler.current.segments[0].GetComponent<Renderer>().material.color = new Color(0f,1f,0f,1f); //set initial colour green
             Assert.AreNotEqual(initialColour, newCol);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
             
             eventManager.onColourSelect(newCol);
-            Assert.AreEqual(newCol, ModelHandler.segments[0].GetComponent<Renderer>().material.color);
+            Assert.AreEqual(newCol, ModelHandler.current.segments[0].GetComponent<Renderer>().material.color);
         }
         [UnityTest]
         public IEnumerator EventManager_onChangeOpacity(){
@@ -350,11 +340,23 @@ namespace Tests
             Color initialColour = new Color(0f, 1f, 0f, 1f);
             float newOp = 0.5f;
             Color colourAfterEvent = new Color(0f, 1f, 0f, newOp);
-            yield return new  WaitUntil(() => ModelHandler.segments !=null);
-            ModelHandler.segments[0].GetComponent<Renderer>().material.color = initialColour; //set initial colour green
+            yield return new  WaitUntil(() => ModelHandler.current.organ !=null && ModelHandler.current.modelRadius != 0); //wait for model to be loaded
+            ModelHandler.current.segments[0].GetComponent<Renderer>().material.color = initialColour; //set initial colour green
             Assert.AreNotEqual(initialColour, colourAfterEvent);
             eventManager.onChangeOpacity(newOp);
-            Assert.AreEqual(colourAfterEvent, ModelHandler.segments[0].GetComponent<Renderer>().material.color);
+            Assert.AreEqual(colourAfterEvent, ModelHandler.current.segments[0].GetComponent<Renderer>().material.color);
+        }
+
+        [UnityTest]
+        public IEnumerator EventManger_onChangeSettings(){
+            var uiManager = eventListener.AddComponent<UIManager>();
+            var settingsController = new GameObject();
+            uiManager.settingsController = settingsController;
+            settingsController.SetActive(false);
+            eventListener.SetActive(true);
+            yield return new WaitForSeconds(0.2f);
+            eventManager.onChangeSettings();
+            Assert.True(settingsController.activeInHierarchy);
         }
         
         // [UnityTest]

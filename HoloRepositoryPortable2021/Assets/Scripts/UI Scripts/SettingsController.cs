@@ -56,6 +56,7 @@ public class SettingsController : MonoBehaviour
     private void hide(){
         this.gameObject.SetActive(false);
         ToolTip.current.gameObject.SetActive(false);
+        EventManager.current.onEnableCamera();
     }
     private void enablePanel(){
         aboutPanel.SetActive(true);
