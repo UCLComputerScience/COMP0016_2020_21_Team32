@@ -1,5 +1,5 @@
 ﻿# HoloRepository Portable 2021
-The HoloRepository Portable 2021 is a portable, Windows-based 3D medical-model viewer application built in Unity. 
+The HoloRepository Portable 2021 is a portable, Windows-based 3D medical model viewer application built in Unity. 
 It aims to provide a convenient way for clinicians and educators to view, manipulate and store information about 3D models.
 
 # Running the application as a user
