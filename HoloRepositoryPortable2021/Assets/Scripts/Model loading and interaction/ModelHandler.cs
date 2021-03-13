@@ -42,6 +42,7 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
         EventManager.current.OnColourSelect+=EventManager_onColourSelect;
         EventManager.current.OnChangeOpacity+=EventManager_onAdjustOpacity;
         EventManager.current.OnSegmentSelect+=EventManager_onSelectSegment;
+        EventManager.current.OnSelectAnnotation+=EventManager_onSelectAnnotation;
     }  
     void Start(){
         subscribeToEvents();
@@ -80,7 +81,7 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
             segOpacity = MaterialAssigner.adjustOpacity(e.value, segments, currentlySelected, minOpacity);
         }
     }
-    /*Called whenever the segment select button is pushed.*/
+    /*Called whenever the segment select button is clicked.*/
     private void EventManager_onSelectSegment(object sender, EventArgs e){
         if(currentlySelected == segments.Count-1)currentlySelected = 0;
         else currentlySelected++;
@@ -92,5 +93,15 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
         Color col = e.col;
         col.a = segOpacity;
         MaterialAssigner.changeColour(segments[currentlySelected], col);
+    }
+    private void EventManager_onSelectAnnotation(object sender, EventArgsAnnotation e){
+        //set the position of the plane and its normal (so that cross sections of the model can be saved)
+        plane.transform.position = e.data.planePosition;
+        plane.transform.up = e.data.planeNormal; 
+        //reassign the material (with the updated plane's position and colours stored in the annotation) to the model
+        MaterialAssigner.assignToAllChildren(plane, segments, crossSectionalShader);
+        for(int i = 0; i < segments.Count; i++){
+            MaterialAssigner.changeColour(segments[i], e.data.colours[i]);
+        }
     }
 }

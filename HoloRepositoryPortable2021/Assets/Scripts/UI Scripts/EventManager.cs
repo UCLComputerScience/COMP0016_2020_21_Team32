@@ -20,7 +20,7 @@ public class EventManager : MonoBehaviour
     public event EventHandler OnReset;
     public event EventHandler OnViewAnnotations;
     public event EventHandler OnAddAnnotations;
-    public event EventHandler OnSelectAnnotation;
+    public event EventHandler<EventArgsAnnotation> OnSelectAnnotation;
     public event EventHandler OnSegmentSelect;
     public event EventHandler<EventArgsColourData> OnColourSelect;
     public event EventHandler OnToggleOpacitySlider;
@@ -72,9 +72,6 @@ public class EventManager : MonoBehaviour
     public void onAddAnnotations(){
         OnAddAnnotations?.Invoke(this, EventArgs.Empty);
     }
-    public void onSelectAnnotation(){
-        OnSelectAnnotation?.Invoke(this, EventArgs.Empty);
-    }
     public void onToggleOpacitySlider(){
         OnToggleOpacitySlider?.Invoke(this, EventArgs.Empty);
     }
@@ -104,6 +101,10 @@ public class EventManager : MonoBehaviour
         EventArgsFloat e = new EventArgsFloat(op);
         OnChangeOpacity?.Invoke(this, e);
     }
+    public void onSelectAnnotation(AnnotationData annotation){
+        EventArgsAnnotation e = new EventArgsAnnotation(annotation);
+        OnSelectAnnotation?.Invoke(this, e);
+    }
 }
 public class EventArgsColourData : EventArgs{
     public Color col;
@@ -116,4 +117,11 @@ public class EventArgsFloat : EventArgs{
     public EventArgsFloat(float value){
         this.value = value;
     }
+}
+public class EventArgsAnnotation : EventArgs{
+    public AnnotationData data;
+    public EventArgsAnnotation(AnnotationData data){
+        this.data = data;
+    }
+
 }

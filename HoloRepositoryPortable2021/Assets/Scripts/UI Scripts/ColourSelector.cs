@@ -31,8 +31,6 @@ public class ColourSelector : MonoBehaviour
         rect = image.GetComponent<RectTransform>(); //RectTransform of the colour palette
         width = (int) rect.rect.width;
         height = (int) rect.rect.height;
-        print(width);
-        print(height);
         col = GetComponent<CircleCollider2D>();
     }
 
@@ -60,33 +58,10 @@ public class ColourSelector : MonoBehaviour
         }
     }
 
-    // void Update(){
-    //     RaycastHit2D hit;
-    //     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    //     if(Input.GetMouseButtonDown(0)){
-    //         hit = Physics2D.GetRayIntersection(ray);
-    //             Renderer renderer = hit.transform.GetComponent<Renderer>();
-    //             if(hit.transform == this.gameObject){
-    //                 Debug.Log("blapa");
-    //                 Texture2D tex = renderer.material.mainTexture as Texture2D;
-    //                 Vector2 localPos = this.transform.position - hit.transform.position;
-    //                 Vector2 uv = Vector2.zero;
-    //                 uv.x = localPos.x/tex.width * rect.rect.width;
-    //                 uv.y = localPos.y/tex.height * rect.rect.height;
-    //                 Color col = tex.GetPixel((int)uv.x, (int)uv.y);
-    //                 if(doubleClick(DOUBLE_CLICK_TIME)){
-    //                     EventManager.current.onColourSelect(col);
-    //                 }
-    //             }
-    //         }
-    //     }
-    
-
     //Determines the time between consecutive clicks by the user and returns true if this is less than the time allowed for a double click.
     private bool doubleClick(float maxDoubleClickTime){
         bool returnVal = false;
         float timeSinceLastClick = Time.time - lastTimeClicked;
-        print(timeSinceLastClick);
         if(timeSinceLastClick < maxDoubleClickTime){ 
             returnVal = true;
         }

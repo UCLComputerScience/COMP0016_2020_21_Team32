@@ -9,6 +9,7 @@ public abstract class Organ
 {    
     
     public GameObject model{get; set;} //The model itself
+    private List<Transform> segmentTransforms; //The children of the model (ie, its segments)
     public List<GameObject> segments{get; set;} 
     public Vector3 centrePos{get; protected set;} //how the model should be positioned relative to its parent
     public Quaternion centreRot{get; protected set;} //how the model should be orientated relative to its parent
@@ -21,11 +22,12 @@ public abstract class Organ
         model.transform.SetParent(parent.transform);
         model.transform.localPosition = centrePos;
         model.transform.localRotation = centreRot;
-        segments = model.GetComponentsInChildren<Transform>().Select(child => child.gameObject).ToList<GameObject>();
-        foreach(GameObject g in segments){
-            if(g.GetComponent<Renderer>() != null)segments.Add(g);
-            else if(g.GetComponent<Camera>() != null)g.SetActive(false);
+        segmentTransforms = model.GetComponentsInChildren<Transform>().ToList();
+        segments = new List<GameObject>();
+        foreach(Transform t in segmentTransforms){
+            if(t.gameObject.GetComponent<Renderer>() != null)segments.Add(t.gameObject);
+            else if(t.gameObject.GetComponent<Camera>() != null)t.gameObject.SetActive(false);
         }
     }
-    // return dir.GetFiles(searchPattern).Select(f => f.Name).ToList<string>();
+    
 }

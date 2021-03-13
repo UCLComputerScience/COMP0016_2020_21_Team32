@@ -358,26 +358,19 @@ namespace Tests
             eventManager.onChangeSettings();
             Assert.True(settingsController.activeInHierarchy);
         }
-        
-        // [UnityTest]
-        // public IEnumerator EventManager_onToggleSegmentSelect(){
-        //     var uiManager = eventListener.AddComponent<UIManager>();
-        //     bool startState = segmentSelectButton.activeInHierarchy;
-        //     yield return new WaitUntil(()=> uiManager != null);
-        //     eventManager.onToggleSegmentSelect();
-        //     Assert.False(segmentSelectButton.activeInHierarchy == startState);
-        // }
-        
-    
-        // [UnityTest]
-        // public IEnumerator EventManagerTest_onViewAnnotation(){
-        //     initialiseTestScene();
-        //     loadModel();
-        //     dropdown.SetActive(false);
-        //     var selector = eventListener.AddComponent<AnnotationSelector>();
-        //     yield return new WaitUntil(()=> selector != null);
-        //     eventManager.onViewAnnotations();
-        //     Assert.True(dropdown.activeInHierarchy);
-        // }
+        [UnityTest]
+        public IEnumerator EventManager_onSegmentSelect(){
+            eventListener.SetActive(true);
+            Color initialColour = Color.red; 
+            Color finalColour = Color.green;
+            yield return new WaitUntil(()=>ModelHandler.current.organ !=null && ModelHandler.current.modelRadius != 0);
+            ModelHandler.current.segments[0].GetComponent<Renderer>().material.color = initialColour;
+            ModelHandler.current.segments[1].GetComponent<Renderer>().material.color = initialColour;
+            eventManager.onColourSelect(finalColour);
+            eventManager.onSegmentSelect();
+            eventManager.onColourSelect(finalColour);
+            Assert.AreEqual(ModelHandler.current.segments[0].GetComponent<Renderer>().material.color, finalColour);
+            Assert.AreEqual(ModelHandler.current.segments[1].GetComponent<Renderer>().material.color, finalColour);
+        }
     }
 }

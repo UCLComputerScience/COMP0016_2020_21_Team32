@@ -29,6 +29,7 @@ public class CameraController : MonoBehaviour, IEventManagerListener
         EventManager.current.OnReset += EventManager_resetPosition;
         EventManager.current.OnViewAnnotations += EventManager_otherEvent;
         EventManager.current.OnAddAnnotations += EventManager_otherEvent;
+        EventManager.current.OnSelectAnnotation += EventManager_onSelectAnnotation;
     }
     void Start() 
     {
@@ -91,13 +92,16 @@ public class CameraController : MonoBehaviour, IEventManagerListener
         Camera.main.transform.Translate(displacement);
         startPos = Camera.main.transform.position;
         startRot = Camera.main.transform.rotation;
-        
     }
 
     public void EventManager_enableCamera(object sender, EventArgs e){
         isEnabled = true;
     }
-
+    public void EventManager_onSelectAnnotation(object sender, EventArgsAnnotation e){
+        Camera.main.transform.position = e.data.cameraCoordinates;
+        Camera.main.transform.rotation = e.data.cameraRotation;
+        displacement = e.data.cameraDisplacement;
+    }
 
     /*camera is disabled whenever another event is received*/
     public void EventManager_otherEvent(object sender, EventArgs e){

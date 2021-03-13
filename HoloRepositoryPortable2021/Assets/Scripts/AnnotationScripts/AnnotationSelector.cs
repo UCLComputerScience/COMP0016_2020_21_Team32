@@ -14,11 +14,8 @@ using TMPro;
 public class AnnotationSelector : MonoBehaviour, IEventManagerListener 
 {
     
-    public GameObject plane; 
     public TMP_Dropdown dropdown;
     public GameObject annotationTextBox;
-    private Shader shader;
-    
     private FileHelper fileHelper;
     private TMP_Text annotationText;
     private List<AnnotationData> annotations;
@@ -38,7 +35,6 @@ public class AnnotationSelector : MonoBehaviour, IEventManagerListener
     }
     void Awake(){
         /*initialise variables*/
-        shader = Shader.Find("Custom/Clipping");
         annotationText = annotationTextBox.GetComponentInChildren<TMP_Text>(true);
         annotations = new List<AnnotationData>();
         annotationTitles = new List<string>();
@@ -55,33 +51,10 @@ public class AnnotationSelector : MonoBehaviour, IEventManagerListener
     an option will load the state of the scene that was stored in the corresponding AnnotationData object.*/
     public void onIndexChanged(int index){
         if(index != 0){
-            //ensures the position of the textbox is consistent regardless of the screen size
-            float scaledXPos = annotations[index].annotationPosition.x * Screen.width/annotations[index].screenDimensions.x;
-            float scaledYPos = annotations[index].annotationPosition.y * Screen.height/annotations[index].screenDimensions.y;
-            Vector2 scaledPos = new Vector2(scaledXPos, scaledYPos);   
-            
-            //load the camera coordinates in which the annotation was made
-            Camera.main.gameObject.transform.position = annotations[index].cameraCoordinates;
-            Camera.main.gameObject.transform.rotation = annotations[index].cameraRotation;
-            CameraController.displacement = annotations[index].cameraDisplacement;
 
-            //set the text contained within the annotation and display in a transparent textbox
-            annotationText.text = annotations[index].text;
-            annotationTextBox.gameObject.transform.position = scaledPos;
-            annotationText.gameObject.SetActive(true);
-            annotationTextBox.SetActive(true);
-
-            //set the position of the plane and its normal (so that cross sections of the model can be saved)
-            plane.transform.position = annotations[index].planePosition;
-            plane.transform.up = annotations[index].planeNormal; 
-
-            //reassign the material (with the updated plane's position and colours stored in the annotation) to the model
-            MaterialAssigner.assignToAllChildren(plane, ModelHandler.current.segments,shader);
-            for(int i = 0; i < ModelHandler.current.segments.Count(); i++){
-                MaterialAssigner.changeColour(ModelHandler.current.segments[i], annotations[index].colours[i]);
-            }
+            EventManager.current.onSelectAnnotation(annotations[index]);
+            setAnnotationTextBoxPosition(annotations[index]);   
         }
-
     }
 
     /*Searches the Application.datapath (in builds, this is the HoloRepositoryPortable_Data folder, in the editor this is the assets folder)
@@ -111,6 +84,16 @@ public class AnnotationSelector : MonoBehaviour, IEventManagerListener
         }
         annotations.Insert(0, new AnnotationData());
         dropdown.AddOptions(annotationTitles);
+    }
+    //Enables the annotation textbox and ensures the position of the textbox is consistent regardless of the screen size
+    private void setAnnotationTextBoxPosition(AnnotationData data){
+        float scaledXPos = data.annotationPosition.x * Screen.width/data.screenDimensions.x;
+        float scaledYPos = data.annotationPosition.y * Screen.height/data.screenDimensions.y;
+        Vector2 scaledPos = new Vector2(scaledXPos, scaledYPos);
+        annotationText.text = data.text;
+        annotationTextBox.gameObject.transform.position = scaledPos;
+        annotationText.gameObject.SetActive(true);
+        annotationTextBox.SetActive(true);
     }
 
     /*When an onViewAnnotations event is received the dropdown menu is set to active and its 

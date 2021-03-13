@@ -1048,7 +1048,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f31f01898d0c784b9abd35078fa8582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1187458708}
 --- !u!224 &384578135 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 703511364032109823, guid: 29404e3a6c5a62141b61a63b1590f386, type: 3}
@@ -2249,7 +2248,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5a4d72a0b6e384a84adbe576ac6fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plane: {fileID: 1548939258}
   dropdown: {fileID: 590013993}
   annotationTextBox: {fileID: 96170353}
 --- !u!1 &623556751
@@ -6171,7 +6169,7 @@ GameObject:
   - component: {fileID: 1754850716}
   - component: {fileID: 1754850715}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Loading
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7442,14 +7440,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.43137255}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 92083d70319936e4baa8c21bf8bc94e8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7569e4077e7ef444f8a5612a68134fda, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

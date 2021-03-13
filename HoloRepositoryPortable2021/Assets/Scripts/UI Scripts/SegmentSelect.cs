@@ -8,7 +8,7 @@ using TMPro;
 ///When the user presses the button, the currently selected button changes.</summary>
 public class SegmentSelect : MonoBehaviour
 {
-    [SerializeField] private TMP_Text text;
+    private TMP_Text text;
     List<string> segments;
     int currentSegment;
     Button segmentSelect;
