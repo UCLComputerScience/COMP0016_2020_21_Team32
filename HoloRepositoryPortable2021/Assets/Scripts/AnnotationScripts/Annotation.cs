@@ -80,7 +80,7 @@ public class Annotation : MonoBehaviour
         data.planeNormal = plane.transform.up; //current plane normal (for saving cross sectional views)
         data.planePosition = plane.transform.position; //current plane position (for saving cross sectional views)
         data.colours = new List<Color>();
-        foreach(GameObject g in ModelHandler.current.segments)data.colours.Add(g.GetComponent<MeshRenderer>().material.color); //list of the colours (r,g,b,a) of the segments of the model being viewed
+        foreach(GameObject g in ModelHandler.current.segments)data.colours.Add(g.GetComponent<MeshRenderer>().material.color); //list of the colours (r,g,b,a) of the segments) 
     }
 
     /*Convert the AnnotationData object to a string and write it to a file in a folder with the same name as the model currently being viewed*/

@@ -11,16 +11,15 @@ using PixelId = itk.simple.PixelIDValueEnum;
 
 ///<summary>This class provides a method to read in DICOM data and convert it into a texture2D.
 ///Relies on the SimpleImageToolKit</summary>
-public class DicomToTexture2D 
-{
+public class DicomToPNG{
     private int targetWidth;
     private int targetHeight;
-    public DicomToTexture2D(int targetWidth, int targetHeight){
+    public DicomToPNG(int targetWidth, int targetHeight){
         this.targetWidth = targetWidth;
         this.targetHeight = targetHeight;
     }
 
-    /*Converts a .dcm into a SITK Image object, which is then temporarily written to a png before being loaded into a texture2D*/
+    /*Converts a .dcm into a SITK Image object, which is then written to a png*/
     public Texture2D ReadDICOM(string inputfile){
         var imageFileReader = new itk.simple.ImageFileReader();
         imageFileReader.SetImageIO("GDCMImageIO");
@@ -38,14 +37,13 @@ public class DicomToTexture2D
             }
             image = SimpleITK.Cast(image, PixelId.sitkUInt8);
         }
-        string tempFile = Application.dataPath + Path.DirectorySeparatorChar + "temp.png";
+        string tempFile = Path.Combine(Application.dataPath, "temp.png");
         SimpleITK.WriteImage(image, tempFile);
         
         Texture2D texture = new Texture2D(this.targetWidth, this.targetHeight);
         texture.LoadImage(File.ReadAllBytes(tempFile));
         File.Delete(tempFile);
         return texture;
-
     }
     // public Texture2D bullshit(string inputfile){
     //     System.Drawing.Image image = Iamge

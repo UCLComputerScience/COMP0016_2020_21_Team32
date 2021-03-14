@@ -55,7 +55,7 @@ Shader "Custom/Clipping" {
          {
            v2f o;      
            o.worldPos =  mul(unity_ObjectToWorld, v.vertex); //matrix multiplication - transforms object space position (v.vertex) to world space
-           o.pos = UnityObjectToClipPos (v.vertex); //transforms object space position to "clip space"
+             o.pos = UnityObjectToClipPos (v.vertex); //transforms object space position to "clip space"
            return o;
          }
 

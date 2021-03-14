@@ -10,8 +10,7 @@ using System.IO;
 ///<summary>This script is attached to the  DICOMController prefab and provides it with interactivity. The user can load in </summary>
 public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler 
 {
-    #region variableDeclaration 
-    private DicomToTexture2D converter;
+    private DicomToPNG converter;
     private Button hideButton;
     private Button loadButton;
     private Canvas canvas;
@@ -25,7 +24,6 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
     private RectTransform viewAreaRect;
     private string input;
     private Vector3 dragOffset;
-    #endregion variableDeclaration 
 
     /*Initialise variables*/
     void Awake(){
@@ -44,7 +42,7 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
         hideButton.onClick.AddListener(hide);
         loadButton.onClick.AddListener(openFileExplorer);
         //loadButton.onClick.AddListener(DicomToTexture2D.ReadDICOMopenDicom);
-        converter = new DicomToTexture2D((int)rectTransform.rect.width, (int)rectTransform.rect.height);
+        converter = new DicomToPNG((int)rectTransform.rect.width, (int)rectTransform.rect.height);
         outputPaths = new List<String>();
     }
 
@@ -89,13 +87,8 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
         images.Clear(); //clear existing images if loadButton is pressed
         outputPaths.Clear();
         foreach(String path in paths){
-            string outputfile = Application.dataPath + Path.DirectorySeparatorChar + path.Substring(path.LastIndexOf(Path.DirectorySeparatorChar)) + ".png";
+            string outputfile = Path.Combine(Application.dataPath, path.Substring(path.LastIndexOf(Path.DirectorySeparatorChar)) + ".png");
             images.Add(converter.ReadDICOM(path));
-        }
-        foreach(string path in outputPaths){
-            Texture2D tex = new Texture2D((int)rectTransform.rect.width, (int)rectTransform.rect.height);
-            tex.LoadImage(File.ReadAllBytes(path));
-            images.Add(tex);
         }
         StartCoroutine(initialiseSliderMaxValue());
     }
@@ -106,14 +99,6 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
         viewArea.texture = images[0]; //initialise the viewArea with the first selected dcm
         dicomSlider.maxValue = images.Count;
         EventManager.current.onEnableCamera();
-        StartCoroutine(deleteFiles());
-    }
-    private IEnumerator deleteFiles(){
-        yield return new WaitUntil(() => images.Count == outputPaths.Count);
-        foreach(string path in outputPaths){
-            File.Delete(path);
-        }
-        outputPaths.Clear();
     }
 
     /*Adjusting the slider will fire the onValueChanged UnityEvent, triggering this callback. It changes the dcm
@@ -121,11 +106,5 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
     public void viewImage(float index){
         if(index >= images.Count || index < 0)return;
         viewArea.texture = images[(int) index];
-    }
-    /*Called when the gameObject this script is attached to is destroyed. Deletes all pngs created.*/
-    void onDestory(){
-        foreach(string path in outputPaths){
-            File.Delete(path);
-        }
     }
 }

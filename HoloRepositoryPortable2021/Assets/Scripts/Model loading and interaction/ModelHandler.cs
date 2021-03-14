@@ -8,8 +8,7 @@ using UnityEditor;
 using Siccity.GLTFUtility;
 
 ///<summary>This class uses the OrganFactory to load in the model and helps to otherwise initialise the model and scene based on the model that is loaded in. 
-///The radius of the model is calculated here, and the segments of the model are loaded into a list. The list and radius are kept public and static as they are
-///needed by many other classes.</summary>
+///The radius of the model is calculated here, and the segments of the model are loaded into a list.</summary>
 public class ModelHandler : MonoBehaviour, IEventManagerListener 
 {
     public static ModelHandler current;
@@ -23,6 +22,13 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
     private float segOpacity;
     private float minOpacity;
     private int currentlySelected;
+
+    public void subscribeToEvents(){
+        EventManager.current.OnColourSelect+=EventManager_onColourSelect;
+        EventManager.current.OnChangeOpacity+=EventManager_onAdjustOpacity;
+        EventManager.current.OnSegmentSelect+=EventManager_onSelectSegment;
+        EventManager.current.OnSelectAnnotation+=EventManager_onSelectAnnotation;
+    }
     void Awake(){
         //singleton pattern
         if(current != null && current != this){
@@ -37,12 +43,6 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
         crossSectionalShader = Shader.Find("Custom/Clipping");
         StartCoroutine(loadModel());
         
-    }
-    public void subscribeToEvents(){
-        EventManager.current.OnColourSelect+=EventManager_onColourSelect;
-        EventManager.current.OnChangeOpacity+=EventManager_onAdjustOpacity;
-        EventManager.current.OnSegmentSelect+=EventManager_onSelectSegment;
-        EventManager.current.OnSelectAnnotation+=EventManager_onSelectAnnotation;
     }  
     void Start(){
         subscribeToEvents();

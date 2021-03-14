@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,15 +11,6 @@ public static class MaterialAssigner
     #region public methods
 
     /*Assigns a certain material to all segments*/
-    public static void assignMaterialToAllChildrenBelowIndex(GameObject plane, List<GameObject> segments, Shader shader, int index =0,float opacity = 1.0f){
-        for(int i = segments.Count - 1 - index; i !=-1; i--){
-            if(segments[i].GetComponent<Renderer>() != null)
-            {
-                assignNewMaterial(plane, segments[i], segments.Count - i, shader);
-
-            }
-        }
-    }
     public static void assignToAllChildren(GameObject plane, List<GameObject> segments, Shader shader){
         for(int i = 0; i < segments.Count; i++){
             if(segments[i].GetComponent<Renderer>() != null){
