@@ -327,7 +327,7 @@ namespace Tests
         public IEnumerator EventManager_onColourSelect(){
             eventListener.SetActive(true);
             Color newCol = new Color(1f,0f,0f,1f); //set new colour red
-            yield return new  WaitUntil(() => ModelHandler.current.organ !=null && ModelHandler.current.modelRadius != 0); //wait for model to be loaded
+            yield return new  WaitUntil(() => ModelHandler.current.modelRadius != 0); //wait for model to be loaded
             Color initialColour = ModelHandler.current.segments[0].GetComponent<Renderer>().material.color = new Color(0f,1f,0f,1f); //set initial colour green
             Assert.AreNotEqual(initialColour, newCol);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
             
@@ -340,7 +340,7 @@ namespace Tests
             Color initialColour = new Color(0f, 1f, 0f, 1f);
             float newOp = 0.5f;
             Color colourAfterEvent = new Color(0f, 1f, 0f, newOp);
-            yield return new  WaitUntil(() => ModelHandler.current.organ !=null && ModelHandler.current.modelRadius != 0); //wait for model to be loaded
+            yield return new  WaitUntil(() =>  ModelHandler.current.modelRadius != 0); //wait for model to be loaded
             ModelHandler.current.segments[0].GetComponent<Renderer>().material.color = initialColour; //set initial colour green
             Assert.AreNotEqual(initialColour, colourAfterEvent);
             eventManager.onChangeOpacity(newOp);
@@ -363,7 +363,7 @@ namespace Tests
             eventListener.SetActive(true);
             Color initialColour = Color.red; 
             Color finalColour = Color.green;
-            yield return new WaitUntil(()=>ModelHandler.current.organ !=null && ModelHandler.current.modelRadius != 0);
+            yield return new WaitUntil(()=> ModelHandler.current.modelRadius != 0);
             ModelHandler.current.segments[0].GetComponent<Renderer>().material.color = initialColour;
             ModelHandler.current.segments[1].GetComponent<Renderer>().material.color = initialColour;
             eventManager.onColourSelect(finalColour);

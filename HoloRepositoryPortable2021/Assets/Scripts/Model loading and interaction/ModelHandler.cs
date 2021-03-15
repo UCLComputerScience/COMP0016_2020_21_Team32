@@ -14,7 +14,7 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
     public static ModelHandler current;
     public float modelRadius; 
     public Vector3 modelCentre;
-    public Organ organ; 
+    private Organ organ; 
     public GameObject plane; 
     public List<GameObject> segments;
     public Shader crossSectionalShader;
@@ -42,30 +42,27 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
         segments = new List<GameObject>();
         crossSectionalShader = Shader.Find("Custom/Clipping");
         StartCoroutine(loadModel());
-        
     }  
     void Start(){
         subscribeToEvents();
     }
     /*
     Loads the appropriate model and sets it as a child to the gameObject this script is attatched to.
-    Done using a coroutine to prevent nullReferenceException errors being thrown 
+    Done using a coroutine so that the model is fully initialised before the script attempts to access it. 
     (ie, so that the initialiseModel() is not called on a model that has not yet loaded in) ->
     control is returned to the caller until the model is loaded in.
     */
     private IEnumerator loadModel(){
-        Importer.LoadFromFileAsync(FileHelper.currentModelFileName, new ImportSettings(), onLoaded); //GLTFUtility call
-        yield return new WaitUntil(() => (loadedModel != null));
-        organ = OrganFactory.GetOrgan(FileHelper.currentAnnotationFolder, loadedModel);
-        yield return new WaitUntil(() => (organ.model != null));
-        organ.initialiseModel(this.gameObject);
-        segments = organ.segments;
+        organ = OrganFactory.GetOrgan(); //Factory pattern - returns the appropriate subcass of Organ based on the model selected by the user
+        yield return new WaitUntil(() => organ.model != null);
+        organ.setParent(this.gameObject);
+        segments = organ.segments; //make segments public to other classes
         MaterialAssigner.assignToAllChildren(plane, segments, crossSectionalShader);
         Bounds modelBounds = getModelBounds();
         modelRadius = modelBounds.extents.magnitude;
         modelCentre = modelBounds.center; 
     }
-    private void onLoaded(GameObject result, AnimationClip[] clips) {
+    private void onLoaded(GameObject result,AnimationClip[] clips) { //passed as a callback action to the LoadFromFileAsync
         loadedModel = result;
     }
     private Bounds getModelBounds(){
@@ -78,7 +75,7 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
     /*Called whenever the opacity slider is moved. Changes the opacity of the currently selected segment*/
     private void EventManager_onAdjustOpacity(object sender, EventArgsFloat e){
         if(segments[currentlySelected] != null){
-            segOpacity = MaterialAssigner.adjustOpacity(e.value, segments, currentlySelected, minOpacity);
+            segOpacity = MaterialAssigner.adjustOpacity(e.value, segments[currentlySelected], minOpacity);
         }
     }
     /*Called whenever the segment select button is clicked.*/

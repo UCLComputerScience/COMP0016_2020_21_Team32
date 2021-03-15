@@ -20,13 +20,16 @@ public static class MaterialAssigner
     }
 
     /*Adjusts the opacity of the desired segment from a list of segments. The renderer of the segment is disabled if it goes below minOpacity to optimise performance*/
-    public static float adjustOpacity(float newOpacity, List<GameObject> segments, int segmentIndex, float minOpacity) {
-        Color color = segments[segmentIndex].GetComponent<Renderer>().material.color;
+    public static float adjustOpacity(float newOpacity, GameObject segment, float minOpacity) {
+        Color color = segment.GetComponent<Renderer>().material.color;
         color.a = newOpacity;
-        if(color.a < minOpacity)segments[segmentIndex].GetComponent<Renderer>().enabled = false;
-        else{
-            if(segments[segmentIndex].GetComponent<Renderer>().enabled == false)segments[segmentIndex].GetComponent<MeshRenderer>().enabled = true;
-            segments[segmentIndex].GetComponent<Renderer>().material.SetColor("_Color", color);
+        if(color.a < minOpacity){
+            segment.GetComponent<Renderer>().enabled = false;
+        }else{
+            if(segment.GetComponent<Renderer>().enabled == false){
+                segment.GetComponent<MeshRenderer>().enabled = true;
+            }
+            segment.GetComponent<Renderer>().material.SetColor("_Color", color);
         }
         return newOpacity;
     }

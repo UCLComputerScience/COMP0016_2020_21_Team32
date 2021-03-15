@@ -55,7 +55,7 @@ public class CameraController : MonoBehaviour, IEventManagerListener
                 Camera.main.transform.position = pivot.transform.position; //set the camera's position to the target
                 Camera.main.transform.Rotate(Vector3.right, dir.y *180); //rotate the camera based on dir
                 Camera.main.transform.Rotate(Vector3.up, -dir.x * 180, Space.World);
-                Camera.main.transform.Translate(displacement); //move the camera back in the z axis so its not directly on top of the target
+                Camera.main.transform.Translate(displacement); 
                 prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
             }
         /*zoom in/out by changing the value of displacement whenever the scrollwheel is used*/

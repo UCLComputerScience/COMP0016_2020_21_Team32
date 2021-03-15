@@ -5,13 +5,12 @@ using UnityEngine;
  ///<summary>This class is instantiated if the example model of a brain is loaded in</summary>
 public class BrainExample : Organ
 {   
-    public BrainExample(GameObject model){
-        base.model = model;
+    public BrainExample(string filename): base(filename){
         base.centrePos = new Vector3(-94.2f, -99.23f, -93.6f);
         base.centreRot = Quaternion.Euler(0.453f, -288.9f, 1.323f);
         base.segments = new List<GameObject>();
     }
-    public override void initialiseModel(GameObject parent)
+    public override void setParent(GameObject parent)
     {
         GameObject temp = null;
         int count = 0;
