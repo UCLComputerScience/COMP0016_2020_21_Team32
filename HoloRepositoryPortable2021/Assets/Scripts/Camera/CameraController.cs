@@ -32,40 +32,48 @@ public class CameraController : MonoBehaviour, IEventManagerListener
         EventManager.current.OnSelectAnnotation += EventManager_onSelectAnnotation;
     }
     void Start() 
-    {
+    {   
         StartCoroutine(setCameraDistance()); //sets the position of the camera based on the size of the model loaded in 
         subscribeToEvents();
         Camera.main.enabled =true;
         prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition); //used to determine the direction the camera should be rotated
         Camera.main.transparencySortMode = TransparencySortMode.Orthographic;
     }
+    private void startRotation(){
+        Camera.main.transform.Translate(displacement);
+        prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+    }
+
+    /*Uses the direction moved by the pointer between frames to determine how to rotate the camera about the pivot*/
+    private void rotateCamera(){ 
+        Vector3 dir = prevPosition - Camera.main.ScreenToViewportPoint(Input.mousePosition); //direction to rotate the camera
+        Camera.main.transform.position = pivot.transform.position; 
+        Camera.main.transform.Rotate(Vector3.right, dir.y *180); //rotate the camera about its local x axis
+        Camera.main.transform.Rotate(Vector3.up, -dir.x * 180, Space.World);//rotate the camera about the world y axis 
+        Camera.main.transform.Translate(displacement); 
+        prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+    }
+    /*Displaces the camera in the z axis*/
+    private void zoom(){
+        Camera.main.transform.position = pivot.transform.position;
+        float scrollAmount = Input.GetAxis("Mouse ScrollWheel")*scrollSpeed;
+        displacement -= new Vector3(0, 0, scrollAmount);
+        Camera.main.transform.Translate(displacement);
+    }
     void LateUpdate()
     {
         if(!isEnabled) return; //Camera is disabled when certain events are received
-
-        if(Input.GetMouseButtonDown(0)){ //called on the frame when the left mouse button is clicked
-            if(!EventSystem.current.IsPointerOverGameObject()){
-                Camera.main.transform.Translate(displacement);
-                prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition); // cam position set to normalised version of screen coordinates 
-            } 
-        }
-        if(Input.GetMouseButton(0)){ //true if left mouse button is held down
-            if(!EventSystem.current.IsPointerOverGameObject()){ 
-                Vector3 dir = prevPosition - Camera.main.ScreenToViewportPoint(Input.mousePosition); //direction to rotate the camera
-                Camera.main.transform.position = pivot.transform.position; //set the camera's position to the target
-                Camera.main.transform.Rotate(Vector3.right, dir.y *180); //rotate the camera based on dir
-                Camera.main.transform.Rotate(Vector3.up, -dir.x * 180, Space.World);
-                Camera.main.transform.Translate(displacement); 
-                prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        if(!EventSystem.current.IsPointerOverGameObject()){ //if the pointer is not over a UI element
+            if(Input.GetMouseButtonDown(0)){
+                startRotation();
             }
-        /*zoom in/out by changing the value of displacement whenever the scrollwheel is used*/
-        }else if(Input.GetAxis("Mouse ScrollWheel") != 0){
-            Camera.main.transform.position = pivot.transform.position;
-            float scrollAmount = Input.GetAxis("Mouse ScrollWheel")*scrollSpeed;
-            displacement -= new Vector3(0, 0, scrollAmount);
-            Camera.main.transform.Translate(displacement);
-        /*Translate using keybinds. The amount translated is cached and reapplied each frame, offsetting the camera from its target position whenever the user rotates*/
-        }else if(Input.GetKey(KeyCode.H)){
+            if(Input.GetMouseButton(0)){
+                rotateCamera();
+            }
+        }
+        if(Input.GetAxis("Mouse ScrollWheel") != 0){
+            zoom();
+        }else if(Input.GetKey(KeyCode.H)){//Translate using keybinds.
             Camera.main.transform.position += Camera.main.transform.right * 1.0f;
             displacement += Vector3.right*1.0f;
         }else if (Input.GetKey(KeyCode.G)){
@@ -81,8 +89,8 @@ public class CameraController : MonoBehaviour, IEventManagerListener
         
     }
 
-    /*Coroutine that initialises the camera distance dynamically based on the radius of the sphere that bounds the renderer of the model loaded into the application. This enables 
-    models of any physical size to be viewed when loaded into the application.*/
+    /*Coroutine that initialises the camera distance dynamically based on the radius of the sphere that bounds the renderer of the model loaded into the application, 
+    so that models of any physical size can be viewed when loaded into the application.*/
     private IEnumerator setCameraDistance(){
         yield return new WaitUntil(() => ModelHandler.current.modelRadius != 0); //waits until the model has been loaded in - prevents nullReferencEexceptions being thrown
         cameraDistance = -CAMERA_TO_MODEL_RADIUS_RATIO * ModelHandler.current.modelRadius; //ratio * radius of renderer

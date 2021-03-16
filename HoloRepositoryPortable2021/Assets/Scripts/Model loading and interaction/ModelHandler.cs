@@ -53,7 +53,7 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
     control is returned to the caller until the model is loaded in.
     */
     private IEnumerator loadModel(){
-        organ = OrganFactory.GetOrgan(); //Factory pattern - returns the appropriate subcass of Organ based on the model selected by the user
+        organ = OrganFactory.GetOrgan(); //Factory pattern - returns the appropriate subclass of Organ based on the model selected by the user
         yield return new WaitUntil(() => organ.model != null);
         organ.setParent(this.gameObject);
         segments = organ.segments; //make segments public to other classes
@@ -61,9 +61,6 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
         Bounds modelBounds = getModelBounds();
         modelRadius = modelBounds.extents.magnitude;
         modelCentre = modelBounds.center; 
-    }
-    private void onLoaded(GameObject result,AnimationClip[] clips) { //passed as a callback action to the LoadFromFileAsync
-        loadedModel = result;
     }
     private Bounds getModelBounds(){
         Bounds combinedBounds = new Bounds();
@@ -78,19 +75,21 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
             segOpacity = MaterialAssigner.adjustOpacity(e.value, segments[currentlySelected], minOpacity);
         }
     }
-    /*Called whenever the segment select button is clicked.*/
-    private void EventManager_onSelectSegment(object sender, EventArgs e){
-        if(currentlySelected == segments.Count-1)currentlySelected = 0;
-        else currentlySelected++;
-    }
-    /*When the user clicks the pallete, an event is fired that holds the data of the selected colour. 
-     Here the currently selected mesh is set to that colour.
-    */
+    /*When the user clicks the palette, an event is fired that holds the data of the selected colour. 
+     Here the currently selected mesh is set to that colour.*/
    private void EventManager_onColourSelect(object sender, EventArgsColourData e){
         Color col = e.col;
         col.a = segOpacity;
         MaterialAssigner.changeColour(segments[currentlySelected], col);
     }
+
+
+    /*Called whenever the segment select button is clicked.*/
+    private void EventManager_onSelectSegment(object sender, EventArgs e){
+        if(currentlySelected == segments.Count-1)currentlySelected = 0;
+        else currentlySelected++;
+    }
+
     private void EventManager_onSelectAnnotation(object sender, EventArgsAnnotation e){
         //set the position of the plane and its normal (so that cross sections of the model can be saved)
         plane.transform.position = e.data.planePosition;

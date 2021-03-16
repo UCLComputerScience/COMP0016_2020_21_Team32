@@ -11,6 +11,7 @@ using System;
 public class PlaneController : MonoBehaviour
 {
     public GameObject plane;
+    [SerializeField] ModelHandler modelHanlder;
     public Shader crossSectionalShader;
     public Shader differentColourShader;
     private Slider yPosSlider;
@@ -29,10 +30,6 @@ public class PlaneController : MonoBehaviour
     private Button cancelButton;
     private float maxPlaneHeight;
     private float minPlaneHeight;
-    private Quaternion startRot = Quaternion.identity;
-    // public Button confirmButton;
-    // public Button cancelButton;
-
 
 /*Initialise all interactable elements attatched to the PlaneController with callback actions, and initialise the position of the plane*/
     void Awake(){
@@ -45,9 +42,6 @@ public class PlaneController : MonoBehaviour
         resetButton = transform.Find("Reset Plane Position").GetComponent<Button>();
         confirmButton = transform.Find("Confirm").GetComponent<Button>();
         cancelButton = transform.Find("Cancel").GetComponent<Button>();
-
-
-
 
         confirmButton.onClick.AddListener(confirmSlice);
         cancelButton.onClick.AddListener(resetSlider);
@@ -120,7 +114,8 @@ public class PlaneController : MonoBehaviour
         this.plane.transform.Rotate(Vector3.forward * delta);
         this.prevZRot = newZRot;
     }
-    /*Passed as a callback to the onClick event of the reset button. When pressed, all slider values are re-initialised*/
+    /*Both functions below are passed as a callback to the onClick event of the reset button. When pressed, all slider values are re-initialised 
+    and the plane's position is reset.*/
     public void resetSlider(){
         yPosSlider.value = startYPos;
         xRotSlider.value = startXRot;
@@ -150,9 +145,6 @@ public class PlaneController : MonoBehaviour
     }
 
 
-    /*Resets the position of the plane. It is done in a strange way, as simply attempting to reset its rotation once did not work.
-    This is due to the way in which Unity represents the orientations of objects and I haven't been able to find a better way to solve the
-    problem than this one.*/
 
     /*Sets the correct slider position values for the position of the plane stored in the annotation being viewed.*/
     /*Every frame, the material on the model is updated with the new position and normal of the plane. This is passed as input to the shader, which determines

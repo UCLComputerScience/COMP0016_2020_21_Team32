@@ -15,7 +15,8 @@ public class ColourSelector : MonoBehaviour
 {
     private Texture2D colours;
     private Vector2 mousePos; 
-    private RectTransform rect;
+    private RectTransform rectTransform;
+    private Rect boundingRectangle;
     [SerializeField] GameObject UIBlocker;
     private CircleCollider2D col; 
     private int width;
@@ -27,10 +28,11 @@ public class ColourSelector : MonoBehaviour
         /*initialise variables*/
         mousePos = new Vector2();
         RawImage image = GetComponent<RawImage>();
+        rectTransform = image.GetComponent<RectTransform>(); //RectTransform of the colour palette
+        boundingRectangle = rectTransform.rect; 
         colours = image.texture as Texture2D; 
-        rect = image.GetComponent<RectTransform>(); //RectTransform of the colour palette
-        width = (int) rect.rect.width;
-        height = (int) rect.rect.height;
+        width = (int) boundingRectangle.width;
+        height = (int) boundingRectangle.height;
         col = GetComponent<CircleCollider2D>();
     }
 
@@ -38,15 +40,15 @@ public class ColourSelector : MonoBehaviour
     void Update()
     {
         
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(rect, Input.mousePosition, null, out mousePos);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, Input.mousePosition, null, out mousePos);
         //Converts the screen space coordinates of the pointer to local space coordinates of the RectTransform component of 
         //the colour palette. Stores the updated coordinates in the mousePos variable.
 
-        //The origin of our image's RectTransform is at its centre. The pixel data of the texture is stored in a 2D array with
-        //the first element in the bottom left, so the pointer's position must be recalculated to ensure that it samples the 
-        //correct pixel.
-        mousePos.x = Mathf.Clamp (0,(int)(((mousePos.x-rect.rect.x)*colours.width)/rect.rect.width),colours.width);
-        mousePos.y = Mathf.Clamp (0,(int)(((mousePos.y-rect.rect.y)*colours.height)/rect.rect.height),colours.height);
+        //The dimensions of the bounding rectangle of the colour palette in the GUI are not equal to the dimensions of the PNG of the
+        //colour palette image, which is imported as a Texture2D. So that the user picks the correct colour, the pointer's position is transformed 
+        //
+        mousePos.x = Mathf.Clamp (0,(int)(((mousePos.x-boundingRectangle.x)*colours.width)/boundingRectangle.width),colours.width);
+        mousePos.y = Mathf.Clamp (0,(int)(((mousePos.y-boundingRectangle.y)*colours.height)/boundingRectangle.height),colours.height);
 
         //If the user double clicks within the circle collider attatched to the colour palette, fire the onColourSelect event, 
         //letting any subscribers of that event know what colour has been selected.

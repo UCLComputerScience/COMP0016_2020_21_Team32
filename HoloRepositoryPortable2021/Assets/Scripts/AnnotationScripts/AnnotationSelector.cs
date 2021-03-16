@@ -68,16 +68,12 @@ public class AnnotationSelector : MonoBehaviour, IEventManagerListener
         dropdown.ClearOptions(); //The dropdown's options are cleared first with every call to this function to prevent duplicate entries of the same file appearing.
         string dirPath = Path.Combine(Application.dataPath, FileHelper.currentAnnotationFolder);
         dir = Directory.CreateDirectory(dirPath);
-
-
         FileInfo[] info = dir.GetFiles("*.json");
-        
         foreach (FileInfo f in info){
-            if(!f.Exists)f.Create();
             String jsonToParse = File.ReadAllText(f.FullName); //read all the text in the json file into a string
             annotations.Add(JsonUtility.FromJson<AnnotationData>(jsonToParse) as AnnotationData); //parse the string into an AnnotationData object and store it in a list
         }
-        Annotation.setNumAnnotations(annotations.Count); //sets the static variable that keeps track of the number of annotations made to the number of annotation in the array
+        Annotation.setNumAnnotations(annotations.Count); //sets the static variable that keeps track of the number of annotations to the number of annotation in the list.
         annotationTitles.Add("--Select Annotation--");
         foreach(AnnotationData annotation in annotations){
             annotationTitles.Add(annotation.title);

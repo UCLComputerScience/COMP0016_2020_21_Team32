@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 
 ///<summary>Class that handles the assignment and change of state of materials to a loaded model at runtime</summary>
@@ -33,6 +34,7 @@ public static class MaterialAssigner
         }
         return newOpacity;
     }
+    
     public static void updatePlanePos(GameObject g, GameObject plane){
         g.GetComponent<Renderer>().material.SetVector("_PlanePosition", plane.transform.position);
         g.GetComponent<Renderer>().material.SetVector("_PlaneNormal", plane.transform.up);
@@ -78,7 +80,7 @@ public static class MaterialAssigner
     a new shader is passed as a parameter. The renderqueue is also set based on the child's position in the list to deal with draw order issues that arise when overlaying
     multiple transparent objects.
     */
-    private static void assignNewMaterial(GameObject plane, GameObject child, int i, Shader shader, float opacity=1.0f){
+    private static void assignNewMaterial(GameObject plane, GameObject child, int index, Shader shader, float opacity=1.0f){
         Color col = child.GetComponent<Renderer>().material.GetColor("_Color");
         Texture t = child.GetComponent<Renderer>().material.GetTexture("_MainTex");
         col.a = opacity;
@@ -87,7 +89,7 @@ public static class MaterialAssigner
         mat.SetTexture("_MainTex", t);
         mat.SetVector("_PlanePosition", plane.transform.position); 
         mat.SetVector("_PlaneNormal", plane.transform.up);
-        mat.renderQueue = 3000 - i*20;
+        mat.renderQueue = (int)RenderQueue.Transparent - index; //set the renderqueue of the material applied based on the index of the segment
         child.GetComponent<Renderer>().material = mat;
     }
     

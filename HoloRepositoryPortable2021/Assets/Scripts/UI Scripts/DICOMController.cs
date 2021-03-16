@@ -101,8 +101,7 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
         EventManager.current.onEnableCamera();
     }
 
-    /*Adjusting the slider will fire the onValueChanged UnityEvent, triggering this callback. It changes the dcm
-    displayed on the panel based on the slider's position */
+    /*Passed as a callback action to the OnValueChanged event of the slider. Changes the .dcm being viewed.*/
     public void viewImage(float index){
         if(index >= images.Count || index < 0)return;
         viewArea.texture = images[(int) index];
