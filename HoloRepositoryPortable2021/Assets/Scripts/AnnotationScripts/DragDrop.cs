@@ -27,7 +27,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IEndDragHandler
     }
 
     /*Implemented from the IEndDragHandler interface. Called when the pointer is released after dragging. This passes the current position of 
-    the annotation pin to the Annotation*/
+    the annotation pin to the Annotation and sets the Annotation prefab to enabled.*/
     public void OnEndDrag(PointerEventData data){
         annotation.show(this.transform.position); 
     }

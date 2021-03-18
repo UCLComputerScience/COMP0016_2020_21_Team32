@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using System;
+using UnityEngine.SceneManagement;
 
 ///<summary>This class manages the top level components of the UI and whether they are active or not.</summary>
 public class UIManager : MonoBehaviour, IEventManagerListener
@@ -21,6 +22,7 @@ public class UIManager : MonoBehaviour, IEventManagerListener
    public GameObject mainPage; 
    public GameObject dicomController;
    public GameObject settingsController;
+   public GameObject loadingScreen;
 
     public void subscribeToEvents(){
         EventManager.current.OnToggleColourPalette+=EventManager_onToggleColourPalette;
@@ -36,6 +38,8 @@ public class UIManager : MonoBehaviour, IEventManagerListener
         EventManager.current.OnEnablePivot += EventManager_OnChangePivot;
         EventManager.current.OnChangeSettings += EventManager_OnChangeSettings;
         EventManager.current.OnToggleFullScreen+=EventManager_OnToggleFullScreen;
+        EventManager.current.OnReturnToPreviousScene+=EventManager_OnReturnToPreviousScene;
+        EventManager.current.OnModelLoaded+=EventManager_OnModelLoaded;
     }
     void Start(){
         subscribeToEvents();
@@ -82,6 +86,12 @@ public class UIManager : MonoBehaviour, IEventManagerListener
     }
     public void EventManager_OnToggleFullScreen(object sender, EventArgs e){
         mainPage.SetActive(!mainPage.activeInHierarchy);
+    }
+    public void EventManager_OnReturnToPreviousScene(object sender, EventArgs e){
+        SceneManager.LoadScene(0);
+    }
+    public void EventManager_OnModelLoaded(object sender, EventArgs e){
+        loadingScreen.SetActive(false);
     }
 
 }

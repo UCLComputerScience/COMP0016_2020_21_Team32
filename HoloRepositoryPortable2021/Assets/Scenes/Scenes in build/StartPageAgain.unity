@@ -3867,15 +3867,22 @@ MonoBehaviour:
     Rotate the camera by clicking and dragging.
 
 
-    Pan
-    the camera left using the "g" key.
+    Hold
+    the "g" key to pan the camera left.
 
-    Pan the camera right using the "h" key.
+    Hold the "h" key to pan the camera right.
 
-    Pan
-    the camera up using the "y" key.
+    Hold
+    the "y" key to pan the camera up.
 
-    Pan the camera down using the "b" key.'
+    Hold the "b" key to pan the camera down.
+
+    Tap
+    the "w" key to zoom in.
+
+    Tap the "s" key to zoom out.
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

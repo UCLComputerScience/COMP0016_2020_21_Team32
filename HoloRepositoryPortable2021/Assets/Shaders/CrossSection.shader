@@ -31,8 +31,8 @@ Shader "Custom/Clipping" {
 
        Pass //Pass causes the geometry to be rendered once only
        {
-         ZWrite On //despite being renderered as transparent, ZWrite is set to on to force the gpu to write to the z-buffer. This prevents the strange 
-         //effects that occur when changing the opacity of multiple complex meshes over the top of one another
+         ZWrite On //despite being renderered as transparent, ZWrite is set to on to force the gpu to write to the z-buffer. 
+         //This prevents the strange effects that occur when changing the opacity of multiple complex meshes over the top of one another
          ColorMask 0
 
 		     offset 0, 1

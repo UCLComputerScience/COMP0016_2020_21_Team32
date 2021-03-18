@@ -4,12 +4,13 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.IO;
 using TMPro;
 
 namespace Tests
 {
-    /*Testing all the events that the event manager can fire*/
+    /*Tests checking that all Events trigger the correct responses in the GUI*/
     public class EventTests
     {
         private GameObject publisher;
@@ -21,26 +22,7 @@ namespace Tests
         private GameObject camera;
         private EventManager eventManager;
         private ModelHandler modelHandler;
-        // private GameObject annotationPin;
-        // private GameObject settingsController;
-        // private GameObject DICOMController;
-        // private GameObject planeController;
-        // private GameObject pivotController;
-        // private GameObject settingsButton;
-        // private GameObject fullScreenToggle;
-        // private GameObject segmentSelectButton;
-        // private GameObject colourPalette;
-        // private GameObject navigationBar;
-        // private GameObject exitButton;
-        // private GameObject logos;
-        // private GameObject dropdown;
-        // private GameObject mainPage;
-        // private GameObject UIBlocker;
-        // private GameObject controllerHandler;
-        // private GameObject canvas;
-        // private GameObject annotationTextBox;
-        // private GameObject annotationText;
-        // private GameObject annotation;
+
 
         private void initialiseTestScene(){
             Debug.Log("Startin up");
@@ -54,65 +36,10 @@ namespace Tests
             camera.tag = "MainCamera";
             slider = new GameObject();
             pivot = new GameObject();
+            eventListener.AddComponent<EventSystem>();
             eventManager = publisher.GetComponent<EventManager>();
             Debug.Log(eventManager);
-            // plane = new GameObject("Plane");
-            // pivot = new GameObject("Pivot");
-            // camera = new GameObject("MainCamera");
-            // annotationPin = new GameObject("Annotation Pin"); 
-            // navigationBar = new GameObject("Navigation bar");
-            // colourPalette = new GameObject("Colour Palette"); 
-            // mainPage = new GameObject("Main Page");
-            // exitButton = new GameObject("Exit");
-            // settingsButton = new GameObject("Settings");
-            // fullScreenToggle = new GameObject("Toggle full screen");
-            // segmentSelectButton = new GameObject("Toggle Selected Segment");
-            // UIBlocker = new GameObject("UIBlocker");
-            // controllerHandler = new GameObject("Controller Handler");
-            // DICOMController = new GameObject("Dicom Controller");
-            // pivotController = new GameObject("Pivot Controller");
-            // planeController = new GameObject("Plane Controller");
-            // settingsController = new GameObject("Settings Controller");
-            // dropdown = new GameObject("Dropdown");
-            // canvas = new GameObject("Canvas");
-            // annotation = new GameObject("Annotation");
-            // annotationTextBox = new GameObject("Annotation Textbox");
-            // annotationText = new GameObject("AnnotationText");
 
-
-            // var cam = camera.AddComponent<Camera>();
-            // cam.tag = "MainCamera";
-            // slider.AddComponent<Slider>();
-            // settingsButton.AddComponent<Button>();
-            // fullScreenToggle.AddComponent<Toggle>();
-            // dropdown.AddComponent<TMP_Dropdown>();
-            // exitButton.AddComponent<Button>();
-            // segmentSelectButton.AddComponent<Button>();
-            // canvas.AddComponent<Canvas>();
-            // eventManager = publisher.AddComponent<EventManager>();
-            // modelHandler = model.AddComponent<ModelHandler>();
-            // annotationText.AddComponent<TMP_Text>();
-
-
-            
-
-            // pivotController.transform.SetParent(controllerHandler.transform);
-            // planeController.transform.SetParent(controllerHandler.transform);
-            // DICOMController.transform.SetParent(controllerHandler.transform);
-            // settingsController.transform.SetParent(controllerHandler.transform);
-
-            // annotationText.transform.SetParent(annotationTextBox.transform);
-
-            // annotation.transform.SetParent(canvas.transform);
-            // dropdown.transform.SetParent(canvas.transform);
-            // controllerHandler.transform.SetParent(canvas.transform);
-            // navigationBar.transform.SetParent(canvas.transform);
-            // colourPalette.transform.SetParent(canvas.transform);
-            // UIBlocker.transform.SetParent(canvas.transform);
-            // exitButton.transform.SetParent(canvas.transform);
-            // annotationPin.transform.SetParent(canvas.transform);
-            // slider.transform.SetParent(canvas.transform);
-            // annotationTextBox.transform.SetParent(canvas.transform);
         }
         private void loadModel(){
             modelHandler = eventListener.AddComponent<ModelHandler>();
@@ -128,9 +55,9 @@ namespace Tests
 
         [UnityTearDown]
         public IEnumerator tearDown(){
-            Object.Destroy(modelHandler);
-            Object.Destroy(eventManager);
-            Object.Destroy(eventListener);
+            foreach(GameObject g in Object.FindObjectsOfType<GameObject>()){
+                Object.Destroy(g);
+            }
             yield return new ExitPlayMode();
         }
 
@@ -141,7 +68,6 @@ namespace Tests
             cameraController.pivot = pivot;
             cameraController.isEnabled = false;
             eventListener.SetActive(true);
-            Debug.Log(eventManager);
             yield return null;
             eventManager.onEnableCamera();
             Assert.True(cameraController.isEnabled);
@@ -185,7 +111,7 @@ namespace Tests
         }
         
         [UnityTest]
-        public IEnumerator EventManger_onEnableDicom(){
+        public IEnumerator EventManager_onEnableDicom(){
             var uiManager = eventListener.AddComponent<UIManager>();
             var dicomController = new GameObject();
             uiManager.dicomController = dicomController;
@@ -196,7 +122,7 @@ namespace Tests
             Assert.True(dicomController.activeInHierarchy);
         }
         [UnityTest]
-        public IEnumerator EventManger_onEnablePivot(){
+        public IEnumerator EventManager_onEnablePivot(){
             var uiManager = eventListener.AddComponent<UIManager>();
             var pivotController = new GameObject();
             uiManager.pivotController = pivotController;
@@ -207,7 +133,7 @@ namespace Tests
             Assert.True(pivotController.activeInHierarchy);
         }
         [UnityTest]
-        public IEnumerator EventManger_onEnableCrossSection(){
+        public IEnumerator EventManager_onEnableCrossSection(){
             var uiManager = eventListener.AddComponent<UIManager>();
             var planeController = new GameObject();
             uiManager.planeController = planeController;
@@ -296,7 +222,7 @@ namespace Tests
             eventManager.onToggleSegmentSelect();
             Assert.False(segmentSelectButton.activeInHierarchy);
         }
-
+  
         [UnityTest]
         public IEnumerator EventManager_onToggleOpacitySlider(){
             var uiManager = eventListener.AddComponent<UIManager>();
@@ -323,6 +249,7 @@ namespace Tests
             eventManager.onToggleFullScreen();
             Assert.False(mainPage.activeInHierarchy);
         }
+ 
         [UnityTest]
         public IEnumerator EventManager_onColourSelect(){
             eventListener.SetActive(true);
@@ -333,6 +260,19 @@ namespace Tests
             
             eventManager.onColourSelect(newCol);
             Assert.AreEqual(newCol, ModelHandler.current.segments[0].GetComponent<Renderer>().material.color);
+        }
+
+        [UnityTest]
+        public IEnumerator EventManager_onDisableLoadingScreen(){
+            var uiManager = eventListener.AddComponent<UIManager>();
+            var loadingScreen = new GameObject();
+            uiManager.loadingScreen = loadingScreen;
+            loadingScreen.SetActive(true);
+            eventListener.SetActive(true);
+            yield return null;
+            Assert.True(loadingScreen.activeInHierarchy);
+            eventManager.onModelLoaded();
+            Assert.False(loadingScreen.activeInHierarchy);
         }
         [UnityTest]
         public IEnumerator EventManager_onChangeOpacity(){
@@ -354,9 +294,37 @@ namespace Tests
             uiManager.settingsController = settingsController;
             settingsController.SetActive(false);
             eventListener.SetActive(true);
-            yield return new WaitForSeconds(0.2f);
+            yield return null;
             eventManager.onChangeSettings();
             Assert.True(settingsController.activeInHierarchy);
+        }
+        [UnityTest]
+        public IEnumerator EventManager_onZoomIn(){
+            var cameraController = eventListener.AddComponent<CameraController>();
+            cameraController.pivot = pivot;
+            eventListener.SetActive(true);
+            yield return new WaitUntil(() => Camera.main.transform.position != Vector3.zero);
+            Vector3 initialCamPos = Camera.main.transform.position;
+            eventManager.onZoomIn();
+            yield return new WaitForEndOfFrame();
+            Vector3 finalCamPos = Camera.main.transform.position;
+            Debug.Log(initialCamPos);
+            Debug.Log(finalCamPos);
+            Assert.Less(initialCamPos.z, finalCamPos.z);
+        }
+        [UnityTest]
+        public IEnumerator EventManager_onZoomOut(){
+            var cameraController = eventListener.AddComponent<CameraController>();
+            cameraController.pivot = pivot;
+            eventListener.SetActive(true);
+            yield return new WaitUntil(() => Camera.main.transform.position != Vector3.zero);
+            Vector3 initialCamPos = Camera.main.transform.position;
+            eventManager.onZoomOut();
+            yield return new WaitForEndOfFrame();
+            Vector3 finalCamPos = Camera.main.transform.position;
+            Debug.Log(initialCamPos);
+            Debug.Log(finalCamPos);
+            Assert.Greater(initialCamPos.z, finalCamPos.z);
         }
         [UnityTest]
         public IEnumerator EventManager_onSegmentSelect(){

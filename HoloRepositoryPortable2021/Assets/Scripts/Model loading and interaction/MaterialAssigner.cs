@@ -20,7 +20,7 @@ public static class MaterialAssigner
         }
     }
 
-    /*Adjusts the opacity of the desired segment from a list of segments. The renderer of the segment is disabled if it goes below minOpacity to optimise performance*/
+    /*Adjusts the opacity of a gameobject. The renderer of the gameobject is disabled if it goes below minOpacity to optimise performance*/
     public static float adjustOpacity(float newOpacity, GameObject segment, float minOpacity) {
         Color color = segment.GetComponent<Renderer>().material.color;
         color.a = newOpacity;
@@ -59,7 +59,7 @@ public static class MaterialAssigner
         }
     }
     #endregion
-    /*changes the colour of a single segment/gameobject*/
+    /*changes the colour of a single segment/gameobject */
     public static void changeColour(GameObject segment, Color colour){
         segment.GetComponent<Renderer>().material.SetColor("_Color", colour);
     }

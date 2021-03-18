@@ -64,7 +64,7 @@ public class PlaneController : MonoBehaviour
     }
 
     /*This coroutine enables this controller to be used on any model regardless of the size of the model. 
-    None of its code is executed until the model is loaded in and the radius of the sphere that bounds its mesh calculated (ModelHandler.modelRadius). 
+    None of its code is executed until the model is loaded in and the radius of the sphere that bounds its mesh calculated (ModelHandler.current.modelRadius). 
     Using this radius, a maximum and minimum height that the plane can reach is calculated, and the
     minimum and maximum values of the slider that enables the y position of the plane to be changed are initialised to these values. */
     private IEnumerator initialisePlane(){
@@ -75,14 +75,15 @@ public class PlaneController : MonoBehaviour
         plane.transform.rotation = Quaternion.identity; //set the rotation of the plane to zero.
     }
 
-    /*When the controller is enabled, the different colour shader is applied to the model. With this shader applied, 
+    /*When the controller is enabled, the "differentColour" shader is applied to the model. With this shader applied, 
     the volume of the model to be removed when the confirm button is pressed is coloured black. 
     */
     void OnEnable(){
         EventManager.current.onEnableUIBlocker();
         MaterialAssigner.assignToAllChildren(plane, ModelHandler.current.segments, differentColourShader);
     }
-    /*When the controller is disabled, fire an onEnableCamera event so the user can start rotating the camera again immediately without having to click the icon.
+    /*When the controller is disabled, an onEnableCamera event is fired so the user can start rotating the camera again immediately without having to click the icon.
+    The crossSectionalShader is also reapplied to create the cross sectional view (or not, if the plane is above the model).
     Also disable the tooltip that appears when the cancel button is hovered over.*/
     void OnDisable(){
         MaterialAssigner.assignToAllChildren(plane, ModelHandler.current.segments, crossSectionalShader);
@@ -126,16 +127,15 @@ public class PlaneController : MonoBehaviour
         plane.transform.position = new Vector3(0, maxPlaneHeight, 0);
         plane.transform.localRotation = Quaternion.Euler(0f,0f,0f);
     }
-    /*Passed as a callback to the onClick event of the confirm button. When pressed, the CrossSection shader is reapplied to all segments of the model. 
-    This has the effect of removing all of the volume of the model that was coloured black before the button was pressed. The controller is
-    also set to inactive so that the user can continue to use the UI and view/manipulate the cross section of the model.*/
+    /*Passed as a callback to the onClick event of the confirm button. When pressed, the controller is disabled so the CrossSectional shader is reapplied to all #
+    segments of the model.*/
     public void confirmSlice(){
-        MaterialAssigner.assignToAllChildren(plane, ModelHandler.current.segments, crossSectionalShader);
+        // MaterialAssigner.assignToAllChildren(plane, ModelHandler.current.segments, crossSectionalShader);
         plane.SetActive(false);
         this.gameObject.SetActive(false);
     }
     /*Passed as a callback to the onClick event of the cancel button. When pressed, the position of the plane and slider values are reset and the
-    CrossSection shader is reapplied to all segments of the model. This has the effect of viewing the model as normal again .
+    controller is disabled. This has the effect of viewing the model as normal again .
     The controller is set to inactive to return the user to the UI as normal.*/
     public void cancelSlice(){
         resetPlane();

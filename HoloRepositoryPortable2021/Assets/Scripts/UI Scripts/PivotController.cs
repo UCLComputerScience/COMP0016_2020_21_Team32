@@ -6,13 +6,17 @@ using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using System;
 ///<summary>This class is attatched to the PivotController prefab to provide it with interactivity. It allows the user to adjust 
-///the position of the point about which the camera rotates, which is represented by a sphere, using 3 sliders; one for each axis
+///the position of the point about which the camera rotates (represented by a sphere) using 3 sliders; one for each axis
 ///in 3D space.</summary>
 public class PivotController : MonoBehaviour
 {
-    private float ModelToPivotRadiusRatio = 20f; //ratio used to scale the size of the pivot based on the size of the model
+    [SerializeField] const float MODEL_TO_PIVOT_RADIUS_RATIO = 20f; //ratio used to scale the size of the pivot based on the size of the model
+    [SerializeField] const float X_SLIDER_MULTIPLIER = 1f;
+    [SerializeField] const float Y_SLIDER_MULTIPLIER = 1f;
+    [SerializeField] const float Z_SLIDER_MULTIPLER = 1f;
+    [SerializeField] const float TARGET_OPACITY = 0.4f; //opacity to reduce the segments of the model to so the pivot can be seen through the model.
     public GameObject pivot;
-    [SerializeField] GameObject axes;
+    public GameObject axes;
 
     public Vector3 startPos;
 
@@ -35,27 +39,27 @@ public class PivotController : MonoBehaviour
         confirmButton = transform.Find("Confirm").GetComponent<Button>();
         cancelButton = transform.Find("Cancel").GetComponent<Button>();
         resetButton = transform.Find("Reset Pivot Position").GetComponent<Button>();
-        initialiseSlider(xPosSlider, changeXPos, 1);
-        initialiseSlider(yPosSlider, changeYPos, 1);
-        initialiseSlider(zPosSlider, changeZPos, 1);
-        confirmButton.onClick.AddListener(this.onConfirm);
+        initialiseSlider(xPosSlider, changeXPos, X_SLIDER_MULTIPLIER);
+        initialiseSlider(yPosSlider, changeYPos, Y_SLIDER_MULTIPLIER);
+        initialiseSlider(zPosSlider, changeZPos, Z_SLIDER_MULTIPLER);
+        confirmButton.onClick.AddListener(onConfirm);
         resetButton.onClick.AddListener(resetSlider);
         confirmButton.onClick.AddListener(onConfirm);
         cancelButton.onClick.AddListener(onCancel);
 
-        /*Set the position and size of the pivot. Its size is determined by the radius of the sphere that bounds the mesh of the loaded model (ModelHandler.modelRadius)*/
+        /*Set the position and size of the pivot. Its size is determined by the radius of the sphere that bounds the mesh of the loaded model (ModelHandler.current.modelRadius)*/
         pivot.transform.position = startPos;
         startXPos = xPosSlider.value = pivot.transform.position.x;
         startYPos = yPosSlider.value = pivot.transform.position.y;
         startZPos = zPosSlider.value = pivot.transform.position.z;
-        float pRadius = ModelHandler.current.modelRadius / ModelToPivotRadiusRatio;
+        float pRadius = ModelHandler.current.modelRadius / MODEL_TO_PIVOT_RADIUS_RATIO;
         pivot.transform.localScale = new Vector3(pRadius,pRadius,pRadius); 
     }
 
     /*Automatically called when the gameobject the script is attached to is enabled. Reduces the opacity of the segments of the model (if they're above a certain threshold)
     so that the user can see the pivot they're controlling, as it will usually be within the model. Enable the UIBlocker, pivot and the axes.*/
     void OnEnable(){
-        MaterialAssigner.reduceOpacityAll(0.4f, ModelHandler.current.segments);
+        MaterialAssigner.reduceOpacityAll(TARGET_OPACITY, ModelHandler.current.segments);
         EventManager.current.onEnableUIBlocker();
         pivot.transform.position = startPos;
         pivot.SetActive(true);

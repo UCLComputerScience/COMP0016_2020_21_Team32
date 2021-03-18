@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 
 ///<summary>Class is attached to the segment select button.
-///When the user presses the button, the currently selected button changes.</summary>
+///When the user presses the button, the currently selected segment changes.</summary>
 public class SegmentSelect : MonoBehaviour
 {
     private TMP_Text text;

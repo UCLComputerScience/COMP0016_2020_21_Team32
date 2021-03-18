@@ -9,7 +9,8 @@ using System.Linq;
 using System.Globalization;
 using UnityEditor;
 
-///<summary>Helper class for dealing with files</summary>
+///<summary>Helper class for dealing with files. Maintains a reference to the path the chosen model was loaded in from, and
+///the name of the folder that will hold all the annotations of the model.</summary>
 public class FileHelper{
     public static string currentModelFileName = Path.Combine(Application.streamingAssetsPath, "brain.glb");
     public static string currentAnnotationFolder = "brain.glb";
@@ -22,16 +23,11 @@ public class FileHelper{
         this.dir = new DirectoryInfo(path);
     }
 
-    /*Return a list of all files in the current directory*/
+    /*Return a list of all files in the current directory. Whether these files are relative or not is determined by the boolean
+    "relative".*/
     public List<string> getPathsInDir(string searchPattern="*", bool relative=false){
         List<string> paths = (relative) ? getRelativePathsInDir(searchPattern) : getAbsolutePathsInDir(searchPattern);
         return paths;
-    }
-    private List<string> getRelativePathsInDir(string searchPattern="*"){
-        return dir.GetFiles(searchPattern).Select(f => f.Name).ToList<string>();
-    }
-    private List<string> getAbsolutePathsInDir(string searchPattern="*"){
-        return dir.GetFiles(searchPattern).Select(f => f.FullName).ToList<string>();
     }
     /*Generate a readable file name (relative, no path separators)*/
     public static string getReadableFileName(string filename){
@@ -43,9 +39,13 @@ public class FileHelper{
         TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
         return dir.GetFiles(searchPattern).Select(f => ti.ToTitleCase(f.Name.Substring(0, f.Name.IndexOf(".")))).ToList<string>();
     }
-    
-    public List<AnnotationData> JsonToAnnotations(){
-        return (List<AnnotationData>) dir.GetFiles("*.json").Select(f => JsonUtility.FromJson<AnnotationData>(File.ReadAllText(f.FullName)) as AnnotationData); 
+    private List<string> getRelativePathsInDir(string searchPattern="*"){
+        return dir.GetFiles(searchPattern).Select(f => f.Name).ToList<string>();
     }
+    private List<string> getAbsolutePathsInDir(string searchPattern="*"){
+        return dir.GetFiles(searchPattern).Select(f => f.FullName).ToList<string>();
+    }
+    
+
 
 }

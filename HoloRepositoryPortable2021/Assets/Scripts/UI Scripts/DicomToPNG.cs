@@ -19,7 +19,7 @@ public class DicomToPNG{
         this.targetHeight = targetHeight;
     }
 
-    /*Converts a .dcm into a SITK Image object, which is then written to a png*/
+    /*Converts a .dcm into a SITKImage object, which is then written to a png*/
     public Texture2D ReadDICOM(string inputfile){
         var imageFileReader = new itk.simple.ImageFileReader();
         imageFileReader.SetImageIO("GDCMImageIO");

@@ -18,7 +18,6 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
     public GameObject plane; 
     public List<GameObject> segments;
     public Shader crossSectionalShader;
-    private GameObject loadedModel = null;
     private float segOpacity;
     private float minOpacity;
     private int currentlySelected;
@@ -49,12 +48,13 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
     /*
     Loads the appropriate model and sets it as a child to the gameObject this script is attatched to.
     Done using a coroutine so that the model is fully initialised before the script attempts to access it. 
-    (ie, so that the initialiseModel() is not called on a model that has not yet loaded in) ->
+    (ie, so that the organ.initialiseModel() is not called on a model that has not yet loaded in) ->
     control is returned to the caller until the model is loaded in.
     */
     private IEnumerator loadModel(){
         organ = OrganFactory.GetOrgan(); //Factory pattern - returns the appropriate subclass of Organ based on the model selected by the user
         yield return new WaitUntil(() => organ.model != null);
+        EventManager.current.onModelLoaded();
         organ.setParent(this.gameObject);
         segments = organ.segments; //make segments public to other classes
         MaterialAssigner.assignToAllChildren(plane, segments, crossSectionalShader);

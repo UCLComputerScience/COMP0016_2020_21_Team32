@@ -12,13 +12,15 @@ using System;
 public class CameraController : MonoBehaviour, IEventManagerListener
 {
     private const float CAMERA_TO_MODEL_RADIUS_RATIO = 350/178; //experimentally discovered value to move the camera in the z plane relative to the radius of the model loaded
+    private const float DISPLACEMENT_MULTIPLIER = 0.01f; 
     public static Vector3 startPos;
     public static Quaternion startRot;
     public static Vector3 displacement; 
     private Vector3 prevPosition;
     public GameObject pivot;
     private float cameraDistance;
-    private float scrollSpeed; 
+    private float scrollSpeed;
+    private float displacementMagnitude; 
     public bool isEnabled = true;
 
     /*Subscribes to certain events to determine when the camera controls should and shouldn't be enabled.*/
@@ -30,6 +32,8 @@ public class CameraController : MonoBehaviour, IEventManagerListener
         EventManager.current.OnViewAnnotations += EventManager_otherEvent;
         EventManager.current.OnAddAnnotations += EventManager_otherEvent;
         EventManager.current.OnSelectAnnotation += EventManager_onSelectAnnotation;
+        EventManager.current.OnZoomIn += EventManager_onZoomIn;
+        EventManager.current.OnZoomOut += EventManager_onZoomOut;
     }
     void Start() 
     {   
@@ -53,11 +57,10 @@ public class CameraController : MonoBehaviour, IEventManagerListener
         Camera.main.transform.Translate(displacement); 
         prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
     }
-    /*Displaces the camera in the z axis*/
-    private void zoom(){
+    /*Displaces the camera by the vector dir * magnitude*/
+    private void move(Vector3 dir, float magnitude){
         Camera.main.transform.position = pivot.transform.position;
-        float scrollAmount = Input.GetAxis("Mouse ScrollWheel")*scrollSpeed;
-        displacement -= new Vector3(0, 0, scrollAmount);
+        displacement += dir * magnitude;
         Camera.main.transform.Translate(displacement);
     }
     void LateUpdate()
@@ -72,21 +75,20 @@ public class CameraController : MonoBehaviour, IEventManagerListener
             }
         }
         if(Input.GetAxis("Mouse ScrollWheel") != 0){
-            zoom();
-        }else if(Input.GetKey(KeyCode.H)){//Translate using keybinds.
-            Camera.main.transform.position += Camera.main.transform.right * 1.0f;
-            displacement += Vector3.right*1.0f;
-        }else if (Input.GetKey(KeyCode.G)){
-            Camera.main.transform.position -= Camera.main.transform.right * 1.0f;
-            displacement -= Vector3.right*1.0f;
+            move(Vector3.forward * Input.GetAxis("Mouse ScrollWheel"), scrollSpeed);
+        }else if (Input.GetKey(KeyCode.H)){
+            move(Vector3.right, displacementMagnitude);
+        }else if(Input.GetKey(KeyCode.G)){
+            move(Vector3.left, displacementMagnitude);
         }else if(Input.GetKey(KeyCode.Y)){
-            Camera.main.transform.position += Camera.main.transform.up * 1.0f;
-            displacement += Vector3.up*1.0f;
+            move(Vector3.up, displacementMagnitude);
         }else if(Input.GetKey(KeyCode.B)){
-            Camera.main.transform.position -= Camera.main.transform.up * 1.0f;
-            displacement -= Vector3.up*1.0f;
+            move(Vector3.down, displacementMagnitude);
+        }else if(Input.GetKeyDown(KeyCode.W)){
+            move(Vector3.forward, scrollSpeed * 0.1f);
+        }else if(Input.GetKeyDown(KeyCode.S)){
+            move(Vector3.back, scrollSpeed * 0.1f);
         }
-        
     }
 
     /*Coroutine that initialises the camera distance dynamically based on the radius of the sphere that bounds the renderer of the model loaded into the application, 
@@ -94,6 +96,7 @@ public class CameraController : MonoBehaviour, IEventManagerListener
     private IEnumerator setCameraDistance(){
         yield return new WaitUntil(() => ModelHandler.current.modelRadius != 0); //waits until the model has been loaded in - prevents nullReferencEexceptions being thrown
         cameraDistance = -CAMERA_TO_MODEL_RADIUS_RATIO * ModelHandler.current.modelRadius; //ratio * radius of renderer
+        displacementMagnitude = DISPLACEMENT_MULTIPLIER * ModelHandler.current.modelRadius;
         scrollSpeed = -cameraDistance;
         displacement = new Vector3(0f,0f,cameraDistance);
         Camera.main.ScreenToViewportPoint(Input.mousePosition);
@@ -102,9 +105,12 @@ public class CameraController : MonoBehaviour, IEventManagerListener
         startRot = Camera.main.transform.rotation;
     }
 
+    /*Allow the camera to be rotated again*/
     public void EventManager_enableCamera(object sender, EventArgs e){
         isEnabled = true;
     }
+
+    /*Restore the state of the annotation encapsulated by the annotation*/
     public void EventManager_onSelectAnnotation(object sender, EventArgsAnnotation e){
         Camera.main.transform.position = e.data.cameraCoordinates;
         Camera.main.transform.rotation = e.data.cameraRotation;
@@ -120,6 +126,15 @@ public class CameraController : MonoBehaviour, IEventManagerListener
     public void EventManager_resetPosition(object sender, EventArgs e){
         isEnabled = false;
         displacement = new Vector3(0f,0f,cameraDistance);
+    }
+
+    /*Zoom in on button press*/
+    public void EventManager_onZoomIn(object sender, EventArgs e){
+        move(Vector3.forward, displacementMagnitude * 5f);
+    }
+    /*Zoom out on button press*/
+    public void EventManager_onZoomOut(object sender, EventArgs e){
+        move(Vector3.back, displacementMagnitude * 5f);
     }
 }
  

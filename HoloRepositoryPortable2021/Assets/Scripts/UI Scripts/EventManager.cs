@@ -32,6 +32,10 @@ public class EventManager : MonoBehaviour
     public event EventHandler OnEnableUIBlocker;
     public event EventHandler OnDisableUIBlocker;
     public event EventHandler OnToggleFullScreen;
+    public event EventHandler OnZoomIn;
+    public event EventHandler OnZoomOut;
+    public event EventHandler OnReturnToPreviousScene;
+    public event EventHandler OnModelLoaded;
     public event EventHandler<EventArgsFloat> OnChangeOpacity;
 
     private void Awake(){
@@ -75,8 +79,17 @@ public class EventManager : MonoBehaviour
     public void onToggleOpacitySlider(){
         OnToggleOpacitySlider?.Invoke(this, EventArgs.Empty);
     }
+    public void onZoomIn(){
+        OnZoomIn?.Invoke(this, EventArgs.Empty);
+    }
+    public void onZoomOut(){
+        OnZoomOut?.Invoke(this, EventArgs.Empty);
+    }
     public void onToggleSegmentSelect(){
         OnToggleSegmentSelect?.Invoke(this, EventArgs.Empty);
+    }
+    public void onModelLoaded(){
+        OnModelLoaded?.Invoke(this, EventArgs.Empty);
     }
     public void onToggleNavigationBar(){
         OnToggleNavigationBar?.Invoke(this, EventArgs.Empty);
@@ -92,6 +105,9 @@ public class EventManager : MonoBehaviour
     }
     public void onToggleFullScreen(){
         OnToggleFullScreen?.Invoke(this, EventArgs.Empty);
+    }
+    public void onReturnToPreviousScene(){
+        OnReturnToPreviousScene?.Invoke(this, EventArgs.Empty);
     }
     public void onColourSelect(Color col){
         EventArgsColourData e = new EventArgsColourData(col);

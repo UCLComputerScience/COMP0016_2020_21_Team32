@@ -8,7 +8,6 @@ using UnityEngine.UI;
 ///colour of the background to be changed.</summary>
 public class SettingsController : MonoBehaviour
 {   
-   private readonly String startSkyBoxColour = "3C3C3C";
    private Toggle colourPaletteToggle;
    private Toggle navigationBarToggle;
    private Toggle segmentSelectToggle;
@@ -22,8 +21,6 @@ public class SettingsController : MonoBehaviour
    private Button hideAbout;
    void Awake(){
        /*initialise variables*/
-       skyBoxColour = MaterialAssigner.hexToColour(startSkyBoxColour);
-       RenderSettings.skybox.SetColor("_Tint", skyBoxColour);
        colourPaletteToggle = this.transform.Find("Colour Palette Toggle").GetComponent<Toggle>();
        navigationBarToggle = this.transform.Find("Navigation Bar Toggle").GetComponent<Toggle>();
        segmentSelectToggle = this.transform.Find("Segment Select Toggle").GetComponent<Toggle>();
@@ -50,8 +47,10 @@ public class SettingsController : MonoBehaviour
        hideAbout.onClick.AddListener(disablePanel);
    }
     private void adjustBackgroundBrightness(float tint){
-         Color newCol = skyBoxColour * tint;
-         RenderSettings.skybox.SetColor("_Tint",newCol);
+        //  Color newCol = skyBoxColour * tint;
+        //  RenderSettings.skybox.SetColor("_Tint",newCol);
+        float rgbVal = Mathf.Lerp(0, 1, tint);
+        Camera.main.backgroundColor = new Color(rgbVal, rgbVal,rgbVal, 1);
     }
     private void hide(){
         this.gameObject.SetActive(false);
@@ -66,8 +65,7 @@ public class SettingsController : MonoBehaviour
         ToolTip.current.gameObject.SetActive(false);
     }
     void OnDestroy(){
-       skyBoxColour = MaterialAssigner.hexToColour(startSkyBoxColour);
-       RenderSettings.skybox.SetColor("_Tint", skyBoxColour);
+       Camera.main.backgroundColor = Color.white;
     }
     
     /*Helper function to initialise a toggle with a callback*/

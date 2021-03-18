@@ -5,10 +5,12 @@ using UnityEngine;
 ///<summary>Used to draw the lines of the 3D coordinate axis whenever the pivot controller is enabled</summary>
 public class GenerateLines : MonoBehaviour
 {
+    private const float MODEL_RADIUS_TO_LINE_WIDTH = 750f;
+    private const float LINE_LENGTH = 5000f;
     private LineRenderer xLine;
     private LineRenderer yLine;
     private LineRenderer zLine;
-    private float radiusToLineWidth = 750f;
+    
 
 
     void Awake(){
@@ -23,9 +25,9 @@ public class GenerateLines : MonoBehaviour
         line.material.SetColor("_Color", color); 
         line.useWorldSpace = true;
         line.sortingOrder = 5;
-        line.startWidth = line.endWidth = ModelHandler.current.modelRadius / radiusToLineWidth;
+        line.startWidth = line.endWidth = ModelHandler.current.modelRadius / MODEL_RADIUS_TO_LINE_WIDTH;
         line.startColor = line.endColor = color;
-        line.SetPositions(new Vector3[]{-axisDir*5000, axisDir*5000}); //arbitrarily large length of line in the direction specified 
+        line.SetPositions(new Vector3[]{-axisDir*LINE_LENGTH, axisDir*LINE_LENGTH}); //arbitrarily large length of line in the direction specified 
     }
     /*Draws 3 lines, 1 for each axis in 3D space*/
     public void draw(){
