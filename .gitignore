@@ -13,7 +13,7 @@
 
 /HoloRepositoryPortable2021/Assets/SimpleITK/*.dll
 /HoloRepositoryPortable2021/Assets/StreamingAssets/*.glb
-
+/HoloRepositoryPortable2021/Assets/StreamingAssets/*.glb.meta
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
 
