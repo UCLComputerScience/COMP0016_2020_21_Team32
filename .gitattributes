@@ -1,3 +1,2 @@
 *.glb filter=lfs diff=lfs merge=lfs -text
-*.dll filter=lfs diff=lfs merge=lfs -text
 GLTFUnityTest/Library/ArtifactDB filter=lfs diff=lfs merge=lfs -text
