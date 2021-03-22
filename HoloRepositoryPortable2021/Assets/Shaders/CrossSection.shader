@@ -49,6 +49,7 @@ Shader "Custom/Clipping" {
          struct v2f {
            float4 pos : SV_POSITION; //Vertex position in object space
            float4 worldPos : world ; //position in world space
+           half4 col : COLOR;
          };
         //vertex function - runs on each vertex of the model
          v2f vert (appdata_base v)
@@ -70,7 +71,7 @@ Shader "Custom/Clipping" {
             //if this value is positive then the pixel is below the plane, otherwise it's above.
 		        clip(-dist); //discards the current pixel if dist is positive, ie does not draw pixel currently being processed if it's ABOVE the plane
          
-           return half4 (0,0,0,1); 
+           return i.col; 
          }
          ENDCG  
        }
@@ -98,7 +99,7 @@ Shader "Custom/Clipping" {
     half _Metallic;
     half _Roughness;
     half _BumpScale;
-    fixed4 _Color;
+    float4 _Color;
 
     float3 _PlaneNormal;
     float3 _PlanePosition;
@@ -112,9 +113,9 @@ Shader "Custom/Clipping" {
     void surf (Input IN, inout SurfaceOutputStandard o) {
 			fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
 
-			o.Albedo = c.rgb * IN.color;
+			//o.Albedo = c.rgb * IN.color;
 			o.Alpha = c.a;
-
+      o.Albedo = c.rgb;
 			fixed4 m = tex2D (_MetallicGlossMap, IN.uv_MetallicGlossMap);
 			o.Metallic = m.b * _Metallic;
 			

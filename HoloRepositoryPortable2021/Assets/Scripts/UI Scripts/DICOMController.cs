@@ -7,7 +7,7 @@ using SFB;
 using UnityEngine.EventSystems;
 using System.IO;
 
-///<summary>This script is attached to the  DICOMController prefab and provides it with interactivity. The user can load in </summary>
+///<summary>This script is attached to the  DICOMController prefab and provides it with interactivity.</summary>
 public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler 
 {
     private DicomToPNG converter;
@@ -15,14 +15,12 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
     private Button loadButton;
     private Canvas canvas;
     private String[] paths;
-    private List<String> outputPaths;
     private RawImage viewArea;
     private Slider dicomSlider;
     private List<Texture2D> images;
     private RectTransform canvasRect;
     private RectTransform rectTransform; 
     private RectTransform viewAreaRect;
-    private string input;
     private Vector3 dragOffset;
 
     /*Initialise variables*/
@@ -41,12 +39,10 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
         loadButton = this.transform.Find("Load different scans").GetComponent<Button>();
         hideButton.onClick.AddListener(hide);
         loadButton.onClick.AddListener(openFileExplorer);
-        //loadButton.onClick.AddListener(DicomToTexture2D.ReadDICOMopenDicom);
         converter = new DicomToPNG((int)rectTransform.rect.width, (int)rectTransform.rect.height);
-        outputPaths = new List<String>();
     }
 
-    /*Drag and drop functionality*/
+    /*Drag and drop functionality (implements the IBeginDragHandler and IEndDragHandler interfaces)*/
     public void OnBeginDrag(PointerEventData data){
         dragOffset = (Vector3)data.position - rectTransform.position;
     }
@@ -54,14 +50,15 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
         rectTransform.position = (Vector3)data.position - dragOffset;
     }
 
-/*Open native file browser and updates the controller with the dcm files selected by the user. Called when the load button is pressed*/
+/*Open the native file browser using the StandAloneFileBrowser library. Updates the controller with the .dcm files selected by the user. 
+  Called when the load button is pressed*/
     public void openFileExplorer(){
         var extension = new [] {new ExtensionFilter("DICOM", "dcm")};
         paths = StandaloneFileBrowser.OpenFilePanel("Select one or multiple dcm files", "", extension, true);
         updateImages();
     }
 
-/*Called when the hideButton is pressed - disables the controller*/
+/*Called when the hideButton is pressed - disables the controller, disables the tooltip and fires an onEnableCamera event so the user can start moving the camera.*/
     public void hide(){
         ToolTip.current.gameObject.SetActive(false);
         EventManager.current.onEnableCamera();
@@ -74,8 +71,8 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
             return;
         }
     }
-    /*Convert the selected .dcm files into Texture2D objects by temporarily writing them to a png. Populate the images
-    array with these textures loaded from the pngs so they can be loaded onto the viewArea */
+    /*Convert the selected .dcm files into Texture2D using the converter object. Populate the images
+    array with these Texture2D objects so they can be loaded onto the viewArea */
     private void updateImages(){
         if(paths.Length == 0){ //If the user presses cancel in the fileExplorer disable the controller
             ToolTip.current.gameObject.SetActive(false);
@@ -85,7 +82,6 @@ public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler
             return;
         }
         images.Clear(); //clear existing images if loadButton is pressed
-        outputPaths.Clear();
         foreach(String path in paths){
             string outputfile = Path.Combine(Application.dataPath, path.Substring(path.LastIndexOf(Path.DirectorySeparatorChar)) + ".png");
             images.Add(converter.ReadDICOM(path));

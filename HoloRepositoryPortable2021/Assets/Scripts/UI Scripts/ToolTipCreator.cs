@@ -14,8 +14,8 @@ using TMPro;
 ///</summary>
 public class ToolTipCreator : MonoBehaviour
 {
-    Canvas canvas;
-    List<Selectable> selectables;
+    public Canvas canvas;
+    private List<Selectable> selectables;
     void Awake(){
         canvas = GetComponent<Canvas>();
         selectables = canvas.GetComponentsInChildren<Selectable>(true).ToList();
@@ -24,6 +24,7 @@ public class ToolTipCreator : MonoBehaviour
             s.gameObject.AddComponent<toolTipShower>();
         }
     }
+    /*Checks if a selectable is part of a dropdown menu.*/
     private bool isDropDownElement(Selectable s){
         return s.transform.parent.name == "Content";
     }
@@ -35,8 +36,8 @@ public class ToolTipCreator : MonoBehaviour
     private class toolTipShower : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler{
         String prevText;
         
-        /*Called when the pointer enters the rect transform of the button/toggle it is attatched to.
-        Sets the text displayed in the tooltip to that of the name of the gameObject the button/toggle
+        /*Called when the pointer enters the rect transform of the button/toggle this componenet is attatched to.
+        Sets the text displayed in the tooltip to that of the name of the gameObject that the button/toggle
         is a component of.
         */
         public void OnPointerEnter(PointerEventData data){

@@ -10,8 +10,8 @@ using System.Globalization;
 using UnityEditor;
 
 ///<summary>
-///This class is attatched to the MainMenu gameobject and provides the elements on it with interactivity by passing callback actions
-///to their events.
+///This class is attatched to the MainMenu gameobject. It provides the elements on it with interactivity by passing callback actions
+///to the events of the selectable elements.
 ///</summary>
 public class MainMenu : MonoBehaviour
 {
@@ -47,22 +47,29 @@ public class MainMenu : MonoBehaviour
         FileHelper.setCurrentModelFileName(exampleFiles[0]); 
 
         /*Add callback actions to the interactable elements*/
-        exampleOrganDropDown.onValueChanged.AddListener(OnValueChanged);
+        exampleOrganDropDown.onValueChanged.AddListener(SelectExampleOrgan);
         viewButton.onClick.AddListener(nextScene);
         quitButton.onClick.AddListener(quitApplication);
         fileExplorer.onClick.AddListener(openFileExplorer);
         controlButton.onClick.AddListener(openControls);
         minimiseControls.onClick.AddListener(closeControls);
     }
+    /*Passed as a callback to the view button. Loads the MainPage scene.*/
     private void nextScene(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
-    private void OnValueChanged(int index){
+    /*Passed as a callback to exampleOrganDropDown. Called whenever the selected organ is changed.*/
+    private void SelectExampleOrgan(int index){
        FileHelper.setCurrentModelFileName(exampleFiles[index]);
     }
+    /*Passed as a callback to the quit button. Terminates the application. Has no effect in the editor.*/
     private void quitApplication(){
         Application.Quit();
     }
+
+    /*Using the StandAloneFileBrowser library, allow the user to select a file from local storage.
+    To prevent the risk of any incompatible files being loaded in, an ExtensionFilter object is created that only permits
+    glb and gltf files to be viewed when the FileExplorer is opened.*/
     private void openFileExplorer(){
         var extension = new [] {new ExtensionFilter("3D model files", "gltf", "glb")};
         string[] paths = StandaloneFileBrowser.OpenFilePanel("Select a glb/gltf file", "", extension, false);

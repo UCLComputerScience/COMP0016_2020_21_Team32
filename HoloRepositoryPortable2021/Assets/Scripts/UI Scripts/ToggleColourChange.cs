@@ -14,7 +14,7 @@ public class ToggleColourChange : MonoBehaviour
         /*initialise variables and pass callback to the onValueChanged event of the toggle*/
         toggle = GetComponent<Toggle>();
         toggle.onValueChanged.AddListener(changeColour);
-        originalCol = new Color(255f, 255f, 255f); //normal colour is white
+        originalCol = Color.white; //normal colour is white
         colourBlock = toggle.colors;
         changeColour(toggle.isOn);
     }

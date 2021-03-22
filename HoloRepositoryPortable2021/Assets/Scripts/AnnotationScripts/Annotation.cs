@@ -18,6 +18,8 @@ public class Annotation : MonoBehaviour
     private Button cancelButton;
     private TMP_InputField titleInputField;
     private TMP_InputField inputField;
+    private TMP_Text titleText;
+    private Vector3 startPos;
 
     public static void setNumAnnotations(int value){
         numAnnotations = value;
@@ -64,6 +66,8 @@ public class Annotation : MonoBehaviour
         ToolTip.current.gameObject.SetActive(false);
         gameObject.SetActive(false);
         EventManager.current.onDisableUIBlocker();
+        //titleInputField.transform.position = startPos;
+        titleInputField.text.Remove(0);
         titleInputField.text = "Annotation #" + numAnnotations;
         inputField.text = "enter...";
         EventManager.current.onEnableCamera();

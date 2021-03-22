@@ -38,7 +38,6 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
         segOpacity = 1.0f;
         minOpacity = 0.3f;
         currentlySelected = 0;
-        segments = new List<GameObject>();
         crossSectionalShader = Shader.Find("Custom/Clipping");
         StartCoroutine(loadModel());
     }  
@@ -61,6 +60,7 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
         Bounds modelBounds = getModelBounds();
         modelRadius = modelBounds.extents.magnitude;
         modelCentre = modelBounds.center; 
+        organ.adjustPosition();
     }
     private Bounds getModelBounds(){
         Bounds combinedBounds = new Bounds();

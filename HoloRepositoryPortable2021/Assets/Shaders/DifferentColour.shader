@@ -64,8 +64,9 @@ Shader "Custom/DifferentColour" {
 			fixed4 c;
 			if(dist > 0)c = (0,0,0,0); //sets everything that won't be drawn by the gpu to black
 			else c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
-			o.Albedo = c.rgb * IN.color;
+			//o.Albedo = c.rgb * IN.color;
 			o.Alpha = c.a;
+			o.Albedo = c.rgb;
 
 			fixed4 m = tex2D (_MetallicGlossMap, IN.uv_MetallicGlossMap);
 			o.Metallic = m.b * _Metallic;

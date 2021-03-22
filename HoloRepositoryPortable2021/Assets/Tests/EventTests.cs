@@ -22,6 +22,7 @@ namespace Tests
         private GameObject camera;
         private EventManager eventManager;
         private ModelHandler modelHandler;
+        private AnnotationData exampleAnnotation;
 
 
         private void initialiseTestScene(){
@@ -41,6 +42,19 @@ namespace Tests
             Debug.Log(eventManager);
 
         }
+        private void initialiseRandomAnnotation(){
+            exampleAnnotation = new AnnotationData();
+            exampleAnnotation.cameraCoordinates = new Vector3(Random.Range(0, 500), Random.Range(0, 500), Random.Range(0, 500));
+            exampleAnnotation.cameraRotation = Quaternion.Euler(Random.Range(0, 180),Random.Range(0, 180),Random.Range(0, 180));
+            exampleAnnotation.cameraDisplacement = new Vector3(Random.Range(0, 500), Random.Range(0, 500), Random.Range(0, 500));
+            exampleAnnotation.text = "random";
+            exampleAnnotation.title = "randomTitle";
+            exampleAnnotation.planeNormal = new Vector3(Random.Range(0, 500), Random.Range(0, 500), Random.Range(0, 500));
+            exampleAnnotation.planePosition = new Vector3(Random.Range(0, 500), Random.Range(0, 500), Random.Range(0, 500));
+            exampleAnnotation.colours = new List<Color>(){Color.red, Color.green, Color.blue, Color.black, Color.white};
+            exampleAnnotation.screenDimensions = new Vector2(Screen.width, Screen.height);
+        }
+        
         private void loadModel(){
             modelHandler = eventListener.AddComponent<ModelHandler>();
             modelHandler.plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
@@ -60,6 +74,7 @@ namespace Tests
             }
             yield return new ExitPlayMode();
         }
+
 
         [UnityTest]
         public IEnumerator EventManagerTest_onCameraEnabled()
@@ -308,8 +323,6 @@ namespace Tests
             eventManager.onZoomIn();
             yield return new WaitForEndOfFrame();
             Vector3 finalCamPos = Camera.main.transform.position;
-            Debug.Log(initialCamPos);
-            Debug.Log(finalCamPos);
             Assert.Less(initialCamPos.z, finalCamPos.z);
         }
         [UnityTest]
@@ -322,8 +335,6 @@ namespace Tests
             eventManager.onZoomOut();
             yield return new WaitForEndOfFrame();
             Vector3 finalCamPos = Camera.main.transform.position;
-            Debug.Log(initialCamPos);
-            Debug.Log(finalCamPos);
             Assert.Greater(initialCamPos.z, finalCamPos.z);
         }
         [UnityTest]

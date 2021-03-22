@@ -1,9 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-///<summary>Attached to the fullscreen toggle.</summary>
+///<summary>Attached to the fullscreen toggle. Changes the image displayed when the toggle is clicked.</summary>
 public class FullscreenToggle : MonoBehaviour
 {
     private GameObject onImage;

@@ -6,8 +6,8 @@ public class LungExample : Organ
 {
     // Start is called before the first frame update
     public LungExample(string filename):base(filename){
-        base.centrePos = new Vector3(-147f, -88f, 64f);
-        base.centreRot = Quaternion.Euler(2.632f, 76.56f, -90.901f);
+        base.centrePos = new Vector3(-229f, 23f, 191f);
+        base.centreRot = Quaternion.Euler(4.348f, 78.478f, -103.107f);
         base.segments = new List<GameObject>();
     }
 }

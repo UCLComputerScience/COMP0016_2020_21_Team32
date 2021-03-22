@@ -44,9 +44,11 @@ public class PlaneController : MonoBehaviour
         cancelButton = transform.Find("Cancel").GetComponent<Button>();
 
         confirmButton.onClick.AddListener(confirmSlice);
+
         cancelButton.onClick.AddListener(resetSlider);
         cancelButton.onClick.AddListener(resetPlane);
         cancelButton.onClick.AddListener(cancelSlice);
+        
         resetButton.onClick.AddListener(resetSlider);
         resetButton.onClick.AddListener(resetPlane);
 
@@ -71,7 +73,7 @@ public class PlaneController : MonoBehaviour
         yield return new WaitUntil(() => ModelHandler.current.modelRadius != 0); //wait until model is loaded
         startYPos = yPosSlider.value = yPosSlider.maxValue = maxPlaneHeight = ModelHandler.current.modelCentre.y + ModelHandler.current.modelRadius; //set max (and initial) value of slider
         yPosSlider.minValue = minPlaneHeight = ModelHandler.current.modelCentre.y - ModelHandler.current.modelRadius; //set min value of slider
-        plane.transform.position = Vector3.up * maxPlaneHeight;//move the plane to the max position
+        plane.transform.position = ModelHandler.current.modelCentre + Vector3.up * maxPlaneHeight;
         plane.transform.rotation = Quaternion.identity; //set the rotation of the plane to zero.
     }
 
@@ -124,13 +126,12 @@ public class PlaneController : MonoBehaviour
         zRotSlider.value = startZRot;
     }
     public void resetPlane(){
-        plane.transform.position = new Vector3(0, maxPlaneHeight, 0);
+        plane.transform.position = ModelHandler.current.modelCentre + Vector3.up * maxPlaneHeight;
         plane.transform.localRotation = Quaternion.Euler(0f,0f,0f);
     }
     /*Passed as a callback to the onClick event of the confirm button. When pressed, the controller is disabled so the CrossSectional shader is reapplied to all #
     segments of the model.*/
     public void confirmSlice(){
-        // MaterialAssigner.assignToAllChildren(plane, ModelHandler.current.segments, crossSectionalShader);
         plane.SetActive(false);
         this.gameObject.SetActive(false);
     }
@@ -138,8 +139,6 @@ public class PlaneController : MonoBehaviour
     controller is disabled. This has the effect of viewing the model as normal again .
     The controller is set to inactive to return the user to the UI as normal.*/
     public void cancelSlice(){
-        resetPlane();
-        resetSlider();
         plane.SetActive(false);
         this.gameObject.SetActive(false);
     }

@@ -1,14 +1,13 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 ///<summary>This class is instantiated if the example model of an abdomen is loaded in</summary>
 public class AbdomenExample : Organ
 {
-    // Start is called before the first frame update
     public AbdomenExample(string filename) : base(filename){
-        base.centrePos = new Vector3(-52f, -86f, -175f);
-        base.centreRot = Quaternion.Euler(0.453f, -288.9f, 1.323f);
+        base.centrePos = new Vector3(-127f, -19f, -117f);
+        base.centreRot = Quaternion.Euler(0f, 63.548f, 0f);
         base.segments = new List<GameObject>();
     }
 }

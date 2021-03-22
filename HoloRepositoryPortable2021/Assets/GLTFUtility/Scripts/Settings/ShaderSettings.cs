@@ -27,6 +27,7 @@ namespace Siccity.GLTFUtility {
 		}
 
 		public Shader GetDefaultMetallic() {
+			Debug.Log("default metallic");
 #if UNITY_2019_1_OR_NEWER
 			if (GraphicsSettings.renderPipelineAsset) return Shader.Find("GLTFUtility/URP/Standard (Metallic)");
 			else
@@ -35,6 +36,7 @@ namespace Siccity.GLTFUtility {
 		}
 
 		public Shader GetDefaultMetallicBlend() {
+			Debug.Log("default metallic blend");
 #if UNITY_2019_1_OR_NEWER
 			if (GraphicsSettings.renderPipelineAsset) return Shader.Find("GLTFUtility/URP/Standard Transparent (Metallic)");
 			else
@@ -43,6 +45,7 @@ namespace Siccity.GLTFUtility {
 		}
 
 		public Shader GetDefaultSpecular() {
+			Debug.Log("default specular");
 #if UNITY_2019_1_OR_NEWER
 			if (GraphicsSettings.renderPipelineAsset) return Shader.Find("GLTFUtility/URP/Standard (Specular)");
 			else
@@ -51,6 +54,7 @@ namespace Siccity.GLTFUtility {
 		}
 
 		public Shader GetDefaultSpecularBlend() {
+			Debug.Log("default specular blend");
 #if UNITY_2019_1_OR_NEWER
 			if (GraphicsSettings.renderPipelineAsset) return Shader.Find("GLTFUtility/URP/Standard Transparent (Specular)");
 			else

@@ -25,17 +25,20 @@ public abstract class Organ
 
     /*Virtual method that may or may not be overridden by subclasses. The model is loaded in at runtime and 
     is made a child of a parent gameObject. It's local position and rotation relative to this parent are set, and all the 
-    children of the model are stored in a list. If a camera exists in the loaded model, it is set to inactive.*/
+    children of the model are stored in a list. If a camera exists in the loaded model, it is set to inactive as to 
+    not intefere with the main camera in the scene.*/
     public virtual void setParent(GameObject parent){
         model.transform.SetParent(parent.transform);
-        model.transform.localPosition = centrePos;
-        model.transform.localRotation = centreRot;
         segmentTransforms = model.GetComponentsInChildren<Transform>().ToList();
         segments = new List<GameObject>();
         foreach(Transform t in segmentTransforms){
             if(t.gameObject.GetComponent<Renderer>() != null)segments.Add(t.gameObject);
             else if(t.gameObject.GetComponent<Camera>() != null)t.gameObject.SetActive(false);
         }
+    }
+    public void adjustPosition(){
+        model.transform.localPosition = centrePos;
+        model.transform.localRotation = centreRot;
     }
     
 }

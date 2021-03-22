@@ -7,8 +7,7 @@ using System.IO;
 using UnityEditor;
 
 ///<summary>This class uses the factory design pattern to instantiate the appopriate concrete organ at runtime based on the filename
-///received. The loaded model itself is passed as a parameter to the newly instantiated organ. If the factory does not recognise the 
-///filename as one of the example model filenames, a LoadedOrgan object will be instantiated, which is the standard wrapper class for the loaded organ.</summary>
+///received. 
 public static class OrganFactory
 {
     public static Organ GetOrgan(){
@@ -23,6 +22,8 @@ public static class OrganFactory
                 return new LungExample(FileHelper.currentModelFileName);
             case "kidney.glb":
                 return new KidneyExample(FileHelper.currentModelFileName);
+            case "eye segment.glb":
+                return new EyeSegmentExample(FileHelper.currentModelFileName);
             default:
                 return new LoadedOrgan(FileHelper.currentModelFileName);
         }

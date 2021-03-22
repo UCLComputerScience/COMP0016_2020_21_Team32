@@ -11,7 +11,7 @@ using System;
 ///</summary>
 public class CameraController : MonoBehaviour, IEventManagerListener
 {
-    private const float CAMERA_TO_MODEL_RADIUS_RATIO = 350/178; //experimentally discovered value to move the camera in the z plane relative to the radius of the model loaded
+    private const float CAMERA_TO_MODEL_RADIUS_RATIO = 350/178; 
     private const float DISPLACEMENT_MULTIPLIER = 0.01f; 
     public static Vector3 startPos;
     public static Quaternion startRot;
@@ -35,14 +35,14 @@ public class CameraController : MonoBehaviour, IEventManagerListener
         EventManager.current.OnZoomIn += EventManager_onZoomIn;
         EventManager.current.OnZoomOut += EventManager_onZoomOut;
     }
-    void Start() 
-    {   
+    void Start(){   
         StartCoroutine(setCameraDistance()); //sets the position of the camera based on the size of the model loaded in 
         subscribeToEvents();
         Camera.main.enabled =true;
         prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition); //used to determine the direction the camera should be rotated
         Camera.main.transparencySortMode = TransparencySortMode.Orthographic;
     }
+
     private void startRotation(){
         Camera.main.transform.Translate(displacement);
         prevPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
@@ -85,9 +85,9 @@ public class CameraController : MonoBehaviour, IEventManagerListener
         }else if(Input.GetKey(KeyCode.B)){
             move(Vector3.down, displacementMagnitude);
         }else if(Input.GetKeyDown(KeyCode.W)){
-            move(Vector3.forward, scrollSpeed * 0.1f);
+            move(Vector3.forward, displacementMagnitude * 5);
         }else if(Input.GetKeyDown(KeyCode.S)){
-            move(Vector3.back, scrollSpeed * 0.1f);
+            move(Vector3.back, displacementMagnitude * 5);
         }
     }
 
@@ -98,11 +98,19 @@ public class CameraController : MonoBehaviour, IEventManagerListener
         cameraDistance = -CAMERA_TO_MODEL_RADIUS_RATIO * ModelHandler.current.modelRadius; //ratio * radius of renderer
         displacementMagnitude = DISPLACEMENT_MULTIPLIER * ModelHandler.current.modelRadius;
         scrollSpeed = -cameraDistance;
+
+        /*THIS IS WHAT'S INTERESTING FOR NEXT TIME*/
+        
+        pivot.transform.position = ModelHandler.current.modelCentre;
+    
+        Camera.main.transform.position = pivot.transform.position;
         displacement = new Vector3(0f,0f,cameraDistance);
         Camera.main.ScreenToViewportPoint(Input.mousePosition);
         Camera.main.transform.Translate(displacement);
         startPos = Camera.main.transform.position;
         startRot = Camera.main.transform.rotation;
+        Debug.Log(ModelHandler.current.modelCentre);
+        
     }
 
     /*Allow the camera to be rotated again*/

@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 ///<Summary>This class handles resetting the position of the camera via means of linear interpolation</summary>
 public class CameraResetter : MonoBehaviour, IEventManagerListener
 {
-    public float travelTime = 2;
+    public const float RESET_TIME = 2f;
     Vector3 startPos;
     Quaternion startRot;
     Vector3 targetPos;
@@ -19,26 +19,19 @@ public class CameraResetter : MonoBehaviour, IEventManagerListener
 
     /*Ensures this script is only enabled when the relevant event is received.*/
     public void subscribeToEvents(){
-        EventManager.current.OnEnableCamera += otherEvent;
-        EventManager.current.OnEnablePivot += otherEvent;
-        EventManager.current.OnEnableCrossSection += otherEvent;
-        EventManager.current.OnEnableDicom += otherEvent;
         EventManager.current.OnReset += EventManager_OnReset;
-        EventManager.current.OnViewAnnotations += otherEvent;
-        EventManager.current.OnAddAnnotations += otherEvent;
-        EventManager.current.OnEnableDicom += otherEvent;
     }
     void Start(){
         subscribeToEvents();    
     }
 
     /*When the reset toggle is pressed in the navigation bar, the camera is linearly interpolated from its current position to its original position.
-    The time taken for this reset to occur is determined by the travelTime variable*/
+    The time taken for this reset to occur is determined by RESET_TIME*/
     void Update()
     {
         if(!isEnabled)return;
         timeElapsed +=Time.deltaTime; 
-        float ratio = timeElapsed/travelTime;
+        float ratio = timeElapsed/RESET_TIME;
         Camera.main.gameObject.transform.position = Vector3.Lerp(startPos, targetPos, ratio);
         Camera.main.gameObject.transform.rotation = Quaternion.Lerp(startRot, targetRot, ratio);
         if(ratio >= 1){
@@ -46,6 +39,7 @@ public class CameraResetter : MonoBehaviour, IEventManagerListener
             timeElapsed = 0;
             ratio = 0;
             EventManager.current.onEnableCamera();
+            isEnabled = false;
         }
     }
 
@@ -57,8 +51,4 @@ public class CameraResetter : MonoBehaviour, IEventManagerListener
         targetPos = CameraController.startPos;
         targetRot = CameraController.startRot;  
     }
-    public void otherEvent(object sender, EventArgs e){
-        isEnabled = false;
-    }
-
 }

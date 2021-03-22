@@ -89,6 +89,9 @@ public static class MaterialAssigner
         mat.SetTexture("_MainTex", t);
         mat.SetVector("_PlanePosition", plane.transform.position); 
         mat.SetVector("_PlaneNormal", plane.transform.up);
+        child.GetComponent<MeshFilter>().mesh.RecalculateNormals();
+        child.GetComponent<MeshFilter>().mesh.RecalculateBounds();
+        child.GetComponent<MeshFilter>().mesh.RecalculateTangents();
         mat.renderQueue = (int)RenderQueue.Transparent - index; //set the renderqueue of the material applied based on the index of the segment
         child.GetComponent<Renderer>().material = mat;
     }
