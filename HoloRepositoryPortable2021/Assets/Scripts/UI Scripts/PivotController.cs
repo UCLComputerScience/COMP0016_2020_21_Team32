@@ -33,6 +33,7 @@ public class PivotController : MonoBehaviour
 
     void Awake(){
         /*Initialise all interactive elements of the controller and add callbacks to their events*/
+        Debug.Log("waking up, to ash'n dust");
         xPosSlider = transform.Find("Pivot xPos").GetComponent<Slider>();
         yPosSlider = transform.Find("Pivot yPos").GetComponent<Slider>();
         zPosSlider = transform.Find("Pivot zPos ").GetComponent<Slider>();
@@ -47,7 +48,6 @@ public class PivotController : MonoBehaviour
 
         /*Set the position and size of the pivot. Its size is determined by the radius of the sphere that bounds the mesh of the loaded model (ModelHandler.current.modelRadius)*/
         StartCoroutine(initialisePivot());
-        StartCoroutine(initialiseSliders());
 
     }
 
@@ -55,25 +55,29 @@ public class PivotController : MonoBehaviour
     so that the user can see the pivot they're controlling, as it will usually be within the model. Enable the UIBlocker, pivot and the axes.*/
     private IEnumerator initialisePivot(){
         yield return new WaitUntil(()=> ModelHandler.current.modelCentre != null);
+        Debug.Log(ModelHandler.current.modelCentre);
         pivot.transform.position = ModelHandler.current.modelCentre;
+        Debug.Log(pivot.transform.position);
         axes.transform.position = pivot.transform.position;
         float pRadius = ModelHandler.current.modelRadius / MODEL_TO_PIVOT_RADIUS_RATIO;
-        pivot.transform.localScale = new Vector3(pRadius,pRadius,pRadius); 
+        pivot.transform.localScale = new Vector3(pRadius,pRadius,pRadius);
+        StartCoroutine(initialiseSliders()); 
     }
     private IEnumerator initialiseSliders(){
         yield return new WaitUntil(()=>ModelHandler.current.modelCentre != null);
         initialiseSlider(xPosSlider, changeXPos, X_SLIDER_MULTIPLIER, ModelHandler.current.modelCentre.x);
         initialiseSlider(yPosSlider, changeYPos, Y_SLIDER_MULTIPLIER, ModelHandler.current.modelCentre.y);
         initialiseSlider(zPosSlider, changeZPos, Z_SLIDER_MULTIPLER, ModelHandler.current.modelCentre.z);
-        startXPos = xPosSlider.value = pivot.transform.position.x;
-        startYPos = yPosSlider.value = pivot.transform.position.y;
-        startZPos = zPosSlider.value = pivot.transform.position.z;
+        startXPos = pivot.transform.position.x;
+        startYPos = pivot.transform.position.y;
+        startZPos = pivot.transform.position.z;
         startPos = new Vector3(startXPos, startYPos, startZPos);
     }
     void OnEnable(){
         MaterialAssigner.reduceOpacityAll(TARGET_OPACITY, ModelHandler.current.segments);
         EventManager.current.onEnableUIBlocker();
         pivot.SetActive(true);
+        Debug.Log(pivot.transform.position);
         axes.SetActive(true);
     }
 
@@ -125,5 +129,6 @@ public class PivotController : MonoBehaviour
         slider.onValueChanged.AddListener(methodToCall);
         slider.minValue = modelCentreCoord -ModelHandler.current.modelRadius * multiplier;
         slider.maxValue = modelCentreCoord + ModelHandler.current.modelRadius * multiplier;
+        slider.value = modelCentreCoord;
     }
 }

@@ -22,22 +22,26 @@ public static class MaterialAssigner
 
     /*Adjusts the opacity of a gameobject. The renderer of the gameobject is disabled if it goes below minOpacity to optimise performance*/
     public static float adjustOpacity(float newOpacity, GameObject segment, float minOpacity) {
-        Color color = segment.GetComponent<Renderer>().material.color;
+        Renderer renderer = segment.GetComponent<Renderer>();
+        if(renderer == null)return 0f;
+        Color color = renderer.material.color;
         color.a = newOpacity;
         if(color.a < minOpacity){
-            segment.GetComponent<Renderer>().enabled = false;
+            renderer.enabled = false;
         }else{
-            if(segment.GetComponent<Renderer>().enabled == false){
-                segment.GetComponent<MeshRenderer>().enabled = true;
+            if(renderer.enabled == false){
+                renderer.enabled = true;
             }
-            segment.GetComponent<Renderer>().material.SetColor("_Color", color);
+            renderer.material.SetColor("_Color", color);
         }
         return newOpacity;
     }
     
     public static void updatePlanePos(GameObject g, GameObject plane){
-        g.GetComponent<Renderer>().material.SetVector("_PlanePosition", plane.transform.position);
-        g.GetComponent<Renderer>().material.SetVector("_PlaneNormal", plane.transform.up);
+        Renderer renderer = g.GetComponent<Renderer>();
+        if(renderer == null)return;
+        renderer.material.SetVector("_PlanePosition", plane.transform.position);
+        renderer.material.SetVector("_PlaneNormal", plane.transform.up);
     }
 
     /*Reduces the opacities of all segments to a minimum of targetOpacity.*/
@@ -61,7 +65,9 @@ public static class MaterialAssigner
     #endregion
     /*changes the colour of a single segment/gameobject */
     public static void changeColour(GameObject segment, Color colour){
-        segment.GetComponent<Renderer>().material.SetColor("_Color", colour);
+        Renderer renderer = segment.GetComponent<Renderer>();
+        if(renderer == null)return;
+        renderer.material.SetColor("_Color", colour);
     }
 
     /*Converts a hexadecimal string to a colour*/
@@ -81,19 +87,18 @@ public static class MaterialAssigner
     multiple transparent objects.
     */
     private static void assignNewMaterial(GameObject plane, GameObject child, int index, Shader shader, float opacity=1.0f){
-        Color col = child.GetComponent<Renderer>().material.GetColor("_Color");
-        Texture t = child.GetComponent<Renderer>().material.GetTexture("_MainTex");
+        Renderer renderer = child.GetComponent<Renderer>();
+        if(renderer == null)return;
+        Color col = renderer.material.GetColor("_Color");
+        Texture t = renderer.material.GetTexture("_MainTex");
         col.a = opacity;
         Material mat = new Material(shader);
         mat.SetColor("_Color", col);
         mat.SetTexture("_MainTex", t);
         mat.SetVector("_PlanePosition", plane.transform.position); 
         mat.SetVector("_PlaneNormal", plane.transform.up);
-        child.GetComponent<MeshFilter>().mesh.RecalculateNormals();
-        child.GetComponent<MeshFilter>().mesh.RecalculateBounds();
-        child.GetComponent<MeshFilter>().mesh.RecalculateTangents();
         mat.renderQueue = (int)RenderQueue.Transparent - index; //set the renderqueue of the material applied based on the index of the segment
-        child.GetComponent<Renderer>().material = mat;
+        renderer.material = mat;
     }
     
     /*converts a hexadecimal string to a 32 bit integer*/

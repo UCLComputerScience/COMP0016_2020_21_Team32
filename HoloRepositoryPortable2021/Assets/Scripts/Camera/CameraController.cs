@@ -84,10 +84,10 @@ public class CameraController : MonoBehaviour, IEventManagerListener
             move(Vector3.up, displacementMagnitude);
         }else if(Input.GetKey(KeyCode.B)){
             move(Vector3.down, displacementMagnitude);
-        }else if(Input.GetKeyDown(KeyCode.W)){
-            move(Vector3.forward, displacementMagnitude * 5);
-        }else if(Input.GetKeyDown(KeyCode.S)){
-            move(Vector3.back, displacementMagnitude * 5);
+        }else if(Input.GetKey(KeyCode.W)){
+            move(Vector3.forward, displacementMagnitude);
+        }else if(Input.GetKey(KeyCode.S)){
+            move(Vector3.back, displacementMagnitude);
         }
     }
 
@@ -138,11 +138,11 @@ public class CameraController : MonoBehaviour, IEventManagerListener
 
     /*Zoom in on button press*/
     public void EventManager_onZoomIn(object sender, EventArgs e){
-        move(Vector3.forward, displacementMagnitude * 5f);
+        move(Vector3.forward, displacementMagnitude);
     }
     /*Zoom out on button press*/
     public void EventManager_onZoomOut(object sender, EventArgs e){
-        move(Vector3.back, displacementMagnitude * 5f);
+        move(Vector3.back, displacementMagnitude);
     }
 }
  

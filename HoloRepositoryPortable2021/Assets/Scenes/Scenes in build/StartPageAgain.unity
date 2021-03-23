@@ -3878,10 +3878,10 @@ MonoBehaviour:
 
     Hold the "b" key to pan the camera down.
 
-    Tap
+    Hold
     the "w" key to zoom in.
 
-    Tap the "s" key to zoom out.
+    Hold the "s" key to zoom out.
 
 '
   m_isRightToLeft: 0
