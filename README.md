@@ -21,7 +21,7 @@ It aims to provide a convenient way for clinicians and educators to view, manipu
 	* Copy all glb files into Assets/StreamingAssets  
 	* Copy all .dlls from the SITK32 directory into Assets/SimpleITK/SimpleITK-1.2.3-CSharp-win32-x86  
 	* Copy all .dlls from the SITK64 directory into Assets/SimpleITK/SimpleITK-2.0.2-CSharp-win64-x64 
-	* Make sure to follow the .dll configuration instructions included in the link above to prevent plugin incompatiblity issues within the 	Unity Editor. 
+	* Make sure to follow the .dll configuration instructions included in the link above to prevent plugin incompatiblity issues within the Unity Editor. 
 * To build the project, either navigate to:  
     * File->"build settings"->build. You will automatically be taken to the directory in which the executable is generated, which can be run.
     * File->"build and run". This will compile the project and run the executable automatically.
@@ -31,3 +31,9 @@ Main authors: Bryn Llewelyn-Jones, Shuai Yuan, Daniel Rempel
 Supervisors: Dr Dean Mohamedally, Costas Stylianou, Sheena Visram
 
 Built at [University College London](https://www.ucl.ac.uk/) in cooperation with [Intel™](https://www.intel.co.uk) and [GOSH DRIVE](https://www.goshdrive.com/).
+
+## Open Source Libraries Used
+* [GLTFUtility](https://github.com/Siccity/GLTFUtility), for the runtime import of GLB/GLTF files into Unity.
+* [SimpleImageToolKit](https://simpleitk.org/), for the loading of DICOM scans into our application.
+* [Unity3DCrossSectionShader](https://github.com/Dandarawy/Unity3DCrossSectionShader), used as reference for implementing the cross sectional viewer feature.
+* [UnityStandAloneFileBrowser](https://github.com/gkngkc/UnityStandaloneFileBrowser), for opening the native Windows file explorer from within our application.
