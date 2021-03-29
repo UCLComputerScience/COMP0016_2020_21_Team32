@@ -25,3 +25,9 @@ It aims to provide a convenient way for clinicians and educators to view, manipu
 * To build the project, either navigate to:  
     * File->"build settings"->build. You will automatically be taken to the directory in which the executable is generated, which can be run.
     * File->"build and run". This will compile the project and run the executable automatically.
+# Acknowledgements
+Main authors: Bryn Llewelyn-Jones, Shuai Yuan, Daniel Rempel
+
+Supervisors: Dr Dean Mohamedally, Costas Stylianou, Sheena Visram
+
+Built at [University College London](https://www.ucl.ac.uk/) in cooperation with [Intel™](https://www.intel.co.uk) and [GOSH DRIVE](https://www.goshdrive.com/).
