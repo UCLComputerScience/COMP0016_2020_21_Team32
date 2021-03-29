@@ -8346,7 +8346,7 @@ MonoBehaviour:
   navigationBar: {fileID: 1214711398}
   segmentSelect: {fileID: 376742396}
   opacitySlider: {fileID: 1420487484}
-  logos: {fileID: 0}
+  logos: {fileID: 26446625}
   annotationPin: {fileID: 105454626}
   mainPage: {fileID: 450532390}
   dicomController: {fileID: 1014638449}

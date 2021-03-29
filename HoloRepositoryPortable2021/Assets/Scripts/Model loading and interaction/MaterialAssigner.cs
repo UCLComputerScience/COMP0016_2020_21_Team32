@@ -66,9 +66,10 @@ public static class MaterialAssigner
     }
     #endregion
     /*changes the colour of a single segment/gameobject */
-    public static void changeColour(GameObject segment, Color colour){
+    public static void changeColour(GameObject segment, Color colour, float minOpacity){
         Renderer renderer = segment.GetComponent<Renderer>();
         if(renderer == null)return;
+        if(colour.a <= minOpacity)renderer.enabled = false;
         renderer.material.SetColor("_Color", colour);
     }
 

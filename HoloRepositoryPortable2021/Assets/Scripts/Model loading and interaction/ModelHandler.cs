@@ -77,7 +77,7 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
    private void EventManager_onColourSelect(object sender, EventArgsColourData e){
         Color col = e.col;
         col.a = segOpacity;
-        MaterialAssigner.changeColour(segments[currentlySelected], col);
+        MaterialAssigner.changeColour(segments[currentlySelected], col, minOpacity);
     }
 
 
@@ -94,7 +94,7 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
         //reassign the material (with the updated plane's position and colours stored in the annotation) to the model
         MaterialAssigner.assignToAllChildren(plane, segments, crossSectionalShader);
         for(int i = 0; i < segments.Count; i++){
-            MaterialAssigner.changeColour(segments[i], e.data.colours[i]);
+            MaterialAssigner.changeColour(segments[i], e.data.colours[i], minOpacity);
         }
     }
 }
