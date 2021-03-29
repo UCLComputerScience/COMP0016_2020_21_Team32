@@ -18,6 +18,7 @@ public abstract class Organ
 
     public Organ(string filename){
         Importer.LoadFromFileAsync(filename, new ImportSettings(), onLoaded); //GLTF Utility call
+        segments = new List<GameObject>();
     }
     private void onLoaded(GameObject loadedModel, AnimationClip[] clips){ //passed as callback action to LoadFromFileAsync.
         model = loadedModel;
@@ -30,12 +31,12 @@ public abstract class Organ
     public virtual void setParent(GameObject parent){
         model.transform.SetParent(parent.transform);
         segmentTransforms = model.GetComponentsInChildren<Transform>().ToList();
-        segments = new List<GameObject>();
         foreach(Transform t in segmentTransforms){
             if(t.gameObject.GetComponent<Renderer>() != null)segments.Add(t.gameObject);
             else if(t.gameObject.GetComponent<Camera>() != null)t.gameObject.SetActive(false);
         }
     }
+    /*adjust the position of the model relative to its parent*/
     public void adjustPosition(){
         model.transform.localPosition = centrePos;
         model.transform.localRotation = centreRot;

@@ -66,7 +66,6 @@ public class Annotation : MonoBehaviour
         ToolTip.current.gameObject.SetActive(false);
         gameObject.SetActive(false);
         EventManager.current.onDisableUIBlocker();
-        //titleInputField.transform.position = startPos;
         titleInputField.text.Remove(0);
         titleInputField.text = "Annotation #" + numAnnotations;
         inputField.text = "enter...";
@@ -80,7 +79,7 @@ public class Annotation : MonoBehaviour
         data.cameraRotation = Camera.main.transform.rotation; //current rotation of the camera
         data.cameraDisplacement = CameraController.displacement; //the amount the user has displaced the camera
         data.annotationPosition = pos; //the position the text of the annotation should appear (same as the position the annotationPin was dropped)
-        data.screenDimensions = new Vector2(Screen.width, Screen.height); //current screen dimensions (so the position in which the text appears on any screen looks the same)
+        data.screenDimensions = new Vector2(Screen.width, Screen.height); //current screen dimensions (so the position in which the textbox appears on any screen size looks the same)
         data.planeNormal = plane.transform.up; //current plane normal (for saving cross sectional views)
         data.planePosition = plane.transform.position; //current plane position (for saving cross sectional views)
         data.colours = new List<Color>();

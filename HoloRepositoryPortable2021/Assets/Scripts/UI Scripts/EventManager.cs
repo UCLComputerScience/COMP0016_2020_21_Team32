@@ -1,13 +1,12 @@
-
-using System;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using System;
+
 
 ///<summary>
 ///This class defines all the events that trigger UI actions to occur, as well as the methods to fire them.
-///As this class is a singleton, it can be referenced from any other class and its methods called from any other class.
+///As this class is a singleton, it can be referenced from any other class and its methods called from any other class. 
 ///</summary>
 
 public class EventManager : MonoBehaviour

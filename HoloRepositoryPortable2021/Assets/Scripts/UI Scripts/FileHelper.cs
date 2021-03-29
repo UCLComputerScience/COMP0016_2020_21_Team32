@@ -39,9 +39,11 @@ public class FileHelper{
         TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
         return dir.GetFiles(searchPattern).Select(f => ti.ToTitleCase(f.Name.Substring(0, f.Name.IndexOf(".")))).ToList<string>();
     }
+    /*Get a list of all the relative paths in the current directory*/
     private List<string> getRelativePathsInDir(string searchPattern="*"){
         return dir.GetFiles(searchPattern).Select(f => f.Name).ToList<string>();
     }
+    /*Get a list of all the absolute paths in the current directory*/
     private List<string> getAbsolutePathsInDir(string searchPattern="*"){
         return dir.GetFiles(searchPattern).Select(f => f.FullName).ToList<string>();
     }

@@ -5,9 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using SFB;
-using System.IO;
-using System.Globalization;
-using UnityEditor;
 
 ///<summary>
 ///This class is attatched to the MainMenu gameobject. It provides the elements on it with interactivity by passing callback actions

@@ -38,7 +38,7 @@ public class CameraResetter : MonoBehaviour, IEventManagerListener
             isEnabled = false;
             timeElapsed = 0;
             ratio = 0;
-            EventManager.current.onEnableCamera();
+            EventManager.current.onEnableCamera(); //re-enable camera controls after the LERP.
             isEnabled = false;
         }
     }

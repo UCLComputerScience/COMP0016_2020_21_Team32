@@ -7,7 +7,7 @@ using SFB;
 using UnityEngine.EventSystems;
 using System.IO;
 
-///<summary>This script is attached to the  DICOMController prefab and provides it with interactivity.</summary>
+///<summary>This script is attached to the  DICOMController prefab to provide it with its functionality.</summary>
 public class DICOMController : MonoBehaviour, IBeginDragHandler, IDragHandler 
 {
     private DicomToPNG converter;

@@ -23,7 +23,7 @@ public static class MaterialAssigner
     /*Adjusts the opacity of a gameobject. The renderer of the gameobject is disabled if it goes below minOpacity to optimise performance*/
     public static float adjustOpacity(float newOpacity, GameObject segment, float minOpacity) {
         Renderer renderer = segment.GetComponent<Renderer>();
-        if(renderer == null)return 0f;
+        if(renderer == null) return 0f;
         Color color = renderer.material.color;
         color.a = newOpacity;
         if(color.a < minOpacity){
@@ -37,6 +37,8 @@ public static class MaterialAssigner
         return newOpacity;
     }
     
+
+    /*Updates the material applied to an object with the current position and normal of a plane */
     public static void updatePlanePos(GameObject g, GameObject plane){
         Renderer renderer = g.GetComponent<Renderer>();
         if(renderer == null)return;
@@ -80,7 +82,6 @@ public static class MaterialAssigner
 
 
 
-    #region private methods
     /*
     Models have a material assigned to them as soon as they are loaded in by the GLTFUtility.Importer. The new material we assign uses the same textures and colours, but
     a new shader is passed as a parameter. The renderqueue is also set based on the child's position in the list to deal with draw order issues that arise when overlaying
@@ -105,7 +106,6 @@ public static class MaterialAssigner
     private static int hexToDec(string hex){
         return System.Convert.ToInt32(hex, 16);
     }
-    #endregion
 
 }
     

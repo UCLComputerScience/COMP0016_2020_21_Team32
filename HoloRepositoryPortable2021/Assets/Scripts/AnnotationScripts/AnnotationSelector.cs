@@ -16,7 +16,6 @@ public class AnnotationSelector : MonoBehaviour, IEventManagerListener
     
     public TMP_Dropdown dropdown;
     public GameObject annotationTextBox;
-    private FileHelper fileHelper;
     private TMP_Text annotationText;
     private List<AnnotationData> annotations;
     private List<string> annotationTitles;
@@ -48,7 +47,7 @@ public class AnnotationSelector : MonoBehaviour, IEventManagerListener
     }
 
     /*This method is called whenever an option is selected in the dropdown menu. The options all correspond to a specific AnnotationData object. Selecting
-    an option will load the state of the scene that was stored in the corresponding AnnotationData object.*/
+    an option will load the view of the model that was stored in the corresponding AnnotationData object.*/
     public void onIndexChanged(int index){
         if(index != 0){
 

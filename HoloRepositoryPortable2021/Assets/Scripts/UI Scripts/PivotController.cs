@@ -33,7 +33,6 @@ public class PivotController : MonoBehaviour
 
     void Awake(){
         /*Initialise all interactive elements of the controller and add callbacks to their events*/
-        Debug.Log("waking up, to ash'n dust");
         xPosSlider = transform.Find("Pivot xPos").GetComponent<Slider>();
         yPosSlider = transform.Find("Pivot yPos").GetComponent<Slider>();
         zPosSlider = transform.Find("Pivot zPos ").GetComponent<Slider>();
@@ -46,13 +45,13 @@ public class PivotController : MonoBehaviour
         confirmButton.onClick.AddListener(onConfirm);
         cancelButton.onClick.AddListener(onCancel);
 
-        /*Set the position and size of the pivot. Its size is determined by the radius of the sphere that bounds the mesh of the loaded model (ModelHandler.current.modelRadius)*/
+        /*Set the position and size of the pivot. Its size is determined by the radius of the loaded model (ModelHandler.current.modelRadius)*/
         StartCoroutine(initialisePivot());
 
     }
 
     /*Automatically called when the gameobject the script is attached to is enabled. Reduces the opacity of the segments of the model (if they're above a certain threshold)
-    so that the user can see the pivot they're controlling, as it will usually be within the model. Enable the UIBlocker, pivot and the axes.*/
+    so that the user can see the pivot they're controlling, as it will usually be within the model. Enable the UIBlocker, pivot and the 3D coordinate axes.*/
     private IEnumerator initialisePivot(){
         yield return new WaitUntil(()=> ModelHandler.current.modelCentre != null);
         Debug.Log(ModelHandler.current.modelCentre);
@@ -63,6 +62,7 @@ public class PivotController : MonoBehaviour
         pivot.transform.localScale = new Vector3(pRadius,pRadius,pRadius);
         StartCoroutine(initialiseSliders()); 
     }
+    /*Dynamically set the maximum and minimum values of the sliders based on centre and radius of the model.*/
     private IEnumerator initialiseSliders(){
         yield return new WaitUntil(()=>ModelHandler.current.modelCentre != null);
         initialiseSlider(xPosSlider, changeXPos, X_SLIDER_MULTIPLIER, ModelHandler.current.modelCentre.x);
@@ -73,15 +73,16 @@ public class PivotController : MonoBehaviour
         startZPos = pivot.transform.position.z;
         startPos = new Vector3(startXPos, startYPos, startZPos);
     }
+    /*Automatically called when the gameObject this script is attached to is enabled. Reduces the opacities of the segments, enables the UIBlocker, pivot and enables the coordinate
+    axes*/
     void OnEnable(){
         MaterialAssigner.reduceOpacityAll(TARGET_OPACITY, ModelHandler.current.segments);
         EventManager.current.onEnableUIBlocker();
         pivot.SetActive(true);
-        Debug.Log(pivot.transform.position);
         axes.SetActive(true);
     }
 
-    /*Automatically called when the game object this script is attached to is disabled. Resets the opacities of the segments of the model to their values before the controller
+    /*Automatically called when the gameObject this script is attached to is disabled. Resets the opacities of the segments of the model to their values before the controller
     was enabled. Disable the UIBlocker, pivot, axes and ToolTip, and fire an OnEnableCamera event so the user immediately has control of the camera again*/
     void OnDisable(){
         MaterialAssigner.resetOpacities(ModelHandler.current.segments);

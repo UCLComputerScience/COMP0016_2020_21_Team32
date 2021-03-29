@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-///<summary>Class representing an annotation. All fields are serializable to allow it to be parsed to and from JSON. </summary>
+///<summary>Class representing an annotation. Used to store information about an annotation made by a user. Can be parsed to and from JSON. </summary>
 public class AnnotationData{ 
     public Vector3 cameraCoordinates;
     public Quaternion cameraRotation;

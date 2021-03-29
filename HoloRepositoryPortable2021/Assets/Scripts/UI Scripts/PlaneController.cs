@@ -11,7 +11,6 @@ using System;
 public class PlaneController : MonoBehaviour
 {
     public GameObject plane;
-    [SerializeField] ModelHandler modelHanlder;
     public Shader crossSectionalShader;
     public Shader differentColourShader;
     private Slider yPosSlider;
@@ -66,9 +65,9 @@ public class PlaneController : MonoBehaviour
     }
 
     /*This coroutine enables this controller to be used on any model regardless of the size of the model. 
-    None of its code is executed until the model is loaded in and the radius of the sphere that bounds its mesh calculated (ModelHandler.current.modelRadius). 
+    None of its code is executed until the model is loaded in and its radius (ModelHandler.current.modelRadius) is set. 
     Using this radius, a maximum and minimum height that the plane can reach is calculated, and the
-    minimum and maximum values of the slider that enables the y position of the plane to be changed are initialised to these values. */
+    minimum and maximum values of the slider that enable the y position of the plane to be changed are initialised to these values. */
     private IEnumerator initialisePlane(){
         yield return new WaitUntil(() => ModelHandler.current.modelRadius != 0); //wait until model is loaded
         startYPos = yPosSlider.value = yPosSlider.maxValue = maxPlaneHeight = ModelHandler.current.modelCentre.y + ModelHandler.current.modelRadius; //set max (and initial) value of slider
@@ -118,7 +117,7 @@ public class PlaneController : MonoBehaviour
         this.prevZRot = newZRot;
     }
     /*Both functions below are passed as a callback to the onClick event of the reset button. When pressed, all slider values are re-initialised 
-    and the plane's position is reset.*/
+    and the plane's position and rotation is reset.*/
     public void resetSlider(){
         yPosSlider.value = startYPos;
         xRotSlider.value = startXRot;

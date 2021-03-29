@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 ///<summary>
 ///This class is attatched to the colour palette gameobject. Monitors the position of the pointer each frame and determines 
 ///whether or not the user has double clicked over the colour palette. If a double click is detected, the pixel data beneath the pointer on that
-//frame is passed to an event which is invoked so any listener classes can make use of the data. 
+//frame is passed to an event which is invoked so any listener classes can make use of the colour data. 
 //Tutorial used to help develop this class: https://www.youtube.com/watch?v=n5WOD5zoggg
 ///</summary>
 

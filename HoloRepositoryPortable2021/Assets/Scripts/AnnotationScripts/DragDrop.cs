@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
-///<summary>Class is attached as a component to the AnnotationPin GameObject, and allows the it
+///<summary>Class is attached as a component to the AnnotationPin GameObject, and allowsit
 /// to be dragged and dropped.</summary>
 public class DragDrop : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     [SerializeField] Annotation annotation;
     public Canvas canvas;
-    private RectTransform rectTransform; //stores position, size, anchor, pivot of a rectangle
+    private RectTransform rectTransform; 
     void awake(){
         canvas = GetComponentInParent<Canvas>();
     }

@@ -1,13 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using System.IO;
 using System;
-using UnityEditor;
-using Siccity.GLTFUtility;
 
-///<summary>This class uses the OrganFactory to load in the model and helps to otherwise initialise the model and scene based on the model that is loaded in. 
+
+///<summary>This class uses the OrganFactory to load in the model and helps to otherwise initialise the model. 
 ///The radius of the model is calculated here, and the segments of the model are loaded into a list.</summary>
 public class ModelHandler : MonoBehaviour, IEventManagerListener 
 {
@@ -29,7 +26,7 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
         EventManager.current.OnSelectAnnotation+=EventManager_onSelectAnnotation;
     }
     void Awake(){
-        //singleton pattern
+        //singleton pattern 
         if(current != null && current != this){
             Destroy(this.gameObject);
         }else{
@@ -47,7 +44,7 @@ public class ModelHandler : MonoBehaviour, IEventManagerListener
     /*
     Loads the appropriate model and sets it as a child to the gameObject this script is attatched to.
     Done using a coroutine so that the model is fully initialised before the script attempts to access it. 
-    (ie, so that the organ.initialiseModel() is not called on a model that has not yet loaded in) ->
+    (ie, so that the organ.setParent() is not called on a model that has not yet loaded in) ->
     control is returned to the caller until the model is loaded in.
     */
     private IEnumerator loadModel(){

@@ -24,6 +24,7 @@ public class ToolTipCreator : MonoBehaviour
             s.gameObject.AddComponent<toolTipShower>();
         }
     }
+
     /*Checks if a selectable is part of a dropdown menu.*/
     private bool isDropDownElement(Selectable s){
         return s.transform.parent.name == "Content";
@@ -41,7 +42,6 @@ public class ToolTipCreator : MonoBehaviour
         is a component of.
         */
         public void OnPointerEnter(PointerEventData data){
-            //if(prevText == this.gameObject.name)return;
             ToolTip.current.gameObject.SetActive(true);
             ToolTip.SetToolTipText(this.gameObject.name);
             prevText = this.gameObject.name;

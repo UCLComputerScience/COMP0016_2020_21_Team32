@@ -1,13 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Siccity.GLTFUtility;
-using System;
-using System.IO;
-using UnityEditor;
 
 ///<summary>This class uses the factory design pattern to instantiate the appopriate concrete organ at runtime based on the filename
-///received. 
+///received. </summary>
 public static class OrganFactory
 {
     public static Organ GetOrgan(){

@@ -1,11 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using SFB;
-using System;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using itk.simple;
 using PixelId = itk.simple.PixelIDValueEnum;
 
@@ -24,14 +20,14 @@ public class DicomToPNG{
     https://simpleitk.readthedocs.io/en/master/link_DicomConvert_docs.html*/
     public Texture2D ReadDICOM(string inputfile){
         ImageFileReader imageFileReader = new ImageFileReader(); //SITK class
-        imageFileReader.SetImageIO("GDCMImageIO"); //setting the desired input image type to dcm
+        imageFileReader.SetImageIO("GDCMImageIO");//setting the desired input image type to dcm
         imageFileReader.SetFileName(inputfile);
         imageFileReader.ReadImageInformation();
         var size = imageFileReader.GetSize();
         if(size.Count == 3 && size[2] == 1){
             size[2] = 0;
         }
-        var image = imageFileReader.Execute();
+        itk.simple.Image image = imageFileReader.Execute();
         if(image.GetNumberOfComponentsPerPixel() == 1){
             image = SimpleITK.RescaleIntensity(image, 0, 255);
             if(imageFileReader.GetMetaData("0028|0004").Trim() == "MONOCHROME1"){

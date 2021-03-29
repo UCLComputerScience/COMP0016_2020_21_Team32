@@ -91,15 +91,14 @@ public class CameraController : MonoBehaviour, IEventManagerListener
         }
     }
 
-    /*Coroutine that initialises the camera distance dynamically based on the radius of the sphere that bounds the renderer of the model loaded into the application, 
+    /*Coroutine that initialises the camera distance dynamically based on the radius of the model loaded into the application, 
     so that models of any physical size can be viewed when loaded into the application.*/
     private IEnumerator setCameraDistance(){
         yield return new WaitUntil(() => ModelHandler.current.modelRadius != 0); //waits until the model has been loaded in - prevents nullReferencEexceptions being thrown
-        cameraDistance = -CAMERA_TO_MODEL_RADIUS_RATIO * ModelHandler.current.modelRadius; //ratio * radius of renderer
+        cameraDistance = -CAMERA_TO_MODEL_RADIUS_RATIO * ModelHandler.current.modelRadius; //ratio * radius of model
         displacementMagnitude = DISPLACEMENT_MULTIPLIER * ModelHandler.current.modelRadius;
         scrollSpeed = -cameraDistance;
 
-        /*THIS IS WHAT'S INTERESTING FOR NEXT TIME*/
         
         pivot.transform.position = ModelHandler.current.modelCentre;
     
@@ -109,7 +108,6 @@ public class CameraController : MonoBehaviour, IEventManagerListener
         Camera.main.transform.Translate(displacement);
         startPos = Camera.main.transform.position;
         startRot = Camera.main.transform.rotation;
-        Debug.Log(ModelHandler.current.modelCentre);
         
     }
 
@@ -118,18 +116,12 @@ public class CameraController : MonoBehaviour, IEventManagerListener
         isEnabled = true;
     }
 
-    /*Restore the state of the annotation encapsulated by the annotation*/
+    /*Restore the state of the camera encapsulated by the received AnnotationData object*/
     public void EventManager_onSelectAnnotation(object sender, EventArgsAnnotation e){
         Camera.main.transform.position = e.data.cameraCoordinates;
         Camera.main.transform.rotation = e.data.cameraRotation;
         displacement = e.data.cameraDisplacement;
-    }
-
-    /*camera is disabled whenever another event is received*/
-    public void EventManager_otherEvent(object sender, EventArgs e){
-        isEnabled = false;
-    }
-    
+    }    
     /*Reinitialise displacement whenever the reset button is pressed*/
     public void EventManager_resetPosition(object sender, EventArgs e){
         isEnabled = false;
@@ -143,6 +135,11 @@ public class CameraController : MonoBehaviour, IEventManagerListener
     /*Zoom out on button press*/
     public void EventManager_onZoomOut(object sender, EventArgs e){
         move(Vector3.back, displacementMagnitude);
+    }
+    
+    /*camera is disabled whenever another event is received*/
+    public void EventManager_otherEvent(object sender, EventArgs e){
+        isEnabled = false;
     }
 }
  

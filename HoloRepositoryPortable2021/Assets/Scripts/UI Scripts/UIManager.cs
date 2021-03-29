@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.Linq;
 using System;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 ///<summary>This class manages the top level components of the UI and whether they are active or not.</summary>
 public class UIManager : MonoBehaviour, IEventManagerListener
@@ -68,20 +69,16 @@ public class UIManager : MonoBehaviour, IEventManagerListener
     public void EventManager_onAddAnnotation(object o, EventArgs e){
         annotationPin.SetActive(true);
     }
-        //Enables the pivot controller
-    public void EventManager_OnChangePivot(object sender, EventArgs e){ //enables the pivot controller
+    public void EventManager_OnChangePivot(object sender, EventArgs e){ 
         pivotController.SetActive(true);
     }
-    //Enables the plane controller
     public void EventManager_OnCrossSectionEnabled(object sender, EventArgs e){ 
         planeController.SetActive(true);
     }
-    //Enables the dicom controller
-    public void EventManager_OnDICOMView(object sender, EventArgs e){ //enables the DICOM controller
+    public void EventManager_OnDICOMView(object sender, EventArgs e){ 
         dicomController.SetActive(true);
     }
-    //Enables the settings controller
-    public void EventManager_OnChangeSettings(object sender, EventArgs e){ //enables the settings controller
+    public void EventManager_OnChangeSettings(object sender, EventArgs e){
         settingsController.SetActive(true);
     }
     public void EventManager_OnToggleFullScreen(object sender, EventArgs e){
@@ -93,5 +90,4 @@ public class UIManager : MonoBehaviour, IEventManagerListener
     public void EventManager_OnModelLoaded(object sender, EventArgs e){
         loadingScreen.SetActive(false);
     }
-
 }

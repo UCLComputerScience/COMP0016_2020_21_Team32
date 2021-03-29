@@ -26,7 +26,6 @@ namespace Tests
 
 
         private void initialiseTestScene(){
-            Debug.Log("Startin up");
             publisher = new GameObject();
             publisher.AddComponent<EventManager>();
             model = new GameObject();
@@ -39,21 +38,9 @@ namespace Tests
             pivot = new GameObject();
             eventListener.AddComponent<EventSystem>();
             eventManager = publisher.GetComponent<EventManager>();
-            Debug.Log(eventManager);
 
         }
-        private void initialiseRandomAnnotation(){
-            exampleAnnotation = new AnnotationData();
-            exampleAnnotation.cameraCoordinates = new Vector3(Random.Range(0, 500), Random.Range(0, 500), Random.Range(0, 500));
-            exampleAnnotation.cameraRotation = Quaternion.Euler(Random.Range(0, 180),Random.Range(0, 180),Random.Range(0, 180));
-            exampleAnnotation.cameraDisplacement = new Vector3(Random.Range(0, 500), Random.Range(0, 500), Random.Range(0, 500));
-            exampleAnnotation.text = "random";
-            exampleAnnotation.title = "randomTitle";
-            exampleAnnotation.planeNormal = new Vector3(Random.Range(0, 500), Random.Range(0, 500), Random.Range(0, 500));
-            exampleAnnotation.planePosition = new Vector3(Random.Range(0, 500), Random.Range(0, 500), Random.Range(0, 500));
-            exampleAnnotation.colours = new List<Color>(){Color.red, Color.green, Color.blue, Color.black, Color.white};
-            exampleAnnotation.screenDimensions = new Vector2(Screen.width, Screen.height);
-        }
+
         
         private void loadModel(){
             modelHandler = eventListener.AddComponent<ModelHandler>();
@@ -161,7 +148,6 @@ namespace Tests
 
         [UnityTest]
         public IEnumerator EventManager_onEnableUIBlocker(){
-            Debug.Log(eventManager);
             var uiManager = eventListener.AddComponent<UIManager>();
             var UIBlocker = new GameObject();
             uiManager.UIBlocker = UIBlocker;

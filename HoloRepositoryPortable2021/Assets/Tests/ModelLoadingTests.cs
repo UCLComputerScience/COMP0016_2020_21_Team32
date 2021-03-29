@@ -9,6 +9,7 @@ using System.IO;
 using TMPro;
 
 namespace Tests{
+    /*Tests for checking that the models load with the correct number of segments */
     public class ModelLoadingTests 
     {
         private GameObject model;
@@ -36,7 +37,6 @@ namespace Tests{
             FileHelper.setCurrentModelFileName(Path.Combine(Application.streamingAssetsPath, "brain.glb"));
             model.SetActive(true); 
             yield return new WaitUntil(() => ModelHandler.current.segments != null);
-            Debug.Log(ModelHandler.current.modelRadius);
             Assert.AreEqual(5, ModelHandler.current.segments.Count);
         }
         [UnityTest]
@@ -69,6 +69,13 @@ namespace Tests{
             model.SetActive(true);
             yield return new WaitUntil(() => ModelHandler.current.segments != null);
             Assert.AreEqual(8, ModelHandler.current.segments.Count);
+        }
+        [UnityTest]
+        public IEnumerator loadEyeSegment_checkCorrectNumberOfSegments(){
+            FileHelper.setCurrentModelFileName(Path.Combine(Application.streamingAssetsPath, "eye segment.glb"));
+            model.SetActive(true);
+            yield return new WaitUntil(() => ModelHandler.current.segments != null);
+            Assert.AreEqual(1, ModelHandler.current.segments.Count);
         }
 
     }
