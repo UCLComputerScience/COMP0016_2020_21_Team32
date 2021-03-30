@@ -69,8 +69,19 @@ public static class MaterialAssigner
     public static void changeColour(GameObject segment, Color colour, float minOpacity){
         Renderer renderer = segment.GetComponent<Renderer>();
         if(renderer == null)return;
-        if(colour.a <= minOpacity)renderer.enabled = false;
+        if(renderer.enabled == false)renderer.enabled = true;
         renderer.material.SetColor("_Color", colour);
+        Debug.Log(colour.a);
+        if(colour.a <=  minOpacity){
+            renderer.enabled = false;
+        }
+    }
+    /*returs the colour of a single segment/gameobject*/
+    public static Color getColour(GameObject segment){
+        Renderer renderer = segment.GetComponent<MeshRenderer>();
+        Color colour = renderer.material.color;
+        colour.a = (renderer.enabled == true) ? renderer.material.color.a : 0f;
+        return colour;
     }
 
     /*Converts a hexadecimal string to a colour*/
